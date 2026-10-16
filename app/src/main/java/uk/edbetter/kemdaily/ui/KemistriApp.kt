@@ -92,6 +92,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -1080,10 +1081,11 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
                         }
                     }
                     val shells = remember(element) { ElementOfDay.electronShells(element.atomicNumber) }
+                    val outer = remember(element) { ElementOfDay.outerSubshell(element.atomicNumber) }
                     Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                        AtomModel(shells, tint, animate = !settings.reducedMotion, modifier = Modifier.fillMaxWidth().aspectRatio(1f))
+                        AtomModel(shells, outer.second, tint, animate = !settings.reducedMotion, modifier = Modifier.fillMaxWidth().aspectRatio(1f))
                         Text(
-                            "Electrons ${shells.joinToString(" · ")}",
+                            "Outer electrons: ${outer.first}${"spdf"[outer.second]} orbital",
                             color = Navy.copy(alpha = .6f), fontSize = 11.sp, fontWeight = FontWeight.SemiBold,
                         )
                     }
@@ -1116,46 +1118,87 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
     }
 }
 
-/** Bohr-style model: electrons orbit their shells, inner shells faster. Static when reduced motion is on. */
+private class CloudPoint(val x: Float, val y: Float, val size: Float, val phase: Float, val outer: Boolean)
+
+/**
+ * Schrödinger-style electron cloud: each dot is a likely place to find an electron. Inner electrons form
+ * a soft spherical haze; the outermost subshell is drawn in its orbital shape (s sphere, p dumbbell,
+ * d cloverleaf, f six lobes) as the 2D projection |cos(lθ)|.
+ */
+private fun electronCloud(shells: List<Int>, outerL: Int, seed: Int): List<CloudPoint> {
+    val random = java.util.Random(seed.toLong())
+    val points = mutableListOf<CloudPoint>()
+    val shellCount = shells.size
+    // Inner haze: denser near the nucleus, one soft band per shell.
+    shells.forEachIndexed { index, electrons ->
+        repeat((25 + electrons * 4).coerceAtMost(140)) {
+            val angle = random.nextDouble() * 2 * PI
+            val radius = ((index + .7f) / (shellCount + .5f) * .8f + random.nextGaussian().toFloat() * .05f).coerceIn(.1f, .85f)
+            points += CloudPoint(
+                (radius * cos(angle)).toFloat(), (radius * sin(angle)).toFloat(),
+                .5f + random.nextFloat() * .5f, random.nextFloat() * 2f * PI.toFloat(), outer = false,
+            )
+        }
+    }
+    // Outer orbital lobes.
+    repeat(700) {
+        val angle = random.nextDouble() * 2 * PI
+        val lobe = if (outerL == 0) 1.0 else kotlin.math.abs(cos(outerL * angle))
+        val radius = if (outerL == 0) {
+            (.55 + random.nextGaussian() * .14).coerceIn(.15, 1.0)
+        } else {
+            .18 + .82 * lobe * kotlin.math.sqrt(random.nextDouble())
+        }
+        if (outerL > 0 && radius < .2 + random.nextDouble() * .1) return@repeat
+        points += CloudPoint(
+            (radius * cos(angle)).toFloat(), (radius * sin(angle)).toFloat(),
+            .6f + random.nextFloat() * .9f, random.nextFloat() * 2f * PI.toFloat(), outer = true,
+        )
+    }
+    return points
+}
+
 @Composable
-private fun AtomModel(shells: List<Int>, nucleusColor: Color, animate: Boolean, modifier: Modifier) {
-    val turn = if (animate) {
-        val transition = rememberInfiniteTransition(label = "atom")
+private fun AtomModel(shells: List<Int>, outerL: Int, nucleusColor: Color, animate: Boolean, modifier: Modifier) {
+    val cloud = remember(shells, outerL) { electronCloud(shells, outerL, shells.sum()) }
+    val time = if (animate) {
+        val transition = rememberInfiniteTransition(label = "cloud")
         transition.animateFloat(
             initialValue = 0f, targetValue = 1f,
-            animationSpec = infiniteRepeatable(tween(12_000, easing = LinearEasing)),
-            label = "orbit",
+            animationSpec = infiniteRepeatable(tween(30_000, easing = LinearEasing)),
+            label = "time",
         ).value
     } else 0f
+    val orbitalName = "spdf"[outerL.coerceIn(0, 3)]
     Canvas(
         modifier.semantics {
-            contentDescription = "Atom model with electron shells holding ${shells.joinToString(", ")} electrons"
+            contentDescription = "Electron cloud model. Shells hold ${shells.joinToString(", ")} electrons; " +
+                "the outer electrons fill a $orbitalName orbital."
         },
     ) {
         val centre = this.center
-        val maxRadius = size.minDimension / 2f * .94f
-        val nucleusRadius = maxRadius * .16f
-        val step = (maxRadius - nucleusRadius * 1.6f) / shells.size
-        val dotRadius = (step * .22f).coerceIn(2.2f, 7f)
-        shells.forEachIndexed { index, count ->
-            val radius = nucleusRadius * 1.6f + step * (index + 1)
-            drawCircle(Navy.copy(alpha = .16f), radius, centre, style = Stroke(width = 2f))
-            // Inner shells turn faster; each shell starts at a different angle so they do not line up.
-            val offset = 2f * PI.toFloat() * (turn * (shells.size - index) + index * .13f)
-            repeat(count) { electron ->
-                val angle = offset + 2f * PI.toFloat() * electron / count
-                drawCircle(
-                    Sky, dotRadius,
-                    Offset(centre.x + radius * cos(angle), centre.y + radius * sin(angle)),
-                )
-                drawCircle(
-                    Navy, dotRadius, Offset(centre.x + radius * cos(angle), centre.y + radius * sin(angle)),
-                    style = Stroke(width = 1.5f),
-                )
-            }
+        val scale = size.minDimension / 2f * .92f
+        val dot = size.minDimension / 170f
+        drawCircle(
+            Brush.radialGradient(listOf(Sky.copy(alpha = .35f), Color.Transparent), centre, scale),
+            scale, centre,
+        )
+        val turn = time * 2f * PI.toFloat()
+        val cosT = cos(turn)
+        val sinT = sin(turn)
+        cloud.forEach { point ->
+            val (x, y) = if (point.outer) (point.x * cosT - point.y * sinT) to (point.x * sinT + point.y * cosT) else point.x to point.y
+            val shimmer = .3f + .7f * ((sin(point.phase + turn * 8f) + 1f) / 2f)
+            drawCircle(
+                (if (point.outer) Coral else Color(0xFF2F7DD1)).copy(alpha = shimmer * if (point.outer) .7f else .35f),
+                dot * point.size,
+                Offset(centre.x + x * scale, centre.y + y * scale),
+            )
         }
-        drawCircle(nucleusColor, nucleusRadius, centre)
-        drawCircle(Navy.copy(alpha = .5f), nucleusRadius, centre, style = Stroke(width = 2f))
+        drawCircle(
+            Brush.radialGradient(listOf(Color.White, nucleusColor, Navy.copy(alpha = .6f)), centre, scale * .1f),
+            scale * .09f, centre,
+        )
     }
 }
 

@@ -56,4 +56,12 @@ class ElementOfDayTest {
         assertEquals(listOf(2, 8, 18, 32, 32, 18, 8), ElementOfDay.electronShells(118))
         (1..118).forEach { z -> assertEquals(z, ElementOfDay.electronShells(z).sum()) }
     }
+
+    @Test fun outerSubshellFollowsTheBlocks() {
+        assertEquals(1 to 0, ElementOfDay.outerSubshell(1))
+        assertEquals(2 to 1, ElementOfDay.outerSubshell(8))
+        assertEquals(3 to 2, ElementOfDay.outerSubshell(26))
+        assertEquals(5 to 3, ElementOfDay.outerSubshell(93))
+        assertEquals(7 to 1, ElementOfDay.outerSubshell(118))
+    }
 }

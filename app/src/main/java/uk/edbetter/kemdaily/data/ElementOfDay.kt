@@ -44,11 +44,9 @@ object ElementOfDay {
      */
     fun electronShells(atomicNumber: Int): List<Int> {
         shellExceptions[atomicNumber]?.let { return it }
-        val subshells = (1..7).flatMap { n -> (0 until n).map { l -> n to l } }
-            .sortedWith(compareBy<Pair<Int, Int>>({ it.first + it.second }, { it.first }))
         val shells = IntArray(7)
         var remaining = atomicNumber
-        for ((n, l) in subshells) {
+        for ((n, l) in madelungOrder) {
             if (remaining == 0) break
             val added = minOf(remaining, 2 * (2 * l + 1))
             shells[n - 1] += added
@@ -56,6 +54,19 @@ object ElementOfDay {
         }
         return shells.toList().dropLastWhile { it == 0 }
     }
+
+    /** The last subshell filled in Madelung order, e.g. "2p" for oxygen; this shapes the outer electron cloud. */
+    fun outerSubshell(atomicNumber: Int): Pair<Int, Int> {
+        var remaining = atomicNumber
+        for ((n, l) in madelungOrder) {
+            remaining -= 2 * (2 * l + 1)
+            if (remaining <= 0) return n to l
+        }
+        return madelungOrder.last()
+    }
+
+    private val madelungOrder = (1..7).flatMap { n -> (0 until minOf(n, 4)).map { l -> n to l } }
+        .sortedWith(compareBy<Pair<Int, Int>>({ it.first + it.second }, { it.first }))
 
     private val shellExceptions = mapOf(
         24 to listOf(2, 8, 13, 1), 29 to listOf(2, 8, 18, 1),
