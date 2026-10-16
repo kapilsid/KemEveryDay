@@ -8,7 +8,7 @@ Play App Signing holds the real app-signing key; you only keep an upload key. Cr
 
 ```bash
 mkdir -p keystore
-keytool -genkeypair -v -keystore keystore/kemistri-everyday-upload.jks -alias kemistri-everyday-upload -keyalg RSA -keysize 2048 -validity 10000
+keytool -genkeypair -v -keystore keystore/kemistri-everyday.jks -alias kemistri-everyday-upload -keyalg RSA -keysize 2048 -validity 10000
 ```
 
 Then copy `keystore.properties.example` to `keystore.properties` and fill in the passwords. Both the keystore and `keystore.properties` are git-ignored.
