@@ -1,0 +1,150 @@
+package uk.edbetter.kemdaily.data
+
+import java.time.LocalDate
+import java.time.ZoneOffset
+
+/** One portrait-native Question → Guess → Answer card, following Kemistri's Everyday format. */
+data class EverydayFact(
+    val id: String,
+    val number: String,
+    val question: String,
+    val setup: String,
+    val guesses: List<String>,
+    val correctGuess: Int,
+    val answerHeadline: String,
+    val explanation: String,
+    val chemistryTags: String,
+    val equation: String,
+    val tryIt: String,
+    val safety: String,
+    val emoji: String,
+)
+
+object EverydayFacts {
+    val all = listOf(
+        EverydayFact(
+            "soap_oil", "01", "Why does soap clean grease when water won’t?",
+            "Oil and water separate. Soap gives the two a way to travel together.",
+            listOf("Soap destroys the oil", "Soap warms the water", "Soap wraps oil so water can carry it"), 2,
+            "Soap packages grease into tiny water-friendly droplets.",
+            "A soap molecule has a water-loving head and an oil-loving tail. The tails gather inside a grease droplet while the heads face the water, forming a micelle that can rinse away.",
+            "POLARITY • SURFACTANTS • MICELLES", "surfactant + oil + H₂O → oil-in-water micelle",
+            "Shake oil and water in a closed jar, then compare after adding one drop of washing-up liquid.",
+            "Do not taste the mixture, and wipe up spills promptly.", "🫧",
+        ),
+        EverydayFact(
+            "apple_brown", "02", "Why does a cut apple turn brown?",
+            "Cutting opens the apple’s cells and lets air reach chemicals that were kept apart.",
+            listOf("The surface simply dries", "Oxygen reacts with apple chemicals", "Bacteria immediately cover it"), 1,
+            "Oxygen and an enzyme help create the brown pigments.",
+            "Cutting mixes polyphenol oxidase with phenolic compounds and oxygen. The enzyme helps form quinones that join into brown pigments, while lemon juice slows the process by lowering pH and supplying an antioxidant.",
+            "ENZYMES • OXIDATION • CATALYSIS", "phenolics + O₂ → quinones → brown pigments",
+            "Brush one slice with lemon juice and another with water, then compare them after ten minutes.",
+            "Use clean utensils and ask an adult to cut the apple.", "🍎",
+        ),
+        EverydayFact(
+            "fizzy_drink", "03", "Why does a fizzy drink fizz when opened?",
+            "A sealed bottle holds carbon dioxide in the drink under pressure.",
+            listOf("Lower pressure lets dissolved gas escape", "Outside air bubbles through it", "Opening warms the drink"), 0,
+            "Opening the bottle releases pressure, so dissolved carbon dioxide escapes.",
+            "High pressure keeps extra carbon dioxide dissolved in the liquid. When the cap opens, the pressure falls and gas forms bubbles at scratches, dust and other nucleation sites.",
+            "SOLUBILITY • PRESSURE • HENRY’S LAW", "CO₂(aq) ⇌ CO₂(g)↑",
+            "Compare a freshly opened chilled drink with the same drink after it has warmed.",
+            "Open carbonated containers slowly and never shake them toward someone.", "🥤",
+        ),
+        EverydayFact(
+            "cold_can", "04", "Why does a cold can become wet outside?",
+            "The droplets appear even though the sealed can is not leaking.",
+            listOf("Liquid seeps through the metal", "Water vapour condenses on the cold surface", "Cold turns into water"), 1,
+            "The can cools nearby air below its dew point.",
+            "Air contains invisible water vapour. Air touching the cold can cools until it cannot hold as much vapour, so some changes into liquid droplets on the metal.",
+            "CONDENSATION • DEW POINT • PHASE CHANGE", "H₂O(g) → H₂O(l)",
+            "Place a chilled empty metal cup beside a room-temperature one and compare their surfaces.",
+            "Wipe condensed water so the container cannot slip.", "💧",
+        ),
+        EverydayFact(
+            "salt_ice", "05", "Why does salt melt ice on a winter road?",
+            "Salt dissolves in the thin liquid layer naturally present on ice.",
+            listOf("Salt is warm", "Salt crushes the ice", "Salt water freezes below 0°C"), 2,
+            "Dissolved salt lowers water’s freezing point.",
+            "The salty surface solution can remain liquid at temperatures where pure water would freeze. More ice melts to restore equilibrium, and that melting absorbs heat from the surroundings.",
+            "FREEZING-POINT DEPRESSION • SOLUTIONS", "H₂O(s) + NaCl → NaCl(aq)",
+            "Put equal ice cubes in two bowls, sprinkle salt on one, and observe without tasting.",
+            "Use food-safe salt, protect surfaces and wash your hands afterwards.", "🧊",
+        ),
+        EverydayFact(
+            "rust", "06", "Why does damp iron turn into orange flakes?",
+            "Water and oxygen reach bare iron and support a slow electrochemical process.",
+            listOf("Air slowly burns it", "Water and oxygen corrode it together", "Old metal naturally crumbles"), 1,
+            "Rust is hydrated iron oxide formed by corrosion.",
+            "Iron is oxidised while oxygen is reduced, and water allows ions to move. Rust is porous and flaky, so unlike some protective oxide layers it exposes fresh metal to further corrosion.",
+            "OXIDATION • CORROSION • ELECTROCHEMISTRY", "iron + O₂ + H₂O → hydrated iron oxide",
+            "Compare dry and damp steel wool in separate labelled jars over several days.",
+            "Wear eye protection and wash hands after handling steel wool.", "🔩",
+        ),
+        EverydayFact(
+            "onion_tears", "07", "Why does cutting an onion make you cry?",
+            "The blade breaks cells and mixes sulfur compounds with enzymes.",
+            listOf("The smell is simply strong", "A volatile irritant reaches the eyes", "Juice splashes invisibly"), 1,
+            "A volatile sulfur compound activates irritation nerves in your eyes.",
+            "Damaged onion cells rapidly produce syn-propanethial-S-oxide, which drifts through the air. When it reaches the wet eye surface, sensory nerves trigger tears that help wash the irritant away.",
+            "ENZYMES • SULFUR CHEMISTRY • VOLATILITY", "sulfur precursor → lachrymatory factor",
+            "Compare a chilled onion with one at room temperature and notice which causes tears sooner.",
+            "Use a stable board and ask an adult to handle the knife.", "🧅",
+        ),
+        EverydayFact(
+            "milk_curdle", "08", "Why does vinegar turn warm milk into lumps?",
+            "Adding acid changes the electrical charge around milk proteins.",
+            listOf("The milk freezes", "Acid makes proteins clump", "The fat hardens"), 1,
+            "Acid lets casein proteins stick together into curds.",
+            "Casein bundles normally repel one another because of their surface charge. Lowering the pH reduces that charge, so the proteins aggregate and separate from the watery whey.",
+            "PROTEINS • pH • COLLOIDS", "casein⁻ + H⁺ → casein↓",
+            "Add a teaspoon of vinegar to warm milk and observe the curds and whey.",
+            "Use food-safe ingredients but do not eat experimental mixtures.", "🥛",
+        ),
+        EverydayFact(
+            "descale", "09", "Why does vinegar remove kettle limescale?",
+            "Limescale is mainly calcium carbonate, a mineral base that reacts with acid.",
+            listOf("Vinegar only softens it", "Acid reacts and dissolves it", "The smell loosens it"), 1,
+            "Acid converts solid scale into soluble ions, water and carbon dioxide.",
+            "Acetic acid supplies hydrogen ions that react with carbonate. The solid calcium carbonate disappears as soluble calcium salts form and carbon dioxide bubbles away.",
+            "ACID–BASE • CARBONATES • SOLUBILITY", "CaCO₃ + 2H⁺ → Ca²⁺ + H₂O + CO₂↑",
+            "Drop vinegar onto a small piece of chalk and watch for bubbles.",
+            "Protect eyes, do not taste the mixture and never mix cleaners.", "🫖",
+        ),
+        EverydayFact(
+            "cake_rise", "10", "Why does cake batter rise in the oven?",
+            "Baking powder creates gas while the warming batter becomes able to hold its shape.",
+            listOf("Heat inflates the flour", "Gas bubbles form and expand", "Eggs fill with air"), 1,
+            "Carbon dioxide bubbles expand, then the cake sets around them.",
+            "A carbonate and acid in baking powder react after liquid is added and can react again as temperature rises. Carbon dioxide expands in the heat while starch and proteins set around the bubbles.",
+            "ACID–BASE • GAS EXPANSION • PROTEINS", "HCO₃⁻ + H⁺ → H₂O + CO₂↑",
+            "Compare a small batter sample made with baking powder with one made without it.",
+            "Use oven gloves and adult supervision around a hot oven.", "🧁",
+        ),
+        EverydayFact(
+            "fluoride", "11", "Why does toothpaste contain fluoride?",
+            "Plaque acids can remove mineral from tooth enamel throughout the day.",
+            listOf("It only scrubs plaque", "It colours the teeth", "It supports remineralisation and acid resistance"), 2,
+            "Fluoride helps enamel repair early mineral loss and resist acid.",
+            "Fluoride in saliva encourages calcium and phosphate to redeposit in a more acid-resistant mineral environment. Frequent low-level exposure also reduces further demineralisation.",
+            "MINERAL EQUILIBRIA • ACIDS • REMINERALISATION", "enamel mineral + F⁻ ⇌ more acid-resistant surface",
+            "Notice the fluoride concentration printed on toothpaste packaging and compare products.",
+            "Use only the recommended amount and do not swallow toothpaste.", "🦷",
+        ),
+        EverydayFact(
+            "chilli_heat", "12", "Why does chilli feel hot when it is not actually burning you?",
+            "Capsaicin interacts with a sensor on nerve endings in the mouth.",
+            listOf("It raises mouth temperature", "It activates a heat-sensing receptor", "It scratches the tongue"), 1,
+            "Capsaicin switches on the same receptor that responds to painful heat.",
+            "The TRPV1 receptor normally helps nerves detect dangerously high temperatures. Capsaicin can activate it at ordinary temperatures, so the brain receives a burning signal without a matching temperature rise.",
+            "RECEPTOR BINDING • MOLECULAR SHAPE • SIGNALLING", "capsaicin + TRPV1 → heat signal",
+            "Compare how water and a dairy food affect the lingering sensation after mildly spicy food.",
+            "Use only food you normally eat and keep chilli away from eyes and broken skin.", "🌶️",
+        ),
+    )
+
+    /** UTC makes today's card identical across devices around the world. */
+    fun today(date: LocalDate = LocalDate.now(ZoneOffset.UTC)): EverydayFact =
+        all[Math.floorMod(date.toEpochDay(), all.size.toLong()).toInt()]
+}
