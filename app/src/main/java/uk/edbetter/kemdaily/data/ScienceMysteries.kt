@@ -302,6 +302,13 @@ object ScienceMysteries {
         ),
     )
 
-    fun today(date: LocalDate = LocalDate.now(ZoneOffset.UTC)): ScienceMystery =
-        all[Math.floorMod(date.toEpochDay(), all.size.toLong()).toInt()]
+    const val PER_DAY = 3
+
+    /** Today's three mysteries. Consecutive days take the next three, so the catalogue cycles without repeats. */
+    fun forDay(date: LocalDate = LocalDate.now(ZoneOffset.UTC)): List<ScienceMystery> {
+        val start = Math.floorMod(date.toEpochDay() * PER_DAY, all.size.toLong()).toInt()
+        return List(PER_DAY) { all[(start + it) % all.size] }
+    }
+
+    fun today(date: LocalDate = LocalDate.now(ZoneOffset.UTC)): ScienceMystery = forDay(date).first()
 }

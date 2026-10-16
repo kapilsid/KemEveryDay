@@ -23,7 +23,7 @@ exports.submitDailyChampions = onCall({ enforceAppCheck: false }, async (request
     throw new HttpsError("invalid-argument", "Only today's UTC scores can be submitted.");
   }
   const isCount = (value, max) => Number.isInteger(value) && value >= 0 && value <= max;
-  if (!isCount(uniqueDiscoveries, 20) || !isCount(mysteriesSolved, 1000) ||
+  if (!isCount(uniqueDiscoveries, 20) || !isCount(mysteriesSolved, 3) ||
       !isCount(moleculeScore, uniqueDiscoveries === 0 ? 0 : uniqueDiscoveries * 130 + (20 - uniqueDiscoveries) * 30) ||
       !isCount(scienceScore, mysteriesSolved * 100) ||
       !Number.isInteger(contentVersion) || contentVersion < 1) {

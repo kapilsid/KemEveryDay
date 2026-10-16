@@ -15,13 +15,21 @@ data class EverydayFact(
     val explanation: String,
     val chemistryTags: String,
     val equation: String,
-    val tryIt: String,
-    val safety: String,
-    val emoji: String,
+    val tryIt: String? = null,
+    val safety: String? = null,
+    val emoji: String = "🧪",
 )
 
 object EverydayFacts {
-    val all = listOf(
+    /** Hand-written cards (with "try it" activities) plus the Kemistri catalogue, in Kemistri's order and numbering. */
+    val all: List<EverydayFact> by lazy {
+        val byId = (handWritten + EverydayFactsLibrary.imported).associateBy { it.id }
+        EverydayFactsLibrary.rotationOrder.mapIndexed { index, id ->
+            byId.getValue(id).copy(number = (index + 1).toString().padStart(2, '0'))
+        }
+    }
+
+    private val handWritten = listOf(
         EverydayFact(
             "soap_oil", "01", "Why does soap clean grease when water won’t?",
             "Oil and water separate. Soap gives the two a way to travel together.",

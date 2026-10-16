@@ -3,6 +3,8 @@ package uk.edbetter.kemdaily.ui
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedContent
@@ -91,6 +93,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -122,6 +125,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import uk.edbetter.kemdaily.BuildConfig
 import uk.edbetter.kemdaily.R
 import uk.edbetter.kemdaily.ads.AdMobInterstitial
 import uk.edbetter.kemdaily.core.chemistry.ElementCatalog
@@ -242,7 +246,7 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
                 }
             }
             item {
-                FeatureCard("Science Uncovered", "One daily run. Build a high score.", Icons.Default.AutoAwesome, Sky) {
+                FeatureCard("Science Uncovered", "Three new science mysteries every day", Icons.Default.AutoAwesome, Sky) {
                     nav.navigate(Routes.Science)
                 }
             }
@@ -260,7 +264,6 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     SmallNavCard("Streak", Icons.Default.LocalFireDepartment, Modifier.weight(1f)) { nav.navigate(Routes.DailyHistory) }
                     SmallNavCard("Leaders", Icons.Default.EmojiEvents, Modifier.weight(1f)) { nav.navigate(Routes.Leaderboard) }
-                    SmallNavCard("Review", Icons.Default.Science, Modifier.weight(1f)) { nav.navigate(Routes.Review) }
                     SmallNavCard("Settings", Icons.Default.Settings, Modifier.weight(1f)) { nav.navigate(Routes.Settings) }
                 }
             }
@@ -896,14 +899,15 @@ private tailrec fun Context.findActivity(): Activity? = when (this) {
 private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewModel) {
     val savedBest by viewModel.scienceBestScore.collectAsStateWithLifecycle()
     val restoredRun = remember { viewModel.loadScienceRun() }
-    val firstMysteryIndex = remember { ScienceMysteries.all.indexOf(ScienceMysteries.today()).coerceAtLeast(0) }
+    val todaysMysteries = remember { ScienceMysteries.forDay(restoredRun.date) }
     var mysteryOffset by remember { mutableStateOf(restoredRun.mysteryOffset) }
     var totalScore by remember { mutableStateOf(restoredRun.totalScore) }
     var lives by remember { mutableStateOf(restoredRun.lives) }
     var solvedCount by remember { mutableStateOf(restoredRun.solvedCount) }
     var mysteryNumber by remember { mutableStateOf(restoredRun.mysteryNumber) }
     var runOver by remember { mutableStateOf(restoredRun.runOver) }
-    val mystery = ScienceMysteries.all[(firstMysteryIndex + mysteryOffset) % ScienceMysteries.all.size]
+    val mystery = todaysMysteries[mysteryOffset.coerceIn(0, todaysMysteries.lastIndex)]
+    val lastOfToday = mysteryOffset >= todaysMysteries.lastIndex
     var visibleClues by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.visibleClues else 1) }
     var guessedLetters by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.guessedLetters else emptySet()) }
     var points by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.points else 100) }
@@ -975,7 +979,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                             Text("${"♥".repeat(lives)}${"♡".repeat(3 - lives)}", color = Coral, fontSize = 22.sp, fontWeight = FontWeight.Black)
                         }
                         Text(
-                            "Today's run · Mystery $mysteryNumber · Best $savedBest",
+                            "Today's run · Mystery ${mysteryOffset + 1} of ${todaysMysteries.size} · Best $savedBest",
                             color = Color.White.copy(alpha = .62f),
                             fontSize = 10.sp,
                         )
@@ -1173,6 +1177,10 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                         onClick = {
                             if (runOver) {
                                 nav.popBackStack()
+                            } else if (lastOfToday) {
+                                runOver = true
+                                viewModel.recordScienceBest(totalScore)
+                                saveRun(storedRunOver = true)
                             } else {
                                 val nextOffset = mysteryOffset + 1
                                 val nextNumber = mysteryNumber + 1
@@ -1195,6 +1203,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                         Text(
                             when {
                                 runOver -> "BACK HOME"
+                                lastOfToday -> "SEE TODAY'S SCORE"
                                 solved -> "NEXT MYSTERY"
                                 else -> "CONTINUE — $lives ${if (lives == 1) "LIFE" else "LIVES"} LEFT"
                             },
@@ -1205,7 +1214,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                 if (runOver) {
                     item {
                         Text(
-                            "Today's attempt is complete. A new run unlocks at 00:00 UTC.",
+                            "Today's three mysteries are done. New ones unlock at 00:00 UTC.",
                             color = Navy.copy(alpha = .62f),
                             textAlign = TextAlign.Center,
                             fontSize = 12.sp,
@@ -1348,7 +1357,14 @@ private fun FactScreen(nav: NavHostController) {
                         }
                     }
                 }
-                item { InfoCard("Try it: ${fact.tryIt}\n\nSafety: ${fact.safety}", Icons.Default.Science, Color(0xFFFFEABB)) }
+                if (fact.tryIt != null) {
+                    item {
+                        InfoCard(
+                            "Try it: ${fact.tryIt}" + (fact.safety?.let { "\n\nSafety: $it" } ?: ""),
+                            Icons.Default.Science, Color(0xFFFFEABB),
+                        )
+                    }
+                }
                 item {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
                         OutlinedButton(
@@ -2047,23 +2063,56 @@ private fun ReviewScreen(nav: NavHostController, viewModel: MainViewModel) {
 private fun SettingsScreen(nav: NavHostController, viewModel: MainViewModel) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
     Scaffold(topBar = { AppBar("Settings", { nav.popBackStack() }) }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding).padding(16.dp)) {
+        Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp)) {
             SettingRow("Sound", "Discovery and tile sounds", settings.sound, viewModel::setSound)
             SettingRow("Vibration", "Gentle touch feedback", settings.vibration, viewModel::setVibration)
             SettingRow("Reduced motion", "Use simpler transitions", settings.reducedMotion, viewModel::setReducedMotion)
-            Spacer(Modifier.height(20.dp))
-            Text("Privacy", fontWeight = FontWeight.Black, fontSize = 18.sp)
-            Text("Game progress, streaks and pending reviews are stored only on this device. Ads are provided by Google AdMob, which may use your device's advertising ID.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 8.dp))
             val context = LocalContext.current
-            if (AdMobInterstitial.privacyOptionsRequired(context)) {
-                OutlinedButton(
-                    { context.findActivity()?.let(AdMobInterstitial::showPrivacyOptions) },
-                    Modifier.padding(top = 10.dp),
-                ) { Text("Ad privacy choices") }
+            fun open(url: String) = runCatching {
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
-            Spacer(Modifier.height(20.dp))
-            Text("About the chemistry", fontWeight = FontWeight.Black, fontSize = 18.sp)
-            Text("A formula describes composition, not necessarily a unique structure. Discoveries describe known substances with that composition; they do not simulate a laboratory synthesis.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 8.dp))
+            Spacer(Modifier.height(18.dp))
+            Text("Privacy", fontWeight = FontWeight.Black, fontSize = 18.sp)
+            Text("Your progress stays on this phone. Ads are provided by Google.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 6.dp))
+            Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (AdMobInterstitial.privacyOptionsRequired(context)) {
+                    OutlinedButton({ context.findActivity()?.let(AdMobInterstitial::showPrivacyOptions) }) { Text("Ad choices") }
+                }
+                OutlinedButton({ open("https://www.edbetter.uk/mobile-privacy/") }) { Text("Privacy policy") }
+            }
+            Spacer(Modifier.height(18.dp))
+            Text("About EdBetter", fontWeight = FontWeight.Black, fontSize = 18.sp)
+            Text("We make playful science apps that turn curiosity into understanding.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 6.dp))
+            TextButton({ open("https://www.edbetter.uk") }, contentPadding = PaddingValues(0.dp)) { Text("edbetter.uk", color = Coral, fontWeight = FontWeight.Bold) }
+            Spacer(Modifier.height(10.dp))
+            Text("More from EdBetter", fontWeight = FontWeight.Black, fontSize = 18.sp)
+            Card(
+                Modifier.fillMaxWidth().padding(top = 8.dp).clickable {
+                    open("market://details?id=com.siddbetter.mendleev").onFailure {
+                        open("https://play.google.com/store/apps/details?id=com.siddbetter.mendleev")
+                    }
+                },
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(18.dp),
+            ) {
+                Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Image(
+                        painterResource(R.drawable.kemistri_app_icon), contentDescription = null,
+                        modifier = Modifier.size(52.dp).clip(RoundedCornerShape(12.dp)),
+                    )
+                    Spacer(Modifier.width(12.dp))
+                    Column(Modifier.weight(1f)) {
+                        Text("Kemistri", fontWeight = FontWeight.Black, fontSize = 17.sp, color = Navy)
+                        Text("Master the periodic table through levels, reactions and molecules.", fontSize = 12.sp, color = Navy.copy(alpha = .65f))
+                    }
+                    Icon(Icons.Default.ChevronRight, "Open Kemistri on Google Play", tint = Coral)
+                }
+            }
+            Spacer(Modifier.height(24.dp))
+            Text(
+                "Version ${BuildConfig.VERSION_NAME} · © 2026 EdBetter",
+                Modifier.fillMaxWidth(), textAlign = TextAlign.Center, color = Navy.copy(alpha = .5f), fontSize = 11.sp,
+            )
         }
     }
 }
