@@ -1,5 +1,8 @@
 package uk.edbetter.kemdaily.ui
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedContent
@@ -104,6 +107,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.edbetter.kemdaily.R
+import uk.edbetter.kemdaily.ads.AdMobInterstitial
 import uk.edbetter.kemdaily.core.chemistry.ElementCatalog
 import uk.edbetter.kemdaily.core.chemistry.Composition
 import uk.edbetter.kemdaily.core.chemistry.Recognition
@@ -565,7 +569,13 @@ private fun MissionDialog(game: GameState, viewModel: MainViewModel, nav: NavHos
         title = { Text("Mission complete!", fontWeight = FontWeight.Black) },
         text = { Text("You found ${game.uniqueDiscoveries.size} substances with ${game.movesRemaining} moves remaining. Score: ${game.score}") },
         confirmButton = { Button(viewModel::continueMission) { Text("Keep discovering") } },
-        dismissButton = { OutlinedButton({ viewModel.finish(); nav.popBackStack() }) { Text("Finish") } },
+        dismissButton = {
+            val activity = LocalContext.current.findActivity()
+            OutlinedButton({
+                viewModel.finish()
+                showAdThen(activity) { nav.popBackStack() }
+            }) { Text("Finish") }
+        },
     )
 }
 
@@ -819,9 +829,26 @@ private fun ResultDialog(game: GameState, viewModel: MainViewModel, nav: NavHost
         onDismissRequest = {}, icon = { Icon(Icons.Default.Star, null, tint = Gold) },
         title = { Text(if (game.missionAchieved) "Brilliant chemistry!" else "Hunt complete") },
         text = { Text("Score ${game.score} · ${game.uniqueDiscoveries.size} unique substances") },
-        confirmButton = { Button({ viewModel.start(game.mode, fresh = true) }) { Text("Play again") } },
-        dismissButton = { OutlinedButton({ nav.popBackStack() }) { Text("Home") } },
+        confirmButton = {
+            val activity = LocalContext.current.findActivity()
+            Button({ showAdThen(activity) { viewModel.start(game.mode, fresh = true) } }) { Text("Play again") }
+        },
+        dismissButton = {
+            val activity = LocalContext.current.findActivity()
+            OutlinedButton({ showAdThen(activity) { nav.popBackStack() } }) { Text("Home") }
+        },
     )
+}
+
+/** Ads appear only when a finished board is left, so a hunt is never interrupted. */
+private fun showAdThen(activity: Activity?, next: () -> Unit) {
+    if (activity == null) next() else AdMobInterstitial.show(activity, next)
+}
+
+private tailrec fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -1432,7 +1459,14 @@ private fun SettingsScreen(nav: NavHostController, viewModel: MainViewModel) {
             SettingRow("Reduced motion", "Use simpler transitions", settings.reducedMotion, viewModel::setReducedMotion)
             Spacer(Modifier.height(20.dp))
             Text("Privacy", fontWeight = FontWeight.Black, fontSize = 18.sp)
-            Text("Game progress and pending reviews are stored only on this device. This MVP contains no advertising or analytics SDK.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 8.dp))
+            Text("Game progress, streaks and pending reviews are stored only on this device. Ads are provided by Google AdMob, which may use your device's advertising ID.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 8.dp))
+            val context = LocalContext.current
+            if (AdMobInterstitial.privacyOptionsRequired(context)) {
+                OutlinedButton(
+                    { context.findActivity()?.let(AdMobInterstitial::showPrivacyOptions) },
+                    Modifier.padding(top = 10.dp),
+                ) { Text("Ad privacy choices") }
+            }
             Spacer(Modifier.height(20.dp))
             Text("About the chemistry", fontWeight = FontWeight.Black, fontSize = 18.sp)
             Text("A formula describes composition, not necessarily a unique structure. Discoveries describe known substances with that composition; they do not simulate a laboratory synthesis.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 8.dp))

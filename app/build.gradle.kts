@@ -20,6 +20,13 @@ if (releaseSigningFile.isFile && !hasReleaseSigning) {
     error("keystore.properties must define: ${releaseSigningKeys.joinToString()}")
 }
 
+// Google's public AdMob test IDs. Replace the release values with the Kemistri Everyday AdMob app
+// and ad unit before publishing; bundleRelease refuses to build while they are still test IDs.
+val admobTestAppId = "ca-app-pub-3940256099942544~3347511713"
+val admobTestInterstitialId = "ca-app-pub-3940256099942544/1033173712"
+val admobReleaseAppId = admobTestAppId
+val admobReleaseInterstitialId = admobTestInterstitialId
+
 android {
     namespace = "uk.edbetter.kemdaily"
     compileSdk = 36
@@ -33,7 +40,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures { compose = true }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
 
     signingConfigs {
         if (hasReleaseSigning) {
@@ -54,7 +64,13 @@ android {
     kotlinOptions { jvmTarget = "17" }
 
     buildTypes {
+        debug {
+            manifestPlaceholders["admobAppId"] = admobTestAppId
+            buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"$admobTestInterstitialId\"")
+        }
         release {
+            manifestPlaceholders["admobAppId"] = admobReleaseAppId
+            buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"$admobReleaseInterstitialId\"")
             isMinifyEnabled = true
             isShrinkResources = true
             if (hasReleaseSigning) signingConfig = signingConfigs.getByName("release")
@@ -67,6 +83,9 @@ val verifyReleaseSigning by tasks.registering {
     doLast {
         check(hasReleaseSigning) {
             "Release signing is not configured. Copy keystore.properties.example to keystore.properties and add the Play upload-key credentials."
+        }
+        check(admobReleaseAppId != admobTestAppId && admobReleaseInterstitialId != admobTestInterstitialId) {
+            "Release AdMob IDs are still Google's test IDs. Set admobReleaseAppId and admobReleaseInterstitialId in app/build.gradle.kts."
         }
     }
 }
@@ -88,6 +107,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("com.google.android.gms:play-services-ads:24.9.0")
+    implementation("com.google.android.ump:user-messaging-platform:4.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 

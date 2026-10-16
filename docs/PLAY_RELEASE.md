@@ -47,16 +47,15 @@ Tablet screenshots are only needed if you want the app featured on tablets; the 
 
 ## 5. App content answers
 
-**Data safety**
+**Data safety** (the app shows Google AdMob ads)
 
-- Does your app collect or share any of the required user data types? **No.**
-- Is all user data encrypted in transit? Not applicable — the app makes no network requests (no INTERNET permission).
-- Account creation: **No accounts.**
-- Data deletion: users clear app storage or uninstall.
+- Does your app collect or share any of the required user data types? **Yes.**
+- Is all user data encrypted in transit? **Yes.**
+- Deletion request: optional; no accounts exist.
+- Data types: **Approximate location**, **Device or other IDs**, **App interactions** (purposes: Advertising or marketing, Analytics, Fraud prevention) and **Crash logs**, **Diagnostics** (purposes: Analytics, Fraud prevention). Each is collected and shared, not ephemeral, and required.
+- Advertising ID: **Yes**, for Analytics, Advertising or marketing, and Fraud prevention, security and compliance.
 
-Game progress, streak history, pending reviews and settings stay in on-device app storage. Android Auto Backup is enabled; Google's guidance is that data backed up by the Android system is not counted as developer collection.
-
-**Ads:** No, the app does not contain ads.
+**Ads:** Yes, the app contains ads.
 
 **App access:** All functionality is available without special access or login.
 
@@ -68,7 +67,7 @@ Game progress, streak history, pending reviews and settings stay in on-device ap
 
 ## 6. Decision: target age groups
 
-- **13 and over (recommended for the first release):** keeps the app outside Google Play's Families policy requirements while the content review is finished.
+- **13 and over (chosen):** keeps the app outside Google Play's Families policy requirements while the content review is finished.
 - **Including under-13s:** the app has no ads or data collection, so it is a good fit, but it must then meet the Families policy and Teacher Approved criteria and will get extra review.
 
 ## 7. Testing track
@@ -79,3 +78,7 @@ New personal developer accounts must run a **closed test with at least 12 tester
 
 - Target SDK is 36, above Play's current minimum.
 - The README production gates (Room schema, expert content review, mission reachability simulation) are product-quality items, not Play requirements.
+
+## AdMob IDs
+
+`app/build.gradle.kts` uses Google's test IDs. Set `admobReleaseAppId` and `admobReleaseInterstitialId` to the Kemistri Everyday AdMob app before publishing; `bundleRelease` refuses to build while the release values are test IDs. Make sure https://www.edbetter.uk/app-ads.txt lists the AdMob publisher line.
