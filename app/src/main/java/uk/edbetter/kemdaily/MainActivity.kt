@@ -11,6 +11,8 @@ import uk.edbetter.kemdaily.ui.theme.KemistriTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Must run before the ViewModel first touches Firebase Auth or Firestore.
+        AppCheckSetup.install(applicationContext)
         enableEdgeToEdge()
         setContent { KemistriTheme { KemistriApp() } }
         AdMobInterstitial.initialize(this)
