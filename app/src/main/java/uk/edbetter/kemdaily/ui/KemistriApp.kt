@@ -233,7 +233,7 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     SmallNavCard("Streak", Icons.Default.LocalFireDepartment, Modifier.weight(1f)) { nav.navigate(Routes.DailyHistory) }
-                    SmallNavCard("Leaders", Icons.Default.EmojiEvents, Modifier.weight(1f)) { nav.navigate(Routes.Leaderboard) }
+                    // Leaders returns with the online Play Games leaderboard; personal bests live on the Streak screen.
                     SmallNavCard("Review", Icons.Default.Science, Modifier.weight(1f)) { nav.navigate(Routes.Review) }
                     SmallNavCard("Settings", Icons.Default.Settings, Modifier.weight(1f)) { nav.navigate(Routes.Settings) }
                 }
@@ -1394,6 +1394,7 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             StatPill("Best streak", summary.longest.toString(), Modifier.weight(1f))
                             StatPill("Days played", summary.daysPlayed.toString(), Modifier.weight(1f))
+                            StatPill("Best score", history.values.maxOfOrNull { it.score }?.toString() ?: "–", Modifier.weight(1f))
                         }
                         if (!summary.playedToday) {
                             Spacer(Modifier.height(12.dp))
