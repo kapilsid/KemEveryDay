@@ -200,26 +200,25 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painterResource(R.drawable.kemistri_everyday_brand),
                         contentDescription = "Kemistri Everyday logo",
-                        modifier = Modifier.size(184.dp).clip(RoundedCornerShape(38.dp)),
+                        modifier = Modifier.size(76.dp).clip(RoundedCornerShape(18.dp)),
                         contentScale = ContentScale.Crop,
                     )
-                    Spacer(Modifier.height(9.dp))
-                    Text(
-                        "A new chemistry wonder every day",
-                        color = Navy.copy(alpha = .72f),
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.SemiBold,
-                    )
+                    Spacer(Modifier.width(14.dp))
+                    Column {
+                        Text("Kemistri Everyday", color = Navy, fontWeight = FontWeight.Black, fontSize = 24.sp)
+                        Text(
+                            "A new chemistry wonder every day",
+                            color = Navy.copy(alpha = .72f),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.SemiBold,
+                        )
+                    }
                 }
             }
-            item { Spacer(Modifier.height(6.dp)) }
             item {
                 val dailySubtitle = if (streak > 0) "$streak-day streak · one shared puzzle every day" else "One shared chemistry puzzle every day"
                 FeatureCard("Daily Molecule Board", dailySubtitle, Icons.Default.CalendarMonth, Green) {
