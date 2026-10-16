@@ -6,6 +6,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
@@ -313,6 +314,7 @@ private fun SmallNavCard(title: String, icon: ImageVector, modifier: Modifier, a
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: Boolean = false) {
+    val leave = rememberLeaveWithAd(nav)
     val state by viewModel.game.collectAsStateWithLifecycle()
     val settings by viewModel.settings.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -339,7 +341,7 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
         topBar = {
             AppBar(
                 title = if (daily) "Daily Molecule Board" else "Molecule Hunt",
-                back = { nav.popBackStack() },
+                back = { leave() },
                 actions = {
                     if (daily) {
                         IconButton({ nav.navigate(Routes.DailyHistory) }) { Icon(Icons.Default.CalendarMonth, "Daily history") }
@@ -885,6 +887,18 @@ private fun ResultDialog(game: GameState, viewModel: MainViewModel, nav: NavHost
     )
 }
 
+/**
+ * Leaving a feature (back arrow, system back or its finish button) returns Home through an interstitial.
+ * Ads never interrupt play, and AdMobInterstitial allows at most one every three minutes.
+ */
+@Composable
+private fun rememberLeaveWithAd(nav: NavHostController): () -> Unit {
+    val activity = LocalContext.current.findActivity()
+    val leave: () -> Unit = remember(nav, activity) { { showAdThen(activity) { nav.popBackStack() } } }
+    BackHandler(onBack = leave)
+    return leave
+}
+
 /** Ads appear only when a finished board is left, so a hunt is never interrupted. */
 private fun showAdThen(activity: Activity?, next: () -> Unit) {
     if (activity == null) next() else AdMobInterstitial.show(activity, next)
@@ -898,6 +912,7 @@ private tailrec fun Context.findActivity(): Activity? = when (this) {
 
 @Composable
 private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewModel) {
+    val leave = rememberLeaveWithAd(nav)
     val savedBest by viewModel.scienceBestScore.collectAsStateWithLifecycle()
     val restoredRun = remember { viewModel.loadScienceRun() }
     val todaysMysteries = remember { ScienceMysteries.forDay(restoredRun.date) }
@@ -956,7 +971,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
         }
     }.trim()
 
-    Scaffold(topBar = { AppBar("Science Uncovered", { nav.popBackStack() }) }, containerColor = Color(0xFFF4F7FB)) { padding ->
+    Scaffold(topBar = { AppBar("Science Uncovered", leave) }, containerColor = Color(0xFFF4F7FB)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(16.dp),
@@ -1180,7 +1195,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                     Button(
                         onClick = {
                             if (runOver) {
-                                nav.popBackStack()
+                                leave()
                             } else if (lastOfToday) {
                                 totalScore += lives * ScienceMysteries.LIFE_BONUS
                                 runOver = true
@@ -1244,10 +1259,11 @@ private fun AppBar(title: String, back: () -> Unit, actions: @Composable RowScop
 
 @Composable
 private fun FactScreen(nav: NavHostController) {
+    val leave = rememberLeaveWithAd(nav)
     val fact = EverydayFacts.today()
     var selectedGuess by remember(fact.id) { mutableStateOf<Int?>(null) }
     var revealed by remember(fact.id) { mutableStateOf(false) }
-    Scaffold(topBar = { AppBar("Everyday Chemistry", { nav.popBackStack() }) }, containerColor = Color(0xFFF6F0E5)) { padding ->
+    Scaffold(topBar = { AppBar("Everyday Chemistry", leave) }, containerColor = Color(0xFFF6F0E5)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(18.dp),
@@ -1376,7 +1392,7 @@ private fun FactScreen(nav: NavHostController) {
                             onClick = { selectedGuess = null; revealed = false },
                             modifier = Modifier.weight(1f),
                         ) { Text("ASK AGAIN") }
-                        Button(onClick = { nav.popBackStack() }, modifier = Modifier.weight(1f)) { Text("GOT IT") }
+                        Button(onClick = { leave() }, modifier = Modifier.weight(1f)) { Text("GOT IT") }
                     }
                 }
             }
@@ -1423,10 +1439,11 @@ private fun familyColor(family: String): Color = when (family) {
 
 @Composable
 private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel) {
+    val leave = rememberLeaveWithAd(nav)
     val element = remember { ElementOfDay.today() }
     val settings by viewModel.settings.collectAsStateWithLifecycle()
     val tint = familyColor(element.family)
-    Scaffold(topBar = { AppBar("Element a Day", { nav.popBackStack() }) }, containerColor = Color(0xFFFFF5F1)) { padding ->
+    Scaffold(topBar = { AppBar("Element a Day", leave) }, containerColor = Color(0xFFFFF5F1)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(18.dp),
@@ -1645,6 +1662,7 @@ private fun MiniPeriodicTable(selected: DailyElement) {
 
 @Composable
 private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) {
+    val leave = rememberLeaveWithAd(nav)
     val entries by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
     val cloud by viewModel.scienceCloud.collectAsStateWithLifecycle()
     val today = viewModel.todayUtc()
@@ -1654,7 +1672,7 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
     val dateFormatter = remember { DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH) }
     var editNickname by remember { mutableStateOf(false) }
     var nicknameDraft by remember(cloud.nickname) { mutableStateOf(cloud.nickname) }
-    Scaffold(topBar = { AppBar("Daily Champions", { nav.popBackStack() }) }, containerColor = Color(0xFFF4FCFF)) { padding ->
+    Scaffold(topBar = { AppBar("Daily Champions", leave) }, containerColor = Color(0xFFF4FCFF)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(16.dp),
