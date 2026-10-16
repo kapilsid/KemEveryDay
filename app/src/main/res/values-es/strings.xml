@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Spanish translations. Please review with a native speaker for style/accuracy. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Atrás</string>
+    <string name="common_continue">Continuar</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_save">Guardar</string>
+    <string name="common_delete">Eliminar</string>
+    <string name="common_refresh">Actualizar</string>
+    <string name="common_got_it">Entendido</string>
+    <string name="common_home">Inicio</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Una nueva maravilla de la química cada día</string>
+    <string name="home_daily_title">Tablero de la molécula diaria</string>
+    <string name="home_everyday_title">Química cotidiana</string>
+    <string name="home_element_title">Elemento del día</string>
+    <string name="home_nav_streak">Racha</string>
+    <string name="home_nav_leaders">Clasificación</string>
+    <string name="home_nav_settings">Ajustes</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Caza de moléculas</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"PUNTUACIÓN DE LA RONDA %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">LA RESPUESTA</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">ELEMENTO DE HOY</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Campeones diarios</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_sound">Sonido</string>
+    <string name="settings_vibration">Vibración</string>
+    <string name="settings_reduced_motion">Movimiento reducido</string>
+    <string name="settings_privacy">Privacidad</string>
+    <string name="settings_about">Acerca de EdBetter</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_description">Elige el idioma de la app</string>
+    <string name="settings_language_system">Predeterminado del sistema</string>
+</resources>
+

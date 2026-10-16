@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Turkish translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Geri</string>
+    <string name="common_continue">Devam</string>
+    <string name="common_cancel">İptal</string>
+    <string name="common_save">Kaydet</string>
+    <string name="common_delete">Sil</string>
+    <string name="common_refresh">Yenile</string>
+    <string name="common_got_it">Tamam</string>
+    <string name="common_home">Ana ekran</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Her gün yeni bir kimya harikası</string>
+    <string name="home_daily_title">Günlük Molekül Tahtası</string>
+    <string name="home_everyday_title">Günlük Kimya</string>
+    <string name="home_element_title">Günün elementi</string>
+    <string name="home_nav_streak">Seri</string>
+    <string name="home_nav_leaders">Liderler</string>
+    <string name="home_nav_settings">Ayarlar</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Molekül Avı</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"RUN SKORU %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">CEVAP</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">BUGÜNÜN ELEMENTİ</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Günlük Şampiyonlar</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_sound">Ses</string>
+    <string name="settings_vibration">Titreşim</string>
+    <string name="settings_reduced_motion">Hareket azalt</string>
+    <string name="settings_privacy">Gizlilik</string>
+    <string name="settings_about">EdBetter Hakkında</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_language_description">Uygulama dilini seçin</string>
+    <string name="settings_language_system">Sistem varsayılanı</string>
+</resources>
+

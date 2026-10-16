@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial German translations. Review as needed. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Zurück</string>
+    <string name="common_continue">Weiter</string>
+    <string name="common_cancel">Abbrechen</string>
+    <string name="common_save">Speichern</string>
+    <string name="common_delete">Löschen</string>
+    <string name="common_refresh">Aktualisieren</string>
+    <string name="common_got_it">Verstanden</string>
+    <string name="common_home">Start</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Ein neues chemisches Wunder jeden Tag</string>
+    <string name="home_daily_title">Tägliches Molekülbrett</string>
+    <string name="home_everyday_title">Alltagschemie</string>
+    <string name="home_element_title">Element des Tages</string>
+    <string name="home_nav_streak">Streak</string>
+    <string name="home_nav_leaders">Bestenliste</string>
+    <string name="home_nav_settings">Einstellungen</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Moleküljagd</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"RUN SCORE %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">DIE ANTWORT</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">HEUTIGES ELEMENT</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Tägliche Champions</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_sound">Ton</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="settings_reduced_motion">Reduzierte Bewegung</string>
+    <string name="settings_privacy">Datenschutz</string>
+    <string name="settings_about">Über EdBetter</string>
+    <string name="settings_language">Sprache</string>
+    <string name="settings_language_description">App-Sprache auswählen</string>
+    <string name="settings_language_system">Systemstandard</string>
+</resources>
+

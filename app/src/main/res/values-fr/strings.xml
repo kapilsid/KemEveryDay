@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial French translations. Review with a native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Retour</string>
+    <string name="common_continue">Continuer</string>
+    <string name="common_cancel">Annuler</string>
+    <string name="common_save">Enregistrer</string>
+    <string name="common_delete">Supprimer</string>
+    <string name="common_refresh">Actualiser</string>
+    <string name="common_got_it">Compris</string>
+    <string name="common_home">Accueil</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Une nouvelle merveille chimique chaque jour</string>
+    <string name="home_daily_title">Tableau moléculaire quotidien</string>
+    <string name="home_everyday_title">Chimie du quotidien</string>
+    <string name="home_element_title">Élément du jour</string>
+    <string name="home_nav_streak">Série</string>
+    <string name="home_nav_leaders">Classements</string>
+    <string name="home_nav_settings">Paramètres</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Chasse aux molécules</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"SCORE DE LA SÉRIE %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">LA RÉPONSE</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">L\'ÉLÉMENT D\'AUJOURD\'HUI</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Champions quotidiens</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_sound">Son</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="settings_reduced_motion">Mouvement réduit</string>
+    <string name="settings_privacy">Confidentialité</string>
+    <string name="settings_about">À propos d\'EdBetter</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_language_description">Choisissez la langue de l\'application</string>
+    <string name="settings_language_system">Par défaut du système</string>
+</resources>
+

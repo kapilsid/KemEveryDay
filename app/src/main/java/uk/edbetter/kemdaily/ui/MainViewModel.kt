@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import uk.edbetter.kemdaily.R
 import uk.edbetter.kemdaily.core.game.Cell
 import uk.edbetter.kemdaily.core.game.DailyRecord
 import uk.edbetter.kemdaily.core.game.DailySeed
@@ -30,7 +31,7 @@ import uk.edbetter.kemdaily.data.SubmissionResult
 import java.time.LocalDate
 import java.time.ZoneOffset
 
-data class SettingsState(val sound: Boolean, val vibration: Boolean, val reducedMotion: Boolean)
+data class SettingsState(val sound: Boolean, val vibration: Boolean, val reducedMotion: Boolean, val languageTag: String = "system")
 
 data class ScienceCloudState(
     val connecting: Boolean = true,
@@ -38,7 +39,7 @@ data class ScienceCloudState(
     val playerId: String = "",
     val nickname: String = "",
     val rankings: List<PublicScienceRank> = emptyList(),
-    val message: String = "Connecting to Daily Champions…",
+    val message: String = "",
     val scoreSubmitted: Boolean = false,
 )
 
@@ -62,7 +63,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val scienceBestScore: StateFlow<Int> = _scienceBestScore.asStateFlow()
     private val _scienceLeaderboard = MutableStateFlow(repository.scienceLeaderboard())
     val scienceLeaderboard: StateFlow<List<ScienceLeaderboardEntry>> = _scienceLeaderboard.asStateFlow()
-    private val _scienceCloud = MutableStateFlow(ScienceCloudState(nickname = repository.playerNickname.orEmpty()))
+    private val _scienceCloud = MutableStateFlow(
+        ScienceCloudState(nickname = repository.playerNickname.orEmpty(), message = text(R.string.champions_status_connecting)),
+    )
     val scienceCloud: StateFlow<ScienceCloudState> = _scienceCloud.asStateFlow()
     private var lastScienceSubmissionAttempt: String? = null
 
@@ -115,6 +118,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun setSound(value: Boolean) { repository.soundEnabled = value; _settings.value = settingsSnapshot() }
     fun setVibration(value: Boolean) { repository.vibrationEnabled = value; _settings.value = settingsSnapshot() }
     fun setReducedMotion(value: Boolean) { repository.reducedMotion = value; _settings.value = settingsSnapshot() }
+    fun setLanguage(tag: String) { repository.languageTag = tag; _settings.value = settingsSnapshot() }
 
     private fun publish() {
         val value = engine?.state ?: return
@@ -150,11 +154,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updatePlayerNickname(value: String) {
         val cleaned = PlayerNames.clean(value)
         if (!PlayerNames.isValid(cleaned)) {
-            _scienceCloud.value = _scienceCloud.value.copy(message = PlayerNames.requirement)
+            _scienceCloud.value = _scienceCloud.value.copy(message = text(R.string.champions_status_nickname_requirement))
             return
         }
         viewModelScope.launch {
-            _scienceCloud.value = _scienceCloud.value.copy(connecting = true, message = "Saving nickname…")
+            _scienceCloud.value = _scienceCloud.value.copy(connecting = true, message = text(R.string.champions_status_saving))
             try {
                 val player = cloudLeaderboard.updateDisplayName(cleaned)
                 repository.playerNickname = player.displayName
@@ -163,13 +167,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     online = true,
                     playerId = player.uid,
                     nickname = player.displayName,
-                    message = "Nickname saved",
+                    message = text(R.string.champions_status_saved),
                 )
                 loadCloudRankings()
             } catch (_: Exception) {
                 _scienceCloud.value = _scienceCloud.value.copy(
                     connecting = false,
-                    message = "Could not save the nickname. Check your connection and Firebase setup.",
+                    message = text(R.string.champions_status_save_failed),
                 )
             }
         }
@@ -177,7 +181,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun connectScienceLeaderboard() {
         viewModelScope.launch {
-            _scienceCloud.value = _scienceCloud.value.copy(connecting = true, message = "Connecting to Daily Champions…")
+            _scienceCloud.value = _scienceCloud.value.copy(connecting = true, message = text(R.string.champions_status_connecting))
             try {
                 val player = cloudLeaderboard.connect(repository.playerNickname)
                 repository.playerNickname = player.displayName
@@ -186,7 +190,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     online = true,
                     playerId = player.uid,
                     nickname = player.displayName,
-                    message = "Worldwide leaderboard connected",
+                    message = text(R.string.champions_status_connected),
                 )
                 loadCloudRankings()
                 submitDailyChampions()
@@ -194,7 +198,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 _scienceCloud.value = _scienceCloud.value.copy(
                     connecting = false,
                     online = false,
-                    message = "Local scores are safe. Enable Anonymous Authentication and Firestore to connect worldwide rankings.",
+                    message = text(R.string.champions_status_offline_setup),
                 )
             }
         }
@@ -205,7 +209,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val ranks = cloudLeaderboard.rankings(todayUtc())
             _scienceCloud.value = _scienceCloud.value.copy(rankings = ranks, online = true)
         } catch (_: Exception) {
-            _scienceCloud.value = _scienceCloud.value.copy(message = "Connected, but rankings are unavailable right now.")
+            _scienceCloud.value = _scienceCloud.value.copy(message = text(R.string.champions_status_rankings_unavailable))
         }
     }
 
@@ -231,21 +235,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (lastScienceSubmissionAttempt == key) return
         lastScienceSubmissionAttempt = key
         viewModelScope.launch {
-            _scienceCloud.value = _scienceCloud.value.copy(message = "Submitting today's Daily Champions score…")
+            _scienceCloud.value = _scienceCloud.value.copy(message = text(R.string.champions_status_submitting))
             when (val result = cloudLeaderboard.submit(entry)) {
                 is SubmissionResult.Accepted -> {
                     _scienceCloud.value = _scienceCloud.value.copy(
                         scoreSubmitted = true,
-                        message = result.rank?.let { "Score submitted · rank #$it" } ?: "Today's score submitted",
+                        message = result.rank?.let { text(R.string.champions_status_submitted_rank, it) }
+                            ?: text(R.string.champions_status_submitted),
                     )
                     loadCloudRankings()
                 }
                 SubmissionResult.AlreadySubmitted -> {
-                    _scienceCloud.value = _scienceCloud.value.copy(scoreSubmitted = true, message = "Today's score is already submitted")
+                    _scienceCloud.value = _scienceCloud.value.copy(scoreSubmitted = true, message = text(R.string.champions_status_already_submitted))
                     loadCloudRankings()
                 }
                 SubmissionResult.Offline -> {
-                    _scienceCloud.value = _scienceCloud.value.copy(message = "Offline — tap refresh to submit the saved score later")
+                    _scienceCloud.value = _scienceCloud.value.copy(message = text(R.string.champions_status_offline_retry))
                 }
                 is SubmissionResult.Rejected -> {
                     _scienceCloud.value = _scienceCloud.value.copy(message = result.reason)
@@ -279,7 +284,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun todayUtc(): LocalDate = LocalDate.now(ZoneOffset.UTC)
 
+    /** Status text in the phone's language (re-read on each call, so it follows a language change). */
+    private fun text(id: Int, vararg args: Any): String = getApplication<Application>().getString(id, *args)
+
     private fun settingsSnapshot() = SettingsState(
-        repository.soundEnabled, repository.vibrationEnabled, repository.reducedMotion,
+        repository.soundEnabled, repository.vibrationEnabled, repository.reducedMotion, repository.languageTag,
     )
 }

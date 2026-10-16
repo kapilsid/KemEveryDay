@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Portuguese translations. Review (pt/PT or pt/BR) if needed. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Voltar</string>
+    <string name="common_continue">Continuar</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_save">Salvar</string>
+    <string name="common_delete">Excluir</string>
+    <string name="common_refresh">Atualizar</string>
+    <string name="common_got_it">Entendi</string>
+    <string name="common_home">Início</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Uma nova maravilha da química todo dia</string>
+    <string name="home_daily_title">Quadro molecular diário</string>
+    <string name="home_everyday_title">Química do dia a dia</string>
+    <string name="home_element_title">Elemento do dia</string>
+    <string name="home_nav_streak">Sequência</string>
+    <string name="home_nav_leaders">Líderes</string>
+    <string name="home_nav_settings">Configurações</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Caça à molécula</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"PONTUAÇÃO DA RODADA %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">A RESPOSTA</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">ELEMENTO DE HOJE</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Campeões diários</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_sound">Som</string>
+    <string name="settings_vibration">Vibração</string>
+    <string name="settings_reduced_motion">Movimento reduzido</string>
+    <string name="settings_privacy">Privacidade</string>
+    <string name="settings_about">Sobre a EdBetter</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_description">Escolha o idioma do app</string>
+    <string name="settings_language_system">Padrão do sistema</string>
+</resources>
+

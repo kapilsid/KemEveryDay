@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Simplified Chinese translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">返回</string>
+    <string name="common_continue">继续</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_save">保存</string>
+    <string name="common_delete">删除</string>
+    <string name="common_refresh">刷新</string>
+    <string name="common_got_it">知道了</string>
+    <string name="common_home">首页</string>
+
+    <!-- Home -->
+    <string name="home_tagline">每天一个新的化学奇迹</string>
+    <string name="home_daily_title">每日分子面板</string>
+    <string name="home_everyday_title">日常化学</string>
+    <string name="home_element_title">每日元素</string>
+    <string name="home_nav_streak">连胜</string>
+    <string name="home_nav_leaders">排行榜</string>
+    <string name="home_nav_settings">设置</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">分子狩猎</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"本轮得分 %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">答案</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">今日元素</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">每日冠军</string>
+
+    <!-- Settings -->
+    <string name="settings_title">设置</string>
+    <string name="settings_sound">声音</string>
+    <string name="settings_vibration">振动</string>
+    <string name="settings_reduced_motion">减少动画</string>
+    <string name="settings_privacy">隐私</string>
+    <string name="settings_about">关于 EdBetter</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_language_description">选择应用语言</string>
+    <string name="settings_language_system">系统默认</string>
+</resources>
+

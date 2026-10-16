@@ -311,6 +311,9 @@ class LocalRepository(context: Context) {
     var reducedMotion: Boolean
         get() = prefs.getBoolean("reduced_motion", false)
         set(value) { prefs.edit().putBoolean("reduced_motion", value).apply() }
+    var languageTag: String
+        get() = prefs.getString("language_tag", "system") ?: "system"
+        set(value) { prefs.edit().putString("language_tag", value).apply() }
 
     var playerNickname: String?
         get() = prefs.getString("player_nickname", null)

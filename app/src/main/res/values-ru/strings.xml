@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Russian translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Назад</string>
+    <string name="common_continue">Продолжить</string>
+    <string name="common_cancel">Отменить</string>
+    <string name="common_save">Сохранить</string>
+    <string name="common_delete">Удалить</string>
+    <string name="common_refresh">Обновить</string>
+    <string name="common_got_it">Понял</string>
+    <string name="common_home">Главная</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Каждый день — новое чудо химии</string>
+    <string name="home_daily_title">Ежедневная доска молекул</string>
+    <string name="home_everyday_title">Химия в повседневной жизни</string>
+    <string name="home_element_title">Элемент дня</string>
+    <string name="home_nav_streak">Серия</string>
+    <string name="home_nav_leaders">Лидеры</string>
+    <string name="home_nav_settings">Настройки</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Охота на молекулы</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"РЕЗУЛЬТАТ РАУНДА %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">ОТВЕТ</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">ЭЛЕМЕНТ СЕГОДНЯ</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Ежедневные чемпионы</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_sound">Звук</string>
+    <string name="settings_vibration">Вибрация</string>
+    <string name="settings_reduced_motion">Уменьшенные анимации</string>
+    <string name="settings_privacy">Конфиденциальность</string>
+    <string name="settings_about">О EdBetter</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_language_description">Выберите язык приложения</string>
+    <string name="settings_language_system">Системный по умолчанию</string>
+</resources>
+

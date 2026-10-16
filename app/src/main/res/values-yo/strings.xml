@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Yoruba translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">Padà</string>
+    <string name="common_continue">Tesiwaju</string>
+    <string name="common_cancel">Fagilee</string>
+    <string name="common_save">Fipamọ</string>
+    <string name="common_delete">Pa</string>
+    <string name="common_refresh">Tunṣe</string>
+    <string name="common_got_it">Mo ye</string>
+    <string name="common_home">Ile</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Ìyanu kemistri tuntun lojoojumọ</string>
+    <string name="home_daily_title">Bọọdu Molikula Ojoojumo</string>
+    <string name="home_everyday_title">Kemistri lojoojumọ</string>
+    <string name="home_element_title">Èlẹ́mẹ̀ntì Ọjọ́</string>
+    <string name="home_nav_streak">Asopọ</string>
+    <string name="home_nav_leaders">Àwọn aṣáájú</string>
+    <string name="home_nav_settings">Eto</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">Ìwádìí Molikula</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"RUN IYE %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">IDÁHUN</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">ÈLẸ́MẸ̀NTÌ LÓJÚỌ̀RÚN</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">Àwọn akọni ojoojumọ</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Eto</string>
+    <string name="settings_sound">Ohùn</string>
+    <string name="settings_vibration">Ibanujẹ</string>
+    <string name="settings_reduced_motion">Din ìṣe</string>
+    <string name="settings_privacy">Ìpamọ</string>
+    <string name="settings_about">Nipa EdBetter</string>
+    <string name="settings_language">Èdè</string>
+    <string name="settings_language_description">Yan èdè app</string>
+    <string name="settings_language_system">Aiyipada ẹrọ</string>
+</resources>
+

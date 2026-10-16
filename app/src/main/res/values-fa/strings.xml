@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Persian (Farsi) translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">بازگشت</string>
+    <string name="common_continue">ادامه</string>
+    <string name="common_cancel">لغو</string>
+    <string name="common_save">ذخیره</string>
+    <string name="common_delete">حذف</string>
+    <string name="common_refresh">به‌روزرسانی</string>
+    <string name="common_got_it">فهمیدم</string>
+    <string name="common_home">خانه</string>
+
+    <!-- Home -->
+    <string name="home_tagline">هر روز یک شگفتی جدید شیمی</string>
+    <string name="home_daily_title">تخته مولکولی روزانه</string>
+    <string name="home_everyday_title">شیمی روزمره</string>
+    <string name="home_element_title">عنصر روز</string>
+    <string name="home_nav_streak">سلسله</string>
+    <string name="home_nav_leaders">رتبه‌ها</string>
+    <string name="home_nav_settings">تنظیمات</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">شکار مولکول</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"امتیاز اجرا %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">پاسخ</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">عنصر امروز</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">قهرمانان روزانه</string>
+
+    <!-- Settings -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_sound">صدا</string>
+    <string name="settings_vibration">لرزش</string>
+    <string name="settings_reduced_motion">کاهش انیمیشن</string>
+    <string name="settings_privacy">حریم خصوصی</string>
+    <string name="settings_about">درباره EdBetter</string>
+    <string name="settings_language">زبان</string>
+    <string name="settings_language_description">زبان برنامه را انتخاب کنید</string>
+    <string name="settings_language_system">پیش‌فرض سیستم</string>
+</resources>
+

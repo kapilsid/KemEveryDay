@@ -69,6 +69,7 @@ import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Scale
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material3.AlertDialog
@@ -85,6 +86,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -110,6 +112,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
@@ -130,6 +134,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.edbetter.kemdaily.BuildConfig
 import uk.edbetter.kemdaily.R
+import uk.edbetter.kemdaily.AppLanguage
 import uk.edbetter.kemdaily.ads.AdMobInterstitial
 import uk.edbetter.kemdaily.core.chemistry.ElementCatalog
 import uk.edbetter.kemdaily.core.chemistry.Composition
@@ -149,6 +154,7 @@ import uk.edbetter.kemdaily.data.DailyElement
 import uk.edbetter.kemdaily.data.ElementOfDay
 import uk.edbetter.kemdaily.data.ElementFactsTable
 import uk.edbetter.kemdaily.data.EverydayFacts
+import uk.edbetter.kemdaily.data.MysteryCategory
 import uk.edbetter.kemdaily.data.ScienceMysteries
 import uk.edbetter.kemdaily.data.ScienceRunSnapshot
 import uk.edbetter.kemdaily.data.TablePosition
@@ -157,9 +163,11 @@ import uk.edbetter.kemdaily.ui.theme.Gold
 import uk.edbetter.kemdaily.ui.theme.Green
 import uk.edbetter.kemdaily.ui.theme.Navy
 import uk.edbetter.kemdaily.ui.theme.Sky
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
 import java.util.Locale
 import kotlinx.coroutines.delay
 import kotlin.math.PI
@@ -215,68 +223,73 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painterResource(R.drawable.kemistri_everyday_brand),
-                        contentDescription = "Kemistri Everyday logo",
+                        contentDescription = stringResource(R.string.home_logo_description),
                         modifier = Modifier.size(76.dp).clip(RoundedCornerShape(18.dp)),
                         contentScale = ContentScale.Crop,
                     )
                     Spacer(Modifier.width(14.dp))
                     Column {
-                        Text("Kemistri Everyday", color = Navy, fontWeight = FontWeight.Black, fontSize = 24.sp)
+                        Text(stringResource(R.string.app_name), color = Navy, fontWeight = FontWeight.Black, fontSize = 24.sp)
                         Text(
-                            "A new chemistry wonder every day",
+                            stringResource(R.string.home_tagline),
                             color = Navy.copy(alpha = .72f),
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold,
                         )
                         if (cloud.nickname.isNotBlank()) {
                             // The public leaderboard name; tapping opens Daily Champions, where it can be changed.
+                            val openChampionsLabel = stringResource(R.string.home_open_champions)
                             Row(
                                 Modifier.padding(top = 6.dp)
                                     .clip(CircleShape)
                                     .background(Color.White)
-                                    .clickable(onClickLabel = "Open Daily Champions") { nav.navigate(Routes.Leaderboard) }
+                                    .clickable(onClickLabel = openChampionsLabel) { nav.navigate(Routes.Leaderboard) }
                                     .padding(horizontal = 10.dp, vertical = 4.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(16.dp))
                                 Spacer(Modifier.width(5.dp))
-                                Text("Playing as ${cloud.nickname}", color = Navy, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                Text(stringResource(R.string.home_playing_as, cloud.nickname), color = Navy, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                             }
                         }
                     }
                 }
             }
             item {
-                val dailySubtitle = if (streak > 0) "$streak-day streak · one shared puzzle every day" else "One shared chemistry puzzle every day"
-                FeatureCard("Daily Molecule Board", dailySubtitle, Icons.Default.CalendarMonth, Green) {
+                val dailySubtitle = if (streak > 0) {
+                    pluralStringResource(R.plurals.home_daily_subtitle_streak, streak, streak)
+                } else {
+                    stringResource(R.string.home_daily_subtitle)
+                }
+                FeatureCard(stringResource(R.string.home_daily_title), dailySubtitle, Icons.Default.CalendarMonth, Green) {
                     nav.navigate(Routes.Daily)
                 }
             }
             item {
-                FeatureCard("Science Uncovered", "Three new science mysteries every day", Icons.Default.AutoAwesome, Sky) {
+                FeatureCard(stringResource(R.string.home_science_title), stringResource(R.string.home_science_subtitle), Icons.Default.AutoAwesome, Sky) {
                     nav.navigate(Routes.Science)
                 }
             }
             item {
-                FeatureCard("Everyday Chemistry", "Guess the chemistry hiding in daily life", Icons.Default.Lightbulb, Gold) {
+                FeatureCard(stringResource(R.string.home_everyday_title), stringResource(R.string.home_everyday_subtitle), Icons.Default.Lightbulb, Gold) {
                     nav.navigate(Routes.Fact)
                 }
             }
             item {
-                FeatureCard("Element a Day", "Meet a new element every day", Icons.Default.Science, Coral) {
+                FeatureCard(stringResource(R.string.home_element_title), stringResource(R.string.home_element_subtitle), Icons.Default.Science, Coral) {
                     nav.navigate(Routes.Element)
                 }
             }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    SmallNavCard("Streak", Icons.Default.LocalFireDepartment, Modifier.weight(1f)) { nav.navigate(Routes.DailyHistory) }
-                    SmallNavCard("Leaders", Icons.Default.EmojiEvents, Modifier.weight(1f)) { nav.navigate(Routes.Leaderboard) }
-                    SmallNavCard("Settings", Icons.Default.Settings, Modifier.weight(1f)) { nav.navigate(Routes.Settings) }
+                    SmallNavCard(stringResource(R.string.home_nav_streak), Icons.Default.LocalFireDepartment, Modifier.weight(1f)) { nav.navigate(Routes.DailyHistory) }
+                    SmallNavCard(stringResource(R.string.home_nav_leaders), Icons.Default.EmojiEvents, Modifier.weight(1f)) { nav.navigate(Routes.Leaderboard) }
+                    SmallNavCard(stringResource(R.string.home_nav_settings), Icons.Default.Settings, Modifier.weight(1f)) { nav.navigate(Routes.Settings) }
                 }
             }
             item {
                 Text(
-                    "© 2026 EdBetter",
+                    stringResource(R.string.common_copyright),
                     modifier = Modifier.fillMaxWidth().padding(10.dp), textAlign = TextAlign.Center,
                     color = Navy.copy(alpha = .55f), fontSize = 12.sp,
                 )
@@ -335,7 +348,12 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
             } else {
                 Toast.makeText(
                     context,
-                    "${discovery.substance.formula.withSubscripts()} already found · +${discovery.score.awarded} points",
+                    context.resources.getQuantityString(
+                        R.plurals.hunt_already_found_toast,
+                        discovery.score.awarded,
+                        discovery.substance.formula.withSubscripts(),
+                        discovery.score.awarded,
+                    ),
                     Toast.LENGTH_SHORT,
                 ).show()
                 viewModel.dismissDiscovery()
@@ -345,15 +363,15 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
     Scaffold(
         topBar = {
             AppBar(
-                title = if (daily) "Daily Molecule Board" else "Molecule Hunt",
+                title = stringResource(if (daily) R.string.home_daily_title else R.string.hunt_title_standard),
                 back = { leave() },
                 actions = {
                     if (daily) {
-                        IconButton({ nav.navigate(Routes.DailyHistory) }) { Icon(Icons.Default.CalendarMonth, "Daily history") }
+                        IconButton({ nav.navigate(Routes.DailyHistory) }) { Icon(Icons.Default.CalendarMonth, stringResource(R.string.hunt_daily_history)) }
                     }
                     IconButton({ showDiscoveries = true }) {
                         Box {
-                            Icon(Icons.Default.EmojiEvents, "Session discoveries")
+                            Icon(Icons.Default.EmojiEvents, stringResource(R.string.hunt_session_discoveries))
                             val found = state?.uniqueDiscoveries?.size ?: 0
                             if (found > 0) {
                                 Box(
@@ -363,7 +381,7 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
                             }
                         }
                     }
-                    IconButton({ showRules = true }) { Icon(Icons.Default.Info, "Game rules") }
+                    IconButton({ showRules = true }) { Icon(Icons.Default.Info, stringResource(R.string.hunt_game_rules)) }
                 },
             )
         },
@@ -377,14 +395,17 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
                 Spacer(Modifier.height(8.dp))
                 if (daily) {
                     Text(
-                        "Shared puzzle · ${viewModel.todayUtc().format(DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH))}",
+                        stringResource(
+                            R.string.hunt_shared_puzzle,
+                            viewModel.todayUtc().format(DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.getDefault())),
+                        ),
                         color = Coral, fontWeight = FontWeight.Bold, fontSize = 12.sp,
                     )
                     Spacer(Modifier.height(6.dp))
                 }
                 StatsRow(game, onFoundClick = { showDiscoveries = true })
                 Spacer(Modifier.height(5.dp))
-                Text("Find 10 different substances", fontSize = 11.sp, color = Navy.copy(alpha = .65f))
+                Text(stringResource(R.string.hunt_mission_goal), fontSize = 11.sp, color = Navy.copy(alpha = .65f))
                 LinearProgressIndicator(
                     progress = { (game.uniqueDiscoveries.size / MISSION_TARGET.toFloat()).coerceIn(0f, 1f) },
                     modifier = Modifier.fillMaxWidth().height(6.dp).clip(CircleShape),
@@ -397,22 +418,22 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
                 SelectionTray(game)
                 RecentDiscoveries(game)
                 AnimatedVisibility(game.message != null) {
-                    Text(game.message.orEmpty(), color = if (game.message?.contains("not yet") == true) Coral else Green,
+                    Text(localizedGameMessage(game.message.orEmpty()), color = if (game.message?.contains("not yet") == true) Coral else Green,
                         fontWeight = FontWeight.SemiBold, fontSize = 12.sp, modifier = Modifier.padding(top = 4.dp), textAlign = TextAlign.Center)
                 }
                 Spacer(Modifier.weight(1f))
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
                     OutlinedButton(viewModel::hint, Modifier.weight(1f), contentPadding = PaddingValues(8.dp)) {
-                        Icon(Icons.Default.Lightbulb, null); Spacer(Modifier.width(5.dp)); Text("Hint")
+                        Icon(Icons.Default.Lightbulb, null); Spacer(Modifier.width(5.dp)); Text(stringResource(R.string.hunt_hint))
                     }
                     OutlinedButton(viewModel::shuffle, Modifier.weight(1f), contentPadding = PaddingValues(8.dp)) {
-                        Icon(Icons.Default.Shuffle, null); Spacer(Modifier.width(5.dp)); Text("Shuffle")
+                        Icon(Icons.Default.Shuffle, null); Spacer(Modifier.width(5.dp)); Text(stringResource(R.string.hunt_shuffle))
                     }
                 }
                 Row(Modifier.fillMaxWidth().padding(vertical = 9.dp), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
-                    OutlinedButton(viewModel::clearSelection, Modifier.weight(.8f)) { Text("Clear", color = Coral) }
+                    OutlinedButton(viewModel::clearSelection, Modifier.weight(.8f)) { Text(stringResource(R.string.hunt_clear), color = Coral) }
                     Button(viewModel::submit, Modifier.weight(1.35f), colors = ButtonDefaults.buttonColors(containerColor = Green)) {
-                        Icon(Icons.Default.AutoAwesome, null); Spacer(Modifier.width(6.dp)); Text("Discover")
+                        Icon(Icons.Default.AutoAwesome, null); Spacer(Modifier.width(6.dp)); Text(stringResource(R.string.hunt_discover))
                     }
                 }
             }
@@ -433,9 +454,9 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
 @Composable
 private fun StatsRow(game: GameState, onFoundClick: () -> Unit) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-        StatPill("Moves", game.movesRemaining.toString(), Modifier.weight(1f))
-        StatPill("Score", game.score.toString(), Modifier.weight(1f))
-        StatPill("Found", "${game.uniqueDiscoveries.size}/$MISSION_TARGET", Modifier.weight(1f).clickable(onClick = onFoundClick))
+        StatPill(stringResource(R.string.hunt_stat_moves), game.movesRemaining.toString(), Modifier.weight(1f))
+        StatPill(stringResource(R.string.hunt_stat_score), game.score.toString(), Modifier.weight(1f))
+        StatPill(stringResource(R.string.hunt_stat_found), "${game.uniqueDiscoveries.size}/$MISSION_TARGET", Modifier.weight(1f).clickable(onClick = onFoundClick))
     }
 }
 
@@ -497,18 +518,18 @@ private fun AtomBoard(game: GameState, onSelect: (Cell) -> Unit, reducedMotion: 
                     val number = game.selection.indexOf(cell).takeIf { it >= 0 }?.plus(1)
                     val selected = number != null
                     val hinted = cell in game.hintedCells
+                    val tileDescription = buildString {
+                        append(stringResource(R.string.hunt_tile_description, ElementCatalog.names[tile.symbol] ?: tile.symbol, row + 1, column + 1))
+                        if (number != null) append(stringResource(R.string.hunt_tile_selected, number))
+                        if (hinted) append(stringResource(R.string.hunt_tile_hinted))
+                    }
                     Box(
                         Modifier.weight(1f).fillMaxSize()
                             .clip(RoundedCornerShape(12.dp))
                             .then(if (hinted) Modifier.border(3.dp, Gold, RoundedCornerShape(12.dp)) else Modifier)
                             .clickable { onSelect(cell) }
                             .semantics {
-                                contentDescription = buildString {
-                                    append(ElementCatalog.names[tile.symbol] ?: tile.symbol)
-                                    append(", row ${row + 1}, column ${column + 1}")
-                                    if (selected) append(", selected number $number")
-                                    if (hinted) append(", hinted")
-                                }
+                                contentDescription = tileDescription
                             },
                         contentAlignment = Alignment.Center,
                     ) {
@@ -569,7 +590,7 @@ private fun SelectionTray(game: GameState) {
     Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF7FF)), shape = RoundedCornerShape(13.dp)) {
         if (symbols.isEmpty()) {
             Text(
-                "Select neighbouring atoms",
+                stringResource(R.string.hunt_select_neighbours),
                 Modifier.fillMaxWidth().padding(10.dp),
                 textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, color = Navy,
             )
@@ -578,14 +599,14 @@ private fun SelectionTray(game: GameState) {
                 Text(symbols.joinToString(" + "), fontWeight = FontWeight.Bold, fontSize = 13.sp, modifier = Modifier.weight(1f))
                 Text("→", color = Navy.copy(alpha = .55f), fontWeight = FontWeight.Black, modifier = Modifier.padding(horizontal = 8.dp))
                 if (recognized == null) {
-                    Text("Ready to review", color = Navy.copy(alpha = .65f), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.hunt_ready_to_review), color = Navy.copy(alpha = .65f), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                 } else {
                     val first = recognized.id !in game.uniqueDiscoveries
                     val points = GameEngine.score(recognized, first, game.consecutiveUnique).awarded
                     Column(horizontalAlignment = Alignment.End) {
                         Text(recognized.formula.withSubscripts(), fontWeight = FontWeight.Black, fontSize = 16.sp)
                         Text(recognized.displayName, fontSize = 10.sp, color = Navy.copy(alpha = .65f))
-                        Text("+$points points", fontSize = 10.sp, color = Green, fontWeight = FontWeight.Bold)
+                        Text(pluralStringResource(R.plurals.common_points_awarded, points, points), fontSize = 10.sp, color = Green, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -604,7 +625,7 @@ private fun RecentDiscoveries(game: GameState) {
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text("Found", fontSize = 10.sp, color = Navy.copy(alpha = .55f), fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.hunt_stat_found), fontSize = 10.sp, color = Navy.copy(alpha = .55f), fontWeight = FontWeight.Bold)
             recent.forEach { substance ->
                 Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(9.dp)) {
                     Text(substance.formula.withSubscripts(), Modifier.padding(horizontal = 9.dp, vertical = 4.dp), fontSize = 11.sp, fontWeight = FontWeight.Bold)
@@ -618,15 +639,24 @@ private fun RecentDiscoveries(game: GameState) {
 private fun MissionDialog(game: GameState, viewModel: MainViewModel, nav: NavHostController) {
     AlertDialog(
         onDismissRequest = {}, icon = { Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(48.dp)) },
-        title = { Text("Mission complete!", fontWeight = FontWeight.Black) },
-        text = { Text("You found ${game.uniqueDiscoveries.size} substances with ${game.movesRemaining} moves remaining. Score: ${game.score}") },
-        confirmButton = { Button(viewModel::continueMission) { Text("Keep discovering") } },
+        title = { Text(stringResource(R.string.hunt_mission_complete_title), fontWeight = FontWeight.Black) },
+        text = {
+            Text(
+                stringResource(
+                    R.string.hunt_mission_complete_text,
+                    pluralStringResource(R.plurals.hunt_found_substances, game.uniqueDiscoveries.size, game.uniqueDiscoveries.size),
+                    pluralStringResource(R.plurals.hunt_moves_remaining, game.movesRemaining, game.movesRemaining),
+                    game.score,
+                ),
+            )
+        },
+        confirmButton = { Button(viewModel::continueMission) { Text(stringResource(R.string.hunt_keep_discovering)) } },
         dismissButton = {
             val activity = LocalContext.current.findActivity()
             OutlinedButton({
                 viewModel.finish()
                 showAdThen(activity) { nav.popBackStack() }
-            }) { Text("Finish") }
+            }) { Text(stringResource(R.string.hunt_finish)) }
         },
     )
 }
@@ -654,7 +684,7 @@ private fun DiscoveryDialog(game: GameState, viewModel: MainViewModel) {
                     Text("✨", fontSize = 28.sp, modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp))
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            if (discovery.isFirst) "Great Discovery!" else "Discovered Again!",
+                            stringResource(if (discovery.isFirst) R.string.hunt_discovery_great else R.string.hunt_discovery_again),
                             color = Navy, fontWeight = FontWeight.Black, fontSize = 24.sp,
                         )
                         Spacer(Modifier.height(12.dp))
@@ -671,7 +701,7 @@ private fun DiscoveryDialog(game: GameState, viewModel: MainViewModel) {
                     shape = RoundedCornerShape(10.dp),
                 ) {
                     Text(
-                        "+${score.awarded} points",
+                        pluralStringResource(R.plurals.common_points_awarded, score.awarded, score.awarded),
                         Modifier.padding(horizontal = 22.dp, vertical = 8.dp),
                         color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp,
                     )
@@ -688,8 +718,12 @@ private fun DiscoveryDialog(game: GameState, viewModel: MainViewModel) {
                     }
                 }
                 Text(
-                    "${score.atoms} atoms · ${score.elements} elements · rarity +${score.rarity}" +
-                        if (score.streak > 0) " · streak +${score.streak}" else "",
+                    listOfNotNull(
+                        pluralStringResource(R.plurals.hunt_score_atoms, score.atoms, score.atoms),
+                        pluralStringResource(R.plurals.hunt_score_elements, score.elements, score.elements),
+                        stringResource(R.string.hunt_score_rarity, score.rarity),
+                        if (score.streak > 0) stringResource(R.string.hunt_score_streak, score.streak) else null,
+                    ).joinToString(" · "),
                     color = Navy.copy(alpha = .55f), fontSize = 10.sp,
                 )
                 Button(
@@ -697,7 +731,7 @@ private fun DiscoveryDialog(game: GameState, viewModel: MainViewModel) {
                     modifier = Modifier.fillMaxWidth().padding(18.dp).height(52.dp),
                     shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Green),
-                ) { Text("Continue", fontWeight = FontWeight.Black, fontSize = 16.sp) }
+                ) { Text(stringResource(R.string.common_continue), fontWeight = FontWeight.Black, fontSize = 16.sp) }
             }
         }
     }
@@ -722,16 +756,16 @@ private fun CompositionGraphic(substance: Substance) {
 @Composable
 private fun RulesDialog(onDismiss: () -> Unit) {
     val rules = listOf(
-        "Connect adjacent atoms horizontally, vertically or diagonally.",
-        "Use 2–6 atoms for most discoveries; advanced formulas may use 7.",
-        "Tap Discover to check the composition. Selection order does not change the formula.",
-        "A recognised substance awards points, uses one move and removes the selected tiles.",
-        "Atoms fall down and balanced replacements enter from above.",
-        "Find 10 different substances to complete the mission.",
-        "Repeats are allowed, use a move and score 25%, but do not increase the unique count.",
-        "Not-yet-recognised combinations use no move and are saved for Discovery Review.",
-        "Hint and Shuffle currently use no move.",
-        "After completing the mission, continue discovering with the moves that remain.",
+        stringResource(R.string.hunt_rule_1),
+        stringResource(R.string.hunt_rule_2),
+        stringResource(R.string.hunt_rule_3),
+        stringResource(R.string.hunt_rule_4),
+        stringResource(R.string.hunt_rule_5),
+        stringResource(R.string.hunt_rule_6),
+        stringResource(R.string.hunt_rule_7),
+        stringResource(R.string.hunt_rule_8),
+        stringResource(R.string.hunt_rule_9),
+        stringResource(R.string.hunt_rule_10),
     )
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Card(
@@ -744,8 +778,8 @@ private fun RulesDialog(onDismiss: () -> Unit) {
                         Icon(Icons.Default.Info, null, tint = Sky, modifier = Modifier.size(30.dp))
                         Spacer(Modifier.width(10.dp))
                         Column {
-                            Text("Molecule Hunt — Rules", fontWeight = FontWeight.Black, fontSize = 21.sp)
-                            Text("Build real chemical compositions on the 5 × 5 board", color = Navy.copy(alpha = .62f), fontSize = 12.sp)
+                            Text(stringResource(R.string.hunt_rules_title), fontWeight = FontWeight.Black, fontSize = 21.sp)
+                            Text(stringResource(R.string.hunt_rules_subtitle), color = Navy.copy(alpha = .62f), fontSize = 12.sp)
                         }
                     }
                 }
@@ -762,10 +796,10 @@ private fun RulesDialog(onDismiss: () -> Unit) {
                 item {
                     Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFEFFBF3))) {
                         Column(Modifier.fillMaxWidth().padding(14.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Scoring", fontWeight = FontWeight.Black, fontSize = 17.sp)
-                            Text("Score = 5 + 5A + 5E + R + S", color = Green, fontWeight = FontWeight.Black, fontSize = 18.sp)
+                            Text(stringResource(R.string.hunt_scoring), fontWeight = FontWeight.Black, fontSize = 17.sp)
+                            Text(stringResource(R.string.hunt_scoring_formula), color = Green, fontWeight = FontWeight.Black, fontSize = 18.sp)
                             Text(
-                                "A = atoms · E = different elements · R = rarity (0–40) · S = new-discovery streak (0–15)",
+                                stringResource(R.string.hunt_scoring_legend),
                                 color = Navy.copy(alpha = .68f), textAlign = TextAlign.Center, fontSize = 11.sp,
                             )
                         }
@@ -773,11 +807,11 @@ private fun RulesDialog(onDismiss: () -> Unit) {
                 }
                 item {
                     Text(
-                        "A formula describes composition, not necessarily one unique structure. For example, C₂H₆O can represent more than one substance.",
+                        stringResource(R.string.hunt_formula_note),
                         color = Navy.copy(alpha = .65f), textAlign = TextAlign.Center, fontSize = 11.sp,
                     )
                 }
-                item { Button(onDismiss, Modifier.fillMaxWidth()) { Text("Got it") } }
+                item { Button(onDismiss, Modifier.fillMaxWidth()) { Text(stringResource(R.string.common_got_it)) } }
             }
         }
     }
@@ -802,9 +836,13 @@ private fun SessionDiscoveriesDialog(game: GameState, onDismiss: () -> Unit) {
                         Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(34.dp))
                         Spacer(Modifier.width(10.dp))
                         Column(Modifier.weight(1f)) {
-                            Text("This hunt’s discoveries", fontWeight = FontWeight.Black, fontSize = 22.sp)
+                            Text(stringResource(R.string.hunt_discoveries_title), fontWeight = FontWeight.Black, fontSize = 22.sp)
                             Text(
-                                "${missionDiscoveries.size} mission · ${extraDiscoveries.size} extra · ${game.discoveryHistory.size} total finds",
+                                listOf(
+                                    pluralStringResource(R.plurals.hunt_discoveries_mission, missionDiscoveries.size, missionDiscoveries.size),
+                                    pluralStringResource(R.plurals.hunt_discoveries_extra, extraDiscoveries.size, extraDiscoveries.size),
+                                    pluralStringResource(R.plurals.hunt_discoveries_total, game.discoveryHistory.size, game.discoveryHistory.size),
+                                ).joinToString(" · "),
                                 color = Navy.copy(alpha = .62f),
                                 fontSize = 12.sp,
                             )
@@ -813,17 +851,17 @@ private fun SessionDiscoveriesDialog(game: GameState, onDismiss: () -> Unit) {
                 }
                 if (discoveries.isEmpty()) {
                     item {
-                        Text("No discoveries yet — connect some atoms and see what you can make!", Modifier.padding(vertical = 24.dp), textAlign = TextAlign.Center)
+                        Text(stringResource(R.string.hunt_discoveries_empty), Modifier.padding(vertical = 24.dp), textAlign = TextAlign.Center)
                     }
                 } else {
-                    item { Text("MISSION DISCOVERIES", color = Green, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.sp) }
+                    item { Text(stringResource(R.string.hunt_mission_discoveries), color = Green, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.sp) }
                     items(missionDiscoveries, key = { "mission_${it.id}" }) { substance ->
                         DiscoverySummaryRow(substance, counts[substance.id] ?: 1)
                     }
                     if (extraDiscoveries.isNotEmpty()) {
                         item {
                             Text(
-                                "EXTRA DISCOVERIES",
+                                stringResource(R.string.hunt_extra_discoveries),
                                 modifier = Modifier.padding(top = 8.dp),
                                 color = Coral,
                                 fontWeight = FontWeight.Black,
@@ -838,7 +876,7 @@ private fun SessionDiscoveriesDialog(game: GameState, onDismiss: () -> Unit) {
                 }
                 item { HorizontalDivider(Modifier.padding(vertical = 3.dp)) }
                 item {
-                    Button(onDismiss, Modifier.fillMaxWidth()) { Text("Back to this hunt") }
+                    Button(onDismiss, Modifier.fillMaxWidth()) { Text(stringResource(R.string.hunt_back_to_hunt)) }
                 }
             }
         }
@@ -879,15 +917,15 @@ private fun String.withSubscripts(): String = buildString {
 private fun ResultDialog(game: GameState, viewModel: MainViewModel, nav: NavHostController) {
     AlertDialog(
         onDismissRequest = {}, icon = { Icon(Icons.Default.Star, null, tint = Gold) },
-        title = { Text(if (game.missionAchieved) "Brilliant chemistry!" else "Hunt complete") },
-        text = { Text("Score ${game.score} · ${game.uniqueDiscoveries.size} unique substances") },
+        title = { Text(stringResource(if (game.missionAchieved) R.string.hunt_result_brilliant else R.string.hunt_result_complete)) },
+        text = { Text(pluralStringResource(R.plurals.hunt_result_summary, game.uniqueDiscoveries.size, game.score, game.uniqueDiscoveries.size)) },
         confirmButton = {
             val activity = LocalContext.current.findActivity()
-            Button({ showAdThen(activity) { viewModel.start(game.mode, fresh = true) } }) { Text("Play again") }
+            Button({ showAdThen(activity) { viewModel.start(game.mode, fresh = true) } }) { Text(stringResource(R.string.hunt_play_again)) }
         },
         dismissButton = {
             val activity = LocalContext.current.findActivity()
-            OutlinedButton({ showAdThen(activity) { nav.popBackStack() } }) { Text("Home") }
+            OutlinedButton({ showAdThen(activity) { nav.popBackStack() } }) { Text(stringResource(R.string.common_home)) }
         },
     )
 }
@@ -918,6 +956,7 @@ private tailrec fun Context.findActivity(): Activity? = when (this) {
 @Composable
 private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewModel) {
     val leave = rememberLeaveWithAd(nav)
+    val context = LocalContext.current
     val savedBest by viewModel.scienceBestScore.collectAsStateWithLifecycle()
     val restoredRun = remember { viewModel.loadScienceRun() }
     val todaysMysteries = remember { ScienceMysteries.forDay(restoredRun.date) }
@@ -976,7 +1015,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
         }
     }.trim()
 
-    Scaffold(topBar = { AppBar("Science Uncovered", leave) }, containerColor = Color(0xFFF4F7FB)) { padding ->
+    Scaffold(topBar = { AppBar(stringResource(R.string.home_science_title), leave) }, containerColor = Color(0xFFF4F7FB)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(16.dp),
@@ -991,7 +1030,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                     Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                "RUN SCORE  $totalScore",
+                                stringResource(R.string.science_run_score, totalScore),
                                 modifier = Modifier.weight(1f),
                                 color = Color.White,
                                 fontWeight = FontWeight.Black,
@@ -1000,18 +1039,18 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                             Text("${"♥".repeat(lives)}${"♡".repeat(3 - lives)}", color = Coral, fontSize = 22.sp, fontWeight = FontWeight.Black)
                         }
                         Text(
-                            "Today's run · Mystery ${mysteryOffset + 1} of ${todaysMysteries.size} · Best $savedBest",
+                            stringResource(R.string.science_run_status, mysteryOffset + 1, todaysMysteries.size, savedBest),
                             color = Color.White.copy(alpha = .62f),
                             fontSize = 10.sp,
                         )
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f)) {
-                                Text(mystery.category.label.uppercase(), color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.3.sp)
-                                Text(mystery.category.prompt, color = Color.White, fontWeight = FontWeight.Black, fontSize = 25.sp)
+                                Text(mystery.category.localizedLabel().uppercase(), color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.3.sp)
+                                Text(mystery.category.localizedPrompt(), color = Color.White, fontWeight = FontWeight.Black, fontSize = 25.sp)
                             }
                             Column(horizontalAlignment = Alignment.End) {
                                 Text(points.toString(), color = Gold, fontWeight = FontWeight.Black, fontSize = 28.sp)
-                                Text("possible points", color = Color.White.copy(alpha = .62f), fontSize = 10.sp)
+                                Text(stringResource(R.string.science_possible_points), color = Color.White.copy(alpha = .62f), fontSize = 10.sp)
                             }
                         }
                         LinearProgressIndicator(
@@ -1038,7 +1077,11 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                         )
                         Spacer(Modifier.height(5.dp))
                         Text(
-                            "$answerLength letters · ${mystery.wordCount} ${if (mystery.wordCount == 1) "word" else "words"}",
+                            stringResource(
+                                R.string.science_answer_shape,
+                                pluralStringResource(R.plurals.science_letter_count, answerLength, answerLength),
+                                pluralStringResource(R.plurals.science_word_count, mystery.wordCount, mystery.wordCount),
+                            ),
                             color = Navy.copy(alpha = .55f),
                             fontSize = 11.sp,
                         )
@@ -1058,7 +1101,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                         }
                         Spacer(Modifier.width(11.dp))
                         Column(Modifier.weight(1f)) {
-                            Text("CLUE ${index + 1}", color = Navy.copy(alpha = .5f), fontWeight = FontWeight.Black, fontSize = 10.sp)
+                            Text(stringResource(R.string.science_clue_number, index + 1), color = Navy.copy(alpha = .5f), fontWeight = FontWeight.Black, fontSize = 10.sp)
                             Text(mystery.clues[index], color = Navy, fontWeight = FontWeight.SemiBold, lineHeight = 20.sp)
                         }
                     }
@@ -1108,7 +1151,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                                                             storedRunOver = true,
                                                         )
                                                     } else {
-                                                        message = "$letter is not in the answer — one life lost"
+                                                        message = context.getString(R.string.science_letter_wrong, letter.toString())
                                                         saveRun(
                                                             storedGuessedLetters = updatedGuesses,
                                                             storedPoints = points,
@@ -1130,7 +1173,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                             }
                         }
                         Text(
-                            "Tap a letter to reveal every matching position",
+                            stringResource(R.string.science_keyboard_hint),
                             modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
                             color = Navy.copy(alpha = .58f),
                             textAlign = TextAlign.Center,
@@ -1152,7 +1195,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                             },
                             enabled = visibleClues < mystery.clues.size,
                             modifier = Modifier.weight(1.35f),
-                        ) { Text(if (visibleClues < mystery.clues.size) "Next clue (−15)" else "All clues shown") }
+                        ) { Text(stringResource(if (visibleClues < mystery.clues.size) R.string.science_next_clue else R.string.science_all_clues)) }
                         OutlinedButton(
                             onClick = {
                                 points = 0
@@ -1166,7 +1209,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                                 saveRun(storedPoints = 0, storedRevealed = true, storedRunOver = remainingLives == 0)
                             },
                             modifier = Modifier.weight(1f),
-                        ) { Text("Skip (−1 life)") }
+                        ) { Text(stringResource(R.string.science_skip)) }
                     }
                 }
             } else {
@@ -1178,20 +1221,20 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                         Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                             Text(
                                 when {
-                                    solved -> "Solved — +$points points!"
-                                    runOver -> "Run over — $totalScore points"
-                                    else -> "Mystery revealed — one life lost"
+                                    solved -> pluralStringResource(R.plurals.science_solved, points, points)
+                                    runOver -> pluralStringResource(R.plurals.science_run_over, totalScore, totalScore)
+                                    else -> stringResource(R.string.science_revealed)
                                 },
                                 color = if (solved) Green else Coral,
                                 fontWeight = FontWeight.Black,
                                 fontSize = 22.sp,
                             )
-                            if (wrongAnswers == 0 && solved) Text("Perfect solve: +${ScienceMysteries.PERFECT_BONUS} bonus included.", color = Green, fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                            if (runOver && lastOfToday && lives > 0) Text("Life bonus: +${lives * ScienceMysteries.LIFE_BONUS} for $lives ${if (lives == 1) "life" else "lives"} left.", color = Green, fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                            if (wrongAnswers > 0 && solved) Text("Solved after $wrongAnswers incorrect letter ${if (wrongAnswers == 1) "guess" else "guesses"}.", color = Navy.copy(alpha = .62f), fontSize = 12.sp)
+                            if (wrongAnswers == 0 && solved) Text(pluralStringResource(R.plurals.science_perfect_bonus, ScienceMysteries.PERFECT_BONUS, ScienceMysteries.PERFECT_BONUS), color = Green, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            if (runOver && lastOfToday && lives > 0) Text(pluralStringResource(R.plurals.science_life_bonus, lives, lives * ScienceMysteries.LIFE_BONUS, lives), color = Green, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            if (wrongAnswers > 0 && solved) Text(pluralStringResource(R.plurals.science_solved_after, wrongAnswers, wrongAnswers), color = Navy.copy(alpha = .62f), fontSize = 12.sp)
                             Text(mystery.story, color = Navy, lineHeight = 21.sp)
                             if (runOver) {
-                                Text("$solvedCount mysteries solved in this run", color = Navy.copy(alpha = .62f), fontWeight = FontWeight.Bold)
+                                Text(pluralStringResource(R.plurals.science_run_solved_count, solvedCount, solvedCount), color = Navy.copy(alpha = .62f), fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -1227,10 +1270,10 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                     ) {
                         Text(
                             when {
-                                runOver -> "BACK HOME"
-                                lastOfToday -> "SEE TODAY'S SCORE"
-                                solved -> "NEXT MYSTERY"
-                                else -> "CONTINUE — $lives ${if (lives == 1) "LIFE" else "LIVES"} LEFT"
+                                runOver -> stringResource(R.string.science_back_home)
+                                lastOfToday -> stringResource(R.string.science_see_score)
+                                solved -> stringResource(R.string.science_next_mystery)
+                                else -> pluralStringResource(R.plurals.science_continue_lives, lives, lives)
                             },
                             fontWeight = FontWeight.Black,
                         )
@@ -1239,7 +1282,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                 if (runOver) {
                     item {
                         Text(
-                            "Today's three mysteries are done. New ones unlock at 00:00 UTC.",
+                            stringResource(R.string.science_done_today),
                             color = Navy.copy(alpha = .62f),
                             textAlign = TextAlign.Center,
                             fontSize = 12.sp,
@@ -1256,7 +1299,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
 private fun AppBar(title: String, back: () -> Unit, actions: @Composable RowScope.() -> Unit = {}) {
     TopAppBar(
         title = { Text(title, fontWeight = FontWeight.ExtraBold) },
-        navigationIcon = { IconButton(back) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") } },
+        navigationIcon = { IconButton(back) { Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.common_back)) } },
         actions = actions,
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White, titleContentColor = Navy),
     )
@@ -1269,7 +1312,7 @@ private fun FactScreen(nav: NavHostController) {
     val fact = remember { EverydayFacts.today().localized(context) }
     var selectedGuess by remember(fact.id) { mutableStateOf<Int?>(null) }
     var revealed by remember(fact.id) { mutableStateOf(false) }
-    Scaffold(topBar = { AppBar("Everyday Chemistry", leave) }, containerColor = Color(0xFFF6F0E5)) { padding ->
+    Scaffold(topBar = { AppBar(stringResource(R.string.home_everyday_title), leave) }, containerColor = Color(0xFFF6F0E5)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(18.dp),
@@ -1279,14 +1322,14 @@ private fun FactScreen(nav: NavHostController) {
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        if (revealed) "THE ANSWER" else "THE QUESTION",
+                        stringResource(if (revealed) R.string.everyday_the_answer else R.string.everyday_the_question),
                         color = Green,
                         fontWeight = FontWeight.Black,
                         fontSize = 12.sp,
                         letterSpacing = 1.5.sp,
                         modifier = Modifier.weight(1f),
                     )
-                    Text("CARD ${fact.number}", color = Navy.copy(alpha = .55f), fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                    Text(stringResource(R.string.everyday_card_number, fact.number), color = Navy.copy(alpha = .55f), fontWeight = FontWeight.Bold, fontSize = 11.sp)
                 }
             }
             item {
@@ -1316,7 +1359,7 @@ private fun FactScreen(nav: NavHostController) {
                 }
                 item {
                     Text(
-                        "TAKE A QUICK GUESS",
+                        stringResource(R.string.everyday_quick_guess),
                         Modifier.fillMaxWidth().padding(top = 3.dp),
                         color = Navy.copy(alpha = .58f),
                         fontWeight = FontWeight.Black,
@@ -1350,13 +1393,13 @@ private fun FactScreen(nav: NavHostController) {
                         modifier = Modifier.fillMaxWidth().height(54.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Green),
                         shape = RoundedCornerShape(15.dp),
-                    ) { Text("SHOW ME", fontWeight = FontWeight.Black) }
+                    ) { Text(stringResource(R.string.everyday_show_me), fontWeight = FontWeight.Black) }
                 }
             } else {
                 selectedGuess?.let { guess ->
                     item {
                         Text(
-                            if (guess == fact.correctGuess) "Spot on — you chose well." else "Not quite — here’s what is happening.",
+                            stringResource(if (guess == fact.correctGuess) R.string.everyday_spot_on else R.string.everyday_not_quite),
                             color = if (guess == fact.correctGuess) Green else Coral,
                             fontWeight = FontWeight.Bold,
                         )
@@ -1376,7 +1419,7 @@ private fun FactScreen(nav: NavHostController) {
                 item {
                     Card(colors = CardDefaults.cardColors(containerColor = Navy), shape = RoundedCornerShape(18.dp)) {
                         Column(Modifier.fillMaxWidth().padding(17.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-                            Text("THE CHEMISTRY UNDERNEATH", color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.1.sp)
+                            Text(stringResource(R.string.everyday_chemistry_underneath), color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.1.sp)
                             Text(fact.chemistryTags, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                             Text(fact.explanation, color = Color.White.copy(alpha = .88f), lineHeight = 21.sp)
                             HorizontalDivider(color = Color.White.copy(alpha = .14f))
@@ -1387,7 +1430,8 @@ private fun FactScreen(nav: NavHostController) {
                 if (fact.tryIt != null) {
                     item {
                         InfoCard(
-                            "Try it: ${fact.tryIt}" + (fact.safety?.let { "\n\nSafety: $it" } ?: ""),
+                            stringResource(R.string.everyday_try_it, fact.tryIt) +
+                                (fact.safety?.let { "\n\n" + stringResource(R.string.everyday_safety, it) } ?: ""),
                             Icons.Default.Science, Color(0xFFFFEABB),
                         )
                     }
@@ -1397,8 +1441,8 @@ private fun FactScreen(nav: NavHostController) {
                         OutlinedButton(
                             onClick = { selectedGuess = null; revealed = false },
                             modifier = Modifier.weight(1f),
-                        ) { Text("ASK AGAIN") }
-                        Button(onClick = { leave() }, modifier = Modifier.weight(1f)) { Text("GOT IT") }
+                        ) { Text(stringResource(R.string.everyday_ask_again)) }
+                        Button(onClick = { leave() }, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.everyday_got_it)) }
                     }
                 }
             }
@@ -1487,14 +1531,14 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
     val todayGuess = guesses[viewModel.todayUtc()]
     val collected = guesses.values.map { it.symbol }.toSet()
     val tint = familyColor(element.family)
-    Scaffold(topBar = { AppBar("Element a Day", leave) }, containerColor = Color(0xFFFFF5F1)) { padding ->
+    Scaffold(topBar = { AppBar(stringResource(R.string.home_element_title), leave) }, containerColor = Color(0xFFFFF5F1)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(18.dp),
             verticalArrangement = Arrangement.spacedBy(13.dp),
         ) {
             item {
-                Text("TODAY'S ELEMENT", color = Coral, fontWeight = FontWeight.Black, fontSize = 12.sp, letterSpacing = 1.5.sp)
+                Text(stringResource(R.string.element_todays), color = Coral, fontWeight = FontWeight.Black, fontSize = 12.sp, letterSpacing = 1.5.sp)
             }
             if (todayGuess == null) {
                 item { ElementGuessCard(element, tint) { choice -> viewModel.recordElementGuess(choice.symbol, choice == element) } }
@@ -1506,8 +1550,7 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
                         shape = RoundedCornerShape(16.dp),
                     ) {
                         Text(
-                            if (correct) "Correct! ${element.name} joins your collection and counts for today's streak."
-                            else "Not quite, it was ${element.name}. It still joins your collection.",
+                            stringResource(if (correct) R.string.element_correct else R.string.element_wrong, element.name),
                             Modifier.fillMaxWidth().padding(14.dp),
                             color = if (correct) Green else Coral, fontWeight = FontWeight.Bold,
                         )
@@ -1517,28 +1560,29 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
                 item {
                     Text(
                         listOfNotNull(
-                            element.family, element.state, "Made in a lab".takeIf { element.atomicNumber >= 93 },
-                            "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block",
+                            localizedFamily(element.family), localizedState(element.state),
+                            stringResource(R.string.element_made_in_lab).takeIf { element.atomicNumber >= 93 },
+                            stringResource(R.string.element_period, element.period), localizedGroup(element.group),
                         ).joinToString(" · "),
                         color = Navy.copy(alpha = .7f), fontWeight = FontWeight.Bold, fontSize = 13.sp,
                     )
                 }
                 item { ElementFactsCard(element) }
-                item { ElementStoryCard("REMEMBER IT", element.story.hook, Icons.Default.Lightbulb, Gold, highlight = true) }
-                item { ElementStoryCard("HOW IT WAS FOUND", element.story.discovery, Icons.Default.Science, Coral) }
-                item { ElementStoryCard("WHERE YOU MEET IT", element.story.uses, Icons.Default.Home, Green) }
+                item { ElementStoryCard(stringResource(R.string.element_remember_it), element.story.hook, Icons.Default.Lightbulb, Gold, highlight = true) }
+                item { ElementStoryCard(stringResource(R.string.element_how_found), element.story.discovery, Icons.Default.Science, Coral) }
+                item { ElementStoryCard(stringResource(R.string.element_where_meet), element.story.uses, Icons.Default.Home, Green) }
                 val compounds = ElementOfDay.compounds(element)
                 if (compounds.isNotEmpty()) item { ElementCompoundsCard(compounds) }
                 item {
                     Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                         Column(Modifier.fillMaxWidth().padding(12.dp)) {
                             Row(Modifier.padding(bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                                Text("Your collection", color = Navy, fontWeight = FontWeight.Black, modifier = Modifier.weight(1f))
-                                Text("${collected.size} of ${ElementOfDay.all.size}", color = Coral, fontWeight = FontWeight.Black, fontSize = 13.sp)
+                                Text(stringResource(R.string.element_collection), color = Navy, fontWeight = FontWeight.Black, modifier = Modifier.weight(1f))
+                                Text(stringResource(R.string.element_collection_count, collected.size, ElementOfDay.all.size), color = Coral, fontWeight = FontWeight.Black, fontSize = 13.sp)
                             }
                             MiniPeriodicTable(element, collected)
                             Text(
-                                "Every element you meet fills in its square. Today's is highlighted.",
+                                stringResource(R.string.element_collection_hint),
                                 color = Navy.copy(alpha = .55f), fontSize = 11.sp, modifier = Modifier.padding(top = 8.dp),
                             )
                         }
@@ -1547,7 +1591,7 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
             }
             item {
                 Text(
-                    "A new element appears every day at midnight UTC.",
+                    stringResource(R.string.element_new_daily),
                     Modifier.fillMaxWidth(), color = Navy.copy(alpha = .55f), textAlign = TextAlign.Center, fontSize = 11.sp,
                 )
             }
@@ -1568,9 +1612,13 @@ private fun ElementGuessCard(element: DailyElement, tint: Color, onGuess: (Daily
                 ) { Text("?", color = Navy, fontWeight = FontWeight.Black, fontSize = 34.sp) }
                 Spacer(Modifier.width(14.dp))
                 Column {
-                    Text("Which element am I?", color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
+                    Text(stringResource(R.string.element_which_am_i), color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
                     Text(
-                        listOf(element.family, "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block").joinToString(" · "),
+                        listOf(
+                            localizedFamily(element.family),
+                            stringResource(R.string.element_period, element.period),
+                            localizedGroup(element.group),
+                        ).joinToString(" · "),
                         color = Navy.copy(alpha = .6f), fontSize = 12.sp, fontWeight = FontWeight.SemiBold,
                     )
                 }
@@ -1594,7 +1642,7 @@ private fun ElementGuessCard(element: DailyElement, tint: Color, onGuess: (Daily
                 }
             }
             Text(
-                "Your first guess counts. Get it right to add today to your streak.",
+                stringResource(R.string.element_first_guess_counts),
                 color = Navy.copy(alpha = .55f), fontSize = 11.sp,
             )
         }
@@ -1603,6 +1651,14 @@ private fun ElementGuessCard(element: DailyElement, tint: Color, onGuess: (Daily
 
 @Composable
 private fun ElementTileRow(element: DailyElement, tint: Color, animate: Boolean) {
+    val tileDescription = stringResource(
+        R.string.element_tile_description,
+        element.name,
+        element.symbol,
+        element.atomicNumber,
+        element.atomicWeight,
+        element.core.orEmpty() + " " + element.configuration.joinToString(" ") { "${it.first} ${it.second}" },
+    )
     Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(
             Modifier.weight(1f).aspectRatio(1f)
@@ -1610,9 +1666,7 @@ private fun ElementTileRow(element: DailyElement, tint: Color, animate: Boolean)
                 .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(22.dp))
                 .padding(horizontal = 12.dp, vertical = 10.dp)
                 .semantics {
-                    contentDescription = "${element.name}, symbol ${element.symbol}, atomic number ${element.atomicNumber}, " +
-                        "atomic weight ${element.atomicWeight}, electron configuration " +
-                        (element.core.orEmpty() + " " + element.configuration.joinToString(" ") { "${it.first} ${it.second}" })
+                    contentDescription = tileDescription
                 },
         ) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -1640,7 +1694,7 @@ private fun ElementTileRow(element: DailyElement, tint: Color, animate: Boolean)
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
             AtomModel(shells, outer.second, tint, animate = animate, modifier = Modifier.fillMaxWidth().aspectRatio(1f))
             Text(
-                "Outer electrons: ${outer.first}${"spdf"[outer.second]} orbital",
+                stringResource(R.string.element_outer_electrons, "${outer.first}${"spdf"[outer.second]}"),
                 color = Navy.copy(alpha = .6f), fontSize = 11.sp, fontWeight = FontWeight.SemiBold,
             )
         }
@@ -1655,16 +1709,16 @@ private fun ElementFactsCard(element: DailyElement) {
         Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             facts?.picture?.let { picture ->
                 Image(
-                    painterResource(picture), contentDescription = "Where you might meet ${element.name}",
+                    painterResource(picture), contentDescription = stringResource(R.string.element_picture_description, element.name),
                     modifier = Modifier.width(76.dp).height(120.dp), contentScale = ContentScale.Fit,
                 )
                 Spacer(Modifier.width(12.dp))
             }
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                FactLine(Icons.Default.Thermostat, "Melts", facts?.meltingC?.let { "$it °C" })
-                FactLine(Icons.Default.LocalFireDepartment, "Boils", facts?.boilingC?.let { "$it °C" })
-                FactLine(Icons.Default.Scale, "Density", facts?.density?.let { "$it $densityUnit" })
-                FactLine(Icons.Default.CalendarMonth, "Discovered", facts?.discovered)
+                FactLine(Icons.Default.Thermostat, stringResource(R.string.element_melts), facts?.meltingC?.let { "$it °C" })
+                FactLine(Icons.Default.LocalFireDepartment, stringResource(R.string.element_boils), facts?.boilingC?.let { "$it °C" })
+                FactLine(Icons.Default.Scale, stringResource(R.string.element_density), facts?.density?.let { "$it $densityUnit" })
+                FactLine(Icons.Default.CalendarMonth, stringResource(R.string.element_discovered), facts?.discovered)
             }
         }
     }
@@ -1676,7 +1730,7 @@ private fun FactLine(icon: ImageVector, label: String, value: String?) {
         Icon(icon, null, tint = Coral, modifier = Modifier.size(18.dp))
         Spacer(Modifier.width(8.dp))
         Text(label, color = Navy.copy(alpha = .6f), fontSize = 13.sp, modifier = Modifier.width(84.dp))
-        Text(value ?: "Not measured", color = Navy, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Text(value ?: stringResource(R.string.element_not_measured), color = Navy, fontWeight = FontWeight.Bold, fontSize = 13.sp)
     }
 }
 
@@ -1684,14 +1738,14 @@ private fun FactLine(icon: ImageVector, label: String, value: String?) {
 private fun ElementCompoundsCard(compounds: List<Substance>) {
     Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text("IN THINGS YOU KNOW", color = ScienceBlue, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.1.sp)
+            Text(stringResource(R.string.element_in_things_you_know), color = ScienceBlue, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.1.sp)
             compounds.forEach { substance ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(substance.formula.withSubscripts(), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp, modifier = Modifier.width(92.dp))
                     Text(substance.displayName, color = Navy, modifier = Modifier.weight(1f))
                     if (substance.isPlayable) {
                         Text(
-                            "On the board",
+                            stringResource(R.string.element_on_the_board),
                             Modifier.clip(CircleShape).background(Color(0xFFDDF8F2)).padding(horizontal = 8.dp, vertical = 3.dp),
                             color = Green, fontSize = 10.sp, fontWeight = FontWeight.Bold,
                         )
@@ -1754,10 +1808,10 @@ private fun AtomModel(shells: List<Int>, outerL: Int, nucleusColor: Color, anima
         ).value
     } else 0f
     val orbitalName = "spdf"[outerL.coerceIn(0, 3)]
+    val cloudDescription = stringResource(R.string.element_cloud_description, shells.joinToString(", "), orbitalName.toString())
     Canvas(
         modifier.semantics {
-            contentDescription = "Electron cloud model. Shells hold ${shells.joinToString(", ")} electrons; " +
-                "the outer electrons fill a $orbitalName orbital."
+            contentDescription = cloudDescription
         },
     ) {
         val centre = this.center
@@ -1810,6 +1864,7 @@ private fun ElementStoryCard(label: String, text: String, icon: ImageVector, acc
 @Composable
 private fun MiniPeriodicTable(selected: DailyElement, collected: Set<String>) {
     val cells = remember { ElementOfDay.all.associateBy(ElementOfDay::position) }
+    val collectedSuffix = stringResource(R.string.element_collected)
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         for (row in 0..9) {
             if (row == 7) { Spacer(Modifier.height(5.dp)); continue }
@@ -1830,7 +1885,7 @@ private fun MiniPeriodicTable(selected: DailyElement, collected: Set<String>) {
                                         },
                                     )
                                     .semantics {
-                                        contentDescription = element.name + if (element.symbol in collected) ", collected" else ""
+                                        contentDescription = element.name + if (element.symbol in collected) collectedSuffix else ""
                                     },
                             )
                         }
@@ -1850,10 +1905,10 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
     val run = remember { viewModel.loadScienceRun() }
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
     val board = history[today]
-    val dateFormatter = remember { DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH) }
+    val dateFormatter = remember { DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault()) }
     var editNickname by remember { mutableStateOf(false) }
     var nicknameDraft by remember(cloud.nickname) { mutableStateOf(cloud.nickname) }
-    Scaffold(topBar = { AppBar("Daily Champions", leave) }, containerColor = Color(0xFFF4FCFF)) { padding ->
+    Scaffold(topBar = { AppBar(stringResource(R.string.champions_title), leave) }, containerColor = Color(0xFFF4FCFF)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(16.dp),
@@ -1865,10 +1920,10 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.EmojiEvents, null, tint = Gold)
                             Spacer(Modifier.width(9.dp))
-                            Text("Daily Champions", color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
+                            Text(stringResource(R.string.champions_title), color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
                         }
                         Text(
-                            "Finish today's Molecule Board and today's Science Uncovered run. Your two scores are added together, and your first completed total for each UTC day goes on the worldwide ranking.",
+                            stringResource(R.string.champions_intro),
                             color = Navy.copy(alpha = .7f),
                             fontSize = 12.sp,
                             lineHeight = 17.sp,
@@ -1885,16 +1940,17 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                         }
                         Spacer(Modifier.width(11.dp))
                         Column(Modifier.weight(1f)) {
-                            Text(cloud.nickname.ifBlank { "Science player" }, color = Navy, fontWeight = FontWeight.Black)
+                            val defaultPlayer = stringResource(R.string.champions_default_player)
+                            Text(cloud.nickname.ifBlank { defaultPlayer }, color = Navy, fontWeight = FontWeight.Black)
                             Text(cloud.message, color = Navy.copy(alpha = .6f), fontSize = 10.sp, lineHeight = 14.sp)
                         }
                         if (cloud.online) {
                             IconButton({ nicknameDraft = cloud.nickname; editNickname = true }) {
-                                Icon(Icons.Default.Edit, "Edit nickname", tint = Coral)
+                                Icon(Icons.Default.Edit, stringResource(R.string.champions_edit_nickname), tint = Coral)
                             }
                         } else {
                             IconButton(viewModel::refreshScienceLeaderboard) {
-                                Icon(Icons.Default.Refresh, "Retry Firebase connection", tint = Coral)
+                                Icon(Icons.Default.Refresh, stringResource(R.string.champions_retry), tint = Coral)
                             }
                         }
                     }
@@ -1904,10 +1960,13 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                 Card(colors = CardDefaults.cardColors(containerColor = Navy), shape = RoundedCornerShape(18.dp)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
-                            Text(if (board != null && run.runOver) "TODAY'S TOTAL" else "TODAY SO FAR", color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp)
+                            Text(stringResource(if (board != null && run.runOver) R.string.champions_todays_total else R.string.champions_today_so_far), color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp)
                             Text(
-                                "Molecule Board " + (board?.score?.toString() ?: "not finished") +
-                                    " · Science " + (if (run.runOver) run.totalScore.toString() else "in progress"),
+                                stringResource(
+                                    R.string.champions_today_breakdown,
+                                    board?.score?.toString() ?: stringResource(R.string.champions_not_finished),
+                                    if (run.runOver) run.totalScore.toString() else stringResource(R.string.champions_in_progress),
+                                ),
                                 color = Color.White.copy(alpha = .7f),
                                 fontSize = 12.sp,
                             )
@@ -1918,15 +1977,14 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
             }
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text("Worldwide rankings", modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
-                    Text(if (cloud.online) "TODAY · UTC" else "OFFLINE", color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
+                    Text(stringResource(R.string.champions_worldwide), modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
+                    Text(stringResource(if (cloud.online) R.string.champions_today_utc else R.string.champions_offline), color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
                 }
             }
             if (cloud.rankings.isEmpty()) {
                 item {
                     Text(
-                        if (cloud.online) "No worldwide scores have been posted for today yet."
-                        else "Worldwide scores appear here when Firebase is connected.",
+                        stringResource(if (cloud.online) R.string.champions_no_scores_today else R.string.champions_scores_need_firebase),
                         modifier = Modifier.fillMaxWidth().padding(vertical = 18.dp),
                         color = Navy.copy(alpha = .62f),
                         textAlign = TextAlign.Center,
@@ -1947,9 +2005,9 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                             ) { Text("#${entry.rank}", color = Navy, fontWeight = FontWeight.Black) }
                             Spacer(Modifier.width(12.dp))
                             Column(Modifier.weight(1f)) {
-                                Text(if (isPlayer) "${entry.displayName} · You" else entry.displayName, fontWeight = FontWeight.Bold)
+                                Text(if (isPlayer) stringResource(R.string.champions_you, entry.displayName) else entry.displayName, fontWeight = FontWeight.Bold)
                                 Text(
-                                    "Board ${entry.moleculeScore} · Science ${entry.scienceScore}",
+                                    stringResource(R.string.champions_entry_scores, entry.moleculeScore, entry.scienceScore),
                                     color = Navy.copy(alpha = .6f), fontSize = 11.sp,
                                 )
                             }
@@ -1960,8 +2018,8 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
             }
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text("Your scores on this device", modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
-                    Text("LOCAL", color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
+                    Text(stringResource(R.string.champions_local_scores), modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
+                    Text(stringResource(R.string.champions_local), color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
                 }
             }
             if (entries.isEmpty()) {
@@ -1972,8 +2030,7 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                     ) {
                         Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(54.dp))
                         Spacer(Modifier.height(12.dp))
-                        Text("No completed runs yet", fontWeight = FontWeight.Black, fontSize = 19.sp)
-                        Text("Finish today's Science Uncovered run to place your first score.", color = Navy.copy(alpha = .62f), textAlign = TextAlign.Center)
+                        Text(stringResource(R.string.champions_no_runs), fontWeight = FontWeight.Black, fontSize = 19.sp)
                     }
                 }
             } else {
@@ -1987,9 +2044,9 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                             ) { Text("#${index + 1}", color = Navy, fontWeight = FontWeight.Black) }
                             Spacer(Modifier.width(12.dp))
                             Column(Modifier.weight(1f)) {
-                                Text(if (entry.date == today) "Today" else entry.date.format(dateFormatter), fontWeight = FontWeight.Bold)
+                                Text(if (entry.date == today) stringResource(R.string.champions_today) else entry.date.format(dateFormatter), fontWeight = FontWeight.Bold)
                                 Text(
-                                    "${entry.mysteriesSolved} ${if (entry.mysteriesSolved == 1) "mystery" else "mysteries"} solved",
+                                    pluralStringResource(R.plurals.champions_mysteries_solved, entry.mysteriesSolved, entry.mysteriesSolved),
                                     color = Navy.copy(alpha = .6f),
                                     fontSize = 11.sp,
                                 )
@@ -2002,10 +2059,9 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
             item {
                 Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F6FC)), shape = RoundedCornerShape(16.dp)) {
                     Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                        Text(if (cloud.online) "Firebase connected" else "Playing offline", color = Navy, fontWeight = FontWeight.Black)
+                        Text(stringResource(if (cloud.online) R.string.champions_firebase_connected else R.string.champions_playing_offline), color = Navy, fontWeight = FontWeight.Black)
                         Text(
-                            if (cloud.online) "Your anonymous player identity keeps the app simple: no Google login screen and no email is shown. A finished daily run is submitted once."
-                            else "Your run and score remain on this device. After Anonymous Authentication, Firestore and the score function are enabled, tap Retry to connect.",
+                            stringResource(if (cloud.online) R.string.champions_online_note else R.string.champions_offline_note),
                             color = Navy.copy(alpha = .65f),
                             fontSize = 11.sp,
                             lineHeight = 16.sp,
@@ -2013,7 +2069,7 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                         TextButton(onClick = viewModel::refreshScienceLeaderboard) {
                             Icon(Icons.Default.Refresh, null)
                             Spacer(Modifier.width(6.dp))
-                            Text("Refresh")
+                            Text(stringResource(R.string.common_refresh))
                         }
                     }
                 }
@@ -2023,23 +2079,23 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
     if (editNickname) {
         AlertDialog(
             onDismissRequest = { editNickname = false },
-            title = { Text("Choose your player name") },
+            title = { Text(stringResource(R.string.champions_choose_name)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("This public nickname appears on Daily Champions. Do not use your real name.", color = Navy.copy(alpha = .7f))
+                    Text(stringResource(R.string.champions_nickname_note), color = Navy.copy(alpha = .7f))
                     OutlinedTextField(
                         value = nicknameDraft,
                         onValueChange = { if (it.length <= 16) nicknameDraft = it },
-                        label = { Text("Nickname") },
-                        supportingText = { Text("3–16 letters, numbers or spaces") },
+                        label = { Text(stringResource(R.string.champions_nickname_label)) },
+                        supportingText = { Text(stringResource(R.string.champions_nickname_support)) },
                         singleLine = true,
                     )
                 }
             },
             confirmButton = {
-                Button(onClick = { viewModel.updatePlayerNickname(nicknameDraft); editNickname = false }) { Text("Save") }
+                Button(onClick = { viewModel.updatePlayerNickname(nicknameDraft); editNickname = false }) { Text(stringResource(R.string.common_save)) }
             },
-            dismissButton = { TextButton(onClick = { editNickname = false }) { Text("Cancel") } },
+            dismissButton = { TextButton(onClick = { editNickname = false }) { Text(stringResource(R.string.common_cancel)) } },
         )
     }
 }
@@ -2059,8 +2115,8 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
     val firstMonth = history.keys.minOrNull()?.let(YearMonth::from)?.takeIf { it.isBefore(currentMonth) } ?: currentMonth
     var month by remember { mutableStateOf(currentMonth) }
     val recent = history.values.sortedByDescending { it.date }.take(14)
-    val dateFormatter = remember { DateTimeFormatter.ofPattern("EEE d MMM", Locale.ENGLISH) }
-    Scaffold(topBar = { AppBar("Daily Streak", { nav.popBackStack() }) }, containerColor = Color(0xFFF4FCFF)) { padding ->
+    val dateFormatter = remember { DateTimeFormatter.ofPattern("EEE d MMM", Locale.getDefault()) }
+    Scaffold(topBar = { AppBar(stringResource(R.string.streak_title), { nav.popBackStack() }) }, containerColor = Color(0xFFF4FCFF)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(16.dp),
@@ -2075,17 +2131,16 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                             Column {
                                 Text(
                                     when (summary.current) {
-                                        0 -> "No streak yet"
-                                        1 -> "1-day streak"
-                                        else -> "${summary.current}-day streak"
+                                        0 -> stringResource(R.string.streak_none)
+                                        else -> pluralStringResource(R.plurals.streak_days, summary.current, summary.current)
                                     },
                                     color = Navy, fontWeight = FontWeight.Black, fontSize = 24.sp,
                                 )
                                 Text(
                                     when {
-                                        summary.playedToday -> "Today counts. Come back tomorrow."
-                                        summary.current > 0 -> "Play any daily game to keep your streak going."
-                                        else -> "Play any daily game to start a streak."
+                                        summary.playedToday -> stringResource(R.string.streak_played_today)
+                                        summary.current > 0 -> stringResource(R.string.streak_keep_going)
+                                        else -> stringResource(R.string.streak_start)
                                     },
                                     color = Navy.copy(alpha = .7f), fontSize = 12.sp,
                                 )
@@ -2093,9 +2148,9 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                         }
                         Spacer(Modifier.height(12.dp))
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            StatPill("Best streak", summary.longest.toString(), Modifier.weight(1f))
-                            StatPill("Days played", summary.daysPlayed.toString(), Modifier.weight(1f))
-                            StatPill("Best score", history.values.maxOfOrNull { it.score }?.toString() ?: "–", Modifier.weight(1f))
+                            StatPill(stringResource(R.string.streak_best), summary.longest.toString(), Modifier.weight(1f))
+                            StatPill(stringResource(R.string.streak_days_played), summary.daysPlayed.toString(), Modifier.weight(1f))
+                            StatPill(stringResource(R.string.streak_best_score), history.values.maxOfOrNull { it.score }?.toString() ?: "–", Modifier.weight(1f))
                         }
                         if (!summary.playedToday) {
                             Spacer(Modifier.height(12.dp))
@@ -2103,7 +2158,7 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                                 { nav.navigate(Routes.Daily) },
                                 Modifier.fillMaxWidth(),
                                 colors = ButtonDefaults.buttonColors(containerColor = Green),
-                            ) { Text("Play today's board") }
+                            ) { Text(stringResource(R.string.streak_play_today)) }
                         }
                     }
                 }
@@ -2120,11 +2175,11 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                     onForward = { month = month.plusMonths(1) },
                 )
             }
-            item { Text("Recent boards", fontWeight = FontWeight.Black, fontSize = 18.sp, color = Navy) }
+            item { Text(stringResource(R.string.streak_recent), fontWeight = FontWeight.Black, fontSize = 18.sp, color = Navy) }
             if (recent.isEmpty()) {
                 item {
                     Text(
-                        "No Daily Boards played yet. A day counts when you finish the Molecule Board or Science Uncovered.",
+                        stringResource(R.string.streak_recent_empty),
                         color = Navy.copy(alpha = .62f), fontSize = 13.sp,
                     )
                 }
@@ -2141,7 +2196,11 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                         Column(Modifier.weight(1f)) {
                             Text(record.date.format(dateFormatter), fontWeight = FontWeight.Bold)
                             Text(
-                                "${record.uniqueDiscoveries} unique" + if (record.missionAchieved) " · mission complete" else "",
+                                pluralStringResource(
+                                    if (record.missionAchieved) R.plurals.streak_unique_mission else R.plurals.streak_unique,
+                                    record.uniqueDiscoveries,
+                                    record.uniqueDiscoveries,
+                                ),
                                 color = Navy.copy(alpha = .6f), fontSize = 11.sp,
                             )
                         }
@@ -2151,7 +2210,7 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
             }
             item {
                 Text(
-                    "Each day's board changes at midnight UTC. History is stored only on this device.",
+                    stringResource(R.string.streak_footer),
                     modifier = Modifier.fillMaxWidth().padding(8.dp),
                     color = Navy.copy(alpha = .55f), textAlign = TextAlign.Center, fontSize = 11.sp,
                 )
@@ -2173,20 +2232,20 @@ private fun StreakCalendar(
     onBack: () -> Unit,
     onForward: () -> Unit,
 ) {
-    val monthFormatter = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH) }
-    val dayFormatter = remember { DateTimeFormatter.ofPattern("d MMMM", Locale.ENGLISH) }
+    val monthFormatter = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale.getDefault()) }
+    val dayFormatter = remember { DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()) }
     Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(20.dp)) {
         Column(Modifier.fillMaxWidth().padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onBack, enabled = canGoBack) { Icon(Icons.Default.ChevronLeft, "Previous month") }
+                IconButton(onBack, enabled = canGoBack) { Icon(Icons.Default.ChevronLeft, stringResource(R.string.streak_previous_month)) }
                 Text(
                     month.format(monthFormatter), Modifier.weight(1f),
                     textAlign = TextAlign.Center, fontWeight = FontWeight.Black, color = Navy,
                 )
-                IconButton(onForward, enabled = canGoForward) { Icon(Icons.Default.ChevronRight, "Next month") }
+                IconButton(onForward, enabled = canGoForward) { Icon(Icons.Default.ChevronRight, stringResource(R.string.streak_next_month)) }
             }
             Row(Modifier.fillMaxWidth()) {
-                listOf("M", "T", "W", "T", "F", "S", "S").forEach { label ->
+                DayOfWeek.entries.map { it.getDisplayName(TextStyle.NARROW, Locale.getDefault()) }.forEach { label ->
                     Text(
                         label, Modifier.weight(1f), textAlign = TextAlign.Center,
                         fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Navy.copy(alpha = .5f),
@@ -2212,11 +2271,11 @@ private fun StreakCalendar(
                             }
                             val description = buildString {
                                 append(date.format(dayFormatter))
-                                if (!played) append(", not played")
-                                if (record != null) append(", Molecule Board score ${record.score}")
-                                if (science) append(", Science Uncovered finished")
-                                if (element) append(", element guessed")
-                                if (day.isToday) append(", today")
+                                if (!played) append(stringResource(R.string.streak_day_not_played))
+                                if (record != null) append(stringResource(R.string.streak_day_board_score, record.score))
+                                if (science) append(stringResource(R.string.streak_day_science))
+                                if (element) append(stringResource(R.string.streak_day_element))
+                                if (day.isToday) append(stringResource(R.string.streak_day_today))
                             }
                             Box(
                                 Modifier.fillMaxSize()
@@ -2239,10 +2298,10 @@ private fun StreakCalendar(
             }
             Spacer(Modifier.height(8.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                CalendarLegend(Green, "Board")
-                CalendarLegend(ScienceBlue, "Science")
-                CalendarLegend(Coral, "Element")
-                CalendarLegend(Gold, "Both games")
+                CalendarLegend(Green, stringResource(R.string.streak_legend_board))
+                CalendarLegend(ScienceBlue, stringResource(R.string.streak_legend_science))
+                CalendarLegend(Coral, stringResource(R.string.streak_legend_element))
+                CalendarLegend(Gold, stringResource(R.string.streak_legend_both))
             }
         }
     }
@@ -2260,11 +2319,11 @@ private fun CalendarLegend(color: Color, label: String) {
 @Composable
 private fun ReviewScreen(nav: NavHostController, viewModel: MainViewModel) {
     val records by viewModel.pending.collectAsStateWithLifecycle()
-    Scaffold(topBar = { AppBar("Discovery Review", { nav.popBackStack() }) }) { padding ->
+    Scaffold(topBar = { AppBar(stringResource(R.string.review_title), { nav.popBackStack() }) }) { padding ->
         LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            item { Text("Unrecognised combinations are not labelled impossible. They stay on this device for later review.", color = Navy.copy(alpha = .7f)) }
+            item { Text(stringResource(R.string.review_intro), color = Navy.copy(alpha = .7f)) }
             if (records.isEmpty()) item {
-                Text("Nothing waiting for review", Modifier.fillMaxWidth().padding(40.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.review_empty), Modifier.fillMaxWidth().padding(40.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
             }
             items(records, key = { it.canonicalKey }) { record ->
                 Card {
@@ -2273,9 +2332,9 @@ private fun ReviewScreen(nav: NavHostController, viewModel: MainViewModel) {
                         Spacer(Modifier.width(12.dp))
                         Column(Modifier.weight(1f)) {
                             Text(record.formula, fontWeight = FontWeight.Black, fontSize = 19.sp)
-                            Text("Not yet recognised · tried ${record.count} times", fontSize = 12.sp)
+                            Text(pluralStringResource(R.plurals.review_tried, record.count, record.count), fontSize = 12.sp)
                         }
-                        IconButton({ viewModel.deletePending(record) }) { Icon(Icons.Default.DeleteOutline, "Delete") }
+                        IconButton({ viewModel.deletePending(record) }) { Icon(Icons.Default.DeleteOutline, stringResource(R.string.common_delete)) }
                     }
                 }
             }
@@ -2286,30 +2345,65 @@ private fun ReviewScreen(nav: NavHostController, viewModel: MainViewModel) {
 @Composable
 private fun SettingsScreen(nav: NavHostController, viewModel: MainViewModel) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
-    Scaffold(topBar = { AppBar("Settings", { nav.popBackStack() }) }) { padding ->
+    Scaffold(topBar = { AppBar(stringResource(R.string.settings_title), { nav.popBackStack() }) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp)) {
-            SettingRow("Sound", "Discovery and tile sounds", settings.sound, viewModel::setSound)
-            SettingRow("Vibration", "Gentle touch feedback", settings.vibration, viewModel::setVibration)
-            SettingRow("Reduced motion", "Use simpler transitions", settings.reducedMotion, viewModel::setReducedMotion)
+            SettingRow(stringResource(R.string.settings_sound), stringResource(R.string.settings_sound_description), settings.sound, viewModel::setSound)
+            SettingRow(stringResource(R.string.settings_vibration), stringResource(R.string.settings_vibration_description), settings.vibration, viewModel::setVibration)
+            SettingRow(stringResource(R.string.settings_reduced_motion), stringResource(R.string.settings_reduced_motion_description), settings.reducedMotion, viewModel::setReducedMotion)
             val context = LocalContext.current
+            var showLanguageDialog by remember { mutableStateOf(false) }
+            val currentLanguage = AppLanguage.fromTag(settings.languageTag)
+            val currentLanguageLabel = if (currentLanguage == AppLanguage.SYSTEM) {
+                stringResource(R.string.settings_language_system)
+            } else {
+                currentLanguage.displayName
+            }
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable { showLanguageDialog = true }
+                    .padding(vertical = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(Icons.Default.Language, contentDescription = null, tint = Coral)
+                Spacer(Modifier.width(12.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.settings_language), fontWeight = FontWeight.Bold)
+                    Text(currentLanguageLabel, fontSize = 12.sp, color = Navy.copy(alpha = .65f))
+                }
+                Icon(Icons.Default.ChevronRight, contentDescription = null, tint = Coral)
+            }
+            if (showLanguageDialog) {
+                LanguagePickerDialog(
+                    current = currentLanguage,
+                    onDismiss = { showLanguageDialog = false },
+                    onSelect = { language ->
+                        showLanguageDialog = false
+                        if (language.tag != settings.languageTag) {
+                            viewModel.setLanguage(language.tag)
+                            context.findActivity()?.recreate()
+                        }
+                    },
+                )
+            }
             fun open(url: String) = runCatching {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
             Spacer(Modifier.height(18.dp))
-            Text("Privacy", fontWeight = FontWeight.Black, fontSize = 18.sp)
-            Text("Your progress stays on this phone. Ads are provided by Google.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 6.dp))
+            Text(stringResource(R.string.settings_privacy), fontWeight = FontWeight.Black, fontSize = 18.sp)
+            Text(stringResource(R.string.settings_privacy_text), color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 6.dp))
             Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (AdMobInterstitial.privacyOptionsRequired(context)) {
-                    OutlinedButton({ context.findActivity()?.let(AdMobInterstitial::showPrivacyOptions) }) { Text("Ad choices") }
+                    OutlinedButton({ context.findActivity()?.let(AdMobInterstitial::showPrivacyOptions) }) { Text(stringResource(R.string.settings_ad_choices)) }
                 }
-                OutlinedButton({ open("https://www.edbetter.uk/mobile-privacy/") }) { Text("Privacy policy") }
+                OutlinedButton({ open("https://www.edbetter.uk/mobile-privacy/") }) { Text(stringResource(R.string.settings_privacy_policy)) }
             }
             Spacer(Modifier.height(18.dp))
-            Text("About EdBetter", fontWeight = FontWeight.Black, fontSize = 18.sp)
-            Text("We make playful science apps that turn curiosity into understanding.", color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 6.dp))
+            Text(stringResource(R.string.settings_about), fontWeight = FontWeight.Black, fontSize = 18.sp)
+            Text(stringResource(R.string.settings_about_text), color = Navy.copy(alpha = .7f), modifier = Modifier.padding(top = 6.dp))
             TextButton({ open("https://www.edbetter.uk") }, contentPadding = PaddingValues(0.dp)) { Text("edbetter.uk", color = Coral, fontWeight = FontWeight.Bold) }
             Spacer(Modifier.height(10.dp))
-            Text("More from EdBetter", fontWeight = FontWeight.Black, fontSize = 18.sp)
+            Text(stringResource(R.string.settings_more), fontWeight = FontWeight.Black, fontSize = 18.sp)
             Card(
                 Modifier.fillMaxWidth().padding(top = 8.dp).clickable {
                     open("market://details?id=com.siddbetter.mendleev").onFailure {
@@ -2327,14 +2421,14 @@ private fun SettingsScreen(nav: NavHostController, viewModel: MainViewModel) {
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
                         Text("Kemistri", fontWeight = FontWeight.Black, fontSize = 17.sp, color = Navy)
-                        Text("Master the periodic table through levels, reactions and molecules.", fontSize = 12.sp, color = Navy.copy(alpha = .65f))
+                        Text(stringResource(R.string.settings_kemistri_description), fontSize = 12.sp, color = Navy.copy(alpha = .65f))
                     }
-                    Icon(Icons.Default.ChevronRight, "Open Kemistri on Google Play", tint = Coral)
+                    Icon(Icons.Default.ChevronRight, stringResource(R.string.settings_open_kemistri), tint = Coral)
                 }
             }
             Spacer(Modifier.height(24.dp))
             Text(
-                "Version ${BuildConfig.VERSION_NAME} · © 2026 EdBetter",
+                stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
                 Modifier.fillMaxWidth(), textAlign = TextAlign.Center, color = Navy.copy(alpha = .5f), fontSize = 11.sp,
             )
         }
@@ -2348,3 +2442,41 @@ private fun SettingRow(title: String, subtitle: String, checked: Boolean, change
         Switch(checked, change)
     }
 }
+
+@Composable
+private fun LanguagePickerDialog(
+    current: AppLanguage,
+    onDismiss: () -> Unit,
+    onSelect: (AppLanguage) -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.settings_language), fontWeight = FontWeight.Black) },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState())) {
+                AppLanguage.entries.forEach { language ->
+                    val label = if (language == AppLanguage.SYSTEM) {
+                        stringResource(R.string.settings_language_system)
+                    } else {
+                        language.displayName
+                    }
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable { onSelect(language) }
+                            .padding(vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(selected = language == current, onClick = { onSelect(language) })
+                        Spacer(Modifier.width(8.dp))
+                        Text(label, fontSize = 15.sp)
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
+        },
+    )
+}
+

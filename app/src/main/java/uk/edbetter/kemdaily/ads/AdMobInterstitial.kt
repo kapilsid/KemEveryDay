@@ -15,6 +15,7 @@ import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.UserMessagingPlatform
 import uk.edbetter.kemdaily.BuildConfig
+import uk.edbetter.kemdaily.R
 
 /** Loads one interstitial ahead of time and shows it only between Daily boards, never during play. */
 object AdMobInterstitial {
@@ -79,7 +80,7 @@ object AdMobInterstitial {
         UserMessagingPlatform.showPrivacyOptionsForm(activity) { error ->
             if (error != null) {
                 Log.d(TAG, "Privacy options unavailable: ${error.message}")
-                Toast.makeText(activity, "Ad privacy options are not required on this device", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, activity.getString(R.string.settings_ad_privacy_unavailable), Toast.LENGTH_SHORT).show()
             }
         }
     }

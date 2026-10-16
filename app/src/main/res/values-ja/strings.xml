@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Japanese translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">戻る</string>
+    <string name="common_continue">続ける</string>
+    <string name="common_cancel">キャンセル</string>
+    <string name="common_save">保存</string>
+    <string name="common_delete">削除</string>
+    <string name="common_refresh">更新</string>
+    <string name="common_got_it">了解</string>
+    <string name="common_home">ホーム</string>
+
+    <!-- Home -->
+    <string name="home_tagline">毎日新しい化学の驚きを</string>
+    <string name="home_daily_title">デイリーモレキュールボード</string>
+    <string name="home_everyday_title">日常の化学</string>
+    <string name="home_element_title">本日の元素</string>
+    <string name="home_nav_streak">連勝</string>
+    <string name="home_nav_leaders">ランキング</string>
+    <string name="home_nav_settings">設定</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">分子ハント</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"ランスコア %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">答え</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">本日の元素</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">デイリー・チャンピオン</string>
+
+    <!-- Settings -->
+    <string name="settings_title">設定</string>
+    <string name="settings_sound">サウンド</string>
+    <string name="settings_vibration">バイブレーション</string>
+    <string name="settings_reduced_motion">動きを減らす</string>
+    <string name="settings_privacy">プライバシー</string>
+    <string name="settings_about">EdBetterについて</string>
+    <string name="settings_language">言語</string>
+    <string name="settings_language_description">アプリの言語を選択</string>
+    <string name="settings_language_system">システムのデフォルト</string>
+</resources>
+

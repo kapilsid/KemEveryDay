@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Partial Hindi translations. Review with native speaker. -->
+<resources>
+    <string name="app_name">Kemistri Everyday</string>
+
+    <!-- Common -->
+    <string name="common_back">वापस</string>
+    <string name="common_continue">जारी रखें</string>
+    <string name="common_cancel">रद्द करें</string>
+    <string name="common_save">सहेजें</string>
+    <string name="common_delete">हटाएँ</string>
+    <string name="common_refresh">रिफ्रेश</string>
+    <string name="common_got_it">समझ गया</string>
+    <string name="common_home">मुखपृष्ठ</string>
+
+    <!-- Home -->
+    <string name="home_tagline">हर दिन एक नया रसायन विज्ञान आश्चर्य</string>
+    <string name="home_daily_title">दैनिक अणु बोर्ड</string>
+    <string name="home_everyday_title">रोज़मर्रा की रसायन</string>
+    <string name="home_element_title">दिन का तत्व</string>
+    <string name="home_nav_streak">स्ट्रीक</string>
+    <string name="home_nav_leaders">रैंकिंग</string>
+    <string name="home_nav_settings">सेटिंग्स</string>
+
+    <!-- Molecule Hunt -->
+    <string name="hunt_title_standard">मॉलिक्यूल हंट</string>
+
+    <!-- Science Uncovered -->
+    <string name="science_run_score">"रन स्कोर %1$d"</string>
+
+    <!-- Everyday Chemistry -->
+    <string name="everyday_the_answer">उत्तर</string>
+
+    <!-- Element a Day -->
+    <string name="element_todays">आज का तत्व</string>
+
+    <!-- Daily Champions -->
+    <string name="champions_title">दैनिक चैंपियन</string>
+
+    <!-- Settings -->
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="settings_sound">ध्वनि</string>
+    <string name="settings_vibration">वाइब्रेशन</string>
+    <string name="settings_reduced_motion">कम गति प्रभाव</string>
+    <string name="settings_privacy">गोपनीयता</string>
+    <string name="settings_about">EdBetter के बारे में</string>
+    <string name="settings_language">भाषा</string>
+    <string name="settings_language_description">ऐप की भाषा चुनें</string>
+    <string name="settings_language_system">सिस्टम डिफ़ॉल्ट</string>
+</resources>
+

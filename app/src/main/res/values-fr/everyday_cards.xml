@@ -149,7 +149,6 @@
     <string name="ev_bread_stale_setup">Le pain frais perd peu à peu sa texture moelleuse sur le comptoir.</string>
     <string name="ev_bread_stale_guess_a">Le pain sèche complètement</string>
     <string name="ev_bread_stale_guess_b">Les molécules d\'amidon recristallisent et chassent l\'humidité de la mie</string>
-    <string name="ev_bread_stale_guess_c">La moisissure se développe déjà à l’intérieur</string>
     <string name="ev_bread_stale_headline">Les molécules d\'amidon se réorganisent et se cristallisent à mesure que le pain refroidit, chassant l\'eau de la mie. Cette rétrogradation rend le pain ferme.</string>
     <string name="ev_bread_stale_body">Les molécules d\'amidon se réorganisent et se cristallisent à mesure que le pain refroidit, chassant l\'eau de la mie. Cette rétrogradation rend le pain ferme.</string>
     <string name="ev_bread_stale_tags">amidon • cristallisation • rétrogradation</string>

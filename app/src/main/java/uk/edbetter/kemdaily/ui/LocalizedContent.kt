@@ -1,8 +1,13 @@
 package uk.edbetter.kemdaily.ui
 
 import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import java.util.Locale
+import uk.edbetter.kemdaily.R
 import uk.edbetter.kemdaily.data.EverydayFact
+import uk.edbetter.kemdaily.data.MysteryCategory
 
 /**
  * Everyday Chemistry text comes from string resources imported from Kemistri (res/values-xx/everyday_cards.xml),
@@ -42,3 +47,94 @@ fun EverydayFact.localized(context: Context): EverydayFact {
         safety = safety.takeIf { english },
     )
 }
+
+/*
+ * The game engine and data classes stay plain English Kotlin (no Context, unit tested), so their
+ * player-facing words are translated here at display time. Anything unmapped is shown unchanged.
+ */
+
+private val maxAtomsMessage = Regex("A discovery can use up to (\\d+) atoms")
+private const val NOT_RECOGNISED_SUFFIX = " is not yet recognised — saved for review"
+
+/** Translates a GameEngine message (GameState.message) into the phone's language. */
+@Composable
+fun localizedGameMessage(message: String): String {
+    maxAtomsMessage.matchEntire(message)?.let { match ->
+        val atoms = match.groupValues[1].toInt()
+        return pluralStringResource(R.plurals.hunt_msg_max_atoms, atoms, atoms)
+    }
+    if (message.endsWith(NOT_RECOGNISED_SUFFIX)) {
+        return stringResource(R.string.hunt_msg_not_recognised, message.removeSuffix(NOT_RECOGNISED_SUFFIX))
+    }
+    val id = when (message) {
+        "Choose a neighbouring tile" -> R.string.hunt_msg_choose_neighbour
+        "Board refreshed — try this new layout" -> R.string.hunt_msg_board_refreshed
+        "A possible discovery is glowing" -> R.string.hunt_msg_hint_glowing
+        "Board shuffled" -> R.string.hunt_msg_board_shuffled
+        "No moves remaining" -> R.string.hunt_msg_no_moves
+        "Connect at least two atoms" -> R.string.hunt_msg_too_short
+        "New discovery!" -> R.string.hunt_msg_new_discovery
+        "Repeat discovery · 25% score" -> R.string.hunt_msg_repeat_discovery
+        else -> return message
+    }
+    return stringResource(id)
+}
+
+@Composable
+fun MysteryCategory.localizedLabel(): String = stringResource(
+    when (this) {
+        MysteryCategory.SCIENTIST -> R.string.science_category_scientist
+        MysteryCategory.ELEMENT -> R.string.science_category_element
+        MysteryCategory.PLACE -> R.string.science_category_place
+        MysteryCategory.DISCOVERY -> R.string.science_category_discovery
+        MysteryCategory.INSTRUMENT -> R.string.science_category_instrument
+    },
+)
+
+@Composable
+fun MysteryCategory.localizedPrompt(): String = stringResource(
+    when (this) {
+        MysteryCategory.SCIENTIST -> R.string.science_prompt_scientist
+        MysteryCategory.ELEMENT -> R.string.science_prompt_element
+        MysteryCategory.PLACE -> R.string.science_prompt_place
+        MysteryCategory.DISCOVERY -> R.string.science_prompt_discovery
+        MysteryCategory.INSTRUMENT -> R.string.science_prompt_instrument
+    },
+)
+
+/** Translates DailyElement.family; the English value is still used for colours and guess options. */
+@Composable
+fun localizedFamily(family: String): String {
+    val id = when (family) {
+        "Alkali metals" -> R.string.element_family_alkali_metals
+        "Alkaline-earth metals" -> R.string.element_family_alkaline_earth_metals
+        "Transition metals" -> R.string.element_family_transition_metals
+        "Post-transition metals" -> R.string.element_family_post_transition_metals
+        "Metalloids" -> R.string.element_family_metalloids
+        "Reactive nonmetals" -> R.string.element_family_reactive_nonmetals
+        "Halogens" -> R.string.element_family_halogens
+        "Noble gases" -> R.string.element_family_noble_gases
+        "Lanthanides" -> R.string.element_family_lanthanides
+        "Actinides" -> R.string.element_family_actinides
+        else -> return family
+    }
+    return stringResource(id)
+}
+
+/** Translates DailyElement.state; the English value is still used to pick the density unit. */
+@Composable
+fun localizedState(state: String): String {
+    val id = when (state) {
+        "Solid" -> R.string.element_state_solid
+        "Liquid" -> R.string.element_state_liquid
+        "Gas" -> R.string.element_state_gas
+        "State unknown" -> R.string.element_state_unknown
+        else -> return state
+    }
+    return stringResource(id)
+}
+
+/** "Group 14", or "f-block" for the lanthanides and actinides. */
+@Composable
+fun localizedGroup(group: Int?): String =
+    if (group != null) stringResource(R.string.element_group, group) else stringResource(R.string.element_f_block)
