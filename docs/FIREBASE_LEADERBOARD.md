@@ -35,7 +35,7 @@ daily_champions/{yyyy-MM-dd}/players/{uid}
 - The date must be today or yesterday (UTC).
 - `score` must equal `moleculeScore + scienceScore`.
 - Molecule Board: at most 20 finds, at most 130 points per first find and 30 per repeat, and
-  nothing without a find. Science Uncovered: at most 100 points per solved mystery.
+  nothing without a find. Science Uncovered: at most 3 mysteries a day, 100 points each.
 - The name must match the player's profile; `verified` must be false; no extra fields.
 - Signed-in players can read the board; profiles are private.
 
@@ -56,7 +56,7 @@ npx firebase-tools deploy --only firestore:rules,functions
 
 ## Testing the rules
 
-`firestore-tests/` runs 20 checks against the Firestore emulator (valid score accepted; wrong totals,
+`firestore-tests/` runs 21 checks against the Firestore emulator (valid score accepted; wrong totals,
 caps, dates, names, extra fields, second writes and updates rejected):
 
 ```bash

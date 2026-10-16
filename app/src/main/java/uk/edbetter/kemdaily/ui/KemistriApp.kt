@@ -196,7 +196,8 @@ fun KemistriApp(viewModel: MainViewModel = viewModel()) {
 @Composable
 private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
-    val streak = DailyHistory.streaks(history.keys, viewModel.todayUtc()).current
+    val scienceRuns by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
+    val streak = DailyHistory.streaks(history.keys + scienceRuns.map { it.date }, viewModel.todayUtc()).current
     val cloud by viewModel.scienceCloud.collectAsStateWithLifecycle()
     Scaffold(containerColor = Color(0xFFE8FAFF)) { padding ->
         LazyColumn(
@@ -1844,8 +1845,11 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
 private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel) {
     androidx.compose.runtime.LaunchedEffect(Unit) { viewModel.refreshDailyHistory() }
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
+    val scienceRuns by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
+    val scienceDates = scienceRuns.map { it.date }.toSet()
     val today = viewModel.todayUtc()
-    val summary = DailyHistory.streaks(history.keys, today)
+    // A day counts when either daily game is finished: the Molecule Board or Science Uncovered.
+    val summary = DailyHistory.streaks(history.keys + scienceDates, today)
     val currentMonth = YearMonth.from(today)
     val firstMonth = history.keys.minOrNull()?.let(YearMonth::from)?.takeIf { it.isBefore(currentMonth) } ?: currentMonth
     var month by remember { mutableStateOf(currentMonth) }
@@ -1874,9 +1878,9 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                                 )
                                 Text(
                                     when {
-                                        summary.playedToday -> "Today's board is done. Come back tomorrow."
-                                        summary.current > 0 -> "Play today's board to keep your streak going."
-                                        else -> "Play today's board to start a streak."
+                                        summary.playedToday -> "Today counts. Come back tomorrow."
+                                        summary.current > 0 -> "Finish either daily game to keep your streak going."
+                                        else -> "Finish either daily game to start a streak."
                                     },
                                     color = Navy.copy(alpha = .7f), fontSize = 12.sp,
                                 )
@@ -1903,6 +1907,7 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                 StreakCalendar(
                     month = month,
                     days = DailyHistory.monthGrid(month, history, today),
+                    scienceDates = scienceDates,
                     canGoBack = month.isAfter(firstMonth),
                     canGoForward = month.isBefore(currentMonth),
                     onBack = { month = month.minusMonths(1) },
@@ -1913,7 +1918,7 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
             if (recent.isEmpty()) {
                 item {
                     Text(
-                        "No Daily Boards played yet. Reach the mission or finish a hunt to mark the day.",
+                        "No Daily Boards played yet. A day counts when you finish the Molecule Board or Science Uncovered.",
                         color = Navy.copy(alpha = .62f), fontSize = 13.sp,
                     )
                 }
@@ -1949,10 +1954,13 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
     }
 }
 
+private val ScienceBlue = Color(0xFF2F9BD6)
+
 @Composable
 private fun StreakCalendar(
     month: YearMonth,
     days: List<CalendarDay>,
+    scienceDates: Set<LocalDate>,
     canGoBack: Boolean,
     canGoForward: Boolean,
     onBack: () -> Unit,
@@ -1985,15 +1993,19 @@ private fun StreakCalendar(
                         Box(Modifier.weight(1f).aspectRatio(1f).padding(3.dp), contentAlignment = Alignment.Center) {
                             val date = day.date ?: return@Box
                             val record = day.record
+                            val science = date in scienceDates
+                            val played = record != null || science
                             val fill = when {
-                                record?.missionAchieved == true -> Gold
+                                record != null && science -> Gold
                                 record != null -> Green
+                                science -> ScienceBlue
                                 else -> Color.Transparent
                             }
                             val description = buildString {
                                 append(date.format(dayFormatter))
-                                append(if (record == null) ", not played" else ", played, score ${record.score}")
-                                if (record?.missionAchieved == true) append(", mission complete")
+                                if (!played) append(", not played")
+                                if (record != null) append(", Molecule Board score ${record.score}")
+                                if (science) append(", Science Uncovered finished")
                                 if (day.isToday) append(", today")
                             }
                             Box(
@@ -2006,8 +2018,8 @@ private fun StreakCalendar(
                             ) {
                                 Text(
                                     date.dayOfMonth.toString(),
-                                    color = if (record != null) Color.White else Navy.copy(alpha = .75f),
-                                    fontWeight = if (record != null || day.isToday) FontWeight.Black else FontWeight.Normal,
+                                    color = if (played) Color.White else Navy.copy(alpha = .75f),
+                                    fontWeight = if (played || day.isToday) FontWeight.Black else FontWeight.Normal,
                                     fontSize = 13.sp,
                                 )
                             }
@@ -2017,8 +2029,9 @@ private fun StreakCalendar(
             }
             Spacer(Modifier.height(8.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                CalendarLegend(Green, "Played")
-                CalendarLegend(Gold, "Mission complete")
+                CalendarLegend(Green, "Board")
+                CalendarLegend(ScienceBlue, "Science")
+                CalendarLegend(Gold, "Both games")
             }
         }
     }
