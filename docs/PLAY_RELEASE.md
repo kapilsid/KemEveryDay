@@ -23,9 +23,11 @@ Upload `app/build/outputs/bundle/release/app-release.aab`. `bundleRelease` refus
 
 The release build uses R8 code shrinking and resource shrinking. Play Console also asks for the deobfuscation file: upload `app/build/outputs/mapping/release/mapping.txt` with the same release.
 
-## 3. Host the privacy policy
+## 3. Privacy policy URL
 
-Play needs a public URL. Publish `docs/privacy-policy.html` (for example with GitHub Pages, the same way as Kromosome) and paste the URL into **App content › Privacy policy** and the store listing.
+Use the EdBetter mobile privacy page: https://www.edbetter.uk/mobile-privacy/
+
+That page must name Kemistri Everyday (it currently lists Kemistri, Kromosome, 8K8tris and KraftyK8 Saga). It describes Firebase and AdMob, which this app does not include, so it helps to add a line that Kemistri Everyday contains no ads or analytics and stores progress only on the device. `docs/privacy-policy.html` has app-specific wording you can copy.
 
 ## 4. Store listing
 
