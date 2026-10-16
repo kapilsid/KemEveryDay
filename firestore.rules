@@ -1,0 +1,78 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function validName(name) {
+      return name is string
+        && name.size() >= 3
+        && name.size() <= 16
+        && name.matches('^[A-Za-z0-9 ]+$');
+    }
+
+    function validProfile() {
+      return request.resource.data.keys().hasOnly(['displayName', 'normalizedName', 'updatedAt'])
+        && validName(request.resource.data.displayName)
+        && request.resource.data.normalizedName == request.resource.data.displayName.lower()
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    // The score document's date must be today or yesterday in UTC (allows a run that ends just after midnight).
+    function recentUtcDate(date) {
+      return date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && isRecent(timestamp.date(int(date.split('-')[0]), int(date.split('-')[1]), int(date.split('-')[2])));
+    }
+
+    function isRecent(day) {
+      return day <= request.time && day + duration.value(2, 'd') > request.time;
+    }
+
+    // Mirrors ChampionLimits in ScienceLeaderboardGateway.kt: 20 board moves, at most 130 points for a
+    // first find and 30 for a repeat, at most 100 points per solved Science Uncovered mystery.
+    function validChampionScore(uid, date) {
+      let d = request.resource.data;
+      return d.keys().hasOnly([
+          'displayName', 'score', 'moleculeScore', 'scienceScore', 'uniqueDiscoveries',
+          'mysteriesSolved', 'contentVersion', 'submittedAt', 'verified'
+        ])
+        && d.keys().hasAll([
+          'displayName', 'score', 'moleculeScore', 'scienceScore', 'uniqueDiscoveries',
+          'mysteriesSolved', 'contentVersion', 'submittedAt', 'verified'
+        ])
+        && recentUtcDate(date)
+        && d.displayName == get(/databases/$(database)/documents/players/$(uid)).data.displayName
+        && d.uniqueDiscoveries is int && d.uniqueDiscoveries >= 0 && d.uniqueDiscoveries <= 20
+        && d.moleculeScore is int && d.moleculeScore >= 0
+        && ((d.uniqueDiscoveries == 0 && d.moleculeScore == 0)
+          || (d.uniqueDiscoveries > 0
+            && d.moleculeScore <= d.uniqueDiscoveries * 130 + (20 - d.uniqueDiscoveries) * 30))
+        && d.mysteriesSolved is int && d.mysteriesSolved >= 0 && d.mysteriesSolved <= 1000
+        && d.scienceScore is int && d.scienceScore >= 0
+        && d.scienceScore <= d.mysteriesSolved * 100
+        && d.score == d.moleculeScore + d.scienceScore
+        && d.contentVersion is int && d.contentVersion >= 1
+        && d.submittedAt == request.time
+        && d.verified == false;
+    }
+
+    match /players/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid && validProfile();
+      allow delete: if false;
+    }
+
+    match /daily_champions/{date}/players/{uid} {
+      allow read: if signedIn();
+      // One immutable combined score per anonymous player per UTC date.
+      allow create: if signedIn() && request.auth.uid == uid && validChampionScore(uid, date);
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

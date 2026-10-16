@@ -28,6 +28,29 @@ data class LeaderboardEntry(
     val completedAt: Long,
 )
 
+data class ScienceRunSnapshot(
+    val date: LocalDate,
+    val mysteryOffset: Int = 0,
+    val totalScore: Int = 0,
+    val lives: Int = 3,
+    val solvedCount: Int = 0,
+    val mysteryNumber: Int = 1,
+    val visibleClues: Int = 1,
+    val guessedLetters: Set<Char> = emptySet(),
+    val points: Int = 100,
+    val wrongAnswers: Int = 0,
+    val solved: Boolean = false,
+    val revealed: Boolean = false,
+    val runOver: Boolean = false,
+)
+
+data class ScienceLeaderboardEntry(
+    val date: LocalDate,
+    val score: Int,
+    val mysteriesSolved: Int,
+    val completedAt: Long,
+)
+
 /**
  * Device-local MVP persistence. The interface is deliberately storage-agnostic so this can be
  * replaced by Room without coupling the chemistry or game engines to Android.
@@ -171,6 +194,93 @@ class LocalRepository(context: Context) {
         if (updated != history) prefs.edit().putString("daily_history_v1", DailyHistory.encode(updated)).apply()
     }
 
+    fun scienceBestScore(): Int = prefs.getInt("science_uncovered_best", 0)
+
+    fun recordScienceBest(score: Int) {
+        if (score > scienceBestScore()) prefs.edit().putInt("science_uncovered_best", score).apply()
+    }
+
+    fun scienceRun(date: LocalDate): ScienceRunSnapshot {
+        val encoded = prefs.getString("science_run_v1", null)
+        val restored = encoded?.split(';')?.takeIf { it.size == 13 }?.let { fields ->
+            runCatching {
+                ScienceRunSnapshot(
+                    date = LocalDate.parse(fields[0]),
+                    mysteryOffset = fields[1].toInt(),
+                    totalScore = fields[2].toInt(),
+                    lives = fields[3].toInt(),
+                    solvedCount = fields[4].toInt(),
+                    mysteryNumber = fields[5].toInt(),
+                    visibleClues = fields[6].toInt(),
+                    guessedLetters = fields[7].toSet(),
+                    points = fields[8].toInt(),
+                    wrongAnswers = fields[9].toInt(),
+                    solved = fields[10].toBooleanStrict(),
+                    revealed = fields[11].toBooleanStrict(),
+                    runOver = fields[12].toBooleanStrict(),
+                )
+            }.getOrNull()
+        }
+        if (restored?.date == date) return restored
+        return ScienceRunSnapshot(date).also(::saveScienceRun)
+    }
+
+    fun saveScienceRun(run: ScienceRunSnapshot) {
+        val encoded = listOf(
+            run.date,
+            run.mysteryOffset,
+            run.totalScore,
+            run.lives,
+            run.solvedCount,
+            run.mysteryNumber,
+            run.visibleClues,
+            run.guessedLetters.sorted().joinToString(""),
+            run.points,
+            run.wrongAnswers,
+            run.solved,
+            run.revealed,
+            run.runOver,
+        ).joinToString(";")
+        prefs.edit().putString("science_run_v1", encoded).apply()
+        if (run.runOver) recordScienceLeaderboard(run)
+    }
+
+    fun scienceLeaderboard(): List<ScienceLeaderboardEntry> = prefs.getString("science_leaderboard_v1", null)
+        .orEmpty()
+        .lineSequence()
+        .filter(String::isNotBlank)
+        .mapNotNull { row ->
+            val fields = row.split(',')
+            if (fields.size != 4) return@mapNotNull null
+            runCatching {
+                ScienceLeaderboardEntry(
+                    date = LocalDate.parse(fields[0]),
+                    score = fields[1].toInt(),
+                    mysteriesSolved = fields[2].toInt(),
+                    completedAt = fields[3].toLong(),
+                )
+            }.getOrNull()
+        }
+        .sortedWith(compareByDescending<ScienceLeaderboardEntry> { it.score }.thenByDescending { it.mysteriesSolved })
+        .toList()
+
+    private fun recordScienceLeaderboard(run: ScienceRunSnapshot) {
+        val byDate = scienceLeaderboard().associateBy { it.date }.toMutableMap()
+        val previous = byDate[run.date]
+        if (previous == null || run.totalScore > previous.score) {
+            byDate[run.date] = ScienceLeaderboardEntry(
+                date = run.date,
+                score = run.totalScore,
+                mysteriesSolved = run.solvedCount,
+                completedAt = System.currentTimeMillis(),
+            )
+            val encoded = byDate.values.sortedByDescending { it.date }.take(100).joinToString("\n") {
+                "${it.date},${it.score},${it.mysteriesSolved},${it.completedAt}"
+            }
+            prefs.edit().putString("science_leaderboard_v1", encoded).apply()
+        }
+    }
+
     var soundEnabled: Boolean
         get() = prefs.getBoolean("sound", true)
         set(value) { prefs.edit().putBoolean("sound", value).apply() }
@@ -180,4 +290,8 @@ class LocalRepository(context: Context) {
     var reducedMotion: Boolean
         get() = prefs.getBoolean("reduced_motion", false)
         set(value) { prefs.edit().putBoolean("reduced_motion", value).apply() }
+
+    var playerNickname: String?
+        get() = prefs.getString("player_nickname", null)
+        set(value) { prefs.edit().putString("player_nickname", value).apply() }
 }

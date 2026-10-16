@@ -1,0 +1,13 @@
+{
+  "name": "kemistri-firestore-rules-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "firebase emulators:exec --project kemistri-rules-test --only firestore --config firebase.json \"node rules.test.mjs\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^3.0.0",
+    "firebase": "^10.14.0",
+    "firebase-tools": "^13.0.0"
+  }
+}

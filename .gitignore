@@ -5,7 +5,10 @@
 *.iml
 .DS_Store
 /keystore.properties
+/app/google-services.json
 /keystore/
 *.jks
 *.keystore
 /.kotlin/
+/functions/node_modules/
+/firestore-tests/node_modules/

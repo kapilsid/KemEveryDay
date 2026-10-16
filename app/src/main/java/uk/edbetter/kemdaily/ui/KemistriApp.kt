@@ -55,6 +55,7 @@ import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lightbulb
@@ -70,6 +71,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -77,9 +79,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -137,16 +141,16 @@ import uk.edbetter.kemdaily.core.game.MISSION_TARGET
 import uk.edbetter.kemdaily.data.DailyElement
 import uk.edbetter.kemdaily.data.ElementOfDay
 import uk.edbetter.kemdaily.data.EverydayFacts
+import uk.edbetter.kemdaily.data.ScienceMysteries
+import uk.edbetter.kemdaily.data.ScienceRunSnapshot
 import uk.edbetter.kemdaily.data.TablePosition
 import uk.edbetter.kemdaily.ui.theme.Coral
 import uk.edbetter.kemdaily.ui.theme.Gold
 import uk.edbetter.kemdaily.ui.theme.Green
 import uk.edbetter.kemdaily.ui.theme.Navy
 import uk.edbetter.kemdaily.ui.theme.Sky
-import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlinx.coroutines.delay
@@ -158,6 +162,7 @@ private object Routes {
     const val Home = "home"
     const val Daily = "daily"
     const val DailyHistory = "daily_history"
+    const val Science = "science"
     const val Fact = "fact"
     const val Element = "element"
     const val Leaderboard = "leaderboard"
@@ -175,6 +180,7 @@ fun KemistriApp(viewModel: MainViewModel = viewModel()) {
             HuntScreen(nav, viewModel, daily = true)
         }
         composable(Routes.DailyHistory) { DailyHistoryScreen(nav, viewModel) }
+        composable(Routes.Science) { ScienceUncoveredScreen(nav, viewModel) }
         composable(Routes.Fact) { FactScreen(nav) }
         composable(Routes.Element) { ElementOfDayScreen(nav, viewModel) }
         composable(Routes.Leaderboard) { LeaderboardScreen(nav, viewModel) }
@@ -221,6 +227,11 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
                 }
             }
             item {
+                FeatureCard("Science Uncovered", "One daily run. Build a high score.", Icons.Default.AutoAwesome, Sky) {
+                    nav.navigate(Routes.Science)
+                }
+            }
+            item {
                 FeatureCard("Everyday Chemistry", "Guess the chemistry hiding in daily life", Icons.Default.Lightbulb, Gold) {
                     nav.navigate(Routes.Fact)
                 }
@@ -233,7 +244,7 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     SmallNavCard("Streak", Icons.Default.LocalFireDepartment, Modifier.weight(1f)) { nav.navigate(Routes.DailyHistory) }
-                    // Leaders returns with the online Play Games leaderboard; personal bests live on the Streak screen.
+                    SmallNavCard("Leaders", Icons.Default.EmojiEvents, Modifier.weight(1f)) { nav.navigate(Routes.Leaderboard) }
                     SmallNavCard("Review", Icons.Default.Science, Modifier.weight(1f)) { nav.navigate(Routes.Review) }
                     SmallNavCard("Settings", Icons.Default.Settings, Modifier.weight(1f)) { nav.navigate(Routes.Settings) }
                 }
@@ -866,6 +877,331 @@ private tailrec fun Context.findActivity(): Activity? = when (this) {
     else -> null
 }
 
+@Composable
+private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewModel) {
+    val savedBest by viewModel.scienceBestScore.collectAsStateWithLifecycle()
+    val restoredRun = remember { viewModel.loadScienceRun() }
+    val firstMysteryIndex = remember { ScienceMysteries.all.indexOf(ScienceMysteries.today()).coerceAtLeast(0) }
+    var mysteryOffset by remember { mutableStateOf(restoredRun.mysteryOffset) }
+    var totalScore by remember { mutableStateOf(restoredRun.totalScore) }
+    var lives by remember { mutableStateOf(restoredRun.lives) }
+    var solvedCount by remember { mutableStateOf(restoredRun.solvedCount) }
+    var mysteryNumber by remember { mutableStateOf(restoredRun.mysteryNumber) }
+    var runOver by remember { mutableStateOf(restoredRun.runOver) }
+    val mystery = ScienceMysteries.all[(firstMysteryIndex + mysteryOffset) % ScienceMysteries.all.size]
+    var visibleClues by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.visibleClues else 1) }
+    var guessedLetters by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.guessedLetters else emptySet()) }
+    var points by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.points else 100) }
+    var wrongAnswers by remember(mysteryOffset) { mutableStateOf(if (mysteryOffset == restoredRun.mysteryOffset) restoredRun.wrongAnswers else 0) }
+    var solved by remember(mysteryOffset) { mutableStateOf(mysteryOffset == restoredRun.mysteryOffset && restoredRun.solved) }
+    var revealed by remember(mysteryOffset) { mutableStateOf(mysteryOffset == restoredRun.mysteryOffset && restoredRun.revealed) }
+    var message by remember(mysteryOffset) { mutableStateOf<String?>(null) }
+    val complete = solved || revealed
+    val answerLength = mystery.normalizedAnswer.length
+    fun saveRun(
+        storedVisibleClues: Int = visibleClues,
+        storedGuessedLetters: Set<Char> = guessedLetters,
+        storedPoints: Int = points,
+        storedWrongAnswers: Int = wrongAnswers,
+        storedSolved: Boolean = solved,
+        storedRevealed: Boolean = revealed,
+        storedRunOver: Boolean = runOver,
+    ) {
+        viewModel.saveScienceRun(
+            ScienceRunSnapshot(
+                date = restoredRun.date,
+                mysteryOffset = mysteryOffset,
+                totalScore = totalScore,
+                lives = lives,
+                solvedCount = solvedCount,
+                mysteryNumber = mysteryNumber,
+                visibleClues = storedVisibleClues,
+                guessedLetters = storedGuessedLetters,
+                points = storedPoints,
+                wrongAnswers = storedWrongAnswers,
+                solved = storedSolved,
+                revealed = storedRevealed,
+                runOver = storedRunOver,
+            ),
+        )
+    }
+    val displayAnswer = buildString {
+        mystery.answer.uppercase().forEach { character ->
+            if (character.isLetter()) {
+                append(if (character.uppercaseChar() in guessedLetters) character.uppercaseChar() else '＿')
+                append(' ')
+            } else if (character.isWhitespace()) {
+                append(if (answerLength > 14) "\n" else "  ")
+            }
+        }
+    }.trim()
+
+    Scaffold(topBar = { AppBar("Science Uncovered", { nav.popBackStack() }) }, containerColor = Color(0xFFF4F7FB)) { padding ->
+        LazyColumn(
+            Modifier.fillMaxSize().padding(padding),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(11.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            item {
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = Navy),
+                    shape = RoundedCornerShape(22.dp),
+                ) {
+                    Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                "RUN SCORE  $totalScore",
+                                modifier = Modifier.weight(1f),
+                                color = Color.White,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 13.sp,
+                            )
+                            Text("${"♥".repeat(lives)}${"♡".repeat(3 - lives)}", color = Coral, fontSize = 22.sp, fontWeight = FontWeight.Black)
+                        }
+                        Text(
+                            "Today's run · Mystery $mysteryNumber · Best $savedBest",
+                            color = Color.White.copy(alpha = .62f),
+                            fontSize = 10.sp,
+                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f)) {
+                                Text(mystery.category.label.uppercase(), color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.3.sp)
+                                Text(mystery.category.prompt, color = Color.White, fontWeight = FontWeight.Black, fontSize = 25.sp)
+                            }
+                            Column(horizontalAlignment = Alignment.End) {
+                                Text(points.toString(), color = Gold, fontWeight = FontWeight.Black, fontSize = 28.sp)
+                                Text("possible points", color = Color.White.copy(alpha = .62f), fontSize = 10.sp)
+                            }
+                        }
+                        LinearProgressIndicator(
+                            progress = { points / 100f },
+                            modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
+                            color = if (points >= 55) Green else Coral,
+                            trackColor = Color.White.copy(alpha = .15f),
+                        )
+                    }
+                }
+            }
+            item {
+                Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                    Column(Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            if (complete) mystery.answer.uppercase() else displayAnswer,
+                            modifier = Modifier.fillMaxWidth(),
+                            color = if (complete) Green else Navy,
+                            fontWeight = FontWeight.Black,
+                            fontSize = if (answerLength > 14) 20.sp else 25.sp,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2,
+                            lineHeight = 30.sp,
+                        )
+                        Spacer(Modifier.height(5.dp))
+                        Text(
+                            "$answerLength letters · ${mystery.wordCount} ${if (mystery.wordCount == 1) "word" else "words"}",
+                            color = Navy.copy(alpha = .55f),
+                            fontSize = 11.sp,
+                        )
+                    }
+                }
+            }
+            items(visibleClues) { index ->
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = if (index == visibleClues - 1) Color(0xFFFFF3C9) else Color.White,
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                ) {
+                    Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.Top) {
+                        Box(Modifier.size(28.dp).background(Gold, CircleShape), contentAlignment = Alignment.Center) {
+                            Text((index + 1).toString(), color = Navy, fontWeight = FontWeight.Black)
+                        }
+                        Spacer(Modifier.width(11.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text("CLUE ${index + 1}", color = Navy.copy(alpha = .5f), fontWeight = FontWeight.Black, fontSize = 10.sp)
+                            Text(mystery.clues[index], color = Navy, fontWeight = FontWeight.SemiBold, lineHeight = 20.sp)
+                        }
+                    }
+                }
+            }
+            if (!complete) {
+                item {
+                    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        listOf("QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM").forEach { keyboardRow ->
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally)) {
+                                keyboardRow.forEach { letter ->
+                                    val alreadyGuessed = letter in guessedLetters
+                                    Box(
+                                        Modifier.size(width = 31.dp, height = 40.dp)
+                                            .background(if (alreadyGuessed) Navy.copy(alpha = .08f) else Color.White, RoundedCornerShape(8.dp))
+                                            .border(1.dp, Navy.copy(alpha = .12f), RoundedCornerShape(8.dp))
+                                            .clickable(enabled = !alreadyGuessed) {
+                                                val updatedGuesses = guessedLetters + letter
+                                                guessedLetters = updatedGuesses
+                                                message = null
+                                                if (letter in mystery.normalizedAnswer) {
+                                                    if (mystery.normalizedAnswer.toSet().all { it in updatedGuesses }) {
+                                                        solved = true
+                                                        val updatedScore = totalScore + points
+                                                        totalScore = updatedScore
+                                                        solvedCount++
+                                                        viewModel.recordScienceBest(updatedScore)
+                                                        saveRun(storedGuessedLetters = updatedGuesses, storedSolved = true)
+                                                    } else {
+                                                        saveRun(storedGuessedLetters = updatedGuesses)
+                                                    }
+                                                } else {
+                                                    wrongAnswers++
+                                                    points = (points - 10).coerceAtLeast(0)
+                                                    val remainingLives = (lives - 1).coerceAtLeast(0)
+                                                    lives = remainingLives
+                                                    if (remainingLives == 0) {
+                                                        revealed = true
+                                                        runOver = true
+                                                        viewModel.recordScienceBest(totalScore)
+                                                        saveRun(
+                                                            storedGuessedLetters = updatedGuesses,
+                                                            storedPoints = points,
+                                                            storedWrongAnswers = wrongAnswers,
+                                                            storedRevealed = true,
+                                                            storedRunOver = true,
+                                                        )
+                                                    } else {
+                                                        message = "$letter is not in the answer — one life lost"
+                                                        saveRun(
+                                                            storedGuessedLetters = updatedGuesses,
+                                                            storedPoints = points,
+                                                            storedWrongAnswers = wrongAnswers,
+                                                        )
+                                                    }
+                                                }
+                                            },
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Text(
+                                            letter.toString(),
+                                            color = if (alreadyGuessed) Navy.copy(alpha = .28f) else Navy,
+                                            fontWeight = FontWeight.Black,
+                                            fontSize = 13.sp,
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        Text(
+                            "Tap a letter to reveal every matching position",
+                            modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                            color = Navy.copy(alpha = .58f),
+                            textAlign = TextAlign.Center,
+                            fontSize = 11.sp,
+                        )
+                    }
+                }
+                message?.let { feedback ->
+                    item { Text(feedback, color = Coral, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center) }
+                }
+                item {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        OutlinedButton(
+                            onClick = {
+                                visibleClues++
+                                points = (points - 15).coerceAtLeast(0)
+                                message = null
+                                saveRun(storedVisibleClues = visibleClues, storedPoints = points)
+                            },
+                            enabled = visibleClues < mystery.clues.size,
+                            modifier = Modifier.weight(1.35f),
+                        ) { Text(if (visibleClues < mystery.clues.size) "Next clue (−15)" else "All clues shown") }
+                        OutlinedButton(
+                            onClick = {
+                                points = 0
+                                revealed = true
+                                val remainingLives = (lives - 1).coerceAtLeast(0)
+                                lives = remainingLives
+                                if (remainingLives == 0) {
+                                    runOver = true
+                                    viewModel.recordScienceBest(totalScore)
+                                }
+                                saveRun(storedPoints = 0, storedRevealed = true, storedRunOver = remainingLives == 0)
+                            },
+                            modifier = Modifier.weight(1f),
+                        ) { Text("Skip (−1 life)") }
+                    }
+                }
+            } else {
+                item {
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = if (solved) Color(0xFFDDF8F2) else Color(0xFFFFE8E8)),
+                        shape = RoundedCornerShape(20.dp),
+                    ) {
+                        Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                            Text(
+                                when {
+                                    solved -> "Solved — +$points points!"
+                                    runOver -> "Run over — $totalScore points"
+                                    else -> "Mystery revealed — one life lost"
+                                },
+                                color = if (solved) Green else Coral,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 22.sp,
+                            )
+                            if (wrongAnswers > 0 && solved) Text("Solved after $wrongAnswers incorrect letter ${if (wrongAnswers == 1) "guess" else "guesses"}.", color = Navy.copy(alpha = .62f), fontSize = 12.sp)
+                            Text(mystery.story, color = Navy, lineHeight = 21.sp)
+                            if (runOver) {
+                                Text("$solvedCount mysteries solved in this run", color = Navy.copy(alpha = .62f), fontWeight = FontWeight.Bold)
+                            }
+                        }
+                    }
+                }
+                item {
+                    Button(
+                        onClick = {
+                            if (runOver) {
+                                nav.popBackStack()
+                            } else {
+                                val nextOffset = mysteryOffset + 1
+                                val nextNumber = mysteryNumber + 1
+                                mysteryOffset = nextOffset
+                                mysteryNumber = nextNumber
+                                viewModel.saveScienceRun(
+                                    ScienceRunSnapshot(
+                                        date = restoredRun.date,
+                                        mysteryOffset = nextOffset,
+                                        totalScore = totalScore,
+                                        lives = lives,
+                                        solvedCount = solvedCount,
+                                        mysteryNumber = nextNumber,
+                                    ),
+                                )
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            when {
+                                runOver -> "BACK HOME"
+                                solved -> "NEXT MYSTERY"
+                                else -> "CONTINUE — $lives ${if (lives == 1) "LIFE" else "LIVES"} LEFT"
+                            },
+                            fontWeight = FontWeight.Black,
+                        )
+                    }
+                }
+                if (runOver) {
+                    item {
+                        Text(
+                            "Today's attempt is complete. A new run unlocks at 00:00 UTC.",
+                            color = Navy.copy(alpha = .62f),
+                            textAlign = TextAlign.Center,
+                            fontSize = 12.sp,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppBar(title: String, back: () -> Unit, actions: @Composable RowScope.() -> Unit = {}) {
@@ -1273,10 +1609,16 @@ private fun MiniPeriodicTable(selected: DailyElement) {
 
 @Composable
 private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) {
-    val entries by viewModel.leaderboard.collectAsStateWithLifecycle()
-    val visible = entries.filter { it.mode == GameMode.DAILY }
+    val entries by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
+    val cloud by viewModel.scienceCloud.collectAsStateWithLifecycle()
+    val today = viewModel.todayUtc()
+    val run = remember { viewModel.loadScienceRun() }
+    val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
+    val board = history[today]
     val dateFormatter = remember { DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH) }
-    Scaffold(topBar = { AppBar("Leaderboard", { nav.popBackStack() }) }, containerColor = Color(0xFFF4FCFF)) { padding ->
+    var editNickname by remember { mutableStateOf(false) }
+    var nicknameDraft by remember(cloud.nickname) { mutableStateOf(cloud.nickname) }
+    Scaffold(topBar = { AppBar("Daily Champions", { nav.popBackStack() }) }, containerColor = Color(0xFFF4FCFF)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(16.dp),
@@ -1288,10 +1630,10 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.EmojiEvents, null, tint = Gold)
                             Spacer(Modifier.width(9.dp))
-                        Text("Daily Board leaderboard", color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
+                            Text("Daily Champions", color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
                         }
                         Text(
-                            "Every player receives the same dated board, so Daily Board scores can be compared fairly.",
+                            "Finish today's Molecule Board and today's Science Uncovered run. Your two scores are added together, and your first completed total for each UTC day goes on the worldwide ranking.",
                             color = Navy.copy(alpha = .7f),
                             fontSize = 12.sp,
                             lineHeight = 17.sp,
@@ -1299,7 +1641,95 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                     }
                 }
             }
-            if (visible.isEmpty()) {
+            item {
+                Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                    Row(Modifier.fillMaxWidth().padding(15.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Box(Modifier.size(42.dp).background(Sky, CircleShape), contentAlignment = Alignment.Center) {
+                            if (cloud.connecting) CircularProgressIndicator(Modifier.size(22.dp), strokeWidth = 2.dp, color = Navy)
+                            else Icon(Icons.Default.Science, null, tint = Navy)
+                        }
+                        Spacer(Modifier.width(11.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text(cloud.nickname.ifBlank { "Science player" }, color = Navy, fontWeight = FontWeight.Black)
+                            Text(cloud.message, color = Navy.copy(alpha = .6f), fontSize = 10.sp, lineHeight = 14.sp)
+                        }
+                        if (cloud.online) {
+                            IconButton({ nicknameDraft = cloud.nickname; editNickname = true }) {
+                                Icon(Icons.Default.Edit, "Edit nickname", tint = Coral)
+                            }
+                        } else {
+                            IconButton(viewModel::refreshScienceLeaderboard) {
+                                Icon(Icons.Default.Refresh, "Retry Firebase connection", tint = Coral)
+                            }
+                        }
+                    }
+                }
+            }
+            item {
+                Card(colors = CardDefaults.cardColors(containerColor = Navy), shape = RoundedCornerShape(18.dp)) {
+                    Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            Text(if (board != null && run.runOver) "TODAY'S TOTAL" else "TODAY SO FAR", color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp)
+                            Text(
+                                "Molecule Board " + (board?.score?.toString() ?: "not finished") +
+                                    " · Science " + (if (run.runOver) run.totalScore.toString() else "in progress"),
+                                color = Color.White.copy(alpha = .7f),
+                                fontSize = 12.sp,
+                            )
+                        }
+                        Text(((board?.score ?: 0) + if (run.runOver) run.totalScore else 0).toString(), color = Color.White, fontWeight = FontWeight.Black, fontSize = 32.sp)
+                    }
+                }
+            }
+            item {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Worldwide rankings", modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
+                    Text(if (cloud.online) "TODAY · UTC" else "OFFLINE", color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
+                }
+            }
+            if (cloud.rankings.isEmpty()) {
+                item {
+                    Text(
+                        if (cloud.online) "No worldwide scores have been posted for today yet."
+                        else "Worldwide scores appear here when Firebase is connected.",
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 18.dp),
+                        color = Navy.copy(alpha = .62f),
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            } else {
+                items(cloud.rankings.size) { index ->
+                    val entry = cloud.rankings[index]
+                    val isPlayer = entry.playerId == cloud.playerId
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = if (isPlayer) Color(0xFFFFF3C9) else Color.White),
+                        shape = RoundedCornerShape(16.dp),
+                    ) {
+                        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                Modifier.size(42.dp).background(if (entry.rank <= 3) Gold else Sky, CircleShape),
+                                contentAlignment = Alignment.Center,
+                            ) { Text("#${entry.rank}", color = Navy, fontWeight = FontWeight.Black) }
+                            Spacer(Modifier.width(12.dp))
+                            Column(Modifier.weight(1f)) {
+                                Text(if (isPlayer) "${entry.displayName} · You" else entry.displayName, fontWeight = FontWeight.Bold)
+                                Text(
+                                    "Board ${entry.moleculeScore} · Science ${entry.scienceScore}",
+                                    color = Navy.copy(alpha = .6f), fontSize = 11.sp,
+                                )
+                            }
+                            Text(entry.score.toString(), color = Green, fontWeight = FontWeight.Black, fontSize = 22.sp)
+                        }
+                    }
+                }
+            }
+            item {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Your scores on this device", modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
+                    Text("LOCAL", color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
+                }
+            }
+            if (entries.isEmpty()) {
                 item {
                     Column(
                         Modifier.fillMaxWidth().padding(vertical = 48.dp),
@@ -1307,14 +1737,13 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                     ) {
                         Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(54.dp))
                         Spacer(Modifier.height(12.dp))
-                        Text("No completed hunts yet", fontWeight = FontWeight.Black, fontSize = 19.sp)
-                        Text("Finish a game to place your first score.", color = Navy.copy(alpha = .62f))
+                        Text("No completed runs yet", fontWeight = FontWeight.Black, fontSize = 19.sp)
+                        Text("Finish today's Science Uncovered run to place your first score.", color = Navy.copy(alpha = .62f), textAlign = TextAlign.Center)
                     }
                 }
             } else {
-                items(visible.size) { index ->
-                    val entry = visible[index]
-                    val completed = Instant.ofEpochMilli(entry.completedAt).atZone(ZoneId.systemDefault()).format(dateFormatter)
+                items(entries.size) { index ->
+                    val entry = entries[index]
                     Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(16.dp)) {
                         Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                             Box(
@@ -1323,9 +1752,9 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                             ) { Text("#${index + 1}", color = Navy, fontWeight = FontWeight.Black) }
                             Spacer(Modifier.width(12.dp))
                             Column(Modifier.weight(1f)) {
-                                Text("Daily Molecule Board", fontWeight = FontWeight.Bold)
+                                Text(if (entry.date == today) "Today" else entry.date.format(dateFormatter), fontWeight = FontWeight.Bold)
                                 Text(
-                                    "${entry.uniqueDiscoveries} unique · ${entry.movesRemaining} moves left · $completed",
+                                    "${entry.mysteriesSolved} ${if (entry.mysteriesSolved == 1) "mystery" else "mysteries"} solved",
                                     color = Navy.copy(alpha = .6f),
                                     fontSize = 11.sp,
                                 )
@@ -1336,15 +1765,47 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                 }
             }
             item {
-                Text(
-                    "This first version is stored on this device. The online version will publish verified Daily Board scores.",
-                    modifier = Modifier.fillMaxWidth().padding(8.dp),
-                    color = Navy.copy(alpha = .55f),
-                    textAlign = TextAlign.Center,
-                    fontSize = 11.sp,
-                )
+                Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F6FC)), shape = RoundedCornerShape(16.dp)) {
+                    Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Text(if (cloud.online) "Firebase connected" else "Playing offline", color = Navy, fontWeight = FontWeight.Black)
+                        Text(
+                            if (cloud.online) "Your anonymous player identity keeps the app simple: no Google login screen and no email is shown. A finished daily run is submitted once."
+                            else "Your run and score remain on this device. After Anonymous Authentication, Firestore and the score function are enabled, tap Retry to connect.",
+                            color = Navy.copy(alpha = .65f),
+                            fontSize = 11.sp,
+                            lineHeight = 16.sp,
+                        )
+                        TextButton(onClick = viewModel::refreshScienceLeaderboard) {
+                            Icon(Icons.Default.Refresh, null)
+                            Spacer(Modifier.width(6.dp))
+                            Text("Refresh")
+                        }
+                    }
+                }
             }
         }
+    }
+    if (editNickname) {
+        AlertDialog(
+            onDismissRequest = { editNickname = false },
+            title = { Text("Choose your player name") },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("This public nickname appears on Daily Champions. Do not use your real name.", color = Navy.copy(alpha = .7f))
+                    OutlinedTextField(
+                        value = nicknameDraft,
+                        onValueChange = { if (it.length <= 16) nicknameDraft = it },
+                        label = { Text("Nickname") },
+                        supportingText = { Text("3–16 letters, numbers or spaces") },
+                        singleLine = true,
+                    )
+                }
+            },
+            confirmButton = {
+                Button(onClick = { viewModel.updatePlayerNickname(nicknameDraft); editNickname = false }) { Text("Save") }
+            },
+            dismissButton = { TextButton(onClick = { editNickname = false }) { Text("Cancel") } },
+        )
     }
 }
 

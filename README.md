@@ -55,6 +55,9 @@ Pass a different installed AVD name as the first argument when required:
 - Deterministic 5×5 Molecule Hunt engine: eight-direction paths, swipe or tap selection, backtracking, scoring, repeats, streaks, gravity, caps, hints, and shuffle recovery.
 - Standard 10-in-20 mission and reproducible UTC daily seed.
 - Compose home, hunt, discovery reveal, completion/result, daily, interactive Everyday Chemistry, pending-review, and settings screens.
+- Science Uncovered: one resumable three-life run per UTC day, drawn from 25 mysteries across scientists, elements, scientific places, discoveries, and instruments. A letter reveals every matching position, correct solutions preserve every life and add up to 100 points to the cumulative run score, while incorrect letters and skips cost a life. The final score locks when the lives are exhausted; the device retains the daily state and personal best for a future server-enforced online leaderboard.
+- Science Leaders provides today's live/final score, anonymous Firebase identity, editable public nickname, worldwide daily ranking and device-local fallback. Server-enforced one-score-per-day setup and deployment are documented in `docs/FIREBASE_LEADERBOARD.md`.
+- Element a Day covers the full 118-element periodic table with a deterministic daily selection, atomic data, table position, uses, and a short explanatory story.
 - Discoveries belong to the current hunt and reset with a new game; there is no persistent collection.
 - Device-local active-game restore, pending-review counts, and settings.
 - Daily Board history and streak calendar: best result per UTC board date, current and best streaks, a Monday-first month calendar, and stale saved Daily games discarded at the UTC rollover.
