@@ -5,13 +5,13 @@ import java.time.LocalDate
 /**
  * Plausibility limits for a Daily Champions entry. firestore.rules enforces the same numbers, so keep
  * the two in step: a Molecule Board find scores at most 130 (7 atoms, 7 elements, full rarity and
- * streak), a repeat at most 30, and Science Uncovered has 3 mysteries a day worth at most 100 each.
+ * streak), a repeat at most 30, and Science Uncovered has 3 mysteries a day: 100 points plus a 25 perfect bonus each, plus 50 per life left at the end, which stays within 175 per solved mystery.
  */
 object ChampionLimits {
     const val BOARD_MOVES = 20
     const val MAX_FIRST_FIND = 130
     const val MAX_REPEAT_FIND = 30
-    const val MAX_MYSTERY = 100
+    const val MAX_MYSTERY = 175
     const val MAX_MYSTERIES = 3
 
     /** Repeats only score once something has been found, so an empty board scores nothing. */

@@ -1062,6 +1062,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                                                 if (letter in mystery.normalizedAnswer) {
                                                     if (mystery.normalizedAnswer.toSet().all { it in updatedGuesses }) {
                                                         solved = true
+                                                        if (wrongAnswers == 0) points += ScienceMysteries.PERFECT_BONUS
                                                         val updatedScore = totalScore + points
                                                         totalScore = updatedScore
                                                         solvedCount++
@@ -1165,6 +1166,8 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                                 fontWeight = FontWeight.Black,
                                 fontSize = 22.sp,
                             )
+                            if (wrongAnswers == 0 && solved) Text("Perfect solve: +${ScienceMysteries.PERFECT_BONUS} bonus included.", color = Green, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            if (runOver && lastOfToday && lives > 0) Text("Life bonus: +${lives * ScienceMysteries.LIFE_BONUS} for $lives ${if (lives == 1) "life" else "lives"} left.", color = Green, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                             if (wrongAnswers > 0 && solved) Text("Solved after $wrongAnswers incorrect letter ${if (wrongAnswers == 1) "guess" else "guesses"}.", color = Navy.copy(alpha = .62f), fontSize = 12.sp)
                             Text(mystery.story, color = Navy, lineHeight = 21.sp)
                             if (runOver) {
@@ -1179,6 +1182,7 @@ private fun ScienceUncoveredScreen(nav: NavHostController, viewModel: MainViewMo
                             if (runOver) {
                                 nav.popBackStack()
                             } else if (lastOfToday) {
+                                totalScore += lives * ScienceMysteries.LIFE_BONUS
                                 runOver = true
                                 viewModel.recordScienceBest(totalScore)
                                 saveRun(storedRunOver = true)

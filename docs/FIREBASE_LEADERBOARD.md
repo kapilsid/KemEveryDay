@@ -35,7 +35,7 @@ daily_champions/{yyyy-MM-dd}/players/{uid}
 - The date must be today or yesterday (UTC).
 - `score` must equal `moleculeScore + scienceScore`.
 - Molecule Board: at most 20 finds, at most 130 points per first find and 30 per repeat, and
-  nothing without a find. Science Uncovered: at most 3 mysteries a day, 100 points each.
+  nothing without a find. Science Uncovered: at most 3 mysteries a day and 175 points per solved mystery (100 base, 25 perfect bonus, 50 per life left).
 - The name must match the player's profile; `verified` must be false; no extra fields.
 - Signed-in players can read the board; profiles are private.
 

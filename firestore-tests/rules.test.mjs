@@ -28,7 +28,7 @@ await check("signed-out cannot read scores", assertFails(getDoc(at(anon, today, 
 await check("wrong total rejected", assertFails(setDoc(at(alice, today, "alice"), score({ score: 99999 }))));
 await check("molecule over cap rejected", assertFails(setDoc(at(alice, today, "alice"), score({ moleculeScore: 2700, uniqueDiscoveries: 20, score: 2950 }))));
 await check("empty board with points rejected", assertFails(setDoc(at(alice, today, "alice"), score({ moleculeScore: 50, uniqueDiscoveries: 0, score: 300 }))));
-await check("science over cap rejected", assertFails(setDoc(at(alice, today, "alice"), score({ scienceScore: 350, score: 1100 }))));
+await check("science over cap rejected", assertFails(setDoc(at(alice, today, "alice"), score({ scienceScore: 526, score: 1276 }))));
 await check("more than 3 mysteries rejected", assertFails(setDoc(at(alice, today, "alice"), score({ mysteriesSolved: 4, scienceScore: 350, score: 1100 }))));
 await check("verified=true rejected", assertFails(setDoc(at(alice, today, "alice"), score({ verified: true }))));
 await check("extra field rejected", assertFails(setDoc(at(alice, today, "alice"), score({ cheat: 1 }))));

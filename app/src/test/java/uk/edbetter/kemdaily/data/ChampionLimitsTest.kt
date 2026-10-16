@@ -24,7 +24,8 @@ class ChampionLimitsTest {
         assertFalse(ChampionLimits.isPlausible(entry(molecule = 20 * 130 + 1, unique = 20, science = 0, solved = 0)))
         assertFalse(ChampionLimits.isPlausible(entry(molecule = 500, unique = 0, science = 0, solved = 0)))
         assertFalse(ChampionLimits.isPlausible(entry(molecule = 100, unique = 21, science = 0, solved = 0)))
-        assertFalse(ChampionLimits.isPlausible(entry(molecule = 100, unique = 2, science = 301, solved = 3)))
+        assertTrue(ChampionLimits.isPlausible(entry(molecule = 100, unique = 2, science = 525, solved = 3)))
+        assertFalse(ChampionLimits.isPlausible(entry(molecule = 100, unique = 2, science = 526, solved = 3)))
         assertFalse(ChampionLimits.isPlausible(entry(molecule = -1, unique = 2, science = 0, solved = 0)))
         assertFalse(ChampionLimits.isPlausible(entry(molecule = 100, unique = 2, science = 400, solved = 4)))
     }

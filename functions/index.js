@@ -25,7 +25,7 @@ exports.submitDailyChampions = onCall({ enforceAppCheck: false }, async (request
   const isCount = (value, max) => Number.isInteger(value) && value >= 0 && value <= max;
   if (!isCount(uniqueDiscoveries, 20) || !isCount(mysteriesSolved, 3) ||
       !isCount(moleculeScore, uniqueDiscoveries === 0 ? 0 : uniqueDiscoveries * 130 + (20 - uniqueDiscoveries) * 30) ||
-      !isCount(scienceScore, mysteriesSolved * 100) ||
+      !isCount(scienceScore, mysteriesSolved * 175) ||
       !Number.isInteger(contentVersion) || contentVersion < 1) {
     throw new HttpsError("invalid-argument", "The score is outside the valid range.");
   }

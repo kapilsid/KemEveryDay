@@ -2008,6 +2008,10 @@ object ScienceMysteries {
     )
 
     const val PER_DAY = 3
+    /** Solving without a single wrong letter. */
+    const val PERFECT_BONUS = 25
+    /** Each life still left after finishing all of today's mysteries. */
+    const val LIFE_BONUS = 50
 
     /** Today's three mysteries. Consecutive days take the next three, so the catalogue cycles without repeats. */
     fun forDay(date: LocalDate = LocalDate.now(ZoneOffset.UTC)): List<ScienceMystery> {

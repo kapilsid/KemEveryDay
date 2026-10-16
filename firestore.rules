@@ -31,7 +31,7 @@ service cloud.firestore {
     }
 
     // Mirrors ChampionLimits in ScienceLeaderboardGateway.kt: 20 board moves, at most 130 points for a
-    // first find and 30 for a repeat, at most 3 Science Uncovered mysteries a day, 100 points each.
+    // first find and 30 for a repeat, at most 3 Science Uncovered mysteries a day and 175 points per solved mystery (base, perfect and life bonuses).
     function validChampionScore(uid, date) {
       let d = request.resource.data;
       return d.keys().hasOnly([
@@ -51,7 +51,7 @@ service cloud.firestore {
             && d.moleculeScore <= d.uniqueDiscoveries * 130 + (20 - d.uniqueDiscoveries) * 30))
         && d.mysteriesSolved is int && d.mysteriesSolved >= 0 && d.mysteriesSolved <= 3
         && d.scienceScore is int && d.scienceScore >= 0
-        && d.scienceScore <= d.mysteriesSolved * 100
+        && d.scienceScore <= d.mysteriesSolved * 175
         && d.score == d.moleculeScore + d.scienceScore
         && d.contentVersion is int && d.contentVersion >= 1
         && d.submittedAt == request.time
