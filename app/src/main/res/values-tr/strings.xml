@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Turkish translations. Review with native speaker. -->
+<!-- Turkish translations. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
@@ -10,42 +10,380 @@
     <string name="common_save">Kaydet</string>
     <string name="common_delete">Sil</string>
     <string name="common_refresh">Yenile</string>
-    <string name="common_got_it">Tamam</string>
-    <string name="common_home">Ana ekran</string>
+    <string name="common_got_it">Anladım</string>
+    <string name="common_home">Ana sayfa</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d puan</item>
+        <item quantity="other">+%1$d puan</item>
+    </plurals>
 
     <!-- Home -->
+    <string name="home_logo_description">Kemistri Everyday logosu</string>
     <string name="home_tagline">Her gün yeni bir kimya harikası</string>
+    <string name="home_open_champions">Günün Şampiyonları\'nı aç</string>
+    <string name="home_playing_as">Oyuncu: %1$s</string>
     <string name="home_daily_title">Günlük Molekül Tahtası</string>
-    <string name="home_everyday_title">Günlük Kimya</string>
-    <string name="home_element_title">Günün elementi</string>
+    <string name="home_daily_subtitle">Herkes için her gün bir kimya bulmacası</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">%1$d günlük seri · herkes için her gün bir bulmaca</item>
+        <item quantity="other">%1$d günlük seri · herkes için her gün bir bulmaca</item>
+    </plurals>
+    <string name="home_science_title">Bilim Çözülüyor</string>
+    <string name="home_science_subtitle">Her gün üç yeni bilim gizemi</string>
+    <string name="home_everyday_title">Günlük Hayatta Kimya</string>
+    <string name="home_everyday_subtitle">Günlük hayatta saklı kimyayı tahmin et</string>
+    <string name="home_element_title">Günün Elementi</string>
+    <string name="home_element_subtitle">Her gün yeni bir elementle tanış</string>
     <string name="home_nav_streak">Seri</string>
     <string name="home_nav_leaders">Liderler</string>
     <string name="home_nav_settings">Ayarlar</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">Molekül Avı</string>
+    <string name="hunt_daily_history">Günlük geçmiş</string>
+    <string name="hunt_session_discoveries">Bu oturumdaki keşifler</string>
+    <string name="hunt_game_rules">Oyun kuralları</string>
+    <string name="hunt_shared_puzzle">Ortak bulmaca · %1$s</string>
+    <string name="hunt_mission_goal">10 farklı madde bul</string>
+    <string name="hunt_hint">İpucu</string>
+    <string name="hunt_shuffle">Karıştır</string>
+    <string name="hunt_clear">Temizle</string>
+    <string name="hunt_discover">Keşfet</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s zaten bulundu · +%2$d puan</item>
+        <item quantity="other">%1$s zaten bulundu · +%2$d puan</item>
+    </plurals>
+    <string name="hunt_stat_moves">Hamle</string>
+    <string name="hunt_stat_score">Puan</string>
+    <string name="hunt_stat_found">Bulunan</string>
+    <string name="hunt_tile_description">%1$s, satır %2$d, sütun %3$d</string>
+    <string name="hunt_tile_selected">, seçim sırası %1$d</string>
+    <string name="hunt_tile_hinted">, ipucu verildi</string>
+    <string name="hunt_select_neighbours">Komşu atomları seç</string>
+    <string name="hunt_ready_to_review">İncelemeye hazır</string>
+    <string name="hunt_mission_complete_title">Görev tamam!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">%1$s buldun, %2$s. Puan: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d madde</item>
+        <item quantity="other">%1$d madde</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">%1$d hamle kaldı</item>
+        <item quantity="other">%1$d hamle kaldı</item>
+    </plurals>
+    <string name="hunt_keep_discovering">Keşfetmeye devam</string>
+    <string name="hunt_finish">Bitir</string>
+    <string name="hunt_discovery_great">Harika keşif!</string>
+    <string name="hunt_discovery_again">Yine keşfedildi!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d atom</item>
+        <item quantity="other">%1$d atom</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d element</item>
+        <item quantity="other">%1$d element</item>
+    </plurals>
+    <string name="hunt_score_rarity">nadirlik +%1$d</string>
+    <string name="hunt_score_streak">seri +%1$d</string>
+    <string name="hunt_rules_title">Molekül Avı — Kurallar</string>
+    <string name="hunt_rules_subtitle">5 × 5 tahtada gerçek kimyasal bileşimler oluştur</string>
+    <string name="hunt_rule_1">Komşu atomları yatay, dikey ya da çapraz olarak bağla.</string>
+    <string name="hunt_rule_2">Çoğu keşif için 2–6 atom kullan; ileri düzey formüller 7 atom kullanabilir.</string>
+    <string name="hunt_rule_3">Bileşimi kontrol etmek için Keşfet\'e dokun. Seçim sırası formülü değiştirmez.</string>
+    <string name="hunt_rule_4">Tanınan bir madde puan kazandırır, bir hamle harcar ve seçilen kareleri kaldırır.</string>
+    <string name="hunt_rule_5">Atomlar aşağı düşer ve yukarıdan dengeli yeni atomlar gelir.</string>
+    <string name="hunt_rule_6">Görevi tamamlamak için 10 farklı madde bul.</string>
+    <string name="hunt_rule_7" formatted="false">Tekrarlar serbesttir; bir hamle harcar ve %25 puan verir ama benzersiz sayısını artırmaz.</string>
+    <string name="hunt_rule_8">Henüz tanınmayan kombinasyonlar hamle harcamaz ve Keşif İncelemesi için kaydedilir.</string>
+    <string name="hunt_rule_9">İpucu ve Karıştır şu an hamle harcamaz.</string>
+    <string name="hunt_rule_10">Görevi tamamladıktan sonra kalan hamlelerle keşfetmeye devam et.</string>
+    <string name="hunt_scoring">Puanlama</string>
+    <string name="hunt_scoring_formula">Puan = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = atom · E = farklı element · R = nadirlik (0–40) · S = yeni keşif serisi (0–15)</string>
+    <string name="hunt_formula_note">Bir formül bileşimi anlatır, tek bir yapıyı değil. Örneğin C₂H₆O birden fazla maddeyi gösterebilir.</string>
+    <string name="hunt_discoveries_title">Bu avın keşifleri</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">%1$d görev</item>
+        <item quantity="other">%1$d görev</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">%1$d ekstra</item>
+        <item quantity="other">%1$d ekstra</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">toplam %1$d buluş</item>
+        <item quantity="other">toplam %1$d buluş</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">Henüz keşif yok — birkaç atomu bağla ve neler yapabileceğini gör!</string>
+    <string name="hunt_mission_discoveries">GÖREV KEŞİFLERİ</string>
+    <string name="hunt_extra_discoveries">EKSTRA KEŞİFLER</string>
+    <string name="hunt_back_to_hunt">Bu ava dön</string>
+    <string name="hunt_result_brilliant">Muhteşem kimya!</string>
+    <string name="hunt_result_complete">Av tamamlandı</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">Puan %1$d · %2$d benzersiz madde</item>
+        <item quantity="other">Puan %1$d · %2$d benzersiz madde</item>
+    </plurals>
+    <string name="hunt_play_again">Tekrar oyna</string>
+    <!-- Game engine messages, translated at display time (GameEngine stays English and Context-free) -->
+    <string name="hunt_msg_choose_neighbour">Komşu bir kare seç</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">Bir keşifte en fazla %1$d atom kullanılabilir</item>
+        <item quantity="other">Bir keşifte en fazla %1$d atom kullanılabilir</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">Tahta yenilendi — bu yeni düzeni dene</string>
+    <string name="hunt_msg_hint_glowing">Olası bir keşif parlıyor</string>
+    <string name="hunt_msg_board_shuffled">Tahta karıştırıldı</string>
+    <string name="hunt_msg_no_moves">Hamle kalmadı</string>
+    <string name="hunt_msg_too_short">En az iki atomu bağla</string>
+    <string name="hunt_msg_not_recognised">%1$s henüz tanınmıyor — inceleme için kaydedildi</string>
+    <string name="hunt_msg_new_discovery">Yeni keşif!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">Tekrar keşif · %25 puan</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"RUN SKORU %1$d"</string>
+    <string name="science_run_score">"TUR PUANI  %1$d"</string>
+    <string name="science_run_status">Bugünün turu · Gizem %1$d / %2$d · En iyi %3$d</string>
+    <string name="science_possible_points">olası puan</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d harf</item>
+        <item quantity="other">%1$d harf</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d kelime</item>
+        <item quantity="other">%1$d kelime</item>
+    </plurals>
+    <string name="science_clue_number">İPUCU %1$d</string>
+    <string name="science_letter_wrong">%1$s cevapta yok — bir can gitti</string>
+    <string name="science_keyboard_hint">Eşleşen tüm yerleri açmak için bir harfe dokun</string>
+    <string name="science_next_clue">Sonraki ipucu (−15)</string>
+    <string name="science_all_clues">Tüm ipuçları gösterildi</string>
+    <string name="science_skip">Geç (−1 can)</string>
+    <plurals name="science_solved">
+        <item quantity="one">Çözüldü — +%1$d puan!</item>
+        <item quantity="other">Çözüldü — +%1$d puan!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">Tur bitti — %1$d puan</item>
+        <item quantity="other">Tur bitti — %1$d puan</item>
+    </plurals>
+    <string name="science_revealed">Gizem açıklandı — bir can gitti</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">Kusursuz çözüm: +%1$d bonus dahil.</item>
+        <item quantity="other">Kusursuz çözüm: +%1$d bonus dahil.</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">Can bonusu: kalan %2$d can için +%1$d.</item>
+        <item quantity="other">Can bonusu: kalan %2$d can için +%1$d.</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">%1$d yanlış harf tahmininden sonra çözüldü.</item>
+        <item quantity="other">%1$d yanlış harf tahmininden sonra çözüldü.</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">Bu turda %1$d gizem çözüldü</item>
+        <item quantity="other">Bu turda %1$d gizem çözüldü</item>
+    </plurals>
+    <string name="science_back_home">ANA SAYFAYA DÖN</string>
+    <string name="science_see_score">BUGÜNÜN PUANINI GÖR</string>
+    <string name="science_next_mystery">SONRAKİ GİZEM</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">DEVAM — %1$d CAN KALDI</item>
+        <item quantity="other">DEVAM — %1$d CAN KALDI</item>
+    </plurals>
+    <string name="science_done_today">Bugünün üç gizemi bitti. Yenileri 00:00 UTC\'de açılır.</string>
+    <!-- Mystery categories (MysteryCategory label and prompt) -->
+    <string name="science_category_scientist">Bilim insanı</string>
+    <string name="science_category_element">Element</string>
+    <string name="science_category_place">Bilimsel yer</string>
+    <string name="science_category_discovery">Keşif</string>
+    <string name="science_category_instrument">Alet</string>
+    <string name="science_prompt_scientist">Ben kimim?</string>
+    <string name="science_prompt_element">Ben neyim?</string>
+    <string name="science_prompt_place">Neredeyim?</string>
+    <string name="science_prompt_discovery">Ne keşfedildi?</string>
+    <string name="science_prompt_instrument">Bu nedir?</string>
 
     <!-- Everyday Chemistry -->
     <string name="everyday_the_answer">CEVAP</string>
+    <string name="everyday_the_question">SORU</string>
+    <string name="everyday_card_number">KART %1$s</string>
+    <string name="everyday_quick_guess">HIZLI BİR TAHMİN YAP</string>
+    <string name="everyday_show_me">GÖSTER</string>
+    <string name="everyday_spot_on">Tam isabet — iyi seçim.</string>
+    <string name="everyday_not_quite">Pek değil — aslında olan şu.</string>
+    <string name="everyday_chemistry_underneath">ARKADAKİ KİMYA</string>
+    <string name="everyday_try_it">Dene: %1$s</string>
+    <string name="everyday_safety">Güvenlik: %1$s</string>
+    <string name="everyday_ask_again">TEKRAR SOR</string>
+    <string name="everyday_got_it">ANLADIM</string>
 
     <!-- Element a Day -->
     <string name="element_todays">BUGÜNÜN ELEMENTİ</string>
+    <string name="element_correct">Doğru! %1$s koleksiyonuna eklendi ve bugünkü serine sayıldı.</string>
+    <string name="element_wrong">Pek değil, doğru cevap %1$s. Yine de koleksiyonuna eklendi.</string>
+    <string name="element_made_in_lab">Laboratuvarda üretildi</string>
+    <string name="element_period">Periyot %1$d</string>
+    <string name="element_group">Grup %1$d</string>
+    <string name="element_f_block">f bloku</string>
+    <string name="element_remember_it">AKLINDA TUT</string>
+    <string name="element_how_found">NASIL BULUNDU</string>
+    <string name="element_where_meet">ONU NEREDE GÖRÜRSÜN</string>
+    <string name="element_collection">Koleksiyonun</string>
+    <string name="element_collection_count">%1$d / %2$d</string>
+    <string name="element_collection_hint">Tanıştığın her element kendi karesini doldurur. Bugünkü vurgulanır.</string>
+    <string name="element_new_daily">Her gün gece yarısı (UTC) yeni bir element gelir.</string>
+    <string name="element_which_am_i">Ben hangi elementim?</string>
+    <string name="element_first_guess_counts">İlk tahminin sayılır. Bugünü serine eklemek için doğru bil.</string>
+    <string name="element_tile_description">%1$s, sembol %2$s, atom numarası %3$d, atom ağırlığı %4$s, elektron dizilimi %5$s</string>
+    <string name="element_outer_electrons">Dış elektronlar: %1$s orbitali</string>
+    <string name="element_picture_description">%1$s elementini nerede görebilirsin</string>
+    <string name="element_melts">Erime</string>
+    <string name="element_boils">Kaynama</string>
+    <string name="element_density">Yoğunluk</string>
+    <string name="element_discovered">Keşif</string>
+    <string name="element_not_measured">Ölçülmedi</string>
+    <string name="element_in_things_you_know">TANIDIĞIN ŞEYLERDE</string>
+    <string name="element_on_the_board">Tahtada</string>
+    <string name="element_cloud_description">Elektron bulutu modeli. Katmanlarda %1$s elektron var; dış elektronlar bir %2$s orbitalini doldurur.</string>
+    <string name="element_collected">, toplandı</string>
+    <!-- Element families (DailyElement.family) -->
+    <string name="element_family_alkali_metals">Alkali metaller</string>
+    <string name="element_family_alkaline_earth_metals">Toprak alkali metaller</string>
+    <string name="element_family_transition_metals">Geçiş metalleri</string>
+    <string name="element_family_post_transition_metals">Geçiş sonrası metaller</string>
+    <string name="element_family_metalloids">Yarı metaller</string>
+    <string name="element_family_reactive_nonmetals">Reaktif ametaller</string>
+    <string name="element_family_halogens">Halojenler</string>
+    <string name="element_family_noble_gases">Soy gazlar</string>
+    <string name="element_family_lanthanides">Lantanitler</string>
+    <string name="element_family_actinides">Aktinitler</string>
+    <!-- States of matter (DailyElement.state) -->
+    <string name="element_state_solid">Katı</string>
+    <string name="element_state_liquid">Sıvı</string>
+    <string name="element_state_gas">Gaz</string>
+    <string name="element_state_unknown">Hâli bilinmiyor</string>
 
     <!-- Daily Champions -->
-    <string name="champions_title">Günlük Şampiyonlar</string>
+    <string name="champions_title">Günün Şampiyonları</string>
+    <string name="champions_intro">Bugünün Molekül Tahtası\'nı ve bugünün Bilim Çözülüyor turunu bitir. İki puanın toplanır ve her UTC gününde bitirdiğin ilk toplam dünya sıralamasına girer.</string>
+    <string name="champions_default_player">Bilim oyuncusu</string>
+    <string name="champions_edit_nickname">Takma adı düzenle</string>
+    <string name="champions_retry">Firebase\'e tekrar bağlan</string>
+    <string name="champions_todays_total">BUGÜNÜN TOPLAMI</string>
+    <string name="champions_today_so_far">BUGÜN ŞU ANA KADAR</string>
+    <string name="champions_today_breakdown">Molekül Tahtası %1$s · Bilim %2$s</string>
+    <string name="champions_not_finished">bitmedi</string>
+    <string name="champions_in_progress">devam ediyor</string>
+    <string name="champions_worldwide">Dünya sıralaması</string>
+    <string name="champions_today_utc">BUGÜN · UTC</string>
+    <string name="champions_offline">ÇEVRİMDIŞI</string>
+    <string name="champions_no_scores_today">Bugün için henüz dünya puanı yok.</string>
+    <string name="champions_scores_need_firebase">Firebase bağlandığında dünya puanları burada görünür.</string>
+    <string name="champions_you">%1$s · Sen</string>
+    <string name="champions_entry_scores">Tahta %1$d · Bilim %2$d</string>
+    <string name="champions_local_scores">Bu cihazdaki puanların</string>
+    <string name="champions_local">YEREL</string>
+    <string name="champions_no_runs">Henüz bitmiş tur yok</string>
+    <string name="champions_finish_to_place">İlk puanını kaydetmek için bugünün Bilim Çözülüyor turunu bitir.</string>
+    <string name="champions_today">Bugün</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d gizem çözüldü</item>
+        <item quantity="other">%1$d gizem çözüldü</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase bağlı</string>
+    <string name="champions_playing_offline">Çevrimdışı oynuyorsun</string>
+    <string name="champions_online_note">Anonim oyuncu kimliğin uygulamayı sade tutar: Google giriş ekranı yok, e-posta gösterilmez. Biten günlük tur yalnızca bir kez gönderilir.</string>
+    <string name="champions_offline_note">Turun ve puanın bu cihazda kalır. Anonim Kimlik Doğrulama, Firestore ve puan fonksiyonu açıldıktan sonra bağlanmak için Tekrar bağlan\'a dokun.</string>
+    <string name="champions_choose_name">Oyuncu adını seç</string>
+    <string name="champions_nickname_note">Bu herkese açık takma ad Günün Şampiyonları\'nda görünür. Gerçek adını kullanma.</string>
+    <string name="champions_nickname_label">Takma ad</string>
+    <string name="champions_nickname_support">3–16 harf, rakam veya boşluk</string>
+    <!-- Daily Champions status messages (MainViewModel / ScienceCloudState) -->
+    <string name="champions_status_connecting">Günün Şampiyonları\'na bağlanılıyor…</string>
+    <string name="champions_status_nickname_requirement">3–16 harf, rakam veya boşluk kullan</string>
+    <string name="champions_status_saving">Takma ad kaydediliyor…</string>
+    <string name="champions_status_saved">Takma ad kaydedildi</string>
+    <string name="champions_status_save_failed">Takma ad kaydedilemedi. Bağlantını ve Firebase kurulumunu kontrol et.</string>
+    <string name="champions_status_connected">Dünya sıralamasına bağlandı</string>
+    <string name="champions_status_offline_setup">Yerel puanların güvende. Dünya sıralamasına bağlanmak için Anonim Kimlik Doğrulama ve Firestore\'u aç.</string>
+    <string name="champions_status_rankings_unavailable">Bağlandı ama sıralama şu an kullanılamıyor.</string>
+    <string name="champions_status_submitting">Bugünün Günün Şampiyonları puanı gönderiliyor…</string>
+    <string name="champions_status_submitted_rank">Puan gönderildi · sıra #%1$d</string>
+    <string name="champions_status_submitted">Bugünün puanı gönderildi</string>
+    <string name="champions_status_already_submitted">Bugünün puanı zaten gönderildi</string>
+    <string name="champions_status_offline_retry">Çevrimdışı — kayıtlı puanı sonra göndermek için yenile\'ye dokun</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">Günlük Seri</string>
+    <string name="streak_none">Henüz seri yok</string>
+    <plurals name="streak_days">
+        <item quantity="one">%1$d günlük seri</item>
+        <item quantity="other">%1$d günlük seri</item>
+    </plurals>
+    <string name="streak_played_today">Bugün sayıldı. Yarın yine gel.</string>
+    <string name="streak_keep_going">Serini sürdürmek için herhangi bir günlük oyunu oyna.</string>
+    <string name="streak_start">Seri başlatmak için herhangi bir günlük oyunu oyna.</string>
+    <string name="streak_best">En iyi seri</string>
+    <string name="streak_days_played">Oynanan gün</string>
+    <string name="streak_best_score">En iyi puan</string>
+    <string name="streak_play_today">Bugünün tahtasını oyna</string>
+    <string name="streak_recent">Son tahtalar</string>
+    <string name="streak_recent_empty">Henüz Günlük Tahta oynanmadı. Molekül Tahtası\'nı ya da Bilim Çözülüyor\'u bitirdiğinde o gün sayılır.</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d benzersiz</item>
+        <item quantity="other">%1$d benzersiz</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d benzersiz · görev tamam</item>
+        <item quantity="other">%1$d benzersiz · görev tamam</item>
+    </plurals>
+    <string name="streak_footer">Her günün tahtası gece yarısı (UTC) değişir. Geçmiş yalnızca bu cihazda saklanır.</string>
+    <string name="streak_previous_month">Önceki ay</string>
+    <string name="streak_next_month">Sonraki ay</string>
+    <string name="streak_day_not_played">, oynanmadı</string>
+    <string name="streak_day_board_score">, Molekül Tahtası puanı %1$d</string>
+    <string name="streak_day_science">, Bilim Çözülüyor bitti</string>
+    <string name="streak_day_element">, element tahmin edildi</string>
+    <string name="streak_day_today">, bugün</string>
+    <string name="streak_legend_board">Tahta</string>
+    <string name="streak_legend_science">Bilim</string>
+    <string name="streak_legend_element">Element</string>
+    <string name="streak_legend_both">İki oyun da</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">Keşif İncelemesi</string>
+    <string name="review_intro">Tanınmayan kombinasyonlar imkânsız diye işaretlenmez. Daha sonra incelenmek üzere bu cihazda kalırlar.</string>
+    <string name="review_empty">İnceleme bekleyen bir şey yok</string>
+    <plurals name="review_tried">
+        <item quantity="one">Henüz tanınmadı · %1$d kez denendi</item>
+        <item quantity="other">Henüz tanınmadı · %1$d kez denendi</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">Ayarlar</string>
     <string name="settings_sound">Ses</string>
+    <string name="settings_sound_description">Keşif ve kare sesleri</string>
     <string name="settings_vibration">Titreşim</string>
-    <string name="settings_reduced_motion">Hareket azalt</string>
-    <string name="settings_privacy">Gizlilik</string>
-    <string name="settings_about">EdBetter Hakkında</string>
+    <string name="settings_vibration_description">Hafif dokunma geri bildirimi</string>
+    <string name="settings_reduced_motion">Hareketi azalt</string>
+    <string name="settings_reduced_motion_description">Daha sade geçişler kullan</string>
     <string name="settings_language">Dil</string>
-    <string name="settings_language_description">Uygulama dilini seçin</string>
+    <string name="settings_language_description">Uygulama dilini seç</string>
     <string name="settings_language_system">Sistem varsayılanı</string>
+    <string name="settings_privacy">Gizlilik</string>
+    <string name="settings_privacy_text">İlerlemen bu telefonda kalır. Reklamlar Google tarafından sağlanır.</string>
+    <string name="settings_ad_choices">Reklam tercihleri</string>
+    <string name="settings_privacy_policy">Gizlilik politikası</string>
+    <string name="settings_about">EdBetter Hakkında</string>
+    <string name="settings_about_text">Merakı anlayışa dönüştüren eğlenceli bilim uygulamaları yapıyoruz.</string>
+    <string name="settings_more">EdBetter\'dan daha fazlası</string>
+    <string name="settings_kemistri_description">Seviyeler, tepkimeler ve moleküllerle periyodik tabloda ustalaş.</string>
+    <string name="settings_open_kemistri">Kemistri\'yi Google Play\'de aç</string>
+    <string name="settings_version">Sürüm %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">Bu cihazda reklam gizliliği seçenekleri gerekmiyor</string>
 </resources>
-

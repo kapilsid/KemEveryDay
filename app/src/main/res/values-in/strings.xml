@@ -1,51 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Indonesian fallback using the same strings as values-id (some projects use 'in' locale). -->
+<!-- Indonesian translations. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
     <!-- Common -->
     <string name="common_back">Kembali</string>
-    <string name="common_continue">Lanjutkan</string>
+    <string name="common_continue">Lanjut</string>
     <string name="common_cancel">Batal</string>
     <string name="common_save">Simpan</string>
     <string name="common_delete">Hapus</string>
-    <string name="common_refresh">Segarkan</string>
-    <string name="common_got_it">Mengerti</string>
+    <string name="common_refresh">Muat ulang</string>
+    <string name="common_got_it">Oke</string>
     <string name="common_home">Beranda</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d poin</item>
+        <item quantity="other">+%1$d poin</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">Satu keajaiban kimia baru setiap hari</string>
+    <string name="home_logo_description">Logo Kemistri Everyday</string>
+    <string name="home_tagline">Keajaiban kimia baru setiap hari</string>
+    <string name="home_open_champions">Buka Juara Harian</string>
+    <string name="home_playing_as">Bermain sebagai %1$s</string>
     <string name="home_daily_title">Papan Molekul Harian</string>
+    <string name="home_daily_subtitle">Satu teka-teki kimia bersama setiap hari</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">Runtutan %1$d hari · satu teka-teki bersama setiap hari</item>
+        <item quantity="other">Runtutan %1$d hari · satu teka-teki bersama setiap hari</item>
+    </plurals>
+    <string name="home_science_title">Sains Terungkap</string>
+    <string name="home_science_subtitle">Tiga misteri sains baru setiap hari</string>
     <string name="home_everyday_title">Kimia Sehari-hari</string>
-    <string name="home_element_title">Unsur Hari Ini</string>
-    <string name="home_nav_streak">Rangkaian</string>
-    <string name="home_nav_leaders">Pemimpin</string>
+    <string name="home_everyday_subtitle">Tebak kimia yang tersembunyi di kehidupan sehari-hari</string>
+    <string name="home_element_title">Satu Unsur Sehari</string>
+    <string name="home_element_subtitle">Kenali unsur baru setiap hari</string>
+    <string name="home_nav_streak">Runtutan</string>
+    <string name="home_nav_leaders">Peringkat</string>
     <string name="home_nav_settings">Pengaturan</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">Berburu Molekul</string>
+    <string name="hunt_daily_history">Riwayat harian</string>
+    <string name="hunt_session_discoveries">Penemuan sesi ini</string>
+    <string name="hunt_game_rules">Aturan main</string>
+    <string name="hunt_shared_puzzle">Teka-teki bersama · %1$s</string>
+    <string name="hunt_mission_goal">Temukan 10 zat berbeda</string>
+    <string name="hunt_hint">Petunjuk</string>
+    <string name="hunt_shuffle">Acak</string>
+    <string name="hunt_clear">Hapus</string>
+    <string name="hunt_discover">Temukan</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s sudah ditemukan · +%2$d poin</item>
+        <item quantity="other">%1$s sudah ditemukan · +%2$d poin</item>
+    </plurals>
+    <string name="hunt_stat_moves">Langkah</string>
+    <string name="hunt_stat_score">Skor</string>
+    <string name="hunt_stat_found">Ditemukan</string>
+    <string name="hunt_tile_description">%1$s, baris %2$d, kolom %3$d</string>
+    <string name="hunt_tile_selected">, dipilih nomor %1$d</string>
+    <string name="hunt_tile_hinted">, diberi petunjuk</string>
+    <string name="hunt_select_neighbours">Pilih atom yang bersebelahan</string>
+    <string name="hunt_ready_to_review">Siap ditinjau</string>
+    <string name="hunt_mission_complete_title">Misi selesai!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">Kamu menemukan %1$s dengan %2$s. Skor: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d zat</item>
+        <item quantity="other">%1$d zat</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">sisa %1$d langkah</item>
+        <item quantity="other">sisa %1$d langkah</item>
+    </plurals>
+    <string name="hunt_keep_discovering">Terus temukan</string>
+    <string name="hunt_finish">Selesai</string>
+    <string name="hunt_discovery_great">Penemuan hebat!</string>
+    <string name="hunt_discovery_again">Ditemukan lagi!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d atom</item>
+        <item quantity="other">%1$d atom</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d unsur</item>
+        <item quantity="other">%1$d unsur</item>
+    </plurals>
+    <string name="hunt_score_rarity">kelangkaan +%1$d</string>
+    <string name="hunt_score_streak">runtutan +%1$d</string>
+    <string name="hunt_rules_title">Berburu Molekul — Aturan</string>
+    <string name="hunt_rules_subtitle">Susun komposisi kimia nyata di papan 5 × 5</string>
+    <string name="hunt_rule_1">Hubungkan atom yang bersebelahan secara mendatar, tegak, atau diagonal.</string>
+    <string name="hunt_rule_2">Gunakan 2–6 atom untuk sebagian besar penemuan; rumus tingkat lanjut boleh memakai 7.</string>
+    <string name="hunt_rule_3">Ketuk Temukan untuk memeriksa komposisi. Urutan pilihan tidak mengubah rumus.</string>
+    <string name="hunt_rule_4">Zat yang dikenali memberi poin, memakai satu langkah, dan menghapus petak yang dipilih.</string>
+    <string name="hunt_rule_5">Atom akan jatuh ke bawah dan atom pengganti yang seimbang masuk dari atas.</string>
+    <string name="hunt_rule_6">Temukan 10 zat berbeda untuk menyelesaikan misi.</string>
+    <string name="hunt_rule_7" formatted="false">Pengulangan boleh, memakai satu langkah dan bernilai 25% skor, tetapi tidak menambah jumlah zat unik.</string>
+    <string name="hunt_rule_8">Kombinasi yang belum dikenali tidak memakai langkah dan disimpan untuk Tinjauan Penemuan.</string>
+    <string name="hunt_rule_9">Saat ini Petunjuk dan Acak tidak memakai langkah.</string>
+    <string name="hunt_rule_10">Setelah misi selesai, terus temukan zat dengan sisa langkahmu.</string>
+    <string name="hunt_scoring">Penilaian</string>
+    <string name="hunt_scoring_formula">Skor = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = atom · E = unsur berbeda · R = kelangkaan (0–40) · S = runtutan penemuan baru (0–15)</string>
+    <string name="hunt_formula_note">Rumus menggambarkan komposisi, belum tentu satu struktur yang unik. Contohnya, C₂H₆O bisa mewakili lebih dari satu zat.</string>
+    <string name="hunt_discoveries_title">Penemuan perburuan ini</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">%1$d misi</item>
+        <item quantity="other">%1$d misi</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">%1$d tambahan</item>
+        <item quantity="other">%1$d tambahan</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">%1$d total temuan</item>
+        <item quantity="other">%1$d total temuan</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">Belum ada penemuan — hubungkan beberapa atom dan lihat apa yang bisa kamu buat!</string>
+    <string name="hunt_mission_discoveries">PENEMUAN MISI</string>
+    <string name="hunt_extra_discoveries">PENEMUAN TAMBAHAN</string>
+    <string name="hunt_back_to_hunt">Kembali ke perburuan</string>
+    <string name="hunt_result_brilliant">Kimia yang luar biasa!</string>
+    <string name="hunt_result_complete">Perburuan selesai</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">Skor %1$d · %2$d zat unik</item>
+        <item quantity="other">Skor %1$d · %2$d zat unik</item>
+    </plurals>
+    <string name="hunt_play_again">Main lagi</string>
+    <!-- Game engine messages, translated at display time (GameEngine stays English and Context-free) -->
+    <string name="hunt_msg_choose_neighbour">Pilih petak yang bersebelahan</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">Satu penemuan bisa memakai hingga %1$d atom</item>
+        <item quantity="other">Satu penemuan bisa memakai hingga %1$d atom</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">Papan diperbarui — coba susunan baru ini</string>
+    <string name="hunt_msg_hint_glowing">Ada kemungkinan penemuan yang menyala</string>
+    <string name="hunt_msg_board_shuffled">Papan diacak</string>
+    <string name="hunt_msg_no_moves">Langkah sudah habis</string>
+    <string name="hunt_msg_too_short">Hubungkan minimal dua atom</string>
+    <string name="hunt_msg_not_recognised">%1$s belum dikenali — disimpan untuk ditinjau</string>
+    <string name="hunt_msg_new_discovery">Penemuan baru!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">Penemuan ulang · skor 25%</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"SKOR RUN %1$d"</string>
+    <string name="science_run_score">"SKOR PUTARAN  %1$d"</string>
+    <string name="science_run_status">Putaran hari ini · Misteri %1$d dari %2$d · Terbaik %3$d</string>
+    <string name="science_possible_points">poin yang bisa didapat</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d huruf</item>
+        <item quantity="other">%1$d huruf</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d kata</item>
+        <item quantity="other">%1$d kata</item>
+    </plurals>
+    <string name="science_clue_number">PETUNJUK %1$d</string>
+    <string name="science_letter_wrong">%1$s tidak ada di jawaban — satu nyawa hilang</string>
+    <string name="science_keyboard_hint">Ketuk huruf untuk membuka semua posisi yang cocok</string>
+    <string name="science_next_clue">Petunjuk lain (−15)</string>
+    <string name="science_all_clues">Semua petunjuk sudah tampil</string>
+    <string name="science_skip">Lewati (−1 nyawa)</string>
+    <plurals name="science_solved">
+        <item quantity="one">Terpecahkan — +%1$d poin!</item>
+        <item quantity="other">Terpecahkan — +%1$d poin!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">Putaran selesai — %1$d poin</item>
+        <item quantity="other">Putaran selesai — %1$d poin</item>
+    </plurals>
+    <string name="science_revealed">Misteri terungkap — satu nyawa hilang</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">Jawaban sempurna: termasuk bonus +%1$d.</item>
+        <item quantity="other">Jawaban sempurna: termasuk bonus +%1$d.</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">Bonus nyawa: +%1$d untuk %2$d sisa nyawa.</item>
+        <item quantity="other">Bonus nyawa: +%1$d untuk %2$d sisa nyawa.</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">Terpecahkan setelah %1$d tebakan huruf salah.</item>
+        <item quantity="other">Terpecahkan setelah %1$d tebakan huruf salah.</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">%1$d misteri terpecahkan di putaran ini</item>
+        <item quantity="other">%1$d misteri terpecahkan di putaran ini</item>
+    </plurals>
+    <string name="science_back_home">KE BERANDA</string>
+    <string name="science_see_score">LIHAT SKOR HARI INI</string>
+    <string name="science_next_mystery">MISTERI BERIKUTNYA</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">LANJUT — SISA %1$d NYAWA</item>
+        <item quantity="other">LANJUT — SISA %1$d NYAWA</item>
+    </plurals>
+    <string name="science_done_today">Tiga misteri hari ini sudah selesai. Misteri baru terbuka pukul 00:00 UTC.</string>
+    <!-- Mystery categories (MysteryCategory label and prompt) -->
+    <string name="science_category_scientist">Ilmuwan</string>
+    <string name="science_category_element">Unsur</string>
+    <string name="science_category_place">Tempat ilmiah</string>
+    <string name="science_category_discovery">Penemuan</string>
+    <string name="science_category_instrument">Alat</string>
+    <string name="science_prompt_scientist">Siapa aku?</string>
+    <string name="science_prompt_element">Apa aku?</string>
+    <string name="science_prompt_place">Di mana aku?</string>
+    <string name="science_prompt_discovery">Apa yang ditemukan?</string>
+    <string name="science_prompt_instrument">Alat apa ini?</string>
 
     <!-- Everyday Chemistry -->
-    <string name="everyday_the_answer">JAWABAN</string>
+    <string name="everyday_the_answer">JAWABANNYA</string>
+    <string name="everyday_the_question">PERTANYAANNYA</string>
+    <string name="everyday_card_number">KARTU %1$s</string>
+    <string name="everyday_quick_guess">TEBAK CEPAT</string>
+    <string name="everyday_show_me">TUNJUKKAN</string>
+    <string name="everyday_spot_on">Tepat sekali — pilihanmu bagus.</string>
+    <string name="everyday_not_quite">Belum tepat — begini yang sebenarnya terjadi.</string>
+    <string name="everyday_chemistry_underneath">KIMIA DI BALIKNYA</string>
+    <string name="everyday_try_it">Coba: %1$s</string>
+    <string name="everyday_safety">Keamanan: %1$s</string>
+    <string name="everyday_ask_again">TANYA LAGI</string>
+    <string name="everyday_got_it">OKE</string>
 
     <!-- Element a Day -->
     <string name="element_todays">UNSUR HARI INI</string>
+    <string name="element_correct">Benar! %1$s masuk ke koleksimu dan dihitung untuk runtutan hari ini.</string>
+    <string name="element_wrong">Belum tepat, jawabannya %1$s. Unsur ini tetap masuk ke koleksimu.</string>
+    <string name="element_made_in_lab">Dibuat di laboratorium</string>
+    <string name="element_period">Periode %1$d</string>
+    <string name="element_group">Golongan %1$d</string>
+    <string name="element_f_block">blok f</string>
+    <string name="element_remember_it">INGAT INI</string>
+    <string name="element_how_found">CARA DITEMUKAN</string>
+    <string name="element_where_meet">DI MANA KAMU MENEMUINYA</string>
+    <string name="element_collection">Koleksimu</string>
+    <string name="element_collection_count">%1$d dari %2$d</string>
+    <string name="element_collection_hint">Setiap unsur yang kamu temui mengisi kotaknya. Unsur hari ini disorot.</string>
+    <string name="element_new_daily">Unsur baru muncul setiap hari pukul 00:00 UTC.</string>
+    <string name="element_which_am_i">Unsur apakah aku?</string>
+    <string name="element_first_guess_counts">Tebakan pertamamu yang dihitung. Tebak dengan benar untuk menambah runtutan hari ini.</string>
+    <string name="element_tile_description">%1$s, lambang %2$s, nomor atom %3$d, massa atom %4$s, konfigurasi elektron %5$s</string>
+    <string name="element_outer_electrons">Elektron terluar: orbital %1$s</string>
+    <string name="element_picture_description">Tempat kamu mungkin menemui %1$s</string>
+    <string name="element_melts">Leleh</string>
+    <string name="element_boils">Didih</string>
+    <string name="element_density">Massa jenis</string>
+    <string name="element_discovered">Ditemukan</string>
+    <string name="element_not_measured">Belum diukur</string>
+    <string name="element_in_things_you_know">DI BENDA YANG KAMU KENAL</string>
+    <string name="element_on_the_board">Di papan</string>
+    <string name="element_cloud_description">Model awan elektron. Kulit-kulitnya berisi %1$s elektron; elektron terluar mengisi orbital %2$s.</string>
+    <string name="element_collected">, sudah dikoleksi</string>
+    <!-- Element families (DailyElement.family) -->
+    <string name="element_family_alkali_metals">Logam alkali</string>
+    <string name="element_family_alkaline_earth_metals">Logam alkali tanah</string>
+    <string name="element_family_transition_metals">Logam transisi</string>
+    <string name="element_family_post_transition_metals">Logam pascatransisi</string>
+    <string name="element_family_metalloids">Metaloid</string>
+    <string name="element_family_reactive_nonmetals">Nonlogam reaktif</string>
+    <string name="element_family_halogens">Halogen</string>
+    <string name="element_family_noble_gases">Gas mulia</string>
+    <string name="element_family_lanthanides">Lantanida</string>
+    <string name="element_family_actinides">Aktinida</string>
+    <!-- States of matter (DailyElement.state) -->
+    <string name="element_state_solid">Padat</string>
+    <string name="element_state_liquid">Cair</string>
+    <string name="element_state_gas">Gas</string>
+    <string name="element_state_unknown">Wujud tidak diketahui</string>
 
     <!-- Daily Champions -->
     <string name="champions_title">Juara Harian</string>
+    <string name="champions_intro">Selesaikan Papan Molekul hari ini dan putaran Sains Terungkap hari ini. Kedua skormu dijumlahkan, dan total pertamamu yang selesai di setiap hari UTC masuk ke peringkat dunia.</string>
+    <string name="champions_default_player">Pemain sains</string>
+    <string name="champions_edit_nickname">Ubah nama panggilan</string>
+    <string name="champions_retry">Hubungkan ulang Firebase</string>
+    <string name="champions_todays_total">TOTAL HARI INI</string>
+    <string name="champions_today_so_far">HARI INI SEJAUH INI</string>
+    <string name="champions_today_breakdown">Papan Molekul %1$s · Sains %2$s</string>
+    <string name="champions_not_finished">belum selesai</string>
+    <string name="champions_in_progress">sedang berjalan</string>
+    <string name="champions_worldwide">Peringkat dunia</string>
+    <string name="champions_today_utc">HARI INI · UTC</string>
+    <string name="champions_offline">OFFLINE</string>
+    <string name="champions_no_scores_today">Belum ada skor dunia untuk hari ini.</string>
+    <string name="champions_scores_need_firebase">Skor dunia muncul di sini saat Firebase terhubung.</string>
+    <string name="champions_you">%1$s · Kamu</string>
+    <string name="champions_entry_scores">Papan %1$d · Sains %2$d</string>
+    <string name="champions_local_scores">Skormu di perangkat ini</string>
+    <string name="champions_local">LOKAL</string>
+    <string name="champions_no_runs">Belum ada putaran yang selesai</string>
+    <string name="champions_finish_to_place">Selesaikan putaran Sains Terungkap hari ini untuk mencatat skor pertamamu.</string>
+    <string name="champions_today">Hari ini</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d misteri terpecahkan</item>
+        <item quantity="other">%1$d misteri terpecahkan</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase terhubung</string>
+    <string name="champions_playing_offline">Bermain offline</string>
+    <string name="champions_online_note">Identitas pemain anonim membuat aplikasi tetap simpel: tanpa layar login Google dan tanpa menampilkan email. Putaran harian yang selesai dikirim satu kali.</string>
+    <string name="champions_offline_note">Putaran dan skormu tetap tersimpan di perangkat ini. Setelah Anonymous Authentication, Firestore, dan fungsi skor diaktifkan, ketuk Hubungkan ulang untuk terhubung.</string>
+    <string name="champions_choose_name">Pilih nama pemainmu</string>
+    <string name="champions_nickname_note">Nama panggilan publik ini muncul di Juara Harian. Jangan pakai nama aslimu.</string>
+    <string name="champions_nickname_label">Nama panggilan</string>
+    <string name="champions_nickname_support">3–16 huruf, angka, atau spasi</string>
+    <!-- Daily Champions status messages (MainViewModel / ScienceCloudState) -->
+    <string name="champions_status_connecting">Menghubungkan ke Juara Harian…</string>
+    <string name="champions_status_nickname_requirement">Gunakan 3–16 huruf, angka, atau spasi</string>
+    <string name="champions_status_saving">Menyimpan nama panggilan…</string>
+    <string name="champions_status_saved">Nama panggilan tersimpan</string>
+    <string name="champions_status_save_failed">Nama panggilan gagal disimpan. Periksa koneksi dan pengaturan Firebase.</string>
+    <string name="champions_status_connected">Papan peringkat dunia terhubung</string>
+    <string name="champions_status_offline_setup">Skor lokal aman. Aktifkan Anonymous Authentication dan Firestore untuk terhubung ke peringkat dunia.</string>
+    <string name="champions_status_rankings_unavailable">Terhubung, tetapi peringkat sedang tidak tersedia.</string>
+    <string name="champions_status_submitting">Mengirim skor Juara Harian hari ini…</string>
+    <string name="champions_status_submitted_rank">Skor terkirim · peringkat #%1$d</string>
+    <string name="champions_status_submitted">Skor hari ini terkirim</string>
+    <string name="champions_status_already_submitted">Skor hari ini sudah dikirim</string>
+    <string name="champions_status_offline_retry">Offline — ketuk muat ulang untuk mengirim skor yang tersimpan nanti</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">Runtutan Harian</string>
+    <string name="streak_none">Belum ada runtutan</string>
+    <plurals name="streak_days">
+        <item quantity="one">Runtutan %1$d hari</item>
+        <item quantity="other">Runtutan %1$d hari</item>
+    </plurals>
+    <string name="streak_played_today">Hari ini sudah dihitung. Kembali lagi besok.</string>
+    <string name="streak_keep_going">Mainkan game harian apa saja untuk menjaga runtutanmu.</string>
+    <string name="streak_start">Mainkan game harian apa saja untuk memulai runtutan.</string>
+    <string name="streak_best">Runtutan terbaik</string>
+    <string name="streak_days_played">Hari bermain</string>
+    <string name="streak_best_score">Skor terbaik</string>
+    <string name="streak_play_today">Main papan hari ini</string>
+    <string name="streak_recent">Papan terbaru</string>
+    <string name="streak_recent_empty">Belum ada Papan Harian yang dimainkan. Satu hari dihitung saat kamu menyelesaikan Papan Molekul atau Sains Terungkap.</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d unik</item>
+        <item quantity="other">%1$d unik</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d unik · misi selesai</item>
+        <item quantity="other">%1$d unik · misi selesai</item>
+    </plurals>
+    <string name="streak_footer">Papan setiap hari berganti pukul 00:00 UTC. Riwayat hanya disimpan di perangkat ini.</string>
+    <string name="streak_previous_month">Bulan sebelumnya</string>
+    <string name="streak_next_month">Bulan berikutnya</string>
+    <string name="streak_day_not_played">, tidak dimainkan</string>
+    <string name="streak_day_board_score">, skor Papan Molekul %1$d</string>
+    <string name="streak_day_science">, Sains Terungkap selesai</string>
+    <string name="streak_day_element">, unsur ditebak</string>
+    <string name="streak_day_today">, hari ini</string>
+    <string name="streak_legend_board">Papan</string>
+    <string name="streak_legend_science">Sains</string>
+    <string name="streak_legend_element">Unsur</string>
+    <string name="streak_legend_both">Kedua game</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">Tinjauan Penemuan</string>
+    <string name="review_intro">Kombinasi yang belum dikenali tidak dicap mustahil. Kombinasi ini disimpan di perangkat ini untuk ditinjau nanti.</string>
+    <string name="review_empty">Tidak ada yang menunggu ditinjau</string>
+    <plurals name="review_tried">
+        <item quantity="one">Belum dikenali · dicoba %1$d kali</item>
+        <item quantity="other">Belum dikenali · dicoba %1$d kali</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">Pengaturan</string>
     <string name="settings_sound">Suara</string>
+    <string name="settings_sound_description">Suara penemuan dan petak</string>
     <string name="settings_vibration">Getaran</string>
+    <string name="settings_vibration_description">Getaran sentuh yang lembut</string>
     <string name="settings_reduced_motion">Kurangi gerakan</string>
-    <string name="settings_privacy">Privasi</string>
-    <string name="settings_about">Tentang EdBetter</string>
+    <string name="settings_reduced_motion_description">Gunakan transisi yang lebih sederhana</string>
     <string name="settings_language">Bahasa</string>
     <string name="settings_language_description">Pilih bahasa aplikasi</string>
     <string name="settings_language_system">Default sistem</string>
+    <string name="settings_privacy">Privasi</string>
+    <string name="settings_privacy_text">Progresmu tetap di ponsel ini. Iklan disediakan oleh Google.</string>
+    <string name="settings_ad_choices">Pilihan iklan</string>
+    <string name="settings_privacy_policy">Kebijakan privasi</string>
+    <string name="settings_about">Tentang EdBetter</string>
+    <string name="settings_about_text">Kami membuat aplikasi sains seru yang mengubah rasa ingin tahu menjadi pemahaman.</string>
+    <string name="settings_more">Lainnya dari EdBetter</string>
+    <string name="settings_kemistri_description">Kuasai tabel periodik lewat level, reaksi, dan molekul.</string>
+    <string name="settings_open_kemistri">Buka Kemistri di Google Play</string>
+    <string name="settings_version">Versi %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">Opsi privasi iklan tidak diperlukan di perangkat ini</string>
 </resources>
-

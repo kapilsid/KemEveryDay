@@ -41,12 +41,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    lint {
-        // UI strings are English-only until the values-xx/strings.xml translations are added;
-        // keep missing translations visible as warnings instead of failing the build.
-        warning += "MissingTranslation"
-    }
-
     buildFeatures {
         compose = true
         buildConfig = true

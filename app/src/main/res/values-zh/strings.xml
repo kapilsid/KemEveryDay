@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Simplified Chinese translations. Review with native speaker. -->
+<!-- Simplified Chinese translations. Review with native speaker. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
@@ -12,40 +12,378 @@
     <string name="common_refresh">刷新</string>
     <string name="common_got_it">知道了</string>
     <string name="common_home">首页</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d 分</item>
+        <item quantity="other">+%1$d 分</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">每天一个新的化学奇迹</string>
-    <string name="home_daily_title">每日分子面板</string>
+    <string name="home_logo_description">Kemistri Everyday 标志</string>
+    <string name="home_tagline">每天一个化学新奇迹</string>
+    <string name="home_open_champions">打开每日冠军</string>
+    <string name="home_playing_as">当前玩家：%1$s</string>
+    <string name="home_daily_title">每日分子棋盘</string>
+    <string name="home_daily_subtitle">每天一道大家共享的化学谜题</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">连续 %1$d 天 · 每天一道共享谜题</item>
+        <item quantity="other">连续 %1$d 天 · 每天一道共享谜题</item>
+    </plurals>
+    <string name="home_science_title">科学揭秘</string>
+    <string name="home_science_subtitle">每天三个新的科学谜题</string>
     <string name="home_everyday_title">日常化学</string>
+    <string name="home_everyday_subtitle">猜猜生活中藏着什么化学</string>
     <string name="home_element_title">每日元素</string>
-    <string name="home_nav_streak">连胜</string>
+    <string name="home_element_subtitle">每天认识一个新元素</string>
+    <string name="home_nav_streak">连续打卡</string>
     <string name="home_nav_leaders">排行榜</string>
     <string name="home_nav_settings">设置</string>
 
-    <!-- Molecule Hunt -->
-    <string name="hunt_title_standard">分子狩猎</string>
+    <!-- Molecule Hunt / Daily Molecule Board -->
+    <string name="hunt_title_standard">分子寻宝</string>
+    <string name="hunt_daily_history">每日记录</string>
+    <string name="hunt_session_discoveries">本局发现</string>
+    <string name="hunt_game_rules">游戏规则</string>
+    <string name="hunt_shared_puzzle">共享谜题 · %1$s</string>
+    <string name="hunt_mission_goal">找到 10 种不同的物质</string>
+    <string name="hunt_hint">提示</string>
+    <string name="hunt_shuffle">打乱</string>
+    <string name="hunt_clear">清除</string>
+    <string name="hunt_discover">发现</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s 已找到过 · +%2$d 分</item>
+        <item quantity="other">%1$s 已找到过 · +%2$d 分</item>
+    </plurals>
+    <string name="hunt_stat_moves">步数</string>
+    <string name="hunt_stat_score">得分</string>
+    <string name="hunt_stat_found">已找到</string>
+    <string name="hunt_tile_description">%1$s，第 %2$d 行，第 %3$d 列</string>
+    <string name="hunt_tile_selected">，第 %1$d 个选中</string>
+    <string name="hunt_tile_hinted">，提示中</string>
+    <string name="hunt_select_neighbours">选择相邻的原子</string>
+    <string name="hunt_ready_to_review">可以查看了</string>
+    <string name="hunt_mission_complete_title">任务完成！</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">你找到了 %1$s，%2$s。得分：%3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d 种物质</item>
+        <item quantity="other">%1$d 种物质</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">还剩 %1$d 步</item>
+        <item quantity="other">还剩 %1$d 步</item>
+    </plurals>
+    <string name="hunt_keep_discovering">继续发现</string>
+    <string name="hunt_finish">完成</string>
+    <string name="hunt_discovery_great">重大发现！</string>
+    <string name="hunt_discovery_again">再次发现！</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d 个原子</item>
+        <item quantity="other">%1$d 个原子</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d 种元素</item>
+        <item quantity="other">%1$d 种元素</item>
+    </plurals>
+    <string name="hunt_score_rarity">稀有度 +%1$d</string>
+    <string name="hunt_score_streak">连击 +%1$d</string>
+    <string name="hunt_rules_title">分子寻宝 — 规则</string>
+    <string name="hunt_rules_subtitle">在 5 × 5 棋盘上组成真实的化学组成</string>
+    <string name="hunt_rule_1">横向、纵向或斜向连接相邻的原子。</string>
+    <string name="hunt_rule_2">大多数发现使用 2–6 个原子；高级化学式可能用到 7 个。</string>
+    <string name="hunt_rule_3">点击“发现”检查组成。选择顺序不会改变化学式。</string>
+    <string name="hunt_rule_4">识别出的物质会得分、消耗一步，并移除所选方块。</string>
+    <string name="hunt_rule_5">原子会向下掉落，新的平衡补充原子从上方进入。</string>
+    <string name="hunt_rule_6">找到 10 种不同的物质即可完成任务。</string>
+    <string name="hunt_rule_7" formatted="false">可以重复发现，消耗一步并得 25% 分数，但不会增加不同物质的数量。</string>
+    <string name="hunt_rule_8">暂未识别的组合不消耗步数，会保存到发现审查中。</string>
+    <string name="hunt_rule_9">目前提示和打乱不消耗步数。</string>
+    <string name="hunt_rule_10">完成任务后，可以用剩余步数继续发现。</string>
+    <string name="hunt_scoring">计分</string>
+    <string name="hunt_scoring_formula">得分 = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = 原子数 · E = 不同元素数 · R = 稀有度 (0–40) · S = 新发现连击 (0–15)</string>
+    <string name="hunt_formula_note">化学式描述的是组成，不一定对应唯一的结构。例如，C₂H₆O 可以表示不止一种物质。</string>
+    <string name="hunt_discoveries_title">本次寻宝的发现</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">任务 %1$d</item>
+        <item quantity="other">任务 %1$d</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">额外 %1$d</item>
+        <item quantity="other">额外 %1$d</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">共发现 %1$d 个</item>
+        <item quantity="other">共发现 %1$d 个</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">还没有发现 — 连接一些原子，看看能组成什么吧！</string>
+    <string name="hunt_mission_discoveries">任务发现</string>
+    <string name="hunt_extra_discoveries">额外发现</string>
+    <string name="hunt_back_to_hunt">返回寻宝</string>
+    <string name="hunt_result_brilliant">化学天才！</string>
+    <string name="hunt_result_complete">寻宝完成</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">得分 %1$d · %2$d 种不同物质</item>
+        <item quantity="other">得分 %1$d · %2$d 种不同物质</item>
+    </plurals>
+    <string name="hunt_play_again">再玩一次</string>
+    <!-- Game engine messages -->
+    <string name="hunt_msg_choose_neighbour">请选择相邻的方块</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">一次发现最多使用 %1$d 个原子</item>
+        <item quantity="other">一次发现最多使用 %1$d 个原子</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">棋盘已刷新 — 试试新布局吧</string>
+    <string name="hunt_msg_hint_glowing">一个可能的发现正在发光</string>
+    <string name="hunt_msg_board_shuffled">棋盘已打乱</string>
+    <string name="hunt_msg_no_moves">没有剩余步数了</string>
+    <string name="hunt_msg_too_short">至少连接两个原子</string>
+    <string name="hunt_msg_not_recognised">%1$s 暂未识别 — 已保存待审查</string>
+    <string name="hunt_msg_new_discovery">新发现！</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">重复发现 · 25% 分数</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"本轮得分 %1$d"</string>
+    <string name="science_run_score">"本轮得分  %1$d"</string>
+    <string name="science_run_status">今日挑战 · 谜题 %1$d / %2$d · 最佳 %3$d</string>
+    <string name="science_possible_points">可得分数</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d 个字母</item>
+        <item quantity="other">%1$d 个字母</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d 个单词</item>
+        <item quantity="other">%1$d 个单词</item>
+    </plurals>
+    <string name="science_clue_number">线索 %1$d</string>
+    <string name="science_letter_wrong">答案中没有 %1$s — 失去一条命</string>
+    <string name="science_keyboard_hint">点击字母，显示所有匹配的位置</string>
+    <string name="science_next_clue">下一条线索 (−15)</string>
+    <string name="science_all_clues">线索已全部显示</string>
+    <string name="science_skip">跳过 (−1 条命)</string>
+    <plurals name="science_solved">
+        <item quantity="one">答对了 — +%1$d 分！</item>
+        <item quantity="other">答对了 — +%1$d 分！</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">本轮结束 — %1$d 分</item>
+        <item quantity="other">本轮结束 — %1$d 分</item>
+    </plurals>
+    <string name="science_revealed">谜底已揭晓 — 失去一条命</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">完美解答：已含 +%1$d 奖励分。</item>
+        <item quantity="other">完美解答：已含 +%1$d 奖励分。</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">生命奖励：剩余 %2$d 条命，+%1$d。</item>
+        <item quantity="other">生命奖励：剩余 %2$d 条命，+%1$d。</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">猜错 %1$d 个字母后解开。</item>
+        <item quantity="other">猜错 %1$d 个字母后解开。</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">本轮解开 %1$d 个谜题</item>
+        <item quantity="other">本轮解开 %1$d 个谜题</item>
+    </plurals>
+    <string name="science_back_home">返回首页</string>
+    <string name="science_see_score">查看今日得分</string>
+    <string name="science_next_mystery">下一个谜题</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">继续 — 剩余 %1$d 条命</item>
+        <item quantity="other">继续 — 剩余 %1$d 条命</item>
+    </plurals>
+    <string name="science_done_today">今天的三个谜题已完成。新谜题将在 00:00 UTC 解锁。</string>
+    <!-- Mystery categories -->
+    <string name="science_category_scientist">科学家</string>
+    <string name="science_category_element">元素</string>
+    <string name="science_category_place">科学地点</string>
+    <string name="science_category_discovery">发现</string>
+    <string name="science_category_instrument">仪器</string>
+    <string name="science_prompt_scientist">我是谁？</string>
+    <string name="science_prompt_element">我是什么？</string>
+    <string name="science_prompt_place">我在哪里？</string>
+    <string name="science_prompt_discovery">发现了什么？</string>
+    <string name="science_prompt_instrument">这是什么？</string>
 
     <!-- Everyday Chemistry -->
     <string name="everyday_the_answer">答案</string>
+    <string name="everyday_the_question">问题</string>
+    <string name="everyday_card_number">卡片 %1$s</string>
+    <string name="everyday_quick_guess">快速猜一猜</string>
+    <string name="everyday_show_me">看答案</string>
+    <string name="everyday_spot_on">完全正确 — 选得好。</string>
+    <string name="everyday_not_quite">不太对 — 来看看是怎么回事。</string>
+    <string name="everyday_chemistry_underneath">背后的化学</string>
+    <string name="everyday_try_it">试一试：%1$s</string>
+    <string name="everyday_safety">安全提示：%1$s</string>
+    <string name="everyday_ask_again">再问一次</string>
+    <string name="everyday_got_it">明白了</string>
 
     <!-- Element a Day -->
     <string name="element_todays">今日元素</string>
+    <string name="element_correct">答对了！%1$s 已加入你的收藏，并计入今天的连续打卡。</string>
+    <string name="element_wrong">不太对，答案是 %1$s。它仍然会加入你的收藏。</string>
+    <string name="element_made_in_lab">人工合成</string>
+    <string name="element_period">第 %1$d 周期</string>
+    <string name="element_group">第 %1$d 族</string>
+    <string name="element_f_block">f 区</string>
+    <string name="element_remember_it">记住它</string>
+    <string name="element_how_found">发现经过</string>
+    <string name="element_where_meet">在哪里见到它</string>
+    <string name="element_collection">你的收藏</string>
+    <string name="element_collection_count">%1$d / %2$d</string>
+    <string name="element_collection_hint">每认识一个元素，就会点亮它的方格。今天的元素会高亮显示。</string>
+    <string name="element_new_daily">每天 UTC 午夜出现一个新元素。</string>
+    <string name="element_which_am_i">我是哪个元素？</string>
+    <string name="element_first_guess_counts">第一次猜测才算数。猜对了，今天就计入连续打卡。</string>
+    <string name="element_tile_description">%1$s，元素符号 %2$s，原子序数 %3$d，原子量 %4$s，电子排布 %5$s</string>
+    <string name="element_outer_electrons">外层电子：%1$s 轨道</string>
+    <string name="element_picture_description">你可能在哪里见到 %1$s</string>
+    <string name="element_melts">熔点</string>
+    <string name="element_boils">沸点</string>
+    <string name="element_density">密度</string>
+    <string name="element_discovered">发现于</string>
+    <string name="element_not_measured">未测定</string>
+    <string name="element_in_things_you_know">身边的物品中</string>
+    <string name="element_on_the_board">在棋盘上</string>
+    <string name="element_cloud_description">电子云模型。各电子层容纳 %1$s 个电子；外层电子填充 %2$s 轨道。</string>
+    <string name="element_collected">，已收集</string>
+    <!-- Element families -->
+    <string name="element_family_alkali_metals">碱金属</string>
+    <string name="element_family_alkaline_earth_metals">碱土金属</string>
+    <string name="element_family_transition_metals">过渡金属</string>
+    <string name="element_family_post_transition_metals">后过渡金属</string>
+    <string name="element_family_metalloids">类金属</string>
+    <string name="element_family_reactive_nonmetals">活泼非金属</string>
+    <string name="element_family_halogens">卤素</string>
+    <string name="element_family_noble_gases">稀有气体</string>
+    <string name="element_family_lanthanides">镧系元素</string>
+    <string name="element_family_actinides">锕系元素</string>
+    <!-- States of matter -->
+    <string name="element_state_solid">固态</string>
+    <string name="element_state_liquid">液态</string>
+    <string name="element_state_gas">气态</string>
+    <string name="element_state_unknown">状态未知</string>
 
     <!-- Daily Champions -->
     <string name="champions_title">每日冠军</string>
+    <string name="champions_intro">完成今天的分子棋盘和科学揭秘挑战。两项得分相加，每个 UTC 日你第一次完成的总分会进入全球排名。</string>
+    <string name="champions_default_player">科学玩家</string>
+    <string name="champions_edit_nickname">修改昵称</string>
+    <string name="champions_retry">重新连接 Firebase</string>
+    <string name="champions_todays_total">今日总分</string>
+    <string name="champions_today_so_far">今日目前</string>
+    <string name="champions_today_breakdown">分子棋盘 %1$s · 科学 %2$s</string>
+    <string name="champions_not_finished">未完成</string>
+    <string name="champions_in_progress">进行中</string>
+    <string name="champions_worldwide">全球排名</string>
+    <string name="champions_today_utc">今天 · UTC</string>
+    <string name="champions_offline">离线</string>
+    <string name="champions_no_scores_today">今天还没有人提交全球得分。</string>
+    <string name="champions_scores_need_firebase">连接 Firebase 后，全球得分会显示在这里。</string>
+    <string name="champions_you">%1$s · 你</string>
+    <string name="champions_entry_scores">棋盘 %1$d · 科学 %2$d</string>
+    <string name="champions_local_scores">你在本设备上的得分</string>
+    <string name="champions_local">本地</string>
+    <string name="champions_no_runs">还没有完成的挑战</string>
+    <string name="champions_finish_to_place">完成今天的科学揭秘挑战，记录你的第一个得分。</string>
+    <string name="champions_today">今天</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">解开 %1$d 个谜题</item>
+        <item quantity="other">解开 %1$d 个谜题</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase 已连接</string>
+    <string name="champions_playing_offline">离线游戏中</string>
+    <string name="champions_online_note">匿名玩家身份让应用更简单：没有 Google 登录页面，也不会显示邮箱。完成的每日挑战只会提交一次。</string>
+    <string name="champions_offline_note">你的挑战和得分会保留在本设备上。启用匿名身份验证、Firestore 和计分函数后，点击“重试”即可连接。</string>
+    <string name="champions_choose_name">选择你的玩家名</string>
+    <string name="champions_nickname_note">这个公开昵称会显示在每日冠军中。请不要使用真实姓名。</string>
+    <string name="champions_nickname_label">昵称</string>
+    <string name="champions_nickname_support">3–16 个字母、数字或空格</string>
+    <!-- Daily Champions status messages -->
+    <string name="champions_status_connecting">正在连接每日冠军…</string>
+    <string name="champions_status_nickname_requirement">请使用 3–16 个字母、数字或空格</string>
+    <string name="champions_status_saving">正在保存昵称…</string>
+    <string name="champions_status_saved">昵称已保存</string>
+    <string name="champions_status_save_failed">无法保存昵称。请检查网络连接和 Firebase 设置。</string>
+    <string name="champions_status_connected">已连接全球排行榜</string>
+    <string name="champions_status_offline_setup">本地得分很安全。启用匿名身份验证和 Firestore 即可连接全球排名。</string>
+    <string name="champions_status_rankings_unavailable">已连接，但排名暂时不可用。</string>
+    <string name="champions_status_submitting">正在提交今天的每日冠军得分…</string>
+    <string name="champions_status_submitted_rank">得分已提交 · 第 %1$d 名</string>
+    <string name="champions_status_submitted">今日得分已提交</string>
+    <string name="champions_status_already_submitted">今日得分已经提交过了</string>
+    <string name="champions_status_offline_retry">离线 — 稍后点击刷新提交已保存的得分</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">连续打卡</string>
+    <string name="streak_none">还没有连续打卡</string>
+    <plurals name="streak_days">
+        <item quantity="one">连续 %1$d 天</item>
+        <item quantity="other">连续 %1$d 天</item>
+    </plurals>
+    <string name="streak_played_today">今天已打卡，明天再来吧。</string>
+    <string name="streak_keep_going">玩任意每日游戏，保持连续打卡。</string>
+    <string name="streak_start">玩任意每日游戏，开始连续打卡。</string>
+    <string name="streak_best">最长连续</string>
+    <string name="streak_days_played">游戏天数</string>
+    <string name="streak_best_score">最高分</string>
+    <string name="streak_play_today">玩今天的棋盘</string>
+    <string name="streak_recent">最近的棋盘</string>
+    <string name="streak_recent_empty">还没玩过每日棋盘。完成分子棋盘或科学揭秘，当天就算打卡。</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d 种不同物质</item>
+        <item quantity="other">%1$d 种不同物质</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d 种不同物质 · 任务完成</item>
+        <item quantity="other">%1$d 种不同物质 · 任务完成</item>
+    </plurals>
+    <string name="streak_footer">每天的棋盘在 UTC 午夜更换。记录只保存在本设备上。</string>
+    <string name="streak_previous_month">上个月</string>
+    <string name="streak_next_month">下个月</string>
+    <string name="streak_day_not_played">，未游戏</string>
+    <string name="streak_day_board_score">，分子棋盘得分 %1$d</string>
+    <string name="streak_day_science">，已完成科学揭秘</string>
+    <string name="streak_day_element">，已猜元素</string>
+    <string name="streak_day_today">，今天</string>
+    <string name="streak_legend_board">棋盘</string>
+    <string name="streak_legend_science">科学</string>
+    <string name="streak_legend_element">元素</string>
+    <string name="streak_legend_both">两项游戏</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">发现审查</string>
+    <string name="review_intro">未识别的组合不会被标记为不可能。它们会保存在本设备上，供以后查看。</string>
+    <string name="review_empty">没有待审查的内容</string>
+    <plurals name="review_tried">
+        <item quantity="one">暂未识别 · 尝试了 %1$d 次</item>
+        <item quantity="other">暂未识别 · 尝试了 %1$d 次</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">设置</string>
     <string name="settings_sound">声音</string>
+    <string name="settings_sound_description">发现和方块音效</string>
     <string name="settings_vibration">振动</string>
+    <string name="settings_vibration_description">轻柔的触感反馈</string>
     <string name="settings_reduced_motion">减少动画</string>
-    <string name="settings_privacy">隐私</string>
-    <string name="settings_about">关于 EdBetter</string>
+    <string name="settings_reduced_motion_description">使用更简单的过渡效果</string>
     <string name="settings_language">语言</string>
     <string name="settings_language_description">选择应用语言</string>
     <string name="settings_language_system">系统默认</string>
+    <string name="settings_privacy">隐私</string>
+    <string name="settings_privacy_text">你的进度保存在这部手机上。广告由 Google 提供。</string>
+    <string name="settings_ad_choices">广告选择</string>
+    <string name="settings_privacy_policy">隐私政策</string>
+    <string name="settings_about">关于 EdBetter</string>
+    <string name="settings_about_text">我们制作有趣的科学应用，把好奇心变成理解。</string>
+    <string name="settings_more">更多 EdBetter 应用</string>
+    <string name="settings_kemistri_description">通过关卡、反应和分子掌握元素周期表。</string>
+    <string name="settings_open_kemistri">在 Google Play 打开 Kemistri</string>
+    <string name="settings_version">版本 %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">本设备无需广告隐私选项</string>
 </resources>
-

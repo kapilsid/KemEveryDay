@@ -301,11 +301,11 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
 @Composable
 private fun FeatureCard(title: String, subtitle: String, icon: ImageVector, color: Color, action: () -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth().height(92.dp).clickable(onClick = action),
+        modifier = Modifier.fillMaxWidth().heightIn(min = 92.dp).clickable(onClick = action),
         colors = CardDefaults.cardColors(containerColor = color.copy(alpha = .13f)),
         shape = RoundedCornerShape(20.dp),
     ) {
-        Row(Modifier.fillMaxSize().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().heightIn(min = 92.dp).padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(54.dp).background(color, CircleShape), contentAlignment = Alignment.Center) {
                 Icon(icon, null, tint = Color.White, modifier = Modifier.size(31.dp))
             }

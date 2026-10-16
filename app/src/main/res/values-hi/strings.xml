@@ -1,51 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Hindi translations. Review with native speaker. -->
+<!-- Hindi translations. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
     <!-- Common -->
     <string name="common_back">वापस</string>
-    <string name="common_continue">जारी रखें</string>
+    <string name="common_continue">आगे बढ़ें</string>
     <string name="common_cancel">रद्द करें</string>
-    <string name="common_save">सहेजें</string>
+    <string name="common_save">सेव करें</string>
     <string name="common_delete">हटाएँ</string>
-    <string name="common_refresh">रिफ्रेश</string>
+    <string name="common_refresh">रीफ़्रेश</string>
     <string name="common_got_it">समझ गया</string>
-    <string name="common_home">मुखपृष्ठ</string>
+    <string name="common_home">होम</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d पॉइंट</item>
+        <item quantity="other">+%1$d पॉइंट</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">हर दिन एक नया रसायन विज्ञान आश्चर्य</string>
-    <string name="home_daily_title">दैनिक अणु बोर्ड</string>
-    <string name="home_everyday_title">रोज़मर्रा की रसायन</string>
-    <string name="home_element_title">दिन का तत्व</string>
+    <string name="home_logo_description">Kemistri Everyday लोगो</string>
+    <string name="home_tagline">हर दिन रसायन का एक नया अजूबा</string>
+    <string name="home_open_champions">डेली चैंपियंस खोलें</string>
+    <string name="home_playing_as">%1$s के रूप में खेल रहे हैं</string>
+    <string name="home_daily_title">डेली मॉलिक्यूल बोर्ड</string>
+    <string name="home_daily_subtitle">हर दिन सबके लिए एक रसायन पहेली</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">%1$d दिन की स्ट्रीक · हर दिन सबके लिए एक पहेली</item>
+        <item quantity="other">%1$d दिन की स्ट्रीक · हर दिन सबके लिए एक पहेली</item>
+    </plurals>
+    <string name="home_science_title">विज्ञान के राज़</string>
+    <string name="home_science_subtitle">हर दिन विज्ञान की तीन नई पहेलियाँ</string>
+    <string name="home_everyday_title">रोज़ की केमिस्ट्री</string>
+    <string name="home_everyday_subtitle">रोज़मर्रा की ज़िंदगी में छुपा रसायन पहचानें</string>
+    <string name="home_element_title">आज का तत्व</string>
+    <string name="home_element_subtitle">हर दिन एक नए तत्व से मिलें</string>
     <string name="home_nav_streak">स्ट्रीक</string>
-    <string name="home_nav_leaders">रैंकिंग</string>
+    <string name="home_nav_leaders">लीडर्स</string>
     <string name="home_nav_settings">सेटिंग्स</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">मॉलिक्यूल हंट</string>
+    <string name="hunt_daily_history">रोज़ का इतिहास</string>
+    <string name="hunt_session_discoveries">इस सेशन की खोजें</string>
+    <string name="hunt_game_rules">खेल के नियम</string>
+    <string name="hunt_shared_puzzle">साझा पहेली · %1$s</string>
+    <string name="hunt_mission_goal">10 अलग-अलग पदार्थ खोजें</string>
+    <string name="hunt_hint">संकेत</string>
+    <string name="hunt_shuffle">फेंटें</string>
+    <string name="hunt_clear">साफ़ करें</string>
+    <string name="hunt_discover">खोजें</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s पहले ही मिल चुका · +%2$d पॉइंट</item>
+        <item quantity="other">%1$s पहले ही मिल चुका · +%2$d पॉइंट</item>
+    </plurals>
+    <string name="hunt_stat_moves">चालें</string>
+    <string name="hunt_stat_score">स्कोर</string>
+    <string name="hunt_stat_found">मिले</string>
+    <string name="hunt_tile_description">%1$s, पंक्ति %2$d, कॉलम %3$d</string>
+    <string name="hunt_tile_selected">, चुना गया नंबर %1$d</string>
+    <string name="hunt_tile_hinted">, संकेत दिया गया</string>
+    <string name="hunt_select_neighbours">पास-पास के परमाणु चुनें</string>
+    <string name="hunt_ready_to_review">जाँच के लिए तैयार</string>
+    <string name="hunt_mission_complete_title">मिशन पूरा!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">आपने %1$s खोजे, %2$s बाकी। स्कोर: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d पदार्थ</item>
+        <item quantity="other">%1$d पदार्थ</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">%1$d चाल</item>
+        <item quantity="other">%1$d चालें</item>
+    </plurals>
+    <string name="hunt_keep_discovering">खोज जारी रखें</string>
+    <string name="hunt_finish">खत्म करें</string>
+    <string name="hunt_discovery_great">शानदार खोज!</string>
+    <string name="hunt_discovery_again">फिर से खोजा!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d परमाणु</item>
+        <item quantity="other">%1$d परमाणु</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d तत्व</item>
+        <item quantity="other">%1$d तत्व</item>
+    </plurals>
+    <string name="hunt_score_rarity">दुर्लभता +%1$d</string>
+    <string name="hunt_score_streak">स्ट्रीक +%1$d</string>
+    <string name="hunt_rules_title">मॉलिक्यूल हंट — नियम</string>
+    <string name="hunt_rules_subtitle">5 × 5 बोर्ड पर असली रासायनिक यौगिक बनाएँ</string>
+    <string name="hunt_rule_1">पास वाले परमाणुओं को आड़ा, खड़ा या तिरछा जोड़ें।</string>
+    <string name="hunt_rule_2">ज़्यादातर खोजों में 2–6 परमाणु लगते हैं; कठिन सूत्रों में 7 भी हो सकते हैं।</string>
+    <string name="hunt_rule_3">संरचना जाँचने के लिए खोजें दबाएँ। चुनने का क्रम सूत्र नहीं बदलता।</string>
+    <string name="hunt_rule_4">पहचाना गया पदार्थ पॉइंट देता है, एक चाल लेता है और चुनी गई टाइलें हटा देता है।</string>
+    <string name="hunt_rule_5">परमाणु नीचे गिरते हैं और ऊपर से संतुलित नए परमाणु आते हैं।</string>
+    <string name="hunt_rule_6">मिशन पूरा करने के लिए 10 अलग-अलग पदार्थ खोजें।</string>
+    <string name="hunt_rule_7" formatted="false">दोहराना मना नहीं है: इसमें एक चाल लगती है और 25% स्कोर मिलता है, पर यूनिक गिनती नहीं बढ़ती।</string>
+    <string name="hunt_rule_8">जो जोड़ अभी पहचाने नहीं गए, उनमें चाल नहीं लगती और वे खोज समीक्षा के लिए सेव हो जाते हैं।</string>
+    <string name="hunt_rule_9">अभी संकेत और फेंटने में कोई चाल नहीं लगती।</string>
+    <string name="hunt_rule_10">मिशन पूरा होने के बाद बची चालों से खोज जारी रखें।</string>
+    <string name="hunt_scoring">स्कोरिंग</string>
+    <string name="hunt_scoring_formula">स्कोर = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = परमाणु · E = अलग-अलग तत्व · R = दुर्लभता (0–40) · S = नई खोजों की स्ट्रीक (0–15)</string>
+    <string name="hunt_formula_note">सूत्र संरचना नहीं, बल्कि संघटन बताता है। जैसे, C₂H₆O एक से ज़्यादा पदार्थ हो सकता है।</string>
+    <string name="hunt_discoveries_title">इस हंट की खोजें</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">%1$d मिशन</item>
+        <item quantity="other">%1$d मिशन</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">%1$d अतिरिक्त</item>
+        <item quantity="other">%1$d अतिरिक्त</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">कुल %1$d खोज</item>
+        <item quantity="other">कुल %1$d खोजें</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">अभी कोई खोज नहीं — कुछ परमाणु जोड़ें और देखें क्या बनता है!</string>
+    <string name="hunt_mission_discoveries">मिशन की खोजें</string>
+    <string name="hunt_extra_discoveries">अतिरिक्त खोजें</string>
+    <string name="hunt_back_to_hunt">हंट पर वापस</string>
+    <string name="hunt_result_brilliant">कमाल की केमिस्ट्री!</string>
+    <string name="hunt_result_complete">हंट पूरा</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">स्कोर %1$d · %2$d यूनिक पदार्थ</item>
+        <item quantity="other">स्कोर %1$d · %2$d यूनिक पदार्थ</item>
+    </plurals>
+    <string name="hunt_play_again">फिर खेलें</string>
+    <!-- Game engine messages, translated at display time (GameEngine stays English and Context-free) -->
+    <string name="hunt_msg_choose_neighbour">पास वाली टाइल चुनें</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">एक खोज में अधिकतम %1$d परमाणु हो सकता है</item>
+        <item quantity="other">एक खोज में अधिकतम %1$d परमाणु हो सकते हैं</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">बोर्ड रीफ़्रेश हुआ — यह नया लेआउट आज़माएँ</string>
+    <string name="hunt_msg_hint_glowing">एक संभावित खोज चमक रही है</string>
+    <string name="hunt_msg_board_shuffled">बोर्ड फेंटा गया</string>
+    <string name="hunt_msg_no_moves">कोई चाल बाकी नहीं</string>
+    <string name="hunt_msg_too_short">कम से कम दो परमाणु जोड़ें</string>
+    <string name="hunt_msg_not_recognised">%1$s अभी पहचाना नहीं गया — समीक्षा के लिए सेव किया</string>
+    <string name="hunt_msg_new_discovery">नई खोज!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">दोबारा खोज · 25% स्कोर</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"रन स्कोर %1$d"</string>
+    <string name="science_run_score">"रन स्कोर  %1$d"</string>
+    <string name="science_run_status">आज का रन · पहेली %1$d / %2$d · बेस्ट %3$d</string>
+    <string name="science_possible_points">संभावित पॉइंट</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d अक्षर</item>
+        <item quantity="other">%1$d अक्षर</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d शब्द</item>
+        <item quantity="other">%1$d शब्द</item>
+    </plurals>
+    <string name="science_clue_number">संकेत %1$d</string>
+    <string name="science_letter_wrong">%1$s उत्तर में नहीं है — एक जान गई</string>
+    <string name="science_keyboard_hint">अक्षर दबाएँ और उसकी हर जगह देखें</string>
+    <string name="science_next_clue">अगला संकेत (−15)</string>
+    <string name="science_all_clues">सारे संकेत दिख गए</string>
+    <string name="science_skip">छोड़ें (−1 जान)</string>
+    <plurals name="science_solved">
+        <item quantity="one">हल हो गया — +%1$d पॉइंट!</item>
+        <item quantity="other">हल हो गया — +%1$d पॉइंट!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">रन खत्म — %1$d पॉइंट</item>
+        <item quantity="other">रन खत्म — %1$d पॉइंट</item>
+    </plurals>
+    <string name="science_revealed">पहेली का जवाब खुला — एक जान गई</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">परफ़ेक्ट हल: +%1$d बोनस शामिल।</item>
+        <item quantity="other">परफ़ेक्ट हल: +%1$d बोनस शामिल।</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">जान बोनस: %2$d जान बची होने पर +%1$d।</item>
+        <item quantity="other">जान बोनस: %2$d जानें बची होने पर +%1$d।</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">%1$d गलत अक्षर के बाद हल किया।</item>
+        <item quantity="other">%1$d गलत अक्षरों के बाद हल किया।</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">इस रन में %1$d पहेली हल हुई</item>
+        <item quantity="other">इस रन में %1$d पहेलियाँ हल हुईं</item>
+    </plurals>
+    <string name="science_back_home">होम पर वापस</string>
+    <string name="science_see_score">आज का स्कोर देखें</string>
+    <string name="science_next_mystery">अगली पहेली</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">जारी रखें — %1$d जान बाकी</item>
+        <item quantity="other">जारी रखें — %1$d जानें बाकी</item>
+    </plurals>
+    <string name="science_done_today">आज की तीनों पहेलियाँ पूरी। नई पहेलियाँ 00:00 UTC पर खुलेंगी।</string>
+    <!-- Mystery categories (MysteryCategory label and prompt) -->
+    <string name="science_category_scientist">वैज्ञानिक</string>
+    <string name="science_category_element">तत्व</string>
+    <string name="science_category_place">वैज्ञानिक जगह</string>
+    <string name="science_category_discovery">खोज</string>
+    <string name="science_category_instrument">उपकरण</string>
+    <string name="science_prompt_scientist">मैं कौन हूँ?</string>
+    <string name="science_prompt_element">मैं क्या हूँ?</string>
+    <string name="science_prompt_place">मैं कहाँ हूँ?</string>
+    <string name="science_prompt_discovery">क्या खोजा गया?</string>
+    <string name="science_prompt_instrument">यह क्या है?</string>
 
     <!-- Everyday Chemistry -->
-    <string name="everyday_the_answer">उत्तर</string>
+    <string name="everyday_the_answer">जवाब</string>
+    <string name="everyday_the_question">सवाल</string>
+    <string name="everyday_card_number">कार्ड %1$s</string>
+    <string name="everyday_quick_guess">जल्दी से अंदाज़ा लगाएँ</string>
+    <string name="everyday_show_me">दिखाओ</string>
+    <string name="everyday_spot_on">बिल्कुल सही — बढ़िया चुनाव।</string>
+    <string name="everyday_not_quite">पूरी तरह नहीं — असल में यह हो रहा है।</string>
+    <string name="everyday_chemistry_underneath">अंदर की केमिस्ट्री</string>
+    <string name="everyday_try_it">आज़माएँ: %1$s</string>
+    <string name="everyday_safety">सुरक्षा: %1$s</string>
+    <string name="everyday_ask_again">फिर पूछें</string>
+    <string name="everyday_got_it">समझ गया</string>
 
     <!-- Element a Day -->
     <string name="element_todays">आज का तत्व</string>
+    <string name="element_correct">सही! %1$s आपके कलेक्शन में जुड़ गया और आज की स्ट्रीक में गिना गया।</string>
+    <string name="element_wrong">पूरी तरह नहीं, यह %1$s था। फिर भी यह आपके कलेक्शन में जुड़ गया।</string>
+    <string name="element_made_in_lab">लैब में बनाया गया</string>
+    <string name="element_period">आवर्त %1$d</string>
+    <string name="element_group">समूह %1$d</string>
+    <string name="element_f_block">f-ब्लॉक</string>
+    <string name="element_remember_it">याद रखें</string>
+    <string name="element_how_found">इसकी खोज कैसे हुई</string>
+    <string name="element_where_meet">यह आपको कहाँ मिलता है</string>
+    <string name="element_collection">आपका कलेक्शन</string>
+    <string name="element_collection_count">%2$d में से %1$d</string>
+    <string name="element_collection_hint">आप जिस तत्व से मिलते हैं, उसका खाना भर जाता है। आज वाला हाइलाइट है।</string>
+    <string name="element_new_daily">हर दिन आधी रात UTC पर एक नया तत्व आता है।</string>
+    <string name="element_which_am_i">मैं कौन-सा तत्व हूँ?</string>
+    <string name="element_first_guess_counts">पहला अंदाज़ा ही गिना जाता है। सही बताएँ और आज को स्ट्रीक में जोड़ें।</string>
+    <string name="element_tile_description">%1$s, प्रतीक %2$s, परमाणु क्रमांक %3$d, परमाणु भार %4$s, इलेक्ट्रॉन विन्यास %5$s</string>
+    <string name="element_outer_electrons">बाहरी इलेक्ट्रॉन: %1$s ऑर्बिटल</string>
+    <string name="element_picture_description">%1$s आपको कहाँ मिल सकता है</string>
+    <string name="element_melts">गलनांक</string>
+    <string name="element_boils">क्वथनांक</string>
+    <string name="element_density">घनत्व</string>
+    <string name="element_discovered">खोज</string>
+    <string name="element_not_measured">मापा नहीं गया</string>
+    <string name="element_in_things_you_know">जानी-पहचानी चीज़ों में</string>
+    <string name="element_on_the_board">बोर्ड पर</string>
+    <string name="element_cloud_description">इलेक्ट्रॉन क्लाउड मॉडल। कोशों में %1$s इलेक्ट्रॉन हैं; बाहरी इलेक्ट्रॉन %2$s ऑर्बिटल भरते हैं।</string>
+    <string name="element_collected">, इकट्ठा किया</string>
+    <!-- Element families (DailyElement.family) -->
+    <string name="element_family_alkali_metals">क्षार धातुएँ</string>
+    <string name="element_family_alkaline_earth_metals">क्षारीय मृदा धातुएँ</string>
+    <string name="element_family_transition_metals">संक्रमण धातुएँ</string>
+    <string name="element_family_post_transition_metals">उत्तर-संक्रमण धातुएँ</string>
+    <string name="element_family_metalloids">उपधातुएँ</string>
+    <string name="element_family_reactive_nonmetals">क्रियाशील अधातुएँ</string>
+    <string name="element_family_halogens">हैलोजन</string>
+    <string name="element_family_noble_gases">उत्कृष्ट गैसें</string>
+    <string name="element_family_lanthanides">लैंथेनाइड</string>
+    <string name="element_family_actinides">ऐक्टिनाइड</string>
+    <!-- States of matter (DailyElement.state) -->
+    <string name="element_state_solid">ठोस</string>
+    <string name="element_state_liquid">द्रव</string>
+    <string name="element_state_gas">गैस</string>
+    <string name="element_state_unknown">अवस्था अज्ञात</string>
 
     <!-- Daily Champions -->
-    <string name="champions_title">दैनिक चैंपियन</string>
+    <string name="champions_title">डेली चैंपियंस</string>
+    <string name="champions_intro">आज का मॉलिक्यूल बोर्ड और आज का विज्ञान के राज़ रन पूरा करें। दोनों स्कोर जुड़ते हैं, और हर UTC दिन का आपका पहला पूरा कुल स्कोर विश्व रैंकिंग में जाता है।</string>
+    <string name="champions_default_player">विज्ञान खिलाड़ी</string>
+    <string name="champions_edit_nickname">निकनेम बदलें</string>
+    <string name="champions_retry">Firebase से फिर जोड़ें</string>
+    <string name="champions_todays_total">आज का कुल</string>
+    <string name="champions_today_so_far">आज अब तक</string>
+    <string name="champions_today_breakdown">मॉलिक्यूल बोर्ड %1$s · विज्ञान %2$s</string>
+    <string name="champions_not_finished">पूरा नहीं हुआ</string>
+    <string name="champions_in_progress">जारी है</string>
+    <string name="champions_worldwide">विश्व रैंकिंग</string>
+    <string name="champions_today_utc">आज · UTC</string>
+    <string name="champions_offline">ऑफ़लाइन</string>
+    <string name="champions_no_scores_today">आज अभी तक कोई विश्व स्कोर नहीं आया है।</string>
+    <string name="champions_scores_need_firebase">Firebase जुड़ने पर विश्व स्कोर यहाँ दिखेंगे।</string>
+    <string name="champions_you">%1$s · आप</string>
+    <string name="champions_entry_scores">बोर्ड %1$d · विज्ञान %2$d</string>
+    <string name="champions_local_scores">इस डिवाइस पर आपके स्कोर</string>
+    <string name="champions_local">लोकल</string>
+    <string name="champions_no_runs">अभी तक कोई रन पूरा नहीं</string>
+    <string name="champions_finish_to_place">अपना पहला स्कोर दर्ज करने के लिए आज का विज्ञान के राज़ रन पूरा करें।</string>
+    <string name="champions_today">आज</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d पहेली हल हुई</item>
+        <item quantity="other">%1$d पहेलियाँ हल हुईं</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase जुड़ा है</string>
+    <string name="champions_playing_offline">ऑफ़लाइन खेल रहे हैं</string>
+    <string name="champions_online_note">आपकी गुमनाम खिलाड़ी पहचान ऐप को आसान रखती है: न Google लॉगिन स्क्रीन, न कोई ईमेल दिखता है। पूरा किया गया डेली रन एक बार भेजा जाता है।</string>
+    <string name="champions_offline_note">आपका रन और स्कोर इसी डिवाइस पर रहते हैं। Anonymous Authentication, Firestore और स्कोर फ़ंक्शन चालू होने के बाद “Firebase से फिर जोड़ें” दबाएँ।</string>
+    <string name="champions_choose_name">अपना खिलाड़ी नाम चुनें</string>
+    <string name="champions_nickname_note">यह सार्वजनिक निकनेम डेली चैंपियंस में दिखता है। अपना असली नाम इस्तेमाल न करें।</string>
+    <string name="champions_nickname_label">निकनेम</string>
+    <string name="champions_nickname_support">3–16 अक्षर, अंक या स्पेस</string>
+    <!-- Daily Champions status messages (MainViewModel / ScienceCloudState) -->
+    <string name="champions_status_connecting">डेली चैंपियंस से जुड़ रहे हैं…</string>
+    <string name="champions_status_nickname_requirement">3–16 अक्षर, अंक या स्पेस इस्तेमाल करें</string>
+    <string name="champions_status_saving">निकनेम सेव हो रहा है…</string>
+    <string name="champions_status_saved">निकनेम सेव हो गया</string>
+    <string name="champions_status_save_failed">निकनेम सेव नहीं हो सका। अपना कनेक्शन और Firebase सेटअप जाँचें।</string>
+    <string name="champions_status_connected">विश्व लीडरबोर्ड जुड़ गया</string>
+    <string name="champions_status_offline_setup">लोकल स्कोर सुरक्षित हैं। विश्व रैंकिंग से जुड़ने के लिए Anonymous Authentication और Firestore चालू करें।</string>
+    <string name="champions_status_rankings_unavailable">जुड़ गया, पर अभी रैंकिंग उपलब्ध नहीं है।</string>
+    <string name="champions_status_submitting">आज का डेली चैंपियंस स्कोर भेज रहे हैं…</string>
+    <string name="champions_status_submitted_rank">स्कोर भेजा गया · रैंक #%1$d</string>
+    <string name="champions_status_submitted">आज का स्कोर भेजा गया</string>
+    <string name="champions_status_already_submitted">आज का स्कोर पहले ही भेजा जा चुका है</string>
+    <string name="champions_status_offline_retry">ऑफ़लाइन — सेव किया स्कोर बाद में भेजने के लिए रीफ़्रेश दबाएँ</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">डेली स्ट्रीक</string>
+    <string name="streak_none">अभी कोई स्ट्रीक नहीं</string>
+    <plurals name="streak_days">
+        <item quantity="one">%1$d दिन की स्ट्रीक</item>
+        <item quantity="other">%1$d दिन की स्ट्रीक</item>
+    </plurals>
+    <string name="streak_played_today">आज गिन लिया गया। कल फिर आइए।</string>
+    <string name="streak_keep_going">स्ट्रीक बनाए रखने के लिए कोई भी डेली गेम खेलें।</string>
+    <string name="streak_start">स्ट्रीक शुरू करने के लिए कोई भी डेली गेम खेलें।</string>
+    <string name="streak_best">सबसे लंबी स्ट्रीक</string>
+    <string name="streak_days_played">खेले गए दिन</string>
+    <string name="streak_best_score">सबसे अच्छा स्कोर</string>
+    <string name="streak_play_today">आज का बोर्ड खेलें</string>
+    <string name="streak_recent">हाल के बोर्ड</string>
+    <string name="streak_recent_empty">अभी तक कोई डेली बोर्ड नहीं खेला। मॉलिक्यूल बोर्ड या विज्ञान के राज़ पूरा करने पर दिन गिना जाता है।</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d यूनिक</item>
+        <item quantity="other">%1$d यूनिक</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d यूनिक · मिशन पूरा</item>
+        <item quantity="other">%1$d यूनिक · मिशन पूरा</item>
+    </plurals>
+    <string name="streak_footer">हर दिन का बोर्ड आधी रात UTC पर बदलता है। इतिहास सिर्फ़ इसी डिवाइस पर रहता है।</string>
+    <string name="streak_previous_month">पिछला महीना</string>
+    <string name="streak_next_month">अगला महीना</string>
+    <string name="streak_day_not_played">, नहीं खेला</string>
+    <string name="streak_day_board_score">, मॉलिक्यूल बोर्ड स्कोर %1$d</string>
+    <string name="streak_day_science">, विज्ञान के राज़ पूरा</string>
+    <string name="streak_day_element">, तत्व पहचाना</string>
+    <string name="streak_day_today">, आज</string>
+    <string name="streak_legend_board">बोर्ड</string>
+    <string name="streak_legend_science">विज्ञान</string>
+    <string name="streak_legend_element">तत्व</string>
+    <string name="streak_legend_both">दोनों गेम</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">खोज समीक्षा</string>
+    <string name="review_intro">जो जोड़ पहचाने नहीं गए, उन्हें असंभव नहीं माना जाता। वे बाद में जाँच के लिए इसी डिवाइस पर रहते हैं।</string>
+    <string name="review_empty">जाँच के लिए कुछ नहीं</string>
+    <plurals name="review_tried">
+        <item quantity="one">अभी पहचाना नहीं गया · %1$d बार आज़माया</item>
+        <item quantity="other">अभी पहचाना नहीं गया · %1$d बार आज़माया</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">सेटिंग्स</string>
-    <string name="settings_sound">ध्वनि</string>
+    <string name="settings_sound">आवाज़</string>
+    <string name="settings_sound_description">खोज और टाइल की आवाज़ें</string>
     <string name="settings_vibration">वाइब्रेशन</string>
-    <string name="settings_reduced_motion">कम गति प्रभाव</string>
-    <string name="settings_privacy">गोपनीयता</string>
-    <string name="settings_about">EdBetter के बारे में</string>
+    <string name="settings_vibration_description">हल्का टच फ़ीडबैक</string>
+    <string name="settings_reduced_motion">कम मोशन</string>
+    <string name="settings_reduced_motion_description">सरल ट्रांज़िशन इस्तेमाल करें</string>
     <string name="settings_language">भाषा</string>
     <string name="settings_language_description">ऐप की भाषा चुनें</string>
     <string name="settings_language_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="settings_privacy">गोपनीयता</string>
+    <string name="settings_privacy_text">आपकी प्रगति इसी फ़ोन पर रहती है। विज्ञापन Google द्वारा दिए जाते हैं।</string>
+    <string name="settings_ad_choices">विज्ञापन विकल्प</string>
+    <string name="settings_privacy_policy">गोपनीयता नीति</string>
+    <string name="settings_about">EdBetter के बारे में</string>
+    <string name="settings_about_text">हम मज़ेदार विज्ञान ऐप बनाते हैं जो जिज्ञासा को समझ में बदल देते हैं।</string>
+    <string name="settings_more">EdBetter के और ऐप</string>
+    <string name="settings_kemistri_description">लेवल, अभिक्रियाओं और अणुओं से आवर्त सारणी में माहिर बनें।</string>
+    <string name="settings_open_kemistri">Google Play पर Kemistri खोलें</string>
+    <string name="settings_version">वर्शन %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">इस डिवाइस पर विज्ञापन गोपनीयता विकल्पों की ज़रूरत नहीं है</string>
 </resources>
-

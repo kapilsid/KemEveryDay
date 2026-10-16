@@ -1,51 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Yoruba translations. Review with native speaker. -->
+<!-- Yoruba translations. Review with native speaker. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
     <!-- Common -->
     <string name="common_back">Padà</string>
-    <string name="common_continue">Tesiwaju</string>
-    <string name="common_cancel">Fagilee</string>
-    <string name="common_save">Fipamọ</string>
-    <string name="common_delete">Pa</string>
-    <string name="common_refresh">Tunṣe</string>
-    <string name="common_got_it">Mo ye</string>
-    <string name="common_home">Ile</string>
+    <string name="common_continue">Tẹ̀síwájú</string>
+    <string name="common_cancel">Fagilé</string>
+    <string name="common_save">Fipamọ́</string>
+    <string name="common_delete">Parẹ́</string>
+    <string name="common_refresh">Sọdọ̀tun</string>
+    <string name="common_got_it">Ó yé mi</string>
+    <string name="common_home">Ilé</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d àmì</item>
+        <item quantity="other">+%1$d àmì</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">Ìyanu kemistri tuntun lojoojumọ</string>
-    <string name="home_daily_title">Bọọdu Molikula Ojoojumo</string>
-    <string name="home_everyday_title">Kemistri lojoojumọ</string>
-    <string name="home_element_title">Èlẹ́mẹ̀ntì Ọjọ́</string>
-    <string name="home_nav_streak">Asopọ</string>
-    <string name="home_nav_leaders">Àwọn aṣáájú</string>
-    <string name="home_nav_settings">Eto</string>
+    <string name="home_logo_description">Àmì ìdánimọ̀ Kemistri Everyday</string>
+    <string name="home_tagline">Ìyanu kẹ́mísírì tuntun lójoojúmọ́</string>
+    <string name="home_open_champions">Ṣí Àwọn Akọni Ojoojúmọ́</string>
+    <string name="home_playing_as">Ò ń ṣeré bí %1$s</string>
+    <string name="home_daily_title">Pátákó Mọ́lẹ́kúlù Ojoojúmọ́</string>
+    <string name="home_daily_subtitle">Àlọ́ kẹ́mísírì kan tí gbogbo wa ń pín lójoojúmọ́</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">Ọjọ́ %1$d léraléra · àlọ́ kan tí a ń pín lójoojúmọ́</item>
+        <item quantity="other">Ọjọ́ %1$d léraléra · àlọ́ kan tí a ń pín lójoojúmọ́</item>
+    </plurals>
+    <string name="home_science_title">Àṣírí Sáyẹ́ǹsì</string>
+    <string name="home_science_subtitle">Àdììtú sáyẹ́ǹsì tuntun mẹ́ta lójoojúmọ́</string>
+    <string name="home_everyday_title">Kẹ́mísírì Ojoojúmọ́</string>
+    <string name="home_everyday_subtitle">Wá kẹ́mísírì tó farapamọ́ nínú ayé ojoojúmọ́</string>
+    <string name="home_element_title">Ẹ́lẹ́mẹ́ǹtì Ọjọ́ Kọ̀ọ̀kan</string>
+    <string name="home_element_subtitle">Pàdé ẹ́lẹ́mẹ́ǹtì tuntun lójoojúmọ́</string>
+    <string name="home_nav_streak">Léraléra</string>
+    <string name="home_nav_leaders">Àwọn aṣíwájú</string>
+    <string name="home_nav_settings">Ètò</string>
 
-    <!-- Molecule Hunt -->
-    <string name="hunt_title_standard">Ìwádìí Molikula</string>
+    <!-- Molecule Hunt / Daily Molecule Board -->
+    <string name="hunt_title_standard">Ìwákiri Mọ́lẹ́kúlù</string>
+    <string name="hunt_daily_history">Ìtàn ojoojúmọ́</string>
+    <string name="hunt_session_discoveries">Àwárí ìgbà yìí</string>
+    <string name="hunt_game_rules">Òfin eré</string>
+    <string name="hunt_shared_puzzle">Àlọ́ àpapọ̀ · %1$s</string>
+    <string name="hunt_mission_goal">Wá èròjà 10 tó yàtọ̀ síra</string>
+    <string name="hunt_hint">Ìtọ́ka</string>
+    <string name="hunt_shuffle">Dàrú</string>
+    <string name="hunt_clear">Paárẹ́</string>
+    <string name="hunt_discover">Ṣàwárí</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">O ti rí %1$s tẹ́lẹ̀ · +%2$d àmì</item>
+        <item quantity="other">O ti rí %1$s tẹ́lẹ̀ · +%2$d àmì</item>
+    </plurals>
+    <string name="hunt_stat_moves">Ìgbésẹ̀</string>
+    <string name="hunt_stat_score">Àmì</string>
+    <string name="hunt_stat_found">Rírí</string>
+    <string name="hunt_tile_description">%1$s, ìlà %2$d, òpó %3$d</string>
+    <string name="hunt_tile_selected">, a yàn án ní ipò %1$d</string>
+    <string name="hunt_tile_hinted">, ìtọ́ka</string>
+    <string name="hunt_select_neighbours">Yan àwọn átọ̀mù tó wà nítòsí</string>
+    <string name="hunt_ready_to_review">Ó ṣetán fún àyẹ̀wò</string>
+    <string name="hunt_mission_complete_title">Iṣẹ́ parí!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">O rí %1$s, %2$s. Àmì: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">èròjà %1$d</item>
+        <item quantity="other">èròjà %1$d</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">ìgbésẹ̀ %1$d ló kù</item>
+        <item quantity="other">ìgbésẹ̀ %1$d ló kù</item>
+    </plurals>
+    <string name="hunt_keep_discovering">Máa ṣàwárí</string>
+    <string name="hunt_finish">Parí</string>
+    <string name="hunt_discovery_great">Àwárí ńlá!</string>
+    <string name="hunt_discovery_again">O tún rí i!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">átọ̀mù %1$d</item>
+        <item quantity="other">átọ̀mù %1$d</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">ẹ́lẹ́mẹ́ǹtì %1$d</item>
+        <item quantity="other">ẹ́lẹ́mẹ́ǹtì %1$d</item>
+    </plurals>
+    <string name="hunt_score_rarity">àìwọ́pọ̀ +%1$d</string>
+    <string name="hunt_score_streak">léraléra +%1$d</string>
+    <string name="hunt_rules_title">Ìwákiri Mọ́lẹ́kúlù — Òfin</string>
+    <string name="hunt_rules_subtitle">Kọ́ àkójọpọ̀ kẹ́míkà gidi lórí pátákó 5 × 5</string>
+    <string name="hunt_rule_1">So àwọn átọ̀mù tó wà lẹ́gbẹ̀ẹ́ ara wọn pọ̀ ní ìbú, ní òòró tàbí ní ìkọrí.</string>
+    <string name="hunt_rule_2">Lo átọ̀mù 2–6 fún ọ̀pọ̀ àwárí; àwọn fọ́múlà gíga lè lo 7.</string>
+    <string name="hunt_rule_3">Tẹ Ṣàwárí láti yẹ àkójọpọ̀ wò. Bí o ṣe yàn wọ́n tẹ̀léra kò yí fọ́múlà padà.</string>
+    <string name="hunt_rule_4">Èròjà tí a mọ̀ ń fún ọ ní àmì, ó ń lo ìgbésẹ̀ kan, ó sì ń yọ àwọn táìlì tí o yàn kúrò.</string>
+    <string name="hunt_rule_5">Àwọn átọ̀mù ń jábọ́ sílẹ̀, àwọn tuntun tó dọ́gba sì ń wọlé láti òkè.</string>
+    <string name="hunt_rule_6">Wá èròjà 10 tó yàtọ̀ síra láti parí iṣẹ́ náà.</string>
+    <string name="hunt_rule_7" formatted="false">Àtúnṣe-rírí gbà, ó ń lo ìgbésẹ̀ kan, ó sì ń fún ọ ní 25% àmì, ṣùgbọ́n kò ní fi kún iye èròjà tó yàtọ̀.</string>
+    <string name="hunt_rule_8">Àwọn àkópọ̀ tí a kò tíì mọ̀ kò ní lo ìgbésẹ̀, a ó sì fi wọ́n pamọ́ fún Àyẹ̀wò Àwárí.</string>
+    <string name="hunt_rule_9">Ìtọ́ka àti Dàrú kò lo ìgbésẹ̀ lọ́wọ́lọ́wọ́.</string>
+    <string name="hunt_rule_10">Lẹ́yìn tí o bá parí iṣẹ́ náà, máa ṣàwárí pẹ̀lú ìgbésẹ̀ tó kù.</string>
+    <string name="hunt_scoring">Bí a ṣe ń ka àmì</string>
+    <string name="hunt_scoring_formula">Àmì = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = átọ̀mù · E = ẹ́lẹ́mẹ́ǹtì tó yàtọ̀ · R = àìwọ́pọ̀ (0–40) · S = àwárí tuntun léraléra (0–15)</string>
+    <string name="hunt_formula_note">Fọ́múlà ń ṣàpèjúwe àkójọpọ̀, kì í ṣe ìgbékalẹ̀ kan ṣoṣo dandan. Fún àpẹẹrẹ, C₂H₆O lè dúró fún ju èròjà kan lọ.</string>
+    <string name="hunt_discoveries_title">Àwárí ìwákiri yìí</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">iṣẹ́ %1$d</item>
+        <item quantity="other">iṣẹ́ %1$d</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">àfikún %1$d</item>
+        <item quantity="other">àfikún %1$d</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">àpapọ̀ àwárí %1$d</item>
+        <item quantity="other">àpapọ̀ àwárí %1$d</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">Kò sí àwárí kankan síbẹ̀ — so àwọn átọ̀mù pọ̀ kí o wo ohun tí o lè ṣe!</string>
+    <string name="hunt_mission_discoveries">ÀWÁRÍ IṢẸ́</string>
+    <string name="hunt_extra_discoveries">ÀWÁRÍ ÀFIKÚN</string>
+    <string name="hunt_back_to_hunt">Padà sí ìwákiri yìí</string>
+    <string name="hunt_result_brilliant">Kẹ́mísírì tó dára jù!</string>
+    <string name="hunt_result_complete">Ìwákiri parí</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">Àmì %1$d · èròjà %2$d tó yàtọ̀</item>
+        <item quantity="other">Àmì %1$d · èròjà %2$d tó yàtọ̀</item>
+    </plurals>
+    <string name="hunt_play_again">Tún ṣeré</string>
+    <!-- Game engine messages -->
+    <string name="hunt_msg_choose_neighbour">Yan táìlì tó wà nítòsí</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">Àwárí kan lè lo tó átọ̀mù %1$d</item>
+        <item quantity="other">Àwárí kan lè lo tó átọ̀mù %1$d</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">A ti sọ pátákó dọ̀tun — gbìyànjú ètò tuntun yìí</string>
+    <string name="hunt_msg_hint_glowing">Àwárí kan tó ṣeé ṣe ń tàn</string>
+    <string name="hunt_msg_board_shuffled">A ti da pátákó rú</string>
+    <string name="hunt_msg_no_moves">Kò sí ìgbésẹ̀ mọ́</string>
+    <string name="hunt_msg_too_short">So átọ̀mù méjì ó kéré tán pọ̀</string>
+    <string name="hunt_msg_not_recognised">A kò tíì mọ %1$s — a ti fi pamọ́ fún àyẹ̀wò</string>
+    <string name="hunt_msg_new_discovery">Àwárí tuntun!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">Àtúnṣe-rírí · 25% àmì</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"RUN IYE %1$d"</string>
+    <string name="science_run_score">"ÀMÌ ÌPELE  %1$d"</string>
+    <string name="science_run_status">Ìpele òní · Àdììtú %1$d nínú %2$d · Èyí tó dára jù %3$d</string>
+    <string name="science_possible_points">àmì tó ṣeé gbà</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">lẹ́tà %1$d</item>
+        <item quantity="other">lẹ́tà %1$d</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">ọ̀rọ̀ %1$d</item>
+        <item quantity="other">ọ̀rọ̀ %1$d</item>
+    </plurals>
+    <string name="science_clue_number">ÌTỌ́KA %1$d</string>
+    <string name="science_letter_wrong">%1$s kò sí nínú ìdáhùn — ẹ̀mí kan ti lọ</string>
+    <string name="science_keyboard_hint">Tẹ lẹ́tà kan láti fi gbogbo ibi tó bá a mu hàn</string>
+    <string name="science_next_clue">Ìtọ́ka tó kàn (−15)</string>
+    <string name="science_all_clues">Gbogbo ìtọ́ka ti hàn</string>
+    <string name="science_skip">Fò ó (−1 ẹ̀mí)</string>
+    <plurals name="science_solved">
+        <item quantity="one">O yanjú rẹ̀ — +%1$d àmì!</item>
+        <item quantity="other">O yanjú rẹ̀ — +%1$d àmì!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">Ìpele parí — àmì %1$d</item>
+        <item quantity="other">Ìpele parí — àmì %1$d</item>
+    </plurals>
+    <string name="science_revealed">A ti ṣí àdììtú payá — ẹ̀mí kan ti lọ</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">Ìyanjú pípé: ẹ̀bùn +%1$d wà nínú rẹ̀.</item>
+        <item quantity="other">Ìyanjú pípé: ẹ̀bùn +%1$d wà nínú rẹ̀.</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">Ẹ̀bùn ẹ̀mí: +%1$d fún ẹ̀mí %2$d tó kù.</item>
+        <item quantity="other">Ẹ̀bùn ẹ̀mí: +%1$d fún ẹ̀mí %2$d tó kù.</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">O yanjú rẹ̀ lẹ́yìn àṣìṣe lẹ́tà %1$d.</item>
+        <item quantity="other">O yanjú rẹ̀ lẹ́yìn àṣìṣe lẹ́tà %1$d.</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">O yanjú àdììtú %1$d nínú ìpele yìí</item>
+        <item quantity="other">O yanjú àdììtú %1$d nínú ìpele yìí</item>
+    </plurals>
+    <string name="science_back_home">PADÀ SÍLÉ</string>
+    <string name="science_see_score">WO ÀMÌ ÒNÍ</string>
+    <string name="science_next_mystery">ÀDÌÌTÚ TÓ KÀN</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">TẸ̀SÍWÁJÚ — Ẹ̀MÍ %1$d LÓ KÙ</item>
+        <item quantity="other">TẸ̀SÍWÁJÚ — Ẹ̀MÍ %1$d LÓ KÙ</item>
+    </plurals>
+    <string name="science_done_today">Àdììtú mẹ́ta ti òní ti parí. Àwọn tuntun yóò ṣí ní 00:00 UTC.</string>
+    <!-- Mystery categories -->
+    <string name="science_category_scientist">Onímọ̀ sáyẹ́ǹsì</string>
+    <string name="science_category_element">Ẹ́lẹ́mẹ́ǹtì</string>
+    <string name="science_category_place">Ibi sáyẹ́ǹsì</string>
+    <string name="science_category_discovery">Àwárí</string>
+    <string name="science_category_instrument">Ohun èlò</string>
+    <string name="science_prompt_scientist">Ta ni mí?</string>
+    <string name="science_prompt_element">Kí ni mí?</string>
+    <string name="science_prompt_place">Ibo ni mo wà?</string>
+    <string name="science_prompt_discovery">Kí ni a ṣàwárí?</string>
+    <string name="science_prompt_instrument">Kí ni èyí?</string>
 
     <!-- Everyday Chemistry -->
-    <string name="everyday_the_answer">IDÁHUN</string>
+    <string name="everyday_the_answer">ÌDÁHÙN</string>
+    <string name="everyday_the_question">ÌBÉÈRÈ</string>
+    <string name="everyday_card_number">KÁÀDÌ %1$s</string>
+    <string name="everyday_quick_guess">GBÌYÀNJÚ KÍÁKÍÁ</string>
+    <string name="everyday_show_me">FI HÀN MÍ</string>
+    <string name="everyday_spot_on">O gbà á gan-an — o yàn dáadáa.</string>
+    <string name="everyday_not_quite">Kò tíì péye — ohun tó ń ṣẹlẹ̀ nìyí.</string>
+    <string name="everyday_chemistry_underneath">KẸ́MÍSÍRÌ TÓ WÀ NÍSÀLẸ̀</string>
+    <string name="everyday_try_it">Gbìyànjú rẹ̀: %1$s</string>
+    <string name="everyday_safety">Ààbò: %1$s</string>
+    <string name="everyday_ask_again">TÚN BÉÈRÈ</string>
+    <string name="everyday_got_it">Ó YÉ MI</string>
 
     <!-- Element a Day -->
-    <string name="element_todays">ÈLẸ́MẸ̀NTÌ LÓJÚỌ̀RÚN</string>
+    <string name="element_todays">Ẹ́LẸ́MẸ́ǸTÌ ÒNÍ</string>
+    <string name="element_correct">O gbà á! %1$s ti wọ inú àkójọ rẹ, ó sì kà fún léraléra òní.</string>
+    <string name="element_wrong">Kò tíì péye, %1$s ni. Ó ṣì wọ inú àkójọ rẹ.</string>
+    <string name="element_made_in_lab">A ṣe é nínú yàrá ìwádìí</string>
+    <string name="element_period">Pẹ́ríọ̀dù %1$d</string>
+    <string name="element_group">Ẹgbẹ́ %1$d</string>
+    <string name="element_f_block">f-block</string>
+    <string name="element_remember_it">RÁNTÍ RẸ̀</string>
+    <string name="element_how_found">BÍ A ṢE RÍ I</string>
+    <string name="element_where_meet">IBI TÍ O TI LÈ PÀDÉ RẸ̀</string>
+    <string name="element_collection">Àkójọ rẹ</string>
+    <string name="element_collection_count">%1$d nínú %2$d</string>
+    <string name="element_collection_hint">Gbogbo ẹ́lẹ́mẹ́ǹtì tí o bá pàdé ń kún àpótí rẹ̀. Ti òní ni a tàn ìmọ́lẹ̀ sí.</string>
+    <string name="element_new_daily">Ẹ́lẹ́mẹ́ǹtì tuntun ń farahàn lójoojúmọ́ ní ọ̀gànjọ́ òru UTC.</string>
+    <string name="element_which_am_i">Ẹ́lẹ́mẹ́ǹtì wo ni mí?</string>
+    <string name="element_first_guess_counts">Ìdáhùn àkọ́kọ́ rẹ ló kà. Gbà á kí òní lè kà fún léraléra rẹ.</string>
+    <string name="element_tile_description">%1$s, àmì %2$s, nọ́ńbà átọ̀mù %3$d, ìwúwo átọ̀mù %4$s, ètò ẹ̀lẹ́ktírọ̀nù %5$s</string>
+    <string name="element_outer_electrons">Ẹ̀lẹ́ktírọ̀nù òde: òbítà %1$s</string>
+    <string name="element_picture_description">Ibi tí o ti lè pàdé %1$s</string>
+    <string name="element_melts">Ìyọ́</string>
+    <string name="element_boils">Ìhó</string>
+    <string name="element_density">Ìwúwo-ààyè</string>
+    <string name="element_discovered">Ìgbà àwárí</string>
+    <string name="element_not_measured">A kò tíì wọ̀n ọ́n</string>
+    <string name="element_in_things_you_know">NÍNÚ OHUN TÍ O MỌ̀</string>
+    <string name="element_on_the_board">Lórí pátákó</string>
+    <string name="element_cloud_description">Àwòṣe ìkùukùu ẹ̀lẹ́ktírọ̀nù. Àwọn ìpele gbé ẹ̀lẹ́ktírọ̀nù %1$s; àwọn ẹ̀lẹ́ktírọ̀nù òde kún òbítà %2$s.</string>
+    <string name="element_collected">, a ti kó o jọ</string>
+    <!-- Element families -->
+    <string name="element_family_alkali_metals">Àwọn mẹ́tàlì alkali</string>
+    <string name="element_family_alkaline_earth_metals">Àwọn mẹ́tàlì alkaline-earth</string>
+    <string name="element_family_transition_metals">Àwọn mẹ́tàlì transition</string>
+    <string name="element_family_post_transition_metals">Àwọn mẹ́tàlì post-transition</string>
+    <string name="element_family_metalloids">Àwọn metalloid</string>
+    <string name="element_family_reactive_nonmetals">Àwọn aláìjẹ́-mẹ́tàlì tó ń ṣiṣẹ́ kíákíá</string>
+    <string name="element_family_halogens">Àwọn halogen</string>
+    <string name="element_family_noble_gases">Àwọn gáàsì ọlọ́lá</string>
+    <string name="element_family_lanthanides">Àwọn lanthanide</string>
+    <string name="element_family_actinides">Àwọn actinide</string>
+    <!-- States of matter -->
+    <string name="element_state_solid">Líle</string>
+    <string name="element_state_liquid">Olómi</string>
+    <string name="element_state_gas">Gáàsì</string>
+    <string name="element_state_unknown">Ipò kò di mímọ̀</string>
 
     <!-- Daily Champions -->
-    <string name="champions_title">Àwọn akọni ojoojumọ</string>
+    <string name="champions_title">Àwọn Akọni Ojoojúmọ́</string>
+    <string name="champions_intro">Parí Pátákó Mọ́lẹ́kúlù òní àti ìpele Àṣírí Sáyẹ́ǹsì òní. A ó ro àmì méjèèjì pọ̀, àpapọ̀ àkọ́kọ́ tí o bá parí ní ọjọ́ UTC kọ̀ọ̀kan yóò sì wọ ipò àgbáyé.</string>
+    <string name="champions_default_player">Aláṣeré sáyẹ́ǹsì</string>
+    <string name="champions_edit_nickname">Yí orúkọ ìnagijẹ padà</string>
+    <string name="champions_retry">Tún so Firebase pọ̀</string>
+    <string name="champions_todays_total">ÀPAPỌ̀ ÒNÍ</string>
+    <string name="champions_today_so_far">ÒNÍ TÍTÍ DI ÌSINSÌNYÍ</string>
+    <string name="champions_today_breakdown">Pátákó Mọ́lẹ́kúlù %1$s · Sáyẹ́ǹsì %2$s</string>
+    <string name="champions_not_finished">kò tíì parí</string>
+    <string name="champions_in_progress">ó ń lọ lọ́wọ́</string>
+    <string name="champions_worldwide">Ipò àgbáyé</string>
+    <string name="champions_today_utc">ÒNÍ · UTC</string>
+    <string name="champions_offline">LÁÌSÍ ÍŃTÁNẸ́Ẹ̀TÌ</string>
+    <string name="champions_no_scores_today">Kò sí àmì àgbáyé kankan fún òní síbẹ̀.</string>
+    <string name="champions_scores_need_firebase">Àmì àgbáyé yóò hàn níbí nígbà tí Firebase bá ti so pọ̀.</string>
+    <string name="champions_you">%1$s · Ìwọ</string>
+    <string name="champions_entry_scores">Pátákó %1$d · Sáyẹ́ǹsì %2$d</string>
+    <string name="champions_local_scores">Àmì rẹ lórí ẹ̀rọ yìí</string>
+    <string name="champions_local">LÓRÍ Ẹ̀RỌ</string>
+    <string name="champions_no_runs">Kò sí ìpele tó ti parí síbẹ̀</string>
+    <string name="champions_finish_to_place">Parí ìpele Àṣírí Sáyẹ́ǹsì òní láti fi àmì àkọ́kọ́ rẹ sílẹ̀.</string>
+    <string name="champions_today">Òní</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">àdììtú %1$d ti yanjú</item>
+        <item quantity="other">àdììtú %1$d ti yanjú</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase ti so pọ̀</string>
+    <string name="champions_playing_offline">Ò ń ṣeré láìsí íńtánẹ́ẹ̀tì</string>
+    <string name="champions_online_note">Ìdánimọ̀ aláṣeré àìlórúkọ rẹ jẹ́ kí app rọrùn: kò sí ojú-ìwé ìwọlé Google, a kò sì fi ímeèlì kankan hàn. Ìpele ojoojúmọ́ tó ti parí ni a ó fi ránṣẹ́ lẹ́ẹ̀kan ṣoṣo.</string>
+    <string name="champions_offline_note">Ìpele àti àmì rẹ wà lórí ẹ̀rọ yìí. Lẹ́yìn tí a bá mú Anonymous Authentication, Firestore àti iṣẹ́ àmì ṣiṣẹ́, tẹ Tún gbìyànjú láti so pọ̀.</string>
+    <string name="champions_choose_name">Yan orúkọ aláṣeré rẹ</string>
+    <string name="champions_nickname_note">Orúkọ ìnagijẹ yìí yóò hàn fún gbogbo ènìyàn lórí Àwọn Akọni Ojoojúmọ́. Má ṣe lo orúkọ gidi rẹ.</string>
+    <string name="champions_nickname_label">Orúkọ ìnagijẹ</string>
+    <string name="champions_nickname_support">Lẹ́tà, nọ́ńbà tàbí àlàfo 3–16</string>
+    <!-- Daily Champions status messages -->
+    <string name="champions_status_connecting">À ń so mọ́ Àwọn Akọni Ojoojúmọ́…</string>
+    <string name="champions_status_nickname_requirement">Lo lẹ́tà, nọ́ńbà tàbí àlàfo 3–16</string>
+    <string name="champions_status_saving">À ń fi orúkọ ìnagijẹ pamọ́…</string>
+    <string name="champions_status_saved">A ti fi orúkọ ìnagijẹ pamọ́</string>
+    <string name="champions_status_save_failed">A kò lè fi orúkọ ìnagijẹ pamọ́. Ṣàyẹ̀wò ìsopọ̀ rẹ àti ètò Firebase.</string>
+    <string name="champions_status_connected">Ipò àgbáyé ti so pọ̀</string>
+    <string name="champions_status_offline_setup">Àmì orí ẹ̀rọ rẹ wà ní ààbò. Mú Anonymous Authentication àti Firestore ṣiṣẹ́ láti so mọ́ ipò àgbáyé.</string>
+    <string name="champions_status_rankings_unavailable">Ó ti so pọ̀, ṣùgbọ́n ipò kò sí lọ́wọ́lọ́wọ́.</string>
+    <string name="champions_status_submitting">À ń fi àmì Àwọn Akọni Ojoojúmọ́ òní ránṣẹ́…</string>
+    <string name="champions_status_submitted_rank">A ti fi àmì ránṣẹ́ · ipò #%1$d</string>
+    <string name="champions_status_submitted">A ti fi àmì òní ránṣẹ́</string>
+    <string name="champions_status_already_submitted">A ti fi àmì òní ránṣẹ́ tẹ́lẹ̀</string>
+    <string name="champions_status_offline_retry">Láìsí íńtánẹ́ẹ̀tì — tẹ sọdọ̀tun lẹ́yìn náà láti fi àmì tí a pamọ́ ránṣẹ́</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">Ọjọ́ Léraléra</string>
+    <string name="streak_none">Kò sí ọjọ́ léraléra síbẹ̀</string>
+    <plurals name="streak_days">
+        <item quantity="one">Ọjọ́ %1$d léraléra</item>
+        <item quantity="other">Ọjọ́ %1$d léraléra</item>
+    </plurals>
+    <string name="streak_played_today">Òní ti kà. Padà wá lọ́la.</string>
+    <string name="streak_keep_going">Ṣe eré ojoojúmọ́ èyíkéyìí kí ọjọ́ léraléra rẹ má bàá dúró.</string>
+    <string name="streak_start">Ṣe eré ojoojúmọ́ èyíkéyìí láti bẹ̀rẹ̀ ọjọ́ léraléra.</string>
+    <string name="streak_best">Léraléra tó gùn jù</string>
+    <string name="streak_days_played">Ọjọ́ tí o ṣeré</string>
+    <string name="streak_best_score">Àmì tó ga jù</string>
+    <string name="streak_play_today">Ṣe pátákó òní</string>
+    <string name="streak_recent">Àwọn pátákó àìpẹ́</string>
+    <string name="streak_recent_empty">O kò tíì ṣe Pátákó Ojoojúmọ́ kankan. Ọjọ́ kan ń kà nígbà tí o bá parí Pátákó Mọ́lẹ́kúlù tàbí Àṣírí Sáyẹ́ǹsì.</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d tó yàtọ̀</item>
+        <item quantity="other">%1$d tó yàtọ̀</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d tó yàtọ̀ · iṣẹ́ parí</item>
+        <item quantity="other">%1$d tó yàtọ̀ · iṣẹ́ parí</item>
+    </plurals>
+    <string name="streak_footer">Pátákó ọjọ́ kọ̀ọ̀kan ń yí padà ní ọ̀gànjọ́ òru UTC. Ìtàn wà lórí ẹ̀rọ yìí nìkan.</string>
+    <string name="streak_previous_month">Oṣù tó kọjá</string>
+    <string name="streak_next_month">Oṣù tó ń bọ̀</string>
+    <string name="streak_day_not_played">, kò ṣeré</string>
+    <string name="streak_day_board_score">, àmì Pátákó Mọ́lẹ́kúlù %1$d</string>
+    <string name="streak_day_science">, Àṣírí Sáyẹ́ǹsì parí</string>
+    <string name="streak_day_element">, ẹ́lẹ́mẹ́ǹtì ti gbà</string>
+    <string name="streak_day_today">, òní</string>
+    <string name="streak_legend_board">Pátákó</string>
+    <string name="streak_legend_science">Sáyẹ́ǹsì</string>
+    <string name="streak_legend_element">Ẹ́lẹ́mẹ́ǹtì</string>
+    <string name="streak_legend_both">Eré méjèèjì</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">Àyẹ̀wò Àwárí</string>
+    <string name="review_intro">A kò pe àwọn àkópọ̀ tí a kò mọ̀ ní ohun tí kò ṣeé ṣe. Wọ́n wà lórí ẹ̀rọ yìí fún àyẹ̀wò lẹ́yìn náà.</string>
+    <string name="review_empty">Kò sí ohun tó ń dúró de àyẹ̀wò</string>
+    <plurals name="review_tried">
+        <item quantity="one">A kò tíì mọ̀ ọ́n · o gbìyànjú ní ìgbà %1$d</item>
+        <item quantity="other">A kò tíì mọ̀ ọ́n · o gbìyànjú ní ìgbà %1$d</item>
+    </plurals>
 
     <!-- Settings -->
-    <string name="settings_title">Eto</string>
+    <string name="settings_title">Ètò</string>
     <string name="settings_sound">Ohùn</string>
-    <string name="settings_vibration">Ibanujẹ</string>
-    <string name="settings_reduced_motion">Din ìṣe</string>
-    <string name="settings_privacy">Ìpamọ</string>
-    <string name="settings_about">Nipa EdBetter</string>
+    <string name="settings_sound_description">Ohùn àwárí àti táìlì</string>
+    <string name="settings_vibration">Gbígbọ̀n</string>
+    <string name="settings_vibration_description">Ìmì-ìfọwọ́kàn jẹ́jẹ́</string>
+    <string name="settings_reduced_motion">Dín ìṣípòpadà kù</string>
+    <string name="settings_reduced_motion_description">Lo àyípadà tó rọrùn</string>
     <string name="settings_language">Èdè</string>
     <string name="settings_language_description">Yan èdè app</string>
-    <string name="settings_language_system">Aiyipada ẹrọ</string>
+    <string name="settings_language_system">Ti ẹ̀rọ</string>
+    <string name="settings_privacy">Àṣírí</string>
+    <string name="settings_privacy_text">Ìtẹ̀síwájú rẹ wà lórí fóònù yìí. Google ló ń pèsè ìpolówó.</string>
+    <string name="settings_ad_choices">Ààyò ìpolówó</string>
+    <string name="settings_privacy_policy">Ìlànà àṣírí</string>
+    <string name="settings_about">Nípa EdBetter</string>
+    <string name="settings_about_text">A ń ṣe àwọn app sáyẹ́ǹsì alárinrin tó ń sọ ìfẹ́-láti-mọ̀ di òye.</string>
+    <string name="settings_more">Púpọ̀ sí i láti EdBetter</string>
+    <string name="settings_kemistri_description">Mọ tábìlì pẹ́ríọ̀dìkì dáadáa nípasẹ̀ ìpele, ìfèsì àti mọ́lẹ́kúlù.</string>
+    <string name="settings_open_kemistri">Ṣí Kemistri lórí Google Play</string>
+    <string name="settings_version">Ẹ̀dà %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">Ẹ̀rọ yìí kò nílò ààyò àṣírí ìpolówó</string>
 </resources>
-

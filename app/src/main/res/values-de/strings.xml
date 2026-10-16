@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial German translations. Review as needed. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
@@ -12,40 +11,378 @@
     <string name="common_refresh">Aktualisieren</string>
     <string name="common_got_it">Verstanden</string>
     <string name="common_home">Start</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d Punkt</item>
+        <item quantity="other">+%1$d Punkte</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">Ein neues chemisches Wunder jeden Tag</string>
+    <string name="home_logo_description">Kemistri-Everyday-Logo</string>
+    <string name="home_tagline">Jeden Tag ein neues Chemie-Wunder</string>
+    <string name="home_open_champions">Tägliche Champions öffnen</string>
+    <string name="home_playing_as">Du spielst als %1$s</string>
     <string name="home_daily_title">Tägliches Molekülbrett</string>
+    <string name="home_daily_subtitle">Jeden Tag ein gemeinsames Chemie-Rätsel</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">Serie: %1$d Tag · jeden Tag ein gemeinsames Rätsel</item>
+        <item quantity="other">Serie: %1$d Tage · jeden Tag ein gemeinsames Rätsel</item>
+    </plurals>
+    <string name="home_science_title">Wissenschaft enthüllt</string>
+    <string name="home_science_subtitle">Jeden Tag drei neue Wissenschaftsrätsel</string>
     <string name="home_everyday_title">Alltagschemie</string>
+    <string name="home_everyday_subtitle">Errate die Chemie, die im Alltag steckt</string>
     <string name="home_element_title">Element des Tages</string>
-    <string name="home_nav_streak">Streak</string>
+    <string name="home_element_subtitle">Lerne jeden Tag ein neues Element kennen</string>
+    <string name="home_nav_streak">Serie</string>
     <string name="home_nav_leaders">Bestenliste</string>
     <string name="home_nav_settings">Einstellungen</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">Moleküljagd</string>
+    <string name="hunt_daily_history">Tagesverlauf</string>
+    <string name="hunt_session_discoveries">Entdeckungen dieser Runde</string>
+    <string name="hunt_game_rules">Spielregeln</string>
+    <string name="hunt_shared_puzzle">Gemeinsames Rätsel · %1$s</string>
+    <string name="hunt_mission_goal">Finde 10 verschiedene Stoffe</string>
+    <string name="hunt_hint">Tipp</string>
+    <string name="hunt_shuffle">Mischen</string>
+    <string name="hunt_clear">Leeren</string>
+    <string name="hunt_discover">Entdecken</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s schon gefunden · +%2$d Punkt</item>
+        <item quantity="other">%1$s schon gefunden · +%2$d Punkte</item>
+    </plurals>
+    <string name="hunt_stat_moves">Züge</string>
+    <string name="hunt_stat_score">Punkte</string>
+    <string name="hunt_stat_found">Gefunden</string>
+    <string name="hunt_tile_description">%1$s, Zeile %2$d, Spalte %3$d</string>
+    <string name="hunt_tile_selected">, ausgewählt als Nummer %1$d</string>
+    <string name="hunt_tile_hinted">, als Tipp markiert</string>
+    <string name="hunt_select_neighbours">Wähle benachbarte Atome</string>
+    <string name="hunt_ready_to_review">Bereit zur Prüfung</string>
+    <string name="hunt_mission_complete_title">Mission geschafft!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">Du hast %1$s gefunden, %2$s. Punkte: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d Stoff</item>
+        <item quantity="other">%1$d Stoffe</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">%1$d Zug übrig</item>
+        <item quantity="other">%1$d Züge übrig</item>
+    </plurals>
+    <string name="hunt_keep_discovering">Weiter entdecken</string>
+    <string name="hunt_finish">Beenden</string>
+    <string name="hunt_discovery_great">Super Entdeckung!</string>
+    <string name="hunt_discovery_again">Wieder entdeckt!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d Atom</item>
+        <item quantity="other">%1$d Atome</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d Element</item>
+        <item quantity="other">%1$d Elemente</item>
+    </plurals>
+    <string name="hunt_score_rarity">Seltenheit +%1$d</string>
+    <string name="hunt_score_streak">Serie +%1$d</string>
+    <string name="hunt_rules_title">Moleküljagd — Regeln</string>
+    <string name="hunt_rules_subtitle">Baue echte chemische Verbindungen auf dem 5 × 5-Brett</string>
+    <string name="hunt_rule_1">Verbinde benachbarte Atome waagerecht, senkrecht oder diagonal.</string>
+    <string name="hunt_rule_2">Nutze für die meisten Entdeckungen 2–6 Atome; schwierige Formeln dürfen 7 haben.</string>
+    <string name="hunt_rule_3">Tippe auf Entdecken, um die Zusammensetzung zu prüfen. Die Reihenfolge der Auswahl ändert die Formel nicht.</string>
+    <string name="hunt_rule_4">Ein erkannter Stoff bringt Punkte, kostet einen Zug und entfernt die ausgewählten Felder.</string>
+    <string name="hunt_rule_5">Atome fallen nach unten und passende neue Atome kommen von oben nach.</string>
+    <string name="hunt_rule_6">Finde 10 verschiedene Stoffe, um die Mission zu schaffen.</string>
+    <string name="hunt_rule_7" formatted="false">Wiederholungen sind erlaubt, kosten einen Zug und bringen 25 % der Punkte, zählen aber nicht als neuer Stoff.</string>
+    <string name="hunt_rule_8">Noch nicht erkannte Kombinationen kosten keinen Zug und werden für die Entdeckungsprüfung gespeichert.</string>
+    <string name="hunt_rule_9">Tipp und Mischen kosten derzeit keinen Zug.</string>
+    <string name="hunt_rule_10">Nach der Mission kannst du mit den übrigen Zügen weiter entdecken.</string>
+    <string name="hunt_scoring">Punktewertung</string>
+    <string name="hunt_scoring_formula">Punkte = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = Atome · E = verschiedene Elemente · R = Seltenheit (0–40) · S = Serie neuer Entdeckungen (0–15)</string>
+    <string name="hunt_formula_note">Eine Formel beschreibt die Zusammensetzung, nicht unbedingt eine einzige Struktur. C₂H₆O kann zum Beispiel mehr als einen Stoff darstellen.</string>
+    <string name="hunt_discoveries_title">Entdeckungen dieser Jagd</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">%1$d Mission</item>
+        <item quantity="other">%1$d Mission</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">%1$d Extra</item>
+        <item quantity="other">%1$d Extra</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">%1$d Fund insgesamt</item>
+        <item quantity="other">%1$d Funde insgesamt</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">Noch keine Entdeckungen — verbinde ein paar Atome und schau, was du bauen kannst!</string>
+    <string name="hunt_mission_discoveries">MISSIONS-ENTDECKUNGEN</string>
+    <string name="hunt_extra_discoveries">EXTRA-ENTDECKUNGEN</string>
+    <string name="hunt_back_to_hunt">Zurück zur Jagd</string>
+    <string name="hunt_result_brilliant">Geniale Chemie!</string>
+    <string name="hunt_result_complete">Jagd beendet</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">%1$d Punkte · %2$d verschiedener Stoff</item>
+        <item quantity="other">%1$d Punkte · %2$d verschiedene Stoffe</item>
+    </plurals>
+    <string name="hunt_play_again">Nochmal spielen</string>
+    <!-- Game engine messages, translated at display time (GameEngine stays English and Context-free) -->
+    <string name="hunt_msg_choose_neighbour">Wähle ein benachbartes Feld</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">Eine Entdeckung darf höchstens %1$d Atom haben</item>
+        <item quantity="other">Eine Entdeckung darf höchstens %1$d Atome haben</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">Brett erneuert — probier das neue Layout</string>
+    <string name="hunt_msg_hint_glowing">Eine mögliche Entdeckung leuchtet</string>
+    <string name="hunt_msg_board_shuffled">Brett gemischt</string>
+    <string name="hunt_msg_no_moves">Keine Züge mehr übrig</string>
+    <string name="hunt_msg_too_short">Verbinde mindestens zwei Atome</string>
+    <string name="hunt_msg_not_recognised">%1$s ist noch nicht bekannt — zur Prüfung gespeichert</string>
+    <string name="hunt_msg_new_discovery">Neue Entdeckung!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">Wiederholte Entdeckung · 25 % der Punkte</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"RUN SCORE %1$d"</string>
+    <string name="science_run_score">"PUNKTE  %1$d"</string>
+    <string name="science_run_status">Heutige Runde · Rätsel %1$d von %2$d · Bestwert %3$d</string>
+    <string name="science_possible_points">mögliche Punkte</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d Buchstabe</item>
+        <item quantity="other">%1$d Buchstaben</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d Wort</item>
+        <item quantity="other">%1$d Wörter</item>
+    </plurals>
+    <string name="science_clue_number">HINWEIS %1$d</string>
+    <string name="science_letter_wrong">%1$s kommt nicht vor — ein Leben weg</string>
+    <string name="science_keyboard_hint">Tippe auf einen Buchstaben, um alle passenden Stellen aufzudecken</string>
+    <string name="science_next_clue">Nächster Hinweis (−15)</string>
+    <string name="science_all_clues">Alle Hinweise gezeigt</string>
+    <string name="science_skip">Überspringen (−1 Leben)</string>
+    <plurals name="science_solved">
+        <item quantity="one">Gelöst — +%1$d Punkt!</item>
+        <item quantity="other">Gelöst — +%1$d Punkte!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">Runde vorbei — %1$d Punkt</item>
+        <item quantity="other">Runde vorbei — %1$d Punkte</item>
+    </plurals>
+    <string name="science_revealed">Rätsel aufgedeckt — ein Leben weg</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">Perfekt gelöst: +%1$d Bonus inklusive.</item>
+        <item quantity="other">Perfekt gelöst: +%1$d Bonus inklusive.</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">Lebensbonus: +%1$d für %2$d übriges Leben.</item>
+        <item quantity="other">Lebensbonus: +%1$d für %2$d übrige Leben.</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">Gelöst nach %1$d falschem Buchstaben.</item>
+        <item quantity="other">Gelöst nach %1$d falschen Buchstaben.</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">%1$d Rätsel in dieser Runde gelöst</item>
+        <item quantity="other">%1$d Rätsel in dieser Runde gelöst</item>
+    </plurals>
+    <string name="science_back_home">ZUM START</string>
+    <string name="science_see_score">HEUTIGE PUNKTE</string>
+    <string name="science_next_mystery">NÄCHSTES RÄTSEL</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">WEITER — NOCH %1$d LEBEN</item>
+        <item quantity="other">WEITER — NOCH %1$d LEBEN</item>
+    </plurals>
+    <string name="science_done_today">Die drei Rätsel von heute sind geschafft. Neue gibt es um 00:00 UTC.</string>
+    <!-- Mystery categories (MysteryCategory label and prompt) -->
+    <string name="science_category_scientist">Forscher*in</string>
+    <string name="science_category_element">Element</string>
+    <string name="science_category_place">Wissenschaftlicher Ort</string>
+    <string name="science_category_discovery">Entdeckung</string>
+    <string name="science_category_instrument">Instrument</string>
+    <string name="science_prompt_scientist">Wer bin ich?</string>
+    <string name="science_prompt_element">Was bin ich?</string>
+    <string name="science_prompt_place">Wo bin ich?</string>
+    <string name="science_prompt_discovery">Was wurde entdeckt?</string>
+    <string name="science_prompt_instrument">Was ist das?</string>
 
     <!-- Everyday Chemistry -->
     <string name="everyday_the_answer">DIE ANTWORT</string>
+    <string name="everyday_the_question">DIE FRAGE</string>
+    <string name="everyday_card_number">KARTE %1$s</string>
+    <string name="everyday_quick_guess">RATE MAL SCHNELL</string>
+    <string name="everyday_show_me">ZEIG ES MIR</string>
+    <string name="everyday_spot_on">Genau richtig — gut gewählt.</string>
+    <string name="everyday_not_quite">Nicht ganz — so funktioniert es.</string>
+    <string name="everyday_chemistry_underneath">DIE CHEMIE DAHINTER</string>
+    <string name="everyday_try_it">Probier es aus: %1$s</string>
+    <string name="everyday_safety">Sicherheit: %1$s</string>
+    <string name="everyday_ask_again">NOCHMAL FRAGEN</string>
+    <string name="everyday_got_it">VERSTANDEN</string>
 
     <!-- Element a Day -->
     <string name="element_todays">HEUTIGES ELEMENT</string>
+    <string name="element_correct">Richtig! %1$s kommt in deine Sammlung und zählt für deine heutige Serie.</string>
+    <string name="element_wrong">Nicht ganz, es war %1$s. Es kommt trotzdem in deine Sammlung.</string>
+    <string name="element_made_in_lab">Im Labor hergestellt</string>
+    <string name="element_period">Periode %1$d</string>
+    <string name="element_group">Gruppe %1$d</string>
+    <string name="element_f_block">f-Block</string>
+    <string name="element_remember_it">MERK ES DIR</string>
+    <string name="element_how_found">SO WURDE ES ENTDECKT</string>
+    <string name="element_where_meet">WO DU ES TRIFFST</string>
+    <string name="element_collection">Deine Sammlung</string>
+    <string name="element_collection_count">%1$d von %2$d</string>
+    <string name="element_collection_hint">Jedes Element, das du kennenlernst, füllt sein Feld. Das heutige ist hervorgehoben.</string>
+    <string name="element_new_daily">Jeden Tag um Mitternacht UTC erscheint ein neues Element.</string>
+    <string name="element_which_am_i">Welches Element bin ich?</string>
+    <string name="element_first_guess_counts">Dein erster Tipp zählt. Liegst du richtig, zählt heute für deine Serie.</string>
+    <string name="element_tile_description">%1$s, Symbol %2$s, Ordnungszahl %3$d, Atommasse %4$s, Elektronenkonfiguration %5$s</string>
+    <string name="element_outer_electrons">Äußere Elektronen: %1$s-Orbital</string>
+    <string name="element_picture_description">Wo du %1$s begegnen kannst</string>
+    <string name="element_melts">Schmilzt</string>
+    <string name="element_boils">Siedet</string>
+    <string name="element_density">Dichte</string>
+    <string name="element_discovered">Entdeckt</string>
+    <string name="element_not_measured">Nicht gemessen</string>
+    <string name="element_in_things_you_know">IN DINGEN, DIE DU KENNST</string>
+    <string name="element_on_the_board">Auf dem Brett</string>
+    <string name="element_cloud_description">Elektronenwolkenmodell. Die Schalen enthalten %1$s Elektronen; die äußeren Elektronen besetzen ein %2$s-Orbital.</string>
+    <string name="element_collected">, gesammelt</string>
+    <!-- Element families (DailyElement.family) -->
+    <string name="element_family_alkali_metals">Alkalimetalle</string>
+    <string name="element_family_alkaline_earth_metals">Erdalkalimetalle</string>
+    <string name="element_family_transition_metals">Übergangsmetalle</string>
+    <string name="element_family_post_transition_metals">Post-Übergangsmetalle</string>
+    <string name="element_family_metalloids">Halbmetalle</string>
+    <string name="element_family_reactive_nonmetals">Reaktive Nichtmetalle</string>
+    <string name="element_family_halogens">Halogene</string>
+    <string name="element_family_noble_gases">Edelgase</string>
+    <string name="element_family_lanthanides">Lanthanoide</string>
+    <string name="element_family_actinides">Actinoide</string>
+    <!-- States of matter (DailyElement.state) -->
+    <string name="element_state_solid">Fest</string>
+    <string name="element_state_liquid">Flüssig</string>
+    <string name="element_state_gas">Gasförmig</string>
+    <string name="element_state_unknown">Zustand unbekannt</string>
 
     <!-- Daily Champions -->
     <string name="champions_title">Tägliche Champions</string>
+    <string name="champions_intro">Schließe das heutige Molekülbrett und die heutige Runde von Wissenschaft enthüllt ab. Deine beiden Punktzahlen werden addiert, und deine erste fertige Summe jedes UTC-Tages kommt in die weltweite Rangliste.</string>
+    <string name="champions_default_player">Science-Fan</string>
+    <string name="champions_edit_nickname">Spitznamen ändern</string>
+    <string name="champions_retry">Firebase-Verbindung erneut versuchen</string>
+    <string name="champions_todays_total">HEUTIGE SUMME</string>
+    <string name="champions_today_so_far">HEUTE BISHER</string>
+    <string name="champions_today_breakdown">Molekülbrett %1$s · Wissenschaft %2$s</string>
+    <string name="champions_not_finished">nicht beendet</string>
+    <string name="champions_in_progress">läuft noch</string>
+    <string name="champions_worldwide">Weltweite Rangliste</string>
+    <string name="champions_today_utc">HEUTE · UTC</string>
+    <string name="champions_offline">OFFLINE</string>
+    <string name="champions_no_scores_today">Für heute wurden noch keine weltweiten Punkte eingetragen.</string>
+    <string name="champions_scores_need_firebase">Weltweite Punkte erscheinen hier, sobald Firebase verbunden ist.</string>
+    <string name="champions_you">%1$s · Du</string>
+    <string name="champions_entry_scores">Brett %1$d · Wissenschaft %2$d</string>
+    <string name="champions_local_scores">Deine Punkte auf diesem Gerät</string>
+    <string name="champions_local">LOKAL</string>
+    <string name="champions_no_runs">Noch keine beendeten Runden</string>
+    <string name="champions_finish_to_place">Beende die heutige Runde von Wissenschaft enthüllt, um deine erste Punktzahl einzutragen.</string>
+    <string name="champions_today">Heute</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d Rätsel gelöst</item>
+        <item quantity="other">%1$d Rätsel gelöst</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase verbunden</string>
+    <string name="champions_playing_offline">Offline-Spiel</string>
+    <string name="champions_online_note">Deine anonyme Spieler-ID hält die App einfach: kein Google-Login und keine E-Mail-Adresse wird angezeigt. Eine beendete Tagesrunde wird nur einmal eingereicht.</string>
+    <string name="champions_offline_note">Deine Runde und deine Punkte bleiben auf diesem Gerät. Sobald Anonymous Authentication, Firestore und die Score-Funktion aktiviert sind, tippe auf Erneut versuchen, um dich zu verbinden.</string>
+    <string name="champions_choose_name">Wähle deinen Spielernamen</string>
+    <string name="champions_nickname_note">Dieser öffentliche Spitzname erscheint bei Tägliche Champions. Verwende nicht deinen echten Namen.</string>
+    <string name="champions_nickname_label">Spitzname</string>
+    <string name="champions_nickname_support">3–16 Buchstaben, Zahlen oder Leerzeichen</string>
+    <!-- Daily Champions status messages (MainViewModel / ScienceCloudState) -->
+    <string name="champions_status_connecting">Verbinde mit Tägliche Champions…</string>
+    <string name="champions_status_nickname_requirement">Nutze 3–16 Buchstaben, Zahlen oder Leerzeichen</string>
+    <string name="champions_status_saving">Spitzname wird gespeichert…</string>
+    <string name="champions_status_saved">Spitzname gespeichert</string>
+    <string name="champions_status_save_failed">Spitzname konnte nicht gespeichert werden. Prüfe deine Verbindung und die Firebase-Einrichtung.</string>
+    <string name="champions_status_connected">Weltweite Bestenliste verbunden</string>
+    <string name="champions_status_offline_setup">Lokale Punkte sind sicher. Aktiviere Anonymous Authentication und Firestore, um die weltweite Rangliste zu verbinden.</string>
+    <string name="champions_status_rankings_unavailable">Verbunden, aber die Rangliste ist gerade nicht verfügbar.</string>
+    <string name="champions_status_submitting">Heutige Punkte für Tägliche Champions werden eingereicht…</string>
+    <string name="champions_status_submitted_rank">Punkte eingereicht · Platz %1$d</string>
+    <string name="champions_status_submitted">Heutige Punkte eingereicht</string>
+    <string name="champions_status_already_submitted">Heutige Punkte sind schon eingereicht</string>
+    <string name="champions_status_offline_retry">Offline — tippe auf Aktualisieren, um die gespeicherten Punkte später einzureichen</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">Tagesserie</string>
+    <string name="streak_none">Noch keine Serie</string>
+    <plurals name="streak_days">
+        <item quantity="one">Serie: %1$d Tag</item>
+        <item quantity="other">Serie: %1$d Tage</item>
+    </plurals>
+    <string name="streak_played_today">Heute zählt. Komm morgen wieder.</string>
+    <string name="streak_keep_going">Spiel ein beliebiges Tagesspiel, um deine Serie fortzusetzen.</string>
+    <string name="streak_start">Spiel ein beliebiges Tagesspiel, um eine Serie zu starten.</string>
+    <string name="streak_best">Beste Serie</string>
+    <string name="streak_days_played">Gespielte Tage</string>
+    <string name="streak_best_score">Bestwert</string>
+    <string name="streak_play_today">Heutiges Brett spielen</string>
+    <string name="streak_recent">Letzte Bretter</string>
+    <string name="streak_recent_empty">Noch keine Tagesbretter gespielt. Ein Tag zählt, wenn du das Molekülbrett oder Wissenschaft enthüllt beendest.</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d verschiedener</item>
+        <item quantity="other">%1$d verschiedene</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d verschiedener · Mission geschafft</item>
+        <item quantity="other">%1$d verschiedene · Mission geschafft</item>
+    </plurals>
+    <string name="streak_footer">Das Brett wechselt jeden Tag um Mitternacht UTC. Der Verlauf wird nur auf diesem Gerät gespeichert.</string>
+    <string name="streak_previous_month">Vorheriger Monat</string>
+    <string name="streak_next_month">Nächster Monat</string>
+    <string name="streak_day_not_played">, nicht gespielt</string>
+    <string name="streak_day_board_score">, Molekülbrett-Punkte %1$d</string>
+    <string name="streak_day_science">, Wissenschaft enthüllt beendet</string>
+    <string name="streak_day_element">, Element erraten</string>
+    <string name="streak_day_today">, heute</string>
+    <string name="streak_legend_board">Brett</string>
+    <string name="streak_legend_science">Wissenschaft</string>
+    <string name="streak_legend_element">Element</string>
+    <string name="streak_legend_both">Beide Spiele</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">Entdeckungsprüfung</string>
+    <string name="review_intro">Nicht erkannte Kombinationen gelten nicht als unmöglich. Sie bleiben auf diesem Gerät, um später geprüft zu werden.</string>
+    <string name="review_empty">Nichts wartet auf Prüfung</string>
+    <plurals name="review_tried">
+        <item quantity="one">Noch nicht erkannt · %1$d-mal versucht</item>
+        <item quantity="other">Noch nicht erkannt · %1$d-mal versucht</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">Einstellungen</string>
     <string name="settings_sound">Ton</string>
+    <string name="settings_sound_description">Entdeckungs- und Feld-Töne</string>
     <string name="settings_vibration">Vibration</string>
-    <string name="settings_reduced_motion">Reduzierte Bewegung</string>
-    <string name="settings_privacy">Datenschutz</string>
-    <string name="settings_about">Über EdBetter</string>
+    <string name="settings_vibration_description">Sanftes Feedback bei Berührung</string>
+    <string name="settings_reduced_motion">Weniger Bewegung</string>
+    <string name="settings_reduced_motion_description">Einfachere Übergänge verwenden</string>
     <string name="settings_language">Sprache</string>
     <string name="settings_language_description">App-Sprache auswählen</string>
     <string name="settings_language_system">Systemstandard</string>
+    <string name="settings_privacy">Datenschutz</string>
+    <string name="settings_privacy_text">Dein Fortschritt bleibt auf diesem Handy. Werbung wird von Google bereitgestellt.</string>
+    <string name="settings_ad_choices">Werbeeinstellungen</string>
+    <string name="settings_privacy_policy">Datenschutzerklärung</string>
+    <string name="settings_about">Über EdBetter</string>
+    <string name="settings_about_text">Wir machen verspielte Wissenschafts-Apps, die Neugier in Verständnis verwandeln.</string>
+    <string name="settings_more">Mehr von EdBetter</string>
+    <string name="settings_kemistri_description">Meistere das Periodensystem mit Levels, Reaktionen und Molekülen.</string>
+    <string name="settings_open_kemistri">Kemistri bei Google Play öffnen</string>
+    <string name="settings_version">Version %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">Werbe-Datenschutzoptionen sind auf diesem Gerät nicht erforderlich</string>
 </resources>
-

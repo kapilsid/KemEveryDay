@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Persian (Farsi) translations. Review with native speaker. -->
+<!-- Persian (Farsi) translations. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
@@ -9,43 +9,381 @@
     <string name="common_cancel">لغو</string>
     <string name="common_save">ذخیره</string>
     <string name="common_delete">حذف</string>
-    <string name="common_refresh">به‌روزرسانی</string>
+    <string name="common_refresh">تازه‌سازی</string>
     <string name="common_got_it">فهمیدم</string>
     <string name="common_home">خانه</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d امتیاز</item>
+        <item quantity="other">+%1$d امتیاز</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">هر روز یک شگفتی جدید شیمی</string>
-    <string name="home_daily_title">تخته مولکولی روزانه</string>
+    <string name="home_logo_description">لوگوی Kemistri Everyday</string>
+    <string name="home_tagline">هر روز یک شگفتی تازه از شیمی</string>
+    <string name="home_open_champions">باز کردن قهرمانان روز</string>
+    <string name="home_playing_as">بازی با نام %1$s</string>
+    <string name="home_daily_title">صفحهٔ مولکول روز</string>
+    <string name="home_daily_subtitle">هر روز یک معمای شیمی مشترک برای همه</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">%1$d روز پیاپی · هر روز یک معمای مشترک</item>
+        <item quantity="other">%1$d روز پیاپی · هر روز یک معمای مشترک</item>
+    </plurals>
+    <string name="home_science_title">رازهای علم</string>
+    <string name="home_science_subtitle">هر روز سه معمای علمی تازه</string>
     <string name="home_everyday_title">شیمی روزمره</string>
+    <string name="home_everyday_subtitle">شیمیِ پنهان در زندگی روزمره را حدس بزن</string>
     <string name="home_element_title">عنصر روز</string>
-    <string name="home_nav_streak">سلسله</string>
-    <string name="home_nav_leaders">رتبه‌ها</string>
+    <string name="home_element_subtitle">هر روز با یک عنصر تازه آشنا شو</string>
+    <string name="home_nav_streak">پیاپی</string>
+    <string name="home_nav_leaders">برترین‌ها</string>
     <string name="home_nav_settings">تنظیمات</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">شکار مولکول</string>
+    <string name="hunt_daily_history">تاریخچهٔ روزانه</string>
+    <string name="hunt_session_discoveries">کشف‌های این دور</string>
+    <string name="hunt_game_rules">قوانین بازی</string>
+    <string name="hunt_shared_puzzle">معمای مشترک · %1$s</string>
+    <string name="hunt_mission_goal">۱۰ مادهٔ مختلف پیدا کن</string>
+    <string name="hunt_hint">راهنما</string>
+    <string name="hunt_shuffle">بُر زدن</string>
+    <string name="hunt_clear">پاک کردن</string>
+    <string name="hunt_discover">کشف کن</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s قبلاً پیدا شده · +%2$d امتیاز</item>
+        <item quantity="other">%1$s قبلاً پیدا شده · +%2$d امتیاز</item>
+    </plurals>
+    <string name="hunt_stat_moves">حرکت‌ها</string>
+    <string name="hunt_stat_score">امتیاز</string>
+    <string name="hunt_stat_found">پیدا شده</string>
+    <string name="hunt_tile_description">%1$s، ردیف %2$d، ستون %3$d</string>
+    <string name="hunt_tile_selected">، انتخاب شمارهٔ %1$d</string>
+    <string name="hunt_tile_hinted">، با راهنما</string>
+    <string name="hunt_select_neighbours">اتم‌های کنار هم را انتخاب کن</string>
+    <string name="hunt_ready_to_review">آمادهٔ بررسی</string>
+    <string name="hunt_mission_complete_title">مأموریت انجام شد!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">%1$s پیدا کردی و %2$s. امتیاز: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d ماده</item>
+        <item quantity="other">%1$d ماده</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">%1$d حرکت باقی مانده</item>
+        <item quantity="other">%1$d حرکت باقی مانده</item>
+    </plurals>
+    <string name="hunt_keep_discovering">ادامهٔ کشف</string>
+    <string name="hunt_finish">پایان</string>
+    <string name="hunt_discovery_great">کشف عالی!</string>
+    <string name="hunt_discovery_again">دوباره کشف شد!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d اتم</item>
+        <item quantity="other">%1$d اتم</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d عنصر</item>
+        <item quantity="other">%1$d عنصر</item>
+    </plurals>
+    <string name="hunt_score_rarity">کمیابی +%1$d</string>
+    <string name="hunt_score_streak">پیاپی +%1$d</string>
+    <string name="hunt_rules_title">شکار مولکول — قوانین</string>
+    <string name="hunt_rules_subtitle">روی صفحهٔ ۵ × ۵ ترکیب‌های شیمیایی واقعی بساز</string>
+    <string name="hunt_rule_1">اتم‌های مجاور را افقی، عمودی یا مورب به هم وصل کن.</string>
+    <string name="hunt_rule_2">بیشتر کشف‌ها ۲ تا ۶ اتم دارند؛ فرمول‌های پیشرفته ممکن است ۷ اتم داشته باشند.</string>
+    <string name="hunt_rule_3">برای بررسی ترکیب، «کشف کن» را بزن. ترتیب انتخاب، فرمول را تغییر نمی‌دهد.</string>
+    <string name="hunt_rule_4">مادهٔ شناخته‌شده امتیاز می‌دهد، یک حرکت مصرف می‌کند و خانه‌های انتخاب‌شده را برمی‌دارد.</string>
+    <string name="hunt_rule_5">اتم‌ها پایین می‌افتند و اتم‌های جایگزینِ متعادل از بالا وارد می‌شوند.</string>
+    <string name="hunt_rule_6">برای انجام مأموریت ۱۰ مادهٔ مختلف پیدا کن.</string>
+    <string name="hunt_rule_7" formatted="false">تکرار مجاز است، یک حرکت مصرف می‌کند و 25% امتیاز می‌دهد، اما تعداد کشف‌های یکتا را بالا نمی‌برد.</string>
+    <string name="hunt_rule_8">ترکیب‌هایی که هنوز شناخته نشده‌اند حرکتی مصرف نمی‌کنند و برای «بررسی کشف‌ها» ذخیره می‌شوند.</string>
+    <string name="hunt_rule_9">فعلاً راهنما و بُر زدن حرکتی مصرف نمی‌کنند.</string>
+    <string name="hunt_rule_10">بعد از انجام مأموریت، با حرکت‌های باقی‌مانده به کشف ادامه بده.</string>
+    <string name="hunt_scoring">امتیازدهی</string>
+    <string name="hunt_scoring_formula">امتیاز = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = اتم‌ها · E = عنصرهای مختلف · R = کمیابی (0–40) · S = کشف‌های تازهٔ پیاپی (0–15)</string>
+    <string name="hunt_formula_note">فرمول ترکیبِ ماده را نشان می‌دهد، نه لزوماً یک ساختار یکتا. مثلاً C₂H₆O می‌تواند بیش از یک ماده باشد.</string>
+    <string name="hunt_discoveries_title">کشف‌های این شکار</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">%1$d مأموریت</item>
+        <item quantity="other">%1$d مأموریت</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">%1$d اضافه</item>
+        <item quantity="other">%1$d اضافه</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">در مجموع %1$d کشف</item>
+        <item quantity="other">در مجموع %1$d کشف</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">هنوز کشفی نداری — چند اتم را وصل کن و ببین چه می‌سازی!</string>
+    <string name="hunt_mission_discoveries">کشف‌های مأموریت</string>
+    <string name="hunt_extra_discoveries">کشف‌های اضافه</string>
+    <string name="hunt_back_to_hunt">بازگشت به شکار</string>
+    <string name="hunt_result_brilliant">شیمیِ درخشان!</string>
+    <string name="hunt_result_complete">شکار تمام شد</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">امتیاز %1$d · %2$d مادهٔ یکتا</item>
+        <item quantity="other">امتیاز %1$d · %2$d مادهٔ یکتا</item>
+    </plurals>
+    <string name="hunt_play_again">بازی دوباره</string>
+    <!-- Game engine messages, translated at display time (GameEngine stays English and Context-free) -->
+    <string name="hunt_msg_choose_neighbour">یک خانهٔ مجاور انتخاب کن</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">هر کشف حداکثر %1$d اتم می‌تواند داشته باشد</item>
+        <item quantity="other">هر کشف حداکثر %1$d اتم می‌تواند داشته باشد</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">صفحه تازه شد — این چیدمان جدید را امتحان کن</string>
+    <string name="hunt_msg_hint_glowing">یک کشف ممکن می‌درخشد</string>
+    <string name="hunt_msg_board_shuffled">صفحه بُر خورد</string>
+    <string name="hunt_msg_no_moves">حرکتی باقی نمانده</string>
+    <string name="hunt_msg_too_short">دست‌کم دو اتم را وصل کن</string>
+    <string name="hunt_msg_not_recognised">%1$s هنوز شناخته نشده — برای بررسی ذخیره شد</string>
+    <string name="hunt_msg_new_discovery">کشف تازه!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">کشف تکراری · 25% امتیاز</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"امتیاز اجرا %1$d"</string>
+    <string name="science_run_score">"امتیاز دور  %1$d"</string>
+    <string name="science_run_status">دور امروز · معمای %1$d از %2$d · بهترین %3$d</string>
+    <string name="science_possible_points">امتیاز ممکن</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d حرف</item>
+        <item quantity="other">%1$d حرف</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d کلمه</item>
+        <item quantity="other">%1$d کلمه</item>
+    </plurals>
+    <string name="science_clue_number">سرنخ %1$d</string>
+    <string name="science_letter_wrong">%1$s در پاسخ نیست — یک جان از دست رفت</string>
+    <string name="science_keyboard_hint">روی یک حرف بزن تا همهٔ جاهایش نمایان شود</string>
+    <string name="science_next_clue">سرنخ بعدی (−15)</string>
+    <string name="science_all_clues">همهٔ سرنخ‌ها نمایان شد</string>
+    <string name="science_skip">رد شدن (−1 جان)</string>
+    <plurals name="science_solved">
+        <item quantity="one">حل شد — +%1$d امتیاز!</item>
+        <item quantity="other">حل شد — +%1$d امتیاز!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">دور تمام شد — %1$d امتیاز</item>
+        <item quantity="other">دور تمام شد — %1$d امتیاز</item>
+    </plurals>
+    <string name="science_revealed">معما فاش شد — یک جان از دست رفت</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">حل بی‌نقص: +%1$d امتیاز اضافه منظور شد.</item>
+        <item quantity="other">حل بی‌نقص: +%1$d امتیاز اضافه منظور شد.</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">جایزهٔ جان: +%1$d برای %2$d جانِ باقی‌مانده.</item>
+        <item quantity="other">جایزهٔ جان: +%1$d برای %2$d جانِ باقی‌مانده.</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">بعد از %1$d حدس حرفِ نادرست حل شد.</item>
+        <item quantity="other">بعد از %1$d حدس حرفِ نادرست حل شد.</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">%1$d معما در این دور حل شد</item>
+        <item quantity="other">%1$d معما در این دور حل شد</item>
+    </plurals>
+    <string name="science_back_home">بازگشت به خانه</string>
+    <string name="science_see_score">امتیاز امروز</string>
+    <string name="science_next_mystery">معمای بعدی</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">ادامه — %1$d جان باقی است</item>
+        <item quantity="other">ادامه — %1$d جان باقی است</item>
+    </plurals>
+    <string name="science_done_today">سه معمای امروز تمام شد. معماهای تازه ساعت 00:00 UTC باز می‌شوند.</string>
+    <!-- Mystery categories (MysteryCategory label and prompt) -->
+    <string name="science_category_scientist">دانشمند</string>
+    <string name="science_category_element">عنصر</string>
+    <string name="science_category_place">مکان علمی</string>
+    <string name="science_category_discovery">کشف</string>
+    <string name="science_category_instrument">ابزار</string>
+    <string name="science_prompt_scientist">من کی هستم؟</string>
+    <string name="science_prompt_element">من چه هستم؟</string>
+    <string name="science_prompt_place">من کجا هستم؟</string>
+    <string name="science_prompt_discovery">چه چیزی کشف شد؟</string>
+    <string name="science_prompt_instrument">این چیست؟</string>
 
     <!-- Everyday Chemistry -->
     <string name="everyday_the_answer">پاسخ</string>
+    <string name="everyday_the_question">پرسش</string>
+    <string name="everyday_card_number">کارت %1$s</string>
+    <string name="everyday_quick_guess">یک حدس سریع بزن</string>
+    <string name="everyday_show_me">نشانم بده</string>
+    <string name="everyday_spot_on">دقیقاً — درست انتخاب کردی.</string>
+    <string name="everyday_not_quite">نه کاملاً — ماجرا این است.</string>
+    <string name="everyday_chemistry_underneath">شیمیِ پشت ماجرا</string>
+    <string name="everyday_try_it">امتحانش کن: %1$s</string>
+    <string name="everyday_safety">ایمنی: %1$s</string>
+    <string name="everyday_ask_again">دوباره بپرس</string>
+    <string name="everyday_got_it">فهمیدم</string>
 
     <!-- Element a Day -->
     <string name="element_todays">عنصر امروز</string>
+    <string name="element_correct">درست است! %1$s به مجموعه‌ات اضافه شد و برای روزهای پیاپیِ امروز حساب می‌شود.</string>
+    <string name="element_wrong">نه کاملاً، جواب %1$s بود. باز هم به مجموعه‌ات اضافه می‌شود.</string>
+    <string name="element_made_in_lab">ساخته‌شده در آزمایشگاه</string>
+    <string name="element_period">دورهٔ %1$d</string>
+    <string name="element_group">گروه %1$d</string>
+    <string name="element_f_block">دستهٔ f</string>
+    <string name="element_remember_it">به خاطر بسپار</string>
+    <string name="element_how_found">چطور کشف شد</string>
+    <string name="element_where_meet">کجا می‌بینیش</string>
+    <string name="element_collection">مجموعهٔ تو</string>
+    <string name="element_collection_count">%1$d از %2$d</string>
+    <string name="element_collection_hint">هر عنصری که با آن آشنا شوی، خانه‌اش پر می‌شود. عنصر امروز برجسته است.</string>
+    <string name="element_new_daily">هر روز نیمه‌شب به وقت UTC یک عنصر تازه می‌آید.</string>
+    <string name="element_which_am_i">من کدام عنصرم؟</string>
+    <string name="element_first_guess_counts">فقط حدس اول حساب می‌شود. درست بگو تا امروز به روزهای پیاپی‌ات اضافه شود.</string>
+    <string name="element_tile_description">%1$s، نماد %2$s، عدد اتمی %3$d، جرم اتمی %4$s، آرایش الکترونی %5$s</string>
+    <string name="element_outer_electrons">الکترون‌های بیرونی: اوربیتال %1$s</string>
+    <string name="element_picture_description">جاهایی که ممکن است %1$s را ببینی</string>
+    <string name="element_melts">ذوب</string>
+    <string name="element_boils">جوش</string>
+    <string name="element_density">چگالی</string>
+    <string name="element_discovered">کشف</string>
+    <string name="element_not_measured">اندازه‌گیری نشده</string>
+    <string name="element_in_things_you_know">در چیزهای آشنا</string>
+    <string name="element_on_the_board">روی صفحه</string>
+    <string name="element_cloud_description">مدل ابر الکترونی. لایه‌ها %1$s الکترون دارند؛ الکترون‌های بیرونی یک اوربیتال %2$s را پر می‌کنند.</string>
+    <string name="element_collected">، جمع‌آوری شده</string>
+    <!-- Element families (DailyElement.family) -->
+    <string name="element_family_alkali_metals">فلزهای قلیایی</string>
+    <string name="element_family_alkaline_earth_metals">فلزهای قلیایی خاکی</string>
+    <string name="element_family_transition_metals">فلزهای واسطه</string>
+    <string name="element_family_post_transition_metals">فلزهای پس‌واسطه</string>
+    <string name="element_family_metalloids">شبه‌فلزها</string>
+    <string name="element_family_reactive_nonmetals">نافلزهای واکنش‌پذیر</string>
+    <string name="element_family_halogens">هالوژن‌ها</string>
+    <string name="element_family_noble_gases">گازهای نجیب</string>
+    <string name="element_family_lanthanides">لانتانیدها</string>
+    <string name="element_family_actinides">آکتینیدها</string>
+    <!-- States of matter (DailyElement.state) -->
+    <string name="element_state_solid">جامد</string>
+    <string name="element_state_liquid">مایع</string>
+    <string name="element_state_gas">گاز</string>
+    <string name="element_state_unknown">حالت نامعلوم</string>
 
     <!-- Daily Champions -->
-    <string name="champions_title">قهرمانان روزانه</string>
+    <string name="champions_title">قهرمانان روز</string>
+    <string name="champions_intro">صفحهٔ مولکول امروز و دور «رازهای علم» امروز را تمام کن. دو امتیازت با هم جمع می‌شوند و اولین مجموع کاملت در هر روز UTC در رتبه‌بندی جهانی ثبت می‌شود.</string>
+    <string name="champions_default_player">بازیکن علم</string>
+    <string name="champions_edit_nickname">ویرایش نام مستعار</string>
+    <string name="champions_retry">اتصال دوباره به Firebase</string>
+    <string name="champions_todays_total">مجموع امروز</string>
+    <string name="champions_today_so_far">امروز تا این لحظه</string>
+    <string name="champions_today_breakdown">صفحهٔ مولکول %1$s · علم %2$s</string>
+    <string name="champions_not_finished">تمام نشده</string>
+    <string name="champions_in_progress">در جریان</string>
+    <string name="champions_worldwide">رتبه‌بندی جهانی</string>
+    <string name="champions_today_utc">امروز · UTC</string>
+    <string name="champions_offline">آفلاین</string>
+    <string name="champions_no_scores_today">هنوز امتیاز جهانی‌ای برای امروز ثبت نشده است.</string>
+    <string name="champions_scores_need_firebase">وقتی Firebase وصل شود، امتیازهای جهانی اینجا نمایش داده می‌شوند.</string>
+    <string name="champions_you">%1$s · تو</string>
+    <string name="champions_entry_scores">صفحه %1$d · علم %2$d</string>
+    <string name="champions_local_scores">امتیازهای تو روی این دستگاه</string>
+    <string name="champions_local">محلی</string>
+    <string name="champions_no_runs">هنوز دوری تمام نشده</string>
+    <string name="champions_finish_to_place">دور «رازهای علم» امروز را تمام کن تا اولین امتیازت ثبت شود.</string>
+    <string name="champions_today">امروز</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d معما حل شد</item>
+        <item quantity="other">%1$d معما حل شد</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase وصل است</string>
+    <string name="champions_playing_offline">بازی آفلاین</string>
+    <string name="champions_online_note">هویت ناشناس بازیکن، برنامه را ساده نگه می‌دارد: نه صفحهٔ ورود Google هست و نه ایمیلی نشان داده می‌شود. هر دور روزانهٔ تمام‌شده فقط یک بار ارسال می‌شود.</string>
+    <string name="champions_offline_note">دور و امتیازت روی همین دستگاه می‌ماند. بعد از فعال شدن Anonymous Authentication، Firestore و تابع امتیاز، «اتصال دوباره به Firebase» را بزن.</string>
+    <string name="champions_choose_name">نام بازیکنت را انتخاب کن</string>
+    <string name="champions_nickname_note">این نام مستعار عمومی در قهرمانان روز دیده می‌شود. از نام واقعی‌ات استفاده نکن.</string>
+    <string name="champions_nickname_label">نام مستعار</string>
+    <string name="champions_nickname_support">۳ تا ۱۶ حرف، عدد یا فاصله</string>
+    <!-- Daily Champions status messages (MainViewModel / ScienceCloudState) -->
+    <string name="champions_status_connecting">در حال اتصال به قهرمانان روز…</string>
+    <string name="champions_status_nickname_requirement">از ۳ تا ۱۶ حرف، عدد یا فاصله استفاده کن</string>
+    <string name="champions_status_saving">در حال ذخیرهٔ نام مستعار…</string>
+    <string name="champions_status_saved">نام مستعار ذخیره شد</string>
+    <string name="champions_status_save_failed">نام مستعار ذخیره نشد. اتصال اینترنت و تنظیمات Firebase را بررسی کن.</string>
+    <string name="champions_status_connected">جدول امتیازات جهانی وصل شد</string>
+    <string name="champions_status_offline_setup">امتیازهای محلی امن هستند. برای اتصال به رتبه‌بندی جهانی، Anonymous Authentication و Firestore را فعال کن.</string>
+    <string name="champions_status_rankings_unavailable">وصل شد، اما رتبه‌بندی فعلاً در دسترس نیست.</string>
+    <string name="champions_status_submitting">در حال ارسال امتیاز امروزِ قهرمانان روز…</string>
+    <string name="champions_status_submitted_rank">امتیاز ارسال شد · رتبهٔ #%1$d</string>
+    <string name="champions_status_submitted">امتیاز امروز ارسال شد</string>
+    <string name="champions_status_already_submitted">امتیاز امروز قبلاً ارسال شده است</string>
+    <string name="champions_status_offline_retry">آفلاین — برای ارسال امتیاز ذخیره‌شده بعداً تازه‌سازی را بزن</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">روزهای پیاپی</string>
+    <string name="streak_none">هنوز روز پیاپی نداری</string>
+    <plurals name="streak_days">
+        <item quantity="one">%1$d روز پیاپی</item>
+        <item quantity="other">%1$d روز پیاپی</item>
+    </plurals>
+    <string name="streak_played_today">امروز حساب شد. فردا برگرد.</string>
+    <string name="streak_keep_going">برای حفظ روزهای پیاپی، یکی از بازی‌های روزانه را بازی کن.</string>
+    <string name="streak_start">برای شروع روزهای پیاپی، یکی از بازی‌های روزانه را بازی کن.</string>
+    <string name="streak_best">بیشترین روز پیاپی</string>
+    <string name="streak_days_played">روزهای بازی‌شده</string>
+    <string name="streak_best_score">بهترین امتیاز</string>
+    <string name="streak_play_today">بازیِ صفحهٔ امروز</string>
+    <string name="streak_recent">صفحه‌های اخیر</string>
+    <string name="streak_recent_empty">هنوز هیچ صفحهٔ روزانه‌ای بازی نشده. وقتی صفحهٔ مولکول یا «رازهای علم» را تمام کنی، آن روز حساب می‌شود.</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d یکتا</item>
+        <item quantity="other">%1$d یکتا</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d یکتا · مأموریت انجام شد</item>
+        <item quantity="other">%1$d یکتا · مأموریت انجام شد</item>
+    </plurals>
+    <string name="streak_footer">صفحهٔ هر روز نیمه‌شب به وقت UTC عوض می‌شود. تاریخچه فقط روی همین دستگاه ذخیره می‌شود.</string>
+    <string name="streak_previous_month">ماه قبل</string>
+    <string name="streak_next_month">ماه بعد</string>
+    <string name="streak_day_not_played">، بازی نشده</string>
+    <string name="streak_day_board_score">، امتیاز صفحهٔ مولکول %1$d</string>
+    <string name="streak_day_science">، «رازهای علم» تمام شد</string>
+    <string name="streak_day_element">، عنصر حدس زده شد</string>
+    <string name="streak_day_today">، امروز</string>
+    <string name="streak_legend_board">صفحه</string>
+    <string name="streak_legend_science">علم</string>
+    <string name="streak_legend_element">عنصر</string>
+    <string name="streak_legend_both">هر دو بازی</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">بررسی کشف‌ها</string>
+    <string name="review_intro">ترکیب‌های ناشناخته غیرممکن به حساب نمی‌آیند. آن‌ها برای بررسی بعدی روی همین دستگاه می‌مانند.</string>
+    <string name="review_empty">چیزی برای بررسی نیست</string>
+    <plurals name="review_tried">
+        <item quantity="one">هنوز شناخته نشده · %1$d بار امتحان شد</item>
+        <item quantity="other">هنوز شناخته نشده · %1$d بار امتحان شد</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">تنظیمات</string>
     <string name="settings_sound">صدا</string>
+    <string name="settings_sound_description">صدای کشف‌ها و خانه‌ها</string>
     <string name="settings_vibration">لرزش</string>
-    <string name="settings_reduced_motion">کاهش انیمیشن</string>
-    <string name="settings_privacy">حریم خصوصی</string>
-    <string name="settings_about">درباره EdBetter</string>
+    <string name="settings_vibration_description">بازخورد لمسی ملایم</string>
+    <string name="settings_reduced_motion">حرکت کمتر</string>
+    <string name="settings_reduced_motion_description">انتقال‌های ساده‌تر</string>
     <string name="settings_language">زبان</string>
-    <string name="settings_language_description">زبان برنامه را انتخاب کنید</string>
+    <string name="settings_language_description">زبان برنامه را انتخاب کن</string>
     <string name="settings_language_system">پیش‌فرض سیستم</string>
+    <string name="settings_privacy">حریم خصوصی</string>
+    <string name="settings_privacy_text">پیشرفتت روی همین گوشی می‌ماند. تبلیغات توسط Google ارائه می‌شود.</string>
+    <string name="settings_ad_choices">گزینه‌های تبلیغات</string>
+    <string name="settings_privacy_policy">سیاست حفظ حریم خصوصی</string>
+    <string name="settings_about">دربارهٔ EdBetter</string>
+    <string name="settings_about_text">ما برنامه‌های علمی سرگرم‌کننده می‌سازیم که کنجکاوی را به فهم تبدیل می‌کنند.</string>
+    <string name="settings_more">برنامه‌های دیگر EdBetter</string>
+    <string name="settings_kemistri_description">جدول تناوبی را با مرحله‌ها، واکنش‌ها و مولکول‌ها یاد بگیر.</string>
+    <string name="settings_open_kemistri">Kemistri را در Google Play باز کن</string>
+    <string name="settings_version">نسخهٔ %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">در این دستگاه نیازی به گزینه‌های حریم خصوصی تبلیغات نیست</string>
 </resources>
-

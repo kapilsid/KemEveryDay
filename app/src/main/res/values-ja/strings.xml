@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Japanese translations. Review with native speaker. -->
+<!-- Japanese translations. Review with native speaker. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
@@ -10,42 +10,380 @@
     <string name="common_save">保存</string>
     <string name="common_delete">削除</string>
     <string name="common_refresh">更新</string>
-    <string name="common_got_it">了解</string>
+    <string name="common_got_it">OK</string>
     <string name="common_home">ホーム</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d ポイント</item>
+        <item quantity="other">+%1$d ポイント</item>
+    </plurals>
 
     <!-- Home -->
-    <string name="home_tagline">毎日新しい化学の驚きを</string>
-    <string name="home_daily_title">デイリーモレキュールボード</string>
-    <string name="home_everyday_title">日常の化学</string>
-    <string name="home_element_title">本日の元素</string>
-    <string name="home_nav_streak">連勝</string>
+    <string name="home_logo_description">Kemistri Everyday のロゴ</string>
+    <string name="home_tagline">毎日、新しい化学のふしぎ</string>
+    <string name="home_open_champions">デイリーチャンピオンを開く</string>
+    <string name="home_playing_as">%1$s でプレイ中</string>
+    <string name="home_daily_title">デイリー分子ボード</string>
+    <string name="home_daily_subtitle">毎日みんなで同じ化学パズル</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">%1$d日連続 · 毎日みんなで同じパズル</item>
+        <item quantity="other">%1$d日連続 · 毎日みんなで同じパズル</item>
+    </plurals>
+    <string name="home_science_title">サイエンスのなぞ</string>
+    <string name="home_science_subtitle">毎日3つの新しい科学ミステリー</string>
+    <string name="home_everyday_title">身近な化学</string>
+    <string name="home_everyday_subtitle">日常にひそむ化学を当てよう</string>
+    <string name="home_element_title">今日の元素</string>
+    <string name="home_element_subtitle">毎日新しい元素に出会おう</string>
+    <string name="home_nav_streak">連続記録</string>
     <string name="home_nav_leaders">ランキング</string>
     <string name="home_nav_settings">設定</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">分子ハント</string>
+    <string name="hunt_daily_history">デイリー履歴</string>
+    <string name="hunt_session_discoveries">今回の発見</string>
+    <string name="hunt_game_rules">ルール</string>
+    <string name="hunt_shared_puzzle">共通パズル · %1$s</string>
+    <string name="hunt_mission_goal">10種類の物質を見つけよう</string>
+    <string name="hunt_hint">ヒント</string>
+    <string name="hunt_shuffle">シャッフル</string>
+    <string name="hunt_clear">クリア</string>
+    <string name="hunt_discover">発見！</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s は発見済み · +%2$d ポイント</item>
+        <item quantity="other">%1$s は発見済み · +%2$d ポイント</item>
+    </plurals>
+    <string name="hunt_stat_moves">手数</string>
+    <string name="hunt_stat_score">スコア</string>
+    <string name="hunt_stat_found">発見</string>
+    <string name="hunt_tile_description">%1$s、%2$d行 %3$d列</string>
+    <string name="hunt_tile_selected">、%1$d番目に選択</string>
+    <string name="hunt_tile_hinted">、ヒント表示中</string>
+    <string name="hunt_select_neighbours">となりの原子を選ぼう</string>
+    <string name="hunt_ready_to_review">確認できます</string>
+    <string name="hunt_mission_complete_title">ミッション達成！</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">%1$sを発見、%2$s。スコア：%3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d種類の物質</item>
+        <item quantity="other">%1$d種類の物質</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">残り%1$d手</item>
+        <item quantity="other">残り%1$d手</item>
+    </plurals>
+    <string name="hunt_keep_discovering">発見を続ける</string>
+    <string name="hunt_finish">終了</string>
+    <string name="hunt_discovery_great">すごい発見！</string>
+    <string name="hunt_discovery_again">また発見！</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">原子%1$d個</item>
+        <item quantity="other">原子%1$d個</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">元素%1$d種</item>
+        <item quantity="other">元素%1$d種</item>
+    </plurals>
+    <string name="hunt_score_rarity">レア度 +%1$d</string>
+    <string name="hunt_score_streak">連続 +%1$d</string>
+    <string name="hunt_rules_title">分子ハント — ルール</string>
+    <string name="hunt_rules_subtitle">5 × 5 のボードで本物の化学組成を作ろう</string>
+    <string name="hunt_rule_1">となり合う原子を、たて・よこ・ななめにつなげよう。</string>
+    <string name="hunt_rule_2">ほとんどの発見は2–6個の原子で。高度な化学式は7個使うこともあります。</string>
+    <string name="hunt_rule_3">「発見！」をタップして組成をチェック。選ぶ順番で化学式は変わりません。</string>
+    <string name="hunt_rule_4">認識された物質はポイントになり、1手使って、選んだタイルが消えます。</string>
+    <string name="hunt_rule_5">原子は下に落ち、バランスのとれた新しい原子が上から入ります。</string>
+    <string name="hunt_rule_6">10種類の物質を見つけるとミッション達成。</string>
+    <string name="hunt_rule_7" formatted="false">同じ物質もOK。1手使ってスコアは25%ですが、種類数は増えません。</string>
+    <string name="hunt_rule_8">まだ認識されない組み合わせは手数を使わず、発見レビューに保存されます。</string>
+    <string name="hunt_rule_9">ヒントとシャッフルは今のところ手数を使いません。</string>
+    <string name="hunt_rule_10">ミッション達成後も、残りの手数で発見を続けられます。</string>
+    <string name="hunt_scoring">スコア計算</string>
+    <string name="hunt_scoring_formula">スコア = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = 原子の数 · E = 元素の種類 · R = レア度 (0–40) · S = 新発見の連続 (0–15)</string>
+    <string name="hunt_formula_note">化学式は組成を表すもので、構造が1つに決まるとは限りません。たとえば C₂H₆O は複数の物質を表せます。</string>
+    <string name="hunt_discoveries_title">今回のハントの発見</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">ミッション %1$d</item>
+        <item quantity="other">ミッション %1$d</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">エクストラ %1$d</item>
+        <item quantity="other">エクストラ %1$d</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">合計 %1$d 発見</item>
+        <item quantity="other">合計 %1$d 発見</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">まだ発見なし — 原子をつなげて何が作れるか試してみよう！</string>
+    <string name="hunt_mission_discoveries">ミッションの発見</string>
+    <string name="hunt_extra_discoveries">エクストラの発見</string>
+    <string name="hunt_back_to_hunt">ハントに戻る</string>
+    <string name="hunt_result_brilliant">すばらしい化学！</string>
+    <string name="hunt_result_complete">ハント終了</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">スコア %1$d · %2$d種類の物質</item>
+        <item quantity="other">スコア %1$d · %2$d種類の物質</item>
+    </plurals>
+    <string name="hunt_play_again">もう一度</string>
+    <!-- Game engine messages -->
+    <string name="hunt_msg_choose_neighbour">となりのタイルを選ぼう</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">1回の発見で使える原子は%1$d個まで</item>
+        <item quantity="other">1回の発見で使える原子は%1$d個まで</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">ボードを更新 — 新しい配置で挑戦しよう</string>
+    <string name="hunt_msg_hint_glowing">発見できそうな場所が光っています</string>
+    <string name="hunt_msg_board_shuffled">シャッフルしました</string>
+    <string name="hunt_msg_no_moves">手数がありません</string>
+    <string name="hunt_msg_too_short">原子を2個以上つなげよう</string>
+    <string name="hunt_msg_not_recognised">%1$s はまだ認識されていません — レビュー用に保存</string>
+    <string name="hunt_msg_new_discovery">新発見！</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">再発見 · スコア25%</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"ランスコア %1$d"</string>
+    <string name="science_run_score">"ランスコア  %1$d"</string>
+    <string name="science_run_status">今日のラン · ミステリー %1$d / %2$d · ベスト %3$d</string>
+    <string name="science_possible_points">獲得可能ポイント</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d文字</item>
+        <item quantity="other">%1$d文字</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d単語</item>
+        <item quantity="other">%1$d単語</item>
+    </plurals>
+    <string name="science_clue_number">ヒント %1$d</string>
+    <string name="science_letter_wrong">%1$s は答えにありません — ライフ1つ失った</string>
+    <string name="science_keyboard_hint">文字をタップすると、合う位置がすべて表示されます</string>
+    <string name="science_next_clue">次のヒント (−15)</string>
+    <string name="science_all_clues">ヒントはすべて表示済み</string>
+    <string name="science_skip">スキップ (−1ライフ)</string>
+    <plurals name="science_solved">
+        <item quantity="one">正解 — +%1$d ポイント！</item>
+        <item quantity="other">正解 — +%1$d ポイント！</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">ラン終了 — %1$d ポイント</item>
+        <item quantity="other">ラン終了 — %1$d ポイント</item>
+    </plurals>
+    <string name="science_revealed">答えを公開 — ライフ1つ失った</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">パーフェクト：ボーナス +%1$d 込み</item>
+        <item quantity="other">パーフェクト：ボーナス +%1$d 込み</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">ライフボーナス：残りライフ%2$dで +%1$d</item>
+        <item quantity="other">ライフボーナス：残りライフ%2$dで +%1$d</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">%1$d回のまちがいの後に正解。</item>
+        <item quantity="other">%1$d回のまちがいの後に正解。</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">このランで%1$d問正解</item>
+        <item quantity="other">このランで%1$d問正解</item>
+    </plurals>
+    <string name="science_back_home">ホームへ</string>
+    <string name="science_see_score">今日のスコアを見る</string>
+    <string name="science_next_mystery">次のミステリー</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">続ける — 残りライフ%1$d</item>
+        <item quantity="other">続ける — 残りライフ%1$d</item>
+    </plurals>
+    <string name="science_done_today">今日の3つのミステリーは終了。新しい問題は 00:00 UTC に登場します。</string>
+    <!-- Mystery categories -->
+    <string name="science_category_scientist">科学者</string>
+    <string name="science_category_element">元素</string>
+    <string name="science_category_place">科学の場所</string>
+    <string name="science_category_discovery">発見</string>
+    <string name="science_category_instrument">器具</string>
+    <string name="science_prompt_scientist">わたしはだれ？</string>
+    <string name="science_prompt_element">わたしはなに？</string>
+    <string name="science_prompt_place">ここはどこ？</string>
+    <string name="science_prompt_discovery">何が発見された？</string>
+    <string name="science_prompt_instrument">これはなに？</string>
 
     <!-- Everyday Chemistry -->
     <string name="everyday_the_answer">答え</string>
+    <string name="everyday_the_question">問題</string>
+    <string name="everyday_card_number">カード %1$s</string>
+    <string name="everyday_quick_guess">直感で答えてみよう</string>
+    <string name="everyday_show_me">答えを見る</string>
+    <string name="everyday_spot_on">大正解 — いい選択！</string>
+    <string name="everyday_not_quite">おしい — 実はこうなっています。</string>
+    <string name="everyday_chemistry_underneath">その裏にある化学</string>
+    <string name="everyday_try_it">試してみよう：%1$s</string>
+    <string name="everyday_safety">安全：%1$s</string>
+    <string name="everyday_ask_again">もう一度</string>
+    <string name="everyday_got_it">わかった</string>
 
     <!-- Element a Day -->
-    <string name="element_todays">本日の元素</string>
+    <string name="element_todays">今日の元素</string>
+    <string name="element_correct">正解！%1$s がコレクションに加わり、今日の連続記録にカウントされます。</string>
+    <string name="element_wrong">おしい、正解は %1$s。それでもコレクションに加わります。</string>
+    <string name="element_made_in_lab">人工元素</string>
+    <string name="element_period">第%1$d周期</string>
+    <string name="element_group">%1$d族</string>
+    <string name="element_f_block">fブロック</string>
+    <string name="element_remember_it">覚えかた</string>
+    <string name="element_how_found">発見のいきさつ</string>
+    <string name="element_where_meet">どこで出会う？</string>
+    <string name="element_collection">あなたのコレクション</string>
+    <string name="element_collection_count">%1$d / %2$d</string>
+    <string name="element_collection_hint">出会った元素のマスが埋まっていきます。今日の元素はハイライト表示。</string>
+    <string name="element_new_daily">毎日 UTC の午前0時に新しい元素が登場します。</string>
+    <string name="element_which_am_i">わたしはどの元素？</string>
+    <string name="element_first_guess_counts">最初の答えが有効。正解すると今日が連続記録に加わります。</string>
+    <string name="element_tile_description">%1$s、元素記号 %2$s、原子番号 %3$d、原子量 %4$s、電子配置 %5$s</string>
+    <string name="element_outer_electrons">最外殻電子：%1$s軌道</string>
+    <string name="element_picture_description">%1$s に出会える場所</string>
+    <string name="element_melts">融点</string>
+    <string name="element_boils">沸点</string>
+    <string name="element_density">密度</string>
+    <string name="element_discovered">発見</string>
+    <string name="element_not_measured">未測定</string>
+    <string name="element_in_things_you_know">身近なものの中に</string>
+    <string name="element_on_the_board">ボードの上で</string>
+    <string name="element_cloud_description">電子雲モデル。各殻の電子数は %1$s。最外殻電子は %2$s 軌道に入ります。</string>
+    <string name="element_collected">、収集済み</string>
+    <!-- Element families -->
+    <string name="element_family_alkali_metals">アルカリ金属</string>
+    <string name="element_family_alkaline_earth_metals">アルカリ土類金属</string>
+    <string name="element_family_transition_metals">遷移金属</string>
+    <string name="element_family_post_transition_metals">ポスト遷移金属</string>
+    <string name="element_family_metalloids">半金属</string>
+    <string name="element_family_reactive_nonmetals">反応性非金属</string>
+    <string name="element_family_halogens">ハロゲン</string>
+    <string name="element_family_noble_gases">貴ガス</string>
+    <string name="element_family_lanthanides">ランタノイド</string>
+    <string name="element_family_actinides">アクチノイド</string>
+    <!-- States of matter -->
+    <string name="element_state_solid">固体</string>
+    <string name="element_state_liquid">液体</string>
+    <string name="element_state_gas">気体</string>
+    <string name="element_state_unknown">状態不明</string>
 
     <!-- Daily Champions -->
-    <string name="champions_title">デイリー・チャンピオン</string>
+    <string name="champions_title">デイリーチャンピオン</string>
+    <string name="champions_intro">今日の分子ボードとサイエンスのなぞのランをクリアしよう。2つのスコアの合計のうち、UTCの各日で最初に完了した合計が世界ランキングに載ります。</string>
+    <string name="champions_default_player">サイエンスプレイヤー</string>
+    <string name="champions_edit_nickname">ニックネームを編集</string>
+    <string name="champions_retry">Firebase に再接続</string>
+    <string name="champions_todays_total">今日の合計</string>
+    <string name="champions_today_so_far">今日のここまで</string>
+    <string name="champions_today_breakdown">分子ボード %1$s · サイエンス %2$s</string>
+    <string name="champions_not_finished">未完了</string>
+    <string name="champions_in_progress">プレイ中</string>
+    <string name="champions_worldwide">世界ランキング</string>
+    <string name="champions_today_utc">今日 · UTC</string>
+    <string name="champions_offline">オフライン</string>
+    <string name="champions_no_scores_today">今日の世界スコアはまだありません。</string>
+    <string name="champions_scores_need_firebase">Firebase に接続すると世界スコアがここに表示されます。</string>
+    <string name="champions_you">%1$s · あなた</string>
+    <string name="champions_entry_scores">ボード %1$d · サイエンス %2$d</string>
+    <string name="champions_local_scores">この端末でのスコア</string>
+    <string name="champions_local">ローカル</string>
+    <string name="champions_no_runs">完了したランはまだありません</string>
+    <string name="champions_finish_to_place">今日のサイエンスのなぞのランを終えると、最初のスコアが記録されます。</string>
+    <string name="champions_today">今日</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d問正解</item>
+        <item quantity="other">%1$d問正解</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase 接続済み</string>
+    <string name="champions_playing_offline">オフラインでプレイ中</string>
+    <string name="champions_online_note">匿名のプレイヤーIDなので、Google ログイン画面もメールアドレスの表示もありません。完了したデイリーランは1回だけ送信されます。</string>
+    <string name="champions_offline_note">ランとスコアはこの端末に残ります。匿名認証、Firestore、スコア機能を有効にしたら「再接続」をタップしてください。</string>
+    <string name="champions_choose_name">プレイヤー名を決めよう</string>
+    <string name="champions_nickname_note">このニックネームはデイリーチャンピオンで公開されます。本名は使わないでね。</string>
+    <string name="champions_nickname_label">ニックネーム</string>
+    <string name="champions_nickname_support">3–16文字の英数字またはスペース</string>
+    <!-- Daily Champions status messages -->
+    <string name="champions_status_connecting">デイリーチャンピオンに接続中…</string>
+    <string name="champions_status_nickname_requirement">3–16文字の英数字またはスペースを使ってね</string>
+    <string name="champions_status_saving">ニックネームを保存中…</string>
+    <string name="champions_status_saved">ニックネームを保存しました</string>
+    <string name="champions_status_save_failed">ニックネームを保存できませんでした。接続と Firebase の設定を確認してください。</string>
+    <string name="champions_status_connected">世界ランキングに接続しました</string>
+    <string name="champions_status_offline_setup">ローカルのスコアは安全です。匿名認証と Firestore を有効にすると世界ランキングに接続できます。</string>
+    <string name="champions_status_rankings_unavailable">接続済みですが、今はランキングを表示できません。</string>
+    <string name="champions_status_submitting">今日のデイリーチャンピオンのスコアを送信中…</string>
+    <string name="champions_status_submitted_rank">スコア送信完了 · %1$d位</string>
+    <string name="champions_status_submitted">今日のスコアを送信しました</string>
+    <string name="champions_status_already_submitted">今日のスコアは送信済みです</string>
+    <string name="champions_status_offline_retry">オフライン — 後で更新をタップして保存済みスコアを送信</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">連続記録</string>
+    <string name="streak_none">まだ連続記録なし</string>
+    <plurals name="streak_days">
+        <item quantity="one">%1$d日連続</item>
+        <item quantity="other">%1$d日連続</item>
+    </plurals>
+    <string name="streak_played_today">今日はカウント済み。また明日ね。</string>
+    <string name="streak_keep_going">デイリーゲームをどれか遊んで、連続記録をキープしよう。</string>
+    <string name="streak_start">デイリーゲームをどれか遊んで、連続記録をスタートしよう。</string>
+    <string name="streak_best">最長記録</string>
+    <string name="streak_days_played">プレイ日数</string>
+    <string name="streak_best_score">ベストスコア</string>
+    <string name="streak_play_today">今日のボードで遊ぶ</string>
+    <string name="streak_recent">最近のボード</string>
+    <string name="streak_recent_empty">まだデイリーボードを遊んでいません。分子ボードかサイエンスのなぞを終えるとその日がカウントされます。</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d種類</item>
+        <item quantity="other">%1$d種類</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d種類 · ミッション達成</item>
+        <item quantity="other">%1$d種類 · ミッション達成</item>
+    </plurals>
+    <string name="streak_footer">ボードは毎日 UTC の午前0時に変わります。履歴はこの端末にのみ保存されます。</string>
+    <string name="streak_previous_month">前の月</string>
+    <string name="streak_next_month">次の月</string>
+    <string name="streak_day_not_played">、未プレイ</string>
+    <string name="streak_day_board_score">、分子ボードのスコア %1$d</string>
+    <string name="streak_day_science">、サイエンスのなぞ完了</string>
+    <string name="streak_day_element">、元素を当てた</string>
+    <string name="streak_day_today">、今日</string>
+    <string name="streak_legend_board">ボード</string>
+    <string name="streak_legend_science">サイエンス</string>
+    <string name="streak_legend_element">元素</string>
+    <string name="streak_legend_both">両方のゲーム</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">発見レビュー</string>
+    <string name="review_intro">認識されない組み合わせも「ありえない」とは判定しません。後で確認できるようにこの端末に保存されます。</string>
+    <string name="review_empty">レビュー待ちはありません</string>
+    <plurals name="review_tried">
+        <item quantity="one">まだ認識されていません · %1$d回試した</item>
+        <item quantity="other">まだ認識されていません · %1$d回試した</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">設定</string>
     <string name="settings_sound">サウンド</string>
+    <string name="settings_sound_description">発見とタイルの効果音</string>
     <string name="settings_vibration">バイブレーション</string>
+    <string name="settings_vibration_description">やさしい振動フィードバック</string>
     <string name="settings_reduced_motion">動きを減らす</string>
-    <string name="settings_privacy">プライバシー</string>
-    <string name="settings_about">EdBetterについて</string>
+    <string name="settings_reduced_motion_description">シンプルな画面切り替えを使う</string>
     <string name="settings_language">言語</string>
-    <string name="settings_language_description">アプリの言語を選択</string>
+    <string name="settings_language_description">アプリの言語を選ぶ</string>
     <string name="settings_language_system">システムのデフォルト</string>
+    <string name="settings_privacy">プライバシー</string>
+    <string name="settings_privacy_text">進行状況はこのスマホに保存されます。広告は Google が提供しています。</string>
+    <string name="settings_ad_choices">広告の設定</string>
+    <string name="settings_privacy_policy">プライバシーポリシー</string>
+    <string name="settings_about">EdBetter について</string>
+    <string name="settings_about_text">好奇心を理解に変える、楽しい科学アプリを作っています。</string>
+    <string name="settings_more">EdBetter のほかのアプリ</string>
+    <string name="settings_kemistri_description">レベル、反応、分子で周期表をマスターしよう。</string>
+    <string name="settings_open_kemistri">Google Play で Kemistri を開く</string>
+    <string name="settings_version">バージョン %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">この端末では広告のプライバシー設定は不要です</string>
 </resources>
-

@@ -1,51 +1,441 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Russian translations. Review with native speaker. -->
+<!-- Russian translations. -->
 <resources>
     <string name="app_name">Kemistri Everyday</string>
 
     <!-- Common -->
     <string name="common_back">Назад</string>
-    <string name="common_continue">Продолжить</string>
-    <string name="common_cancel">Отменить</string>
+    <string name="common_continue">Далее</string>
+    <string name="common_cancel">Отмена</string>
     <string name="common_save">Сохранить</string>
     <string name="common_delete">Удалить</string>
     <string name="common_refresh">Обновить</string>
-    <string name="common_got_it">Понял</string>
+    <string name="common_got_it">Понятно</string>
     <string name="common_home">Главная</string>
+    <plurals name="common_points_awarded">
+        <item quantity="one">+%1$d очко</item>
+        <item quantity="few">+%1$d очка</item>
+        <item quantity="many">+%1$d очков</item>
+        <item quantity="other">+%1$d очка</item>
+    </plurals>
 
     <!-- Home -->
+    <string name="home_logo_description">Логотип Kemistri Everyday</string>
     <string name="home_tagline">Каждый день — новое чудо химии</string>
-    <string name="home_daily_title">Ежедневная доска молекул</string>
-    <string name="home_everyday_title">Химия в повседневной жизни</string>
+    <string name="home_open_champions">Открыть «Чемпионов дня»</string>
+    <string name="home_playing_as">Игрок: %1$s</string>
+    <string name="home_daily_title">Доска молекул дня</string>
+    <string name="home_daily_subtitle">Одна общая химическая головоломка каждый день</string>
+    <plurals name="home_daily_subtitle_streak">
+        <item quantity="one">Серия: %1$d день · одна общая головоломка в день</item>
+        <item quantity="few">Серия: %1$d дня · одна общая головоломка в день</item>
+        <item quantity="many">Серия: %1$d дней · одна общая головоломка в день</item>
+        <item quantity="other">Серия: %1$d дня · одна общая головоломка в день</item>
+    </plurals>
+    <string name="home_science_title">Тайны науки</string>
+    <string name="home_science_subtitle">Три новые научные загадки каждый день</string>
+    <string name="home_everyday_title">Химия вокруг нас</string>
+    <string name="home_everyday_subtitle">Угадай, какая химия прячется в жизни</string>
     <string name="home_element_title">Элемент дня</string>
+    <string name="home_element_subtitle">Каждый день — новый элемент</string>
     <string name="home_nav_streak">Серия</string>
     <string name="home_nav_leaders">Лидеры</string>
     <string name="home_nav_settings">Настройки</string>
 
-    <!-- Molecule Hunt -->
+    <!-- Molecule Hunt / Daily Molecule Board -->
     <string name="hunt_title_standard">Охота на молекулы</string>
+    <string name="hunt_daily_history">История по дням</string>
+    <string name="hunt_session_discoveries">Открытия за игру</string>
+    <string name="hunt_game_rules">Правила игры</string>
+    <string name="hunt_shared_puzzle">Общая головоломка · %1$s</string>
+    <string name="hunt_mission_goal">Найди 10 разных веществ</string>
+    <string name="hunt_hint">Подсказка</string>
+    <string name="hunt_shuffle">Перемешать</string>
+    <string name="hunt_clear">Сбросить</string>
+    <string name="hunt_discover">Открыть</string>
+    <plurals name="hunt_already_found_toast">
+        <item quantity="one">%1$s уже найдено · +%2$d очко</item>
+        <item quantity="few">%1$s уже найдено · +%2$d очка</item>
+        <item quantity="many">%1$s уже найдено · +%2$d очков</item>
+        <item quantity="other">%1$s уже найдено · +%2$d очка</item>
+    </plurals>
+    <string name="hunt_stat_moves">Ходы</string>
+    <string name="hunt_stat_score">Очки</string>
+    <string name="hunt_stat_found">Найдено</string>
+    <string name="hunt_tile_description">%1$s, ряд %2$d, столбец %3$d</string>
+    <string name="hunt_tile_selected">, выбран номер %1$d</string>
+    <string name="hunt_tile_hinted">, подсказка</string>
+    <string name="hunt_select_neighbours">Выбирай соседние атомы</string>
+    <string name="hunt_ready_to_review">Можно проверить</string>
+    <string name="hunt_mission_complete_title">Миссия выполнена!</string>
+    <!-- %1$s = hunt_found_substances, %2$s = hunt_moves_remaining -->
+    <string name="hunt_mission_complete_text">Найдено: %1$s, осталось: %2$s. Очки: %3$d</string>
+    <plurals name="hunt_found_substances">
+        <item quantity="one">%1$d вещество</item>
+        <item quantity="few">%1$d вещества</item>
+        <item quantity="many">%1$d веществ</item>
+        <item quantity="other">%1$d вещества</item>
+    </plurals>
+    <plurals name="hunt_moves_remaining">
+        <item quantity="one">%1$d ход</item>
+        <item quantity="few">%1$d хода</item>
+        <item quantity="many">%1$d ходов</item>
+        <item quantity="other">%1$d хода</item>
+    </plurals>
+    <string name="hunt_keep_discovering">Искать дальше</string>
+    <string name="hunt_finish">Завершить</string>
+    <string name="hunt_discovery_great">Отличное открытие!</string>
+    <string name="hunt_discovery_again">Снова открыто!</string>
+    <!-- Score breakdown parts, joined with " · " -->
+    <plurals name="hunt_score_atoms">
+        <item quantity="one">%1$d атом</item>
+        <item quantity="few">%1$d атома</item>
+        <item quantity="many">%1$d атомов</item>
+        <item quantity="other">%1$d атома</item>
+    </plurals>
+    <plurals name="hunt_score_elements">
+        <item quantity="one">%1$d элемент</item>
+        <item quantity="few">%1$d элемента</item>
+        <item quantity="many">%1$d элементов</item>
+        <item quantity="other">%1$d элемента</item>
+    </plurals>
+    <string name="hunt_score_rarity">редкость +%1$d</string>
+    <string name="hunt_score_streak">серия +%1$d</string>
+    <string name="hunt_rules_title">Охота на молекулы — правила</string>
+    <string name="hunt_rules_subtitle">Собирай настоящие химические составы на поле 5 × 5</string>
+    <string name="hunt_rule_1">Соединяй соседние атомы по горизонтали, вертикали или диагонали.</string>
+    <string name="hunt_rule_2">Для большинства открытий нужно 2–6 атомов; сложные формулы могут содержать 7.</string>
+    <string name="hunt_rule_3">Нажми «Открыть», чтобы проверить состав. Порядок выбора не меняет формулу.</string>
+    <string name="hunt_rule_4">Известное вещество приносит очки, тратит один ход и убирает выбранные клетки.</string>
+    <string name="hunt_rule_5">Атомы падают вниз, а сверху появляются новые, чтобы сохранить баланс.</string>
+    <string name="hunt_rule_6">Найди 10 разных веществ, чтобы выполнить миссию.</string>
+    <string name="hunt_rule_7" formatted="false">Повторы разрешены: они тратят ход и дают 25% очков, но не увеличивают число уникальных находок.</string>
+    <string name="hunt_rule_8">Пока неизвестные сочетания не тратят ход и сохраняются для «Проверки открытий».</string>
+    <string name="hunt_rule_9">Подсказка и перемешивание пока не тратят ходы.</string>
+    <string name="hunt_rule_10">После миссии можно продолжать открытия оставшимися ходами.</string>
+    <string name="hunt_scoring">Подсчёт очков</string>
+    <string name="hunt_scoring_formula">Очки = 5 + 5A + 5E + R + S</string>
+    <string name="hunt_scoring_legend">A = атомы · E = разные элементы · R = редкость (0–40) · S = серия новых открытий (0–15)</string>
+    <string name="hunt_formula_note">Формула описывает состав, а не обязательно одну структуру. Например, C₂H₆O может означать больше одного вещества.</string>
+    <string name="hunt_discoveries_title">Открытия этой охоты</string>
+    <!-- Discovery summary parts, joined with " · " -->
+    <plurals name="hunt_discoveries_mission">
+        <item quantity="one">%1$d для миссии</item>
+        <item quantity="few">%1$d для миссии</item>
+        <item quantity="many">%1$d для миссии</item>
+        <item quantity="other">%1$d для миссии</item>
+    </plurals>
+    <plurals name="hunt_discoveries_extra">
+        <item quantity="one">%1$d сверх</item>
+        <item quantity="few">%1$d сверх</item>
+        <item quantity="many">%1$d сверх</item>
+        <item quantity="other">%1$d сверх</item>
+    </plurals>
+    <plurals name="hunt_discoveries_total">
+        <item quantity="one">всего %1$d находка</item>
+        <item quantity="few">всего %1$d находки</item>
+        <item quantity="many">всего %1$d находок</item>
+        <item quantity="other">всего %1$d находки</item>
+    </plurals>
+    <string name="hunt_discoveries_empty">Пока нет открытий — соедини атомы и посмотри, что получится!</string>
+    <string name="hunt_mission_discoveries">ОТКРЫТИЯ МИССИИ</string>
+    <string name="hunt_extra_discoveries">ДОПОЛНИТЕЛЬНЫЕ ОТКРЫТИЯ</string>
+    <string name="hunt_back_to_hunt">Вернуться к охоте</string>
+    <string name="hunt_result_brilliant">Блестящая химия!</string>
+    <string name="hunt_result_complete">Охота завершена</string>
+    <plurals name="hunt_result_summary">
+        <item quantity="one">Очки %1$d · %2$d уникальное вещество</item>
+        <item quantity="few">Очки %1$d · %2$d уникальных вещества</item>
+        <item quantity="many">Очки %1$d · %2$d уникальных веществ</item>
+        <item quantity="other">Очки %1$d · %2$d уникального вещества</item>
+    </plurals>
+    <string name="hunt_play_again">Ещё раз</string>
+    <!-- Game engine messages, translated at display time (GameEngine stays English and Context-free) -->
+    <string name="hunt_msg_choose_neighbour">Выбери соседнюю клетку</string>
+    <plurals name="hunt_msg_max_atoms">
+        <item quantity="one">В открытии может быть до %1$d атома</item>
+        <item quantity="few">В открытии может быть до %1$d атомов</item>
+        <item quantity="many">В открытии может быть до %1$d атомов</item>
+        <item quantity="other">В открытии может быть до %1$d атома</item>
+    </plurals>
+    <string name="hunt_msg_board_refreshed">Поле обновлено — попробуй новую расстановку</string>
+    <string name="hunt_msg_hint_glowing">Возможное открытие подсвечено</string>
+    <string name="hunt_msg_board_shuffled">Поле перемешано</string>
+    <string name="hunt_msg_no_moves">Ходов не осталось</string>
+    <string name="hunt_msg_too_short">Соедини хотя бы два атома</string>
+    <string name="hunt_msg_not_recognised">%1$s пока неизвестно — сохранено для проверки</string>
+    <string name="hunt_msg_new_discovery">Новое открытие!</string>
+    <string name="hunt_msg_repeat_discovery" formatted="false">Повторное открытие · 25% очков</string>
 
     <!-- Science Uncovered -->
-    <string name="science_run_score">"РЕЗУЛЬТАТ РАУНДА %1$d"</string>
+    <string name="science_run_score">"ОЧКИ ЗАБЕГА  %1$d"</string>
+    <string name="science_run_status">Сегодняшний забег · Загадка %1$d из %2$d · Рекорд %3$d</string>
+    <string name="science_possible_points">можно получить очков</string>
+    <!-- %1$s = science_letter_count, %2$s = science_word_count -->
+    <string name="science_answer_shape">%1$s · %2$s</string>
+    <plurals name="science_letter_count">
+        <item quantity="one">%1$d буква</item>
+        <item quantity="few">%1$d буквы</item>
+        <item quantity="many">%1$d букв</item>
+        <item quantity="other">%1$d буквы</item>
+    </plurals>
+    <plurals name="science_word_count">
+        <item quantity="one">%1$d слово</item>
+        <item quantity="few">%1$d слова</item>
+        <item quantity="many">%1$d слов</item>
+        <item quantity="other">%1$d слова</item>
+    </plurals>
+    <string name="science_clue_number">ПОДСКАЗКА %1$d</string>
+    <string name="science_letter_wrong">Буквы %1$s нет в ответе — минус одна жизнь</string>
+    <string name="science_keyboard_hint">Нажми на букву, чтобы открыть все её места</string>
+    <string name="science_next_clue">Подсказка (−15)</string>
+    <string name="science_all_clues">Все подсказки открыты</string>
+    <string name="science_skip">Пропуск (−1 жизнь)</string>
+    <plurals name="science_solved">
+        <item quantity="one">Решено — +%1$d очко!</item>
+        <item quantity="few">Решено — +%1$d очка!</item>
+        <item quantity="many">Решено — +%1$d очков!</item>
+        <item quantity="other">Решено — +%1$d очка!</item>
+    </plurals>
+    <plurals name="science_run_over">
+        <item quantity="one">Забег окончен — %1$d очко</item>
+        <item quantity="few">Забег окончен — %1$d очка</item>
+        <item quantity="many">Забег окончен — %1$d очков</item>
+        <item quantity="other">Забег окончен — %1$d очка</item>
+    </plurals>
+    <string name="science_revealed">Ответ раскрыт — минус одна жизнь</string>
+    <plurals name="science_perfect_bonus">
+        <item quantity="one">Идеальное решение: бонус +%1$d учтён.</item>
+        <item quantity="few">Идеальное решение: бонус +%1$d учтён.</item>
+        <item quantity="many">Идеальное решение: бонус +%1$d учтён.</item>
+        <item quantity="other">Идеальное решение: бонус +%1$d учтён.</item>
+    </plurals>
+    <plurals name="science_life_bonus">
+        <item quantity="one">Бонус за жизни: +%1$d за %2$d оставшуюся жизнь.</item>
+        <item quantity="few">Бонус за жизни: +%1$d за %2$d оставшиеся жизни.</item>
+        <item quantity="many">Бонус за жизни: +%1$d за %2$d оставшихся жизней.</item>
+        <item quantity="other">Бонус за жизни: +%1$d за %2$d оставшейся жизни.</item>
+    </plurals>
+    <plurals name="science_solved_after">
+        <item quantity="one">Решено после %1$d неверной буквы.</item>
+        <item quantity="few">Решено после %1$d неверных букв.</item>
+        <item quantity="many">Решено после %1$d неверных букв.</item>
+        <item quantity="other">Решено после %1$d неверной буквы.</item>
+    </plurals>
+    <plurals name="science_run_solved_count">
+        <item quantity="one">%1$d загадка решена в этом забеге</item>
+        <item quantity="few">%1$d загадки решены в этом забеге</item>
+        <item quantity="many">%1$d загадок решено в этом забеге</item>
+        <item quantity="other">%1$d загадки решено в этом забеге</item>
+    </plurals>
+    <string name="science_back_home">НА ГЛАВНУЮ</string>
+    <string name="science_see_score">ОЧКИ ЗА СЕГОДНЯ</string>
+    <string name="science_next_mystery">СЛЕДУЮЩАЯ ЗАГАДКА</string>
+    <plurals name="science_continue_lives">
+        <item quantity="one">ДАЛЕЕ — ОСТАЛАСЬ %1$d ЖИЗНЬ</item>
+        <item quantity="few">ДАЛЕЕ — ОСТАЛОСЬ %1$d ЖИЗНИ</item>
+        <item quantity="many">ДАЛЕЕ — ОСТАЛОСЬ %1$d ЖИЗНЕЙ</item>
+        <item quantity="other">ДАЛЕЕ — ОСТАЛОСЬ %1$d ЖИЗНИ</item>
+    </plurals>
+    <string name="science_done_today">Три загадки на сегодня решены. Новые откроются в 00:00 UTC.</string>
+    <!-- Mystery categories (MysteryCategory label and prompt) -->
+    <string name="science_category_scientist">Учёный</string>
+    <string name="science_category_element">Элемент</string>
+    <string name="science_category_place">Научное место</string>
+    <string name="science_category_discovery">Открытие</string>
+    <string name="science_category_instrument">Прибор</string>
+    <string name="science_prompt_scientist">Кто я?</string>
+    <string name="science_prompt_element">Что я?</string>
+    <string name="science_prompt_place">Где я?</string>
+    <string name="science_prompt_discovery">Что открыли?</string>
+    <string name="science_prompt_instrument">Что это?</string>
 
     <!-- Everyday Chemistry -->
     <string name="everyday_the_answer">ОТВЕТ</string>
+    <string name="everyday_the_question">ВОПРОС</string>
+    <string name="everyday_card_number">КАРТОЧКА %1$s</string>
+    <string name="everyday_quick_guess">УГАДАЙ БЫСТРО</string>
+    <string name="everyday_show_me">ПОКАЖИ</string>
+    <string name="everyday_spot_on">В точку — отличный выбор.</string>
+    <string name="everyday_not_quite">Не совсем — вот что происходит.</string>
+    <string name="everyday_chemistry_underneath">ХИМИЯ ВНУТРИ</string>
+    <string name="everyday_try_it">Попробуй: %1$s</string>
+    <string name="everyday_safety">Безопасность: %1$s</string>
+    <string name="everyday_ask_again">ЕЩЁ ВОПРОС</string>
+    <string name="everyday_got_it">ПОНЯТНО</string>
 
     <!-- Element a Day -->
-    <string name="element_todays">ЭЛЕМЕНТ СЕГОДНЯ</string>
+    <string name="element_todays">ЭЛЕМЕНТ ДНЯ</string>
+    <string name="element_correct">Верно! %1$s теперь в твоей коллекции и засчитан в серию.</string>
+    <string name="element_wrong">Не совсем, это был %1$s. Он всё равно попадает в коллекцию.</string>
+    <string name="element_made_in_lab">Получен в лаборатории</string>
+    <string name="element_period">Период %1$d</string>
+    <string name="element_group">Группа %1$d</string>
+    <string name="element_f_block">f-блок</string>
+    <string name="element_remember_it">ЗАПОМНИ</string>
+    <string name="element_how_found">КАК ЕГО ОТКРЫЛИ</string>
+    <string name="element_where_meet">ГДЕ ОН ВСТРЕЧАЕТСЯ</string>
+    <string name="element_collection">Твоя коллекция</string>
+    <string name="element_collection_count">%1$d из %2$d</string>
+    <string name="element_collection_hint">Каждый встреченный элемент заполняет свою клетку. Сегодняшний подсвечен.</string>
+    <string name="element_new_daily">Новый элемент появляется каждый день в полночь по UTC.</string>
+    <string name="element_which_am_i">Какой я элемент?</string>
+    <string name="element_first_guess_counts">Считается первая попытка. Угадай, чтобы продлить серию.</string>
+    <string name="element_tile_description">%1$s, символ %2$s, атомный номер %3$d, атомная масса %4$s, электронная конфигурация %5$s</string>
+    <string name="element_outer_electrons">Внешние электроны: %1$s-орбиталь</string>
+    <string name="element_picture_description">Где можно встретить %1$s</string>
+    <string name="element_melts">Плавится</string>
+    <string name="element_boils">Кипит</string>
+    <string name="element_density">Плотность</string>
+    <string name="element_discovered">Открыт</string>
+    <string name="element_not_measured">Не измерено</string>
+    <string name="element_in_things_you_know">В ЗНАКОМЫХ ВЕЩАХ</string>
+    <string name="element_on_the_board">На поле</string>
+    <string name="element_cloud_description">Модель электронного облака. Электроны по оболочкам: %1$s; внешние электроны заполняют %2$s-орбиталь.</string>
+    <string name="element_collected">, собран</string>
+    <!-- Element families (DailyElement.family) -->
+    <string name="element_family_alkali_metals">Щелочные металлы</string>
+    <string name="element_family_alkaline_earth_metals">Щёлочноземельные металлы</string>
+    <string name="element_family_transition_metals">Переходные металлы</string>
+    <string name="element_family_post_transition_metals">Постпереходные металлы</string>
+    <string name="element_family_metalloids">Металлоиды</string>
+    <string name="element_family_reactive_nonmetals">Активные неметаллы</string>
+    <string name="element_family_halogens">Галогены</string>
+    <string name="element_family_noble_gases">Благородные газы</string>
+    <string name="element_family_lanthanides">Лантаноиды</string>
+    <string name="element_family_actinides">Актиноиды</string>
+    <!-- States of matter (DailyElement.state) -->
+    <string name="element_state_solid">Твёрдое</string>
+    <string name="element_state_liquid">Жидкое</string>
+    <string name="element_state_gas">Газ</string>
+    <string name="element_state_unknown">Состояние неизвестно</string>
 
     <!-- Daily Champions -->
-    <string name="champions_title">Ежедневные чемпионы</string>
+    <string name="champions_title">Чемпионы дня</string>
+    <string name="champions_intro">Пройди сегодняшнюю Доску молекул и забег «Тайны науки». Очки за обе игры складываются, и твой первый полный результат за каждые сутки по UTC попадает в мировой рейтинг.</string>
+    <string name="champions_default_player">Юный учёный</string>
+    <string name="champions_edit_nickname">Изменить ник</string>
+    <string name="champions_retry">Переподключить Firebase</string>
+    <string name="champions_todays_total">ИТОГ ЗА СЕГОДНЯ</string>
+    <string name="champions_today_so_far">СЕГОДНЯ ПОКА</string>
+    <string name="champions_today_breakdown">Доска молекул %1$s · Наука %2$s</string>
+    <string name="champions_not_finished">не завершено</string>
+    <string name="champions_in_progress">в процессе</string>
+    <string name="champions_worldwide">Мировой рейтинг</string>
+    <string name="champions_today_utc">СЕГОДНЯ · UTC</string>
+    <string name="champions_offline">ОФЛАЙН</string>
+    <string name="champions_no_scores_today">Сегодня в мировом рейтинге ещё нет результатов.</string>
+    <string name="champions_scores_need_firebase">Мировые результаты появятся здесь после подключения к Firebase.</string>
+    <string name="champions_you">%1$s · Ты</string>
+    <string name="champions_entry_scores">Доска %1$d · Наука %2$d</string>
+    <string name="champions_local_scores">Твои результаты на этом устройстве</string>
+    <string name="champions_local">ЛОКАЛЬНО</string>
+    <string name="champions_no_runs">Пока нет завершённых забегов</string>
+    <string name="champions_finish_to_place">Пройди сегодняшний забег «Тайны науки», чтобы получить первый результат.</string>
+    <string name="champions_today">Сегодня</string>
+    <plurals name="champions_mysteries_solved">
+        <item quantity="one">%1$d загадка решена</item>
+        <item quantity="few">%1$d загадки решены</item>
+        <item quantity="many">%1$d загадок решено</item>
+        <item quantity="other">%1$d загадки решено</item>
+    </plurals>
+    <string name="champions_firebase_connected">Firebase подключён</string>
+    <string name="champions_playing_offline">Игра офлайн</string>
+    <string name="champions_online_note">Анонимный профиль игрока делает всё проще: никакого входа через Google и никакой почты на экране. Завершённый дневной забег отправляется один раз.</string>
+    <string name="champions_offline_note">Твой забег и очки хранятся на этом устройстве. Когда будут включены анонимная аутентификация, Firestore и функция подсчёта очков, нажми «Переподключить Firebase».</string>
+    <string name="champions_choose_name">Выбери имя игрока</string>
+    <string name="champions_nickname_note">Этот публичный ник видно в «Чемпионах дня». Не используй своё настоящее имя.</string>
+    <string name="champions_nickname_label">Ник</string>
+    <string name="champions_nickname_support">3–16 букв, цифр или пробелов</string>
+    <!-- Daily Champions status messages (MainViewModel / ScienceCloudState) -->
+    <string name="champions_status_connecting">Подключение к «Чемпионам дня»…</string>
+    <string name="champions_status_nickname_requirement">Используй 3–16 букв, цифр или пробелов</string>
+    <string name="champions_status_saving">Сохраняем ник…</string>
+    <string name="champions_status_saved">Ник сохранён</string>
+    <string name="champions_status_save_failed">Не удалось сохранить ник. Проверь подключение и настройку Firebase.</string>
+    <string name="champions_status_connected">Мировой рейтинг подключён</string>
+    <string name="champions_status_offline_setup">Локальные результаты в сохранности. Включи анонимную аутентификацию и Firestore, чтобы подключить мировой рейтинг.</string>
+    <string name="champions_status_rankings_unavailable">Подключено, но рейтинг сейчас недоступен.</string>
+    <string name="champions_status_submitting">Отправляем сегодняшний результат…</string>
+    <string name="champions_status_submitted_rank">Результат отправлен · место №%1$d</string>
+    <string name="champions_status_submitted">Сегодняшний результат отправлен</string>
+    <string name="champions_status_already_submitted">Сегодняшний результат уже отправлен</string>
+    <string name="champions_status_offline_retry">Офлайн — нажми «Обновить», чтобы отправить сохранённый результат позже</string>
+
+    <!-- Daily Streak -->
+    <string name="streak_title">Ежедневная серия</string>
+    <string name="streak_none">Серии пока нет</string>
+    <plurals name="streak_days">
+        <item quantity="one">Серия: %1$d день</item>
+        <item quantity="few">Серия: %1$d дня</item>
+        <item quantity="many">Серия: %1$d дней</item>
+        <item quantity="other">Серия: %1$d дня</item>
+    </plurals>
+    <string name="streak_played_today">Сегодня засчитано. Возвращайся завтра.</string>
+    <string name="streak_keep_going">Сыграй в любую ежедневную игру, чтобы не прервать серию.</string>
+    <string name="streak_start">Сыграй в любую ежедневную игру, чтобы начать серию.</string>
+    <string name="streak_best">Лучшая серия</string>
+    <string name="streak_days_played">Дней сыграно</string>
+    <string name="streak_best_score">Лучший результат</string>
+    <string name="streak_play_today">Играть сегодня</string>
+    <string name="streak_recent">Последние доски</string>
+    <string name="streak_recent_empty">Ежедневных досок пока не было. День засчитывается, когда ты проходишь Доску молекул или «Тайны науки».</string>
+    <plurals name="streak_unique">
+        <item quantity="one">%1$d уникальное</item>
+        <item quantity="few">%1$d уникальных</item>
+        <item quantity="many">%1$d уникальных</item>
+        <item quantity="other">%1$d уникального</item>
+    </plurals>
+    <plurals name="streak_unique_mission">
+        <item quantity="one">%1$d уникальное · миссия выполнена</item>
+        <item quantity="few">%1$d уникальных · миссия выполнена</item>
+        <item quantity="many">%1$d уникальных · миссия выполнена</item>
+        <item quantity="other">%1$d уникального · миссия выполнена</item>
+    </plurals>
+    <string name="streak_footer">Доска меняется каждый день в полночь по UTC. История хранится только на этом устройстве.</string>
+    <string name="streak_previous_month">Предыдущий месяц</string>
+    <string name="streak_next_month">Следующий месяц</string>
+    <string name="streak_day_not_played">, не сыграно</string>
+    <string name="streak_day_board_score">, очки Доски молекул: %1$d</string>
+    <string name="streak_day_science">, «Тайны науки» пройдены</string>
+    <string name="streak_day_element">, элемент угадан</string>
+    <string name="streak_day_today">, сегодня</string>
+    <string name="streak_legend_board">Доска</string>
+    <string name="streak_legend_science">Наука</string>
+    <string name="streak_legend_element">Элемент</string>
+    <string name="streak_legend_both">Обе игры</string>
+
+    <!-- Discovery Review -->
+    <string name="review_title">Проверка открытий</string>
+    <string name="review_intro">Неизвестные сочетания не считаются невозможными. Они хранятся на этом устройстве для проверки позже.</string>
+    <string name="review_empty">Нечего проверять</string>
+    <plurals name="review_tried">
+        <item quantity="one">Пока неизвестно · %1$d попытка</item>
+        <item quantity="few">Пока неизвестно · %1$d попытки</item>
+        <item quantity="many">Пока неизвестно · %1$d попыток</item>
+        <item quantity="other">Пока неизвестно · %1$d попытки</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">Настройки</string>
     <string name="settings_sound">Звук</string>
+    <string name="settings_sound_description">Звуки открытий и клеток</string>
     <string name="settings_vibration">Вибрация</string>
-    <string name="settings_reduced_motion">Уменьшенные анимации</string>
-    <string name="settings_privacy">Конфиденциальность</string>
-    <string name="settings_about">О EdBetter</string>
+    <string name="settings_vibration_description">Лёгкий отклик при касании</string>
+    <string name="settings_reduced_motion">Меньше анимации</string>
+    <string name="settings_reduced_motion_description">Простые переходы</string>
     <string name="settings_language">Язык</string>
-    <string name="settings_language_description">Выберите язык приложения</string>
-    <string name="settings_language_system">Системный по умолчанию</string>
+    <string name="settings_language_description">Выбери язык приложения</string>
+    <string name="settings_language_system">Как в системе</string>
+    <string name="settings_privacy">Конфиденциальность</string>
+    <string name="settings_privacy_text">Твой прогресс хранится на этом телефоне. Реклама предоставляется Google.</string>
+    <string name="settings_ad_choices">Настройки рекламы</string>
+    <string name="settings_privacy_policy">Политика конфиденциальности</string>
+    <string name="settings_about">О EdBetter</string>
+    <string name="settings_about_text">Мы делаем весёлые научные приложения, которые превращают любопытство в понимание.</string>
+    <string name="settings_more">Ещё от EdBetter</string>
+    <string name="settings_kemistri_description">Освой таблицу Менделеева через уровни, реакции и молекулы.</string>
+    <string name="settings_open_kemistri">Открыть Kemistri в Google Play</string>
+    <string name="settings_version">Версия %1$s · © 2026 EdBetter</string>
+    <string name="settings_ad_privacy_unavailable">На этом устройстве настройки конфиденциальности рекламы не требуются</string>
 </resources>
-
