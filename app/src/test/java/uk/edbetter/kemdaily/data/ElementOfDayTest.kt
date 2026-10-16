@@ -64,4 +64,22 @@ class ElementOfDayTest {
         assertEquals(5 to 3, ElementOfDay.outerSubshell(93))
         assertEquals(7 to 1, ElementOfDay.outerSubshell(118))
     }
+
+    private fun config(symbol: String) = ElementOfDay.bySymbol(symbol)!!.let { element ->
+        element.core.orEmpty() + element.configuration.joinToString(" ") { (subshell, count) -> "$subshell$count" }
+    }
+
+    @Test fun configurationsUseNobleGasShorthand() {
+        assertEquals("1s1", config("H"))
+        assertEquals("[Ne]3s1", config("Na"))
+        assertEquals("[Ar]3d5 4s1", config("Cr"))
+        assertEquals("[Ar]3d10 4s1", config("Cu"))
+        assertEquals("[Kr]4d10", config("Pd"))
+        assertEquals("[Xe]4f14 5d10 6s1", config("Au"))
+        assertEquals("[Rn]5f4 6d1 7s2", config("Np"))
+        assertEquals("[Rn]5f14 7s2 7p1", config("Lr"))
+        assertEquals("(237)", ElementOfDay.bySymbol("Np")!!.atomicWeight)
+        assertEquals("Liquid", ElementOfDay.bySymbol("Br")!!.state)
+        assertEquals("Gas", ElementOfDay.bySymbol("Rn")!!.state)
+    }
 }

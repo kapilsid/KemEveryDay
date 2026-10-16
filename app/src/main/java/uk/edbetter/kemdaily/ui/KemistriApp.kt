@@ -102,7 +102,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -1064,21 +1068,36 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
             }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Box(
+                    Column(
                         Modifier.weight(1f).aspectRatio(1f)
-                            .background(tint, RoundedCornerShape(26.dp))
-                            .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(26.dp))
-                            .semantics { contentDescription = "${element.name}, symbol ${element.symbol}, atomic number ${element.atomicNumber}" },
+                            .background(tint, RoundedCornerShape(22.dp))
+                            .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(22.dp))
+                            .padding(horizontal = 12.dp, vertical = 10.dp)
+                            .semantics {
+                                contentDescription = "${element.name}, symbol ${element.symbol}, atomic number ${element.atomicNumber}, " +
+                                    "atomic weight ${element.atomicWeight}, electron configuration " +
+                                    (element.core.orEmpty() + " " + element.configuration.joinToString(" ") { "${it.first} ${it.second}" })
+                            },
                     ) {
-                        Text(
-                            element.atomicNumber.toString(),
-                            Modifier.align(Alignment.TopStart).padding(12.dp),
-                            color = Navy, fontWeight = FontWeight.Bold, fontSize = 16.sp,
-                        )
-                        Column(Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(element.symbol, color = Navy, fontWeight = FontWeight.Black, fontSize = 54.sp)
-                            Text(element.name, color = Navy.copy(alpha = .8f), fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                            Text(element.atomicNumber.toString(), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp, modifier = Modifier.weight(1f))
+                            Text(element.atomicWeight, color = Navy, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
                         }
+                        Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
+                            Text(element.symbol, color = Navy, fontWeight = FontWeight.Black, fontSize = 52.sp)
+                        }
+                        Text(
+                            buildAnnotatedString {
+                                element.core?.let(::append)
+                                element.configuration.forEachIndexed { index, (subshell, count) ->
+                                    if (index > 0) append(" ")
+                                    append(subshell)
+                                    withStyle(SpanStyle(baselineShift = BaselineShift.Superscript, fontSize = 8.sp)) { append(count.toString()) }
+                                }
+                            },
+                            color = Navy, fontSize = 11.sp, lineHeight = 14.sp, maxLines = 2,
+                        )
+                        Text(element.name.lowercase(), color = Navy, fontWeight = FontWeight.Bold, fontSize = 14.sp, maxLines = 1)
                     }
                     val shells = remember(element) { ElementOfDay.electronShells(element.atomicNumber) }
                     val outer = remember(element) { ElementOfDay.outerSubshell(element.atomicNumber) }
@@ -1093,7 +1112,10 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
             }
             item {
                 Text(
-                    listOf(element.family, "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block").joinToString(" · "),
+                    listOfNotNull(
+                        element.family, element.state, "Made in a lab".takeIf { element.atomicNumber >= 93 },
+                        "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block",
+                    ).joinToString(" · "),
                     color = Navy.copy(alpha = .7f), fontWeight = FontWeight.Bold, fontSize = 13.sp,
                 )
             }
