@@ -193,6 +193,7 @@ fun KemistriApp(viewModel: MainViewModel = viewModel()) {
 private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
     val streak = DailyHistory.streaks(history.keys, viewModel.todayUtc()).current
+    val cloud by viewModel.scienceCloud.collectAsStateWithLifecycle()
     Scaffold(containerColor = Color(0xFFE8FAFF)) { padding ->
         LazyColumn(
             modifier = Modifier.fillMaxSize().padding(padding),
@@ -216,6 +217,21 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold,
                         )
+                        if (cloud.nickname.isNotBlank()) {
+                            // The public leaderboard name; tapping opens Daily Champions, where it can be changed.
+                            Row(
+                                Modifier.padding(top = 6.dp)
+                                    .clip(CircleShape)
+                                    .background(Color.White)
+                                    .clickable(onClickLabel = "Open Daily Champions") { nav.navigate(Routes.Leaderboard) }
+                                    .padding(horizontal = 10.dp, vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(16.dp))
+                                Spacer(Modifier.width(5.dp))
+                                Text("Playing as ${cloud.nickname}", color = Navy, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            }
+                        }
                     }
                 }
             }
@@ -250,9 +266,9 @@ private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
             }
             item {
                 Text(
-                    "Composition tells us which atoms are present — bonding determines the structure.",
+                    "© 2026 EdBetter",
                     modifier = Modifier.fillMaxWidth().padding(10.dp), textAlign = TextAlign.Center,
-                    color = Navy.copy(alpha = .65f), fontSize = 12.sp,
+                    color = Navy.copy(alpha = .55f), fontSize = 12.sp,
                 )
             }
         }
