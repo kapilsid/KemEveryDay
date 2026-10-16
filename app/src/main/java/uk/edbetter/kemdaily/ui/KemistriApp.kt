@@ -1265,7 +1265,8 @@ private fun AppBar(title: String, back: () -> Unit, actions: @Composable RowScop
 @Composable
 private fun FactScreen(nav: NavHostController) {
     val leave = rememberLeaveWithAd(nav)
-    val fact = EverydayFacts.today()
+    val context = LocalContext.current
+    val fact = remember { EverydayFacts.today().localized(context) }
     var selectedGuess by remember(fact.id) { mutableStateOf<Int?>(null) }
     var revealed by remember(fact.id) { mutableStateOf(false) }
     Scaffold(topBar = { AppBar("Everyday Chemistry", leave) }, containerColor = Color(0xFFF6F0E5)) { padding ->
