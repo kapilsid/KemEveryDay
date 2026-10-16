@@ -1406,19 +1406,54 @@ private fun FactScreen(nav: NavHostController) {
 }
 
 private fun everydayArtwork(id: String): Int = when (id) {
-    "soap_oil" -> R.drawable.everyday_art_soap_grease
+    "antacid" -> R.drawable.everyday_art_antacid
     "apple_brown" -> R.drawable.everyday_art_apple_brown
-    "fizzy_drink" -> R.drawable.everyday_art_fizzy_drink
-    "cold_can" -> R.drawable.everyday_art_cold_can
-    "salt_ice" -> R.drawable.everyday_art_salt_ice
-    "rust" -> R.drawable.everyday_art_rust
-    "onion_tears" -> R.drawable.everyday_art_onion_tears
-    "milk_curdle" -> R.drawable.everyday_art_milk_curdle
-    "descale" -> R.drawable.everyday_art_descale
+    "avocado_brown" -> R.drawable.everyday_art_avocado_brown
+    "baking_powder", "yeast_bread" -> R.drawable.everyday_art_baking_powder_yeast
+    "baking_soda_vinegar" -> R.drawable.everyday_art_baking_soda_vinegar
+    "banana_brown" -> R.drawable.everyday_art_banana_brown
+    "battery" -> R.drawable.everyday_art_battery
+    "bleach" -> R.drawable.everyday_art_bleach
+    "bleach_disinfect" -> R.drawable.everyday_art_bleach_disinfect
+    "bread_stale" -> R.drawable.everyday_art_bread_stale
     "cake_rise" -> R.drawable.everyday_art_cake_rise
-    "fluoride" -> R.drawable.everyday_art_fluoride
+    "chilli_after" -> R.drawable.everyday_art_chilli_after
     "chilli_heat" -> R.drawable.everyday_art_chilli_heat
-    else -> R.drawable.kemistri_everyday_brand
+    "coffee_aroma" -> R.drawable.everyday_art_coffee_aroma
+    "cold_can" -> R.drawable.everyday_art_cold_can
+    "descale" -> R.drawable.everyday_art_descale
+    "dishwasher" -> R.drawable.everyday_art_dishwasher
+    "egg_white", "egg_yolk" -> R.drawable.everyday_art_egg_cheese
+    "fireworks" -> R.drawable.everyday_art_fireworks
+    "fizzy_drink" -> R.drawable.everyday_art_fizzy_drink
+    "garlic_smell", "mint_cool", "mustard", "pepper_aroma" -> R.drawable.everyday_art_flavour_aroma
+    "fluoride" -> R.drawable.everyday_art_fluoride
+    "fluoride_varnish" -> R.drawable.everyday_art_fluoride_varnish
+    "glow_stick" -> R.drawable.everyday_art_glow_stick
+    "hard_water", "shower_scale" -> R.drawable.everyday_art_hard_water
+    "ice_slippery" -> R.drawable.everyday_art_ice_slippery
+    "led" -> R.drawable.everyday_art_led
+    "lemon_sour" -> R.drawable.everyday_art_lemon_sour
+    "caramel", "meat_brown" -> R.drawable.everyday_art_meat_caramel
+    "cheese", "milk_curdle" -> R.drawable.everyday_art_milk_curdle
+    "onion_storage", "onion_tears" -> R.drawable.everyday_art_onion_tears
+    "orange_peel" -> R.drawable.everyday_art_orange_peel
+    "nail_polish", "paint_dry" -> R.drawable.everyday_art_paint_nailpolish
+    "perfume", "perfume_heat" -> R.drawable.everyday_art_perfume
+    "red_cabbage", "tea_lemon" -> R.drawable.everyday_art_red_cabbage
+    "redox_apple" -> R.drawable.everyday_art_redox_apple
+    "rust", "rust_protection" -> R.drawable.everyday_art_rust
+    "salt_ice" -> R.drawable.everyday_art_salt_ice
+    "salt_pasta" -> R.drawable.everyday_art_salt_pasta
+    "soap_bubbles" -> R.drawable.everyday_art_soap_bubbles
+    "detergent_grease", "soap_oil" -> R.drawable.everyday_art_soap_grease
+    "soap_ph" -> R.drawable.everyday_art_soap_ph
+    "static_shock" -> R.drawable.everyday_art_static_shock
+    "steam_burn" -> R.drawable.everyday_art_steam_burn
+    "toast_brown" -> R.drawable.everyday_art_toast_brown
+    "tooth_decay" -> R.drawable.everyday_art_tooth_decay
+    "yogurt" -> R.drawable.everyday_art_yogurt
+    else -> R.drawable.everyday_art_everyday_mixed
 }
 
 @Composable
