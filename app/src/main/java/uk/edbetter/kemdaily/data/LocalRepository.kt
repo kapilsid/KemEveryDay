@@ -44,6 +44,9 @@ data class ScienceRunSnapshot(
     val runOver: Boolean = false,
 )
 
+/** One Element a Day guess. The first guess for a date is final. */
+data class ElementGuess(val date: LocalDate, val symbol: String, val correct: Boolean)
+
 data class ScienceLeaderboardEntry(
     val date: LocalDate,
     val score: Int,
@@ -279,6 +282,24 @@ class LocalRepository(context: Context) {
             }
             prefs.edit().putString("science_leaderboard_v1", encoded).apply()
         }
+    }
+
+    fun elementGuesses(): Map<LocalDate, ElementGuess> = prefs.getString("element_guesses_v1", null).orEmpty()
+        .lineSequence()
+        .filter(String::isNotBlank)
+        .mapNotNull { row ->
+            val fields = row.split(',')
+            if (fields.size != 3) return@mapNotNull null
+            runCatching { ElementGuess(LocalDate.parse(fields[0]), fields[1], fields[2].toBooleanStrict()) }.getOrNull()
+        }
+        .associateBy { it.date }
+
+    fun recordElementGuess(guess: ElementGuess) {
+        val existing = elementGuesses()
+        if (guess.date in existing) return
+        val encoded = (existing.values + guess).sortedBy { it.date }
+            .joinToString("\n") { "${it.date},${it.symbol},${it.correct}" }
+        prefs.edit().putString("element_guesses_v1", encoded).apply()
     }
 
     var soundEnabled: Boolean

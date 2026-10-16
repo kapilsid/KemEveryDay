@@ -69,6 +69,8 @@ import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Scale
+import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -145,6 +147,7 @@ import uk.edbetter.kemdaily.core.game.GameEngine
 import uk.edbetter.kemdaily.core.game.MISSION_TARGET
 import uk.edbetter.kemdaily.data.DailyElement
 import uk.edbetter.kemdaily.data.ElementOfDay
+import uk.edbetter.kemdaily.data.ElementFactsTable
 import uk.edbetter.kemdaily.data.EverydayFacts
 import uk.edbetter.kemdaily.data.ScienceMysteries
 import uk.edbetter.kemdaily.data.ScienceRunSnapshot
@@ -198,7 +201,9 @@ fun KemistriApp(viewModel: MainViewModel = viewModel()) {
 private fun HomeScreen(nav: NavHostController, viewModel: MainViewModel) {
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
     val scienceRuns by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
-    val streak = DailyHistory.streaks(history.keys + scienceRuns.map { it.date }, viewModel.todayUtc()).current
+    val elementGuesses by viewModel.elementGuesses.collectAsStateWithLifecycle()
+    val streakDates = history.keys + scienceRuns.map { it.date } + elementGuesses.values.filter { it.correct }.map { it.date }
+    val streak = DailyHistory.streaks(streakDates, viewModel.todayUtc()).current
     val cloud by viewModel.scienceCloud.collectAsStateWithLifecycle()
     Scaffold(containerColor = Color(0xFFE8FAFF)) { padding ->
         LazyColumn(
@@ -1442,6 +1447,9 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
     val leave = rememberLeaveWithAd(nav)
     val element = remember { ElementOfDay.today() }
     val settings by viewModel.settings.collectAsStateWithLifecycle()
+    val guesses by viewModel.elementGuesses.collectAsStateWithLifecycle()
+    val todayGuess = guesses[viewModel.todayUtc()]
+    val collected = guesses.values.map { it.symbol }.toSet()
     val tint = familyColor(element.family)
     Scaffold(topBar = { AppBar("Element a Day", leave) }, containerColor = Color(0xFFFFF5F1)) { padding ->
         LazyColumn(
@@ -1450,72 +1458,54 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
             verticalArrangement = Arrangement.spacedBy(13.dp),
         ) {
             item {
-                Text(
-                    "TODAY'S ELEMENT",
-                    color = Coral, fontWeight = FontWeight.Black, fontSize = 12.sp, letterSpacing = 1.5.sp,
-                )
+                Text("TODAY'S ELEMENT", color = Coral, fontWeight = FontWeight.Black, fontSize = 12.sp, letterSpacing = 1.5.sp)
             }
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Column(
-                        Modifier.weight(1f).aspectRatio(1f)
-                            .background(tint, RoundedCornerShape(22.dp))
-                            .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(22.dp))
-                            .padding(horizontal = 12.dp, vertical = 10.dp)
-                            .semantics {
-                                contentDescription = "${element.name}, symbol ${element.symbol}, atomic number ${element.atomicNumber}, " +
-                                    "atomic weight ${element.atomicWeight}, electron configuration " +
-                                    (element.core.orEmpty() + " " + element.configuration.joinToString(" ") { "${it.first} ${it.second}" })
-                            },
+            if (todayGuess == null) {
+                item { ElementGuessCard(element, tint) { choice -> viewModel.recordElementGuess(choice.symbol, choice == element) } }
+            } else {
+                item {
+                    val correct = todayGuess.correct
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = if (correct) Color(0xFFDDF8F2) else Color(0xFFFFE8E8)),
+                        shape = RoundedCornerShape(16.dp),
                     ) {
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Text(element.atomicNumber.toString(), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp, modifier = Modifier.weight(1f))
-                            Text(element.atomicWeight, color = Navy, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
-                        }
-                        Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
-                            Text(element.symbol, color = Navy, fontWeight = FontWeight.Black, fontSize = 52.sp)
-                        }
                         Text(
-                            buildAnnotatedString {
-                                element.core?.let(::append)
-                                element.configuration.forEachIndexed { index, (subshell, count) ->
-                                    if (index > 0) append(" ")
-                                    append(subshell)
-                                    withStyle(SpanStyle(baselineShift = BaselineShift.Superscript, fontSize = 8.sp)) { append(count.toString()) }
-                                }
-                            },
-                            color = Navy, fontSize = 11.sp, lineHeight = 14.sp, maxLines = 2,
-                        )
-                        Text(element.name.lowercase(), color = Navy, fontWeight = FontWeight.Bold, fontSize = 14.sp, maxLines = 1)
-                    }
-                    val shells = remember(element) { ElementOfDay.electronShells(element.atomicNumber) }
-                    val outer = remember(element) { ElementOfDay.outerSubshell(element.atomicNumber) }
-                    Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                        AtomModel(shells, outer.second, tint, animate = !settings.reducedMotion, modifier = Modifier.fillMaxWidth().aspectRatio(1f))
-                        Text(
-                            "Outer electrons: ${outer.first}${"spdf"[outer.second]} orbital",
-                            color = Navy.copy(alpha = .6f), fontSize = 11.sp, fontWeight = FontWeight.SemiBold,
+                            if (correct) "Correct! ${element.name} joins your collection and counts for today's streak."
+                            else "Not quite, it was ${element.name}. It still joins your collection.",
+                            Modifier.fillMaxWidth().padding(14.dp),
+                            color = if (correct) Green else Coral, fontWeight = FontWeight.Bold,
                         )
                     }
                 }
-            }
-            item {
-                Text(
-                    listOfNotNull(
-                        element.family, element.state, "Made in a lab".takeIf { element.atomicNumber >= 93 },
-                        "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block",
-                    ).joinToString(" · "),
-                    color = Navy.copy(alpha = .7f), fontWeight = FontWeight.Bold, fontSize = 13.sp,
-                )
-            }
-            item { ElementStoryCard("REMEMBER IT", element.story.hook, Icons.Default.Lightbulb, Gold, highlight = true) }
-            item { ElementStoryCard("HOW IT WAS FOUND", element.story.discovery, Icons.Default.Science, Coral) }
-            item { ElementStoryCard("WHERE YOU MEET IT", element.story.uses, Icons.Default.Home, Green) }
-            item {
-                Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
-                    Column(Modifier.fillMaxWidth().padding(12.dp)) {
-                        Text("Where it sits", color = Navy, fontWeight = FontWeight.Black, modifier = Modifier.padding(bottom = 8.dp))
-                        MiniPeriodicTable(element)
+                item { ElementTileRow(element, tint, animate = !settings.reducedMotion) }
+                item {
+                    Text(
+                        listOfNotNull(
+                            element.family, element.state, "Made in a lab".takeIf { element.atomicNumber >= 93 },
+                            "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block",
+                        ).joinToString(" · "),
+                        color = Navy.copy(alpha = .7f), fontWeight = FontWeight.Bold, fontSize = 13.sp,
+                    )
+                }
+                item { ElementFactsCard(element) }
+                item { ElementStoryCard("REMEMBER IT", element.story.hook, Icons.Default.Lightbulb, Gold, highlight = true) }
+                item { ElementStoryCard("HOW IT WAS FOUND", element.story.discovery, Icons.Default.Science, Coral) }
+                item { ElementStoryCard("WHERE YOU MEET IT", element.story.uses, Icons.Default.Home, Green) }
+                val compounds = ElementOfDay.compounds(element)
+                if (compounds.isNotEmpty()) item { ElementCompoundsCard(compounds) }
+                item {
+                    Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                        Column(Modifier.fillMaxWidth().padding(12.dp)) {
+                            Row(Modifier.padding(bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Text("Your collection", color = Navy, fontWeight = FontWeight.Black, modifier = Modifier.weight(1f))
+                                Text("${collected.size} of ${ElementOfDay.all.size}", color = Coral, fontWeight = FontWeight.Black, fontSize = 13.sp)
+                            }
+                            MiniPeriodicTable(element, collected)
+                            Text(
+                                "Every element you meet fills in its square. Today's is highlighted.",
+                                color = Navy.copy(alpha = .55f), fontSize = 11.sp, modifier = Modifier.padding(top = 8.dp),
+                            )
+                        }
                     }
                 }
             }
@@ -1524,6 +1514,153 @@ private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel)
                     "A new element appears every day at midnight UTC.",
                     Modifier.fillMaxWidth(), color = Navy.copy(alpha = .55f), textAlign = TextAlign.Center, fontSize = 11.sp,
                 )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ElementGuessCard(element: DailyElement, tint: Color, onGuess: (DailyElement) -> Unit) {
+    val options = remember { ElementOfDay.guessOptions() }
+    Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(20.dp)) {
+        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier.size(64.dp).background(tint, RoundedCornerShape(16.dp))
+                        .border(2.dp, Navy.copy(alpha = .18f), RoundedCornerShape(16.dp)),
+                    contentAlignment = Alignment.Center,
+                ) { Text("?", color = Navy, fontWeight = FontWeight.Black, fontSize = 34.sp) }
+                Spacer(Modifier.width(14.dp))
+                Column {
+                    Text("Which element am I?", color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
+                    Text(
+                        listOf(element.family, "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block").joinToString(" · "),
+                        color = Navy.copy(alpha = .6f), fontSize = 12.sp, fontWeight = FontWeight.SemiBold,
+                    )
+                }
+            }
+            Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3C9)), shape = RoundedCornerShape(14.dp)) {
+                Row(Modifier.padding(14.dp)) {
+                    Icon(Icons.Default.Lightbulb, null, tint = Gold, modifier = Modifier.size(20.dp))
+                    Spacer(Modifier.width(10.dp))
+                    Text(ElementOfDay.maskedClue(element), color = Navy, fontWeight = FontWeight.Bold, lineHeight = 21.sp)
+                }
+            }
+            options.chunked(2).forEach { pair ->
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    pair.forEach { option ->
+                        OutlinedButton(
+                            { onGuess(option) },
+                            Modifier.weight(1f).heightIn(min = 52.dp),
+                            shape = RoundedCornerShape(14.dp),
+                        ) { Text("${option.name} (${option.symbol})", color = Navy, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center) }
+                    }
+                }
+            }
+            Text(
+                "Your first guess counts. Get it right to add today to your streak.",
+                color = Navy.copy(alpha = .55f), fontSize = 11.sp,
+            )
+        }
+    }
+}
+
+@Composable
+private fun ElementTileRow(element: DailyElement, tint: Color, animate: Boolean) {
+    Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(
+            Modifier.weight(1f).aspectRatio(1f)
+                .background(tint, RoundedCornerShape(22.dp))
+                .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(22.dp))
+                .padding(horizontal = 12.dp, vertical = 10.dp)
+                .semantics {
+                    contentDescription = "${element.name}, symbol ${element.symbol}, atomic number ${element.atomicNumber}, " +
+                        "atomic weight ${element.atomicWeight}, electron configuration " +
+                        (element.core.orEmpty() + " " + element.configuration.joinToString(" ") { "${it.first} ${it.second}" })
+                },
+        ) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(element.atomicNumber.toString(), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp, modifier = Modifier.weight(1f))
+                Text(element.atomicWeight, color = Navy, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+            }
+            Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
+                Text(element.symbol, color = Navy, fontWeight = FontWeight.Black, fontSize = 52.sp)
+            }
+            Text(
+                buildAnnotatedString {
+                    element.core?.let(::append)
+                    element.configuration.forEachIndexed { index, (subshell, count) ->
+                        if (index > 0) append(" ")
+                        append(subshell)
+                        withStyle(SpanStyle(baselineShift = BaselineShift.Superscript, fontSize = 8.sp)) { append(count.toString()) }
+                    }
+                },
+                color = Navy, fontSize = 11.sp, lineHeight = 14.sp, maxLines = 2,
+            )
+            Text(element.name.lowercase(), color = Navy, fontWeight = FontWeight.Bold, fontSize = 14.sp, maxLines = 1)
+        }
+        val shells = remember(element) { ElementOfDay.electronShells(element.atomicNumber) }
+        val outer = remember(element) { ElementOfDay.outerSubshell(element.atomicNumber) }
+        Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+            AtomModel(shells, outer.second, tint, animate = animate, modifier = Modifier.fillMaxWidth().aspectRatio(1f))
+            Text(
+                "Outer electrons: ${outer.first}${"spdf"[outer.second]} orbital",
+                color = Navy.copy(alpha = .6f), fontSize = 11.sp, fontWeight = FontWeight.SemiBold,
+            )
+        }
+    }
+}
+
+@Composable
+private fun ElementFactsCard(element: DailyElement) {
+    val facts = ElementFactsTable.bySymbol[element.symbol]
+    val densityUnit = if (element.state == "Gas") "g/L" else "g/cm³"
+    Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            facts?.picture?.let { picture ->
+                Image(
+                    painterResource(picture), contentDescription = "Where you might meet ${element.name}",
+                    modifier = Modifier.width(76.dp).height(120.dp), contentScale = ContentScale.Fit,
+                )
+                Spacer(Modifier.width(12.dp))
+            }
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                FactLine(Icons.Default.Thermostat, "Melts", facts?.meltingC?.let { "$it °C" })
+                FactLine(Icons.Default.LocalFireDepartment, "Boils", facts?.boilingC?.let { "$it °C" })
+                FactLine(Icons.Default.Scale, "Density", facts?.density?.let { "$it $densityUnit" })
+                FactLine(Icons.Default.CalendarMonth, "Discovered", facts?.discovered)
+            }
+        }
+    }
+}
+
+@Composable
+private fun FactLine(icon: ImageVector, label: String, value: String?) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(icon, null, tint = Coral, modifier = Modifier.size(18.dp))
+        Spacer(Modifier.width(8.dp))
+        Text(label, color = Navy.copy(alpha = .6f), fontSize = 13.sp, modifier = Modifier.width(84.dp))
+        Text(value ?: "Not measured", color = Navy, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+    }
+}
+
+@Composable
+private fun ElementCompoundsCard(compounds: List<Substance>) {
+    Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("IN THINGS YOU KNOW", color = ScienceBlue, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.1.sp)
+            compounds.forEach { substance ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(substance.formula.withSubscripts(), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp, modifier = Modifier.width(92.dp))
+                    Text(substance.displayName, color = Navy, modifier = Modifier.weight(1f))
+                    if (substance.isPlayable) {
+                        Text(
+                            "On the board",
+                            Modifier.clip(CircleShape).background(Color(0xFFDDF8F2)).padding(horizontal = 8.dp, vertical = 3.dp),
+                            color = Green, fontSize = 10.sp, fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
             }
         }
     }
@@ -1635,7 +1772,7 @@ private fun ElementStoryCard(label: String, text: String, icon: ImageVector, acc
 }
 
 @Composable
-private fun MiniPeriodicTable(selected: DailyElement) {
+private fun MiniPeriodicTable(selected: DailyElement, collected: Set<String>) {
     val cells = remember { ElementOfDay.all.associateBy(ElementOfDay::position) }
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         for (row in 0..9) {
@@ -1649,8 +1786,16 @@ private fun MiniPeriodicTable(selected: DailyElement) {
                             Box(
                                 Modifier.fillMaxSize()
                                     .clip(RoundedCornerShape(2.dp))
-                                    .background(if (isSelected) Coral else familyColor(element.family).copy(alpha = .75f))
-                                    .semantics { contentDescription = element.name },
+                                    .background(
+                                        when {
+                                            isSelected -> Coral
+                                            element.symbol in collected -> familyColor(element.family)
+                                            else -> Navy.copy(alpha = .07f)
+                                        },
+                                    )
+                                    .semantics {
+                                        contentDescription = element.name + if (element.symbol in collected) ", collected" else ""
+                                    },
                             )
                         }
                     }
@@ -1869,9 +2014,11 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
     val scienceRuns by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
     val scienceDates = scienceRuns.map { it.date }.toSet()
+    val elementGuesses by viewModel.elementGuesses.collectAsStateWithLifecycle()
+    val elementDates = elementGuesses.values.filter { it.correct }.map { it.date }.toSet()
     val today = viewModel.todayUtc()
-    // A day counts when either daily game is finished: the Molecule Board or Science Uncovered.
-    val summary = DailyHistory.streaks(history.keys + scienceDates, today)
+    // A day counts when the Molecule Board or Science Uncovered is finished, or today's element is guessed.
+    val summary = DailyHistory.streaks(history.keys + scienceDates + elementDates, today)
     val currentMonth = YearMonth.from(today)
     val firstMonth = history.keys.minOrNull()?.let(YearMonth::from)?.takeIf { it.isBefore(currentMonth) } ?: currentMonth
     var month by remember { mutableStateOf(currentMonth) }
@@ -1901,8 +2048,8 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                                 Text(
                                     when {
                                         summary.playedToday -> "Today counts. Come back tomorrow."
-                                        summary.current > 0 -> "Finish either daily game to keep your streak going."
-                                        else -> "Finish either daily game to start a streak."
+                                        summary.current > 0 -> "Play any daily game to keep your streak going."
+                                        else -> "Play any daily game to start a streak."
                                     },
                                     color = Navy.copy(alpha = .7f), fontSize = 12.sp,
                                 )
@@ -1930,6 +2077,7 @@ private fun DailyHistoryScreen(nav: NavHostController, viewModel: MainViewModel)
                     month = month,
                     days = DailyHistory.monthGrid(month, history, today),
                     scienceDates = scienceDates,
+                    elementDates = elementDates,
                     canGoBack = month.isAfter(firstMonth),
                     canGoForward = month.isBefore(currentMonth),
                     onBack = { month = month.minusMonths(1) },
@@ -1983,6 +2131,7 @@ private fun StreakCalendar(
     month: YearMonth,
     days: List<CalendarDay>,
     scienceDates: Set<LocalDate>,
+    elementDates: Set<LocalDate>,
     canGoBack: Boolean,
     canGoForward: Boolean,
     onBack: () -> Unit,
@@ -2016,11 +2165,13 @@ private fun StreakCalendar(
                             val date = day.date ?: return@Box
                             val record = day.record
                             val science = date in scienceDates
-                            val played = record != null || science
+                            val element = date in elementDates
+                            val played = record != null || science || element
                             val fill = when {
                                 record != null && science -> Gold
                                 record != null -> Green
                                 science -> ScienceBlue
+                                element -> Coral
                                 else -> Color.Transparent
                             }
                             val description = buildString {
@@ -2028,6 +2179,7 @@ private fun StreakCalendar(
                                 if (!played) append(", not played")
                                 if (record != null) append(", Molecule Board score ${record.score}")
                                 if (science) append(", Science Uncovered finished")
+                                if (element) append(", element guessed")
                                 if (day.isToday) append(", today")
                             }
                             Box(
@@ -2053,6 +2205,7 @@ private fun StreakCalendar(
             Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
                 CalendarLegend(Green, "Board")
                 CalendarLegend(ScienceBlue, "Science")
+                CalendarLegend(Coral, "Element")
                 CalendarLegend(Gold, "Both games")
             }
         }

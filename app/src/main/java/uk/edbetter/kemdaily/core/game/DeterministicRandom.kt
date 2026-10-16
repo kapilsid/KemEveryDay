@@ -19,6 +19,16 @@ class DeterministicRandom(seed: Long) {
     }
 }
 
+/** Fisher–Yates shuffle that gives the same order on every device for the same seed. */
+fun <T> List<T>.shuffled(random: DeterministicRandom): List<T> {
+    val items = toMutableList()
+    for (i in items.lastIndex downTo 1) {
+        val j = random.nextInt(i + 1)
+        val swap = items[i]; items[i] = items[j]; items[j] = swap
+    }
+    return items
+}
+
 object DailySeed {
     const val VERSION = 1
     fun forDate(isoDateUtc: String): Long {

@@ -3,6 +3,11 @@ package uk.edbetter.kemdaily.data
 import java.time.LocalDate
 import java.time.ZoneOffset
 import uk.edbetter.kemdaily.core.chemistry.ElementCatalog
+import uk.edbetter.kemdaily.core.chemistry.Substance
+import uk.edbetter.kemdaily.core.chemistry.SubstanceCatalog
+import uk.edbetter.kemdaily.core.chemistry.SubstanceCategory
+import uk.edbetter.kemdaily.core.game.DeterministicRandom
+import uk.edbetter.kemdaily.core.game.shuffled
 
 data class DailyElement(
     val atomicNumber: Int,
@@ -49,6 +54,33 @@ object ElementOfDay {
         all[Math.floorMod(date.toEpochDay(), all.size.toLong()).toInt()]
 
     fun bySymbol(symbol: String): DailyElement? = all.firstOrNull { it.symbol == symbol }
+
+    /** Four choices for today's guess: the answer plus three from the same family where possible, in a daily-shuffled order. */
+    fun guessOptions(date: LocalDate = LocalDate.now(ZoneOffset.UTC)): List<DailyElement> {
+        val answer = today(date)
+        val random = DeterministicRandom(date.toEpochDay() * 31 + answer.atomicNumber)
+        val sameFamily = all.filter { it.family == answer.family && it != answer }
+        val nearby = all.filter { it != answer && it !in sameFamily }
+            .sortedBy { kotlin.math.abs(it.atomicNumber - answer.atomicNumber) }
+            .take(12)
+        val pool = (sameFamily.shuffled(random) + nearby.shuffled(random)).distinct()
+        return (pool.take(3) + answer).shuffled(random)
+    }
+
+    /** The discovery story with the element's own name and symbol blanked out, used as the clue before the guess. The memorable hook is kept for the reveal. */
+    fun maskedClue(element: DailyElement): String {
+        // The name anywhere in a word (ferrocerium), the symbol only as an exact standalone word (Fe).
+        return element.story.discovery
+            .replace(Regex("\\w*${Regex.escape(element.name)}\\w*", RegexOption.IGNORE_CASE), "_____")
+            .replace(Regex("\\b${Regex.escape(element.symbol)}\\b"), "_____")
+    }
+
+    /** Up to three familiar compounds containing the element, simplest first. Pure elements are left out. */
+    fun compounds(element: DailyElement, limit: Int = 3): List<Substance> = SubstanceCatalog.all
+        .filter { element.symbol in it.composition.atoms && it.category != SubstanceCategory.ELEMENTAL && !it.isAmbiguous }
+        .distinctBy { it.formula }
+        .sortedWith(compareBy<Substance>({ it.difficultyTier }, { it.composition.atomCount }))
+        .take(limit)
 
     /**
      * Ground-state electrons per shell (K, L, M, ...), as drawn in a Bohr model. Filled in Madelung

@@ -19,6 +19,7 @@ import uk.edbetter.kemdaily.data.LocalRepository
 import uk.edbetter.kemdaily.data.LeaderboardEntry
 import uk.edbetter.kemdaily.data.PendingRecord
 import uk.edbetter.kemdaily.data.ChampionLimits
+import uk.edbetter.kemdaily.data.ElementGuess
 import uk.edbetter.kemdaily.data.FirebaseScienceLeaderboardGateway
 import uk.edbetter.kemdaily.data.PlayerNames
 import uk.edbetter.kemdaily.data.PublicScienceRank
@@ -55,6 +56,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val settings: StateFlow<SettingsState> = _settings.asStateFlow()
     private val _dailyHistory = MutableStateFlow(repository.dailyHistory())
     val dailyHistory: StateFlow<Map<LocalDate, DailyRecord>> = _dailyHistory.asStateFlow()
+    private val _elementGuesses = MutableStateFlow(repository.elementGuesses())
+    val elementGuesses: StateFlow<Map<LocalDate, ElementGuess>> = _elementGuesses.asStateFlow()
     private val _scienceBestScore = MutableStateFlow(repository.scienceBestScore())
     val scienceBestScore: StateFlow<Int> = _scienceBestScore.asStateFlow()
     private val _scienceLeaderboard = MutableStateFlow(repository.scienceLeaderboard())
@@ -117,6 +120,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val value = engine?.state ?: return
         _game.value = value
         repository.saveGame(value)
+    }
+
+    fun recordElementGuess(symbol: String, correct: Boolean) {
+        repository.recordElementGuess(ElementGuess(todayUtc(), symbol, correct))
+        _elementGuesses.value = repository.elementGuesses()
     }
 
     fun refreshDailyHistory() { _dailyHistory.value = repository.dailyHistory() }

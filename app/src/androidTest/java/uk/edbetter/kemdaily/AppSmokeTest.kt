@@ -33,7 +33,7 @@ class AppSmokeTest {
     fun elementOfDayOpens() {
         composeRule.onNodeWithText("Element a Day").assertIsDisplayed().performClick()
         composeRule.onNodeWithText("TODAY'S ELEMENT").assertIsDisplayed()
-        composeRule.onNodeWithText("REMEMBER IT").assertIsDisplayed()
+        composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
     }
 
     @Test

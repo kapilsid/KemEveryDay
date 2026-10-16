@@ -82,4 +82,31 @@ class ElementOfDayTest {
         assertEquals("Liquid", ElementOfDay.bySymbol("Br")!!.state)
         assertEquals("Gas", ElementOfDay.bySymbol("Rn")!!.state)
     }
+
+    @Test fun guessOptionsAreFourDistinctIncludingTheAnswer() {
+        val start = LocalDate.of(2026, 10, 16)
+        (0L until 130L).forEach { offset ->
+            val date = start.plusDays(offset)
+            val options = ElementOfDay.guessOptions(date)
+            assertEquals(4, options.toSet().size)
+            assertTrue(ElementOfDay.today(date) in options)
+            assertEquals(options, ElementOfDay.guessOptions(date))
+        }
+    }
+
+    @Test fun maskedCluesNeverNameTheElement() {
+        ElementOfDay.all.forEach { element ->
+            val clue = ElementOfDay.maskedClue(element)
+            assertTrue(element.symbol, !clue.contains(element.name, ignoreCase = true))
+        }
+    }
+
+    @Test fun compoundsContainTheElementAndFactsCoverTheMeasuredElements() {
+        val sodium = ElementOfDay.bySymbol("Na")!!
+        val compounds = ElementOfDay.compounds(sodium)
+        assertTrue(compounds.isNotEmpty())
+        assertTrue(compounds.all { "Na" in it.composition.atoms })
+        assertEquals(109, ElementFactsTable.bySymbol.size)
+        assertEquals(1535, ElementFactsTable.bySymbol.getValue("Fe").meltingC)
+    }
 }
