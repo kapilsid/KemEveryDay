@@ -20,12 +20,12 @@ if (releaseSigningFile.isFile && !hasReleaseSigning) {
     error("keystore.properties must define: ${releaseSigningKeys.joinToString()}")
 }
 
-// Google's public AdMob test IDs. Replace the release values with the Kemistri Everyday AdMob app
-// and ad unit before publishing; bundleRelease refuses to build while they are still test IDs.
+// Debug builds use Google's public AdMob test IDs; release builds use the Kemistri Everyday AdMob app.
+// bundleRelease refuses to build if the release values are ever set back to test IDs.
 val admobTestAppId = "ca-app-pub-3940256099942544~3347511713"
 val admobTestInterstitialId = "ca-app-pub-3940256099942544/1033173712"
-val admobReleaseAppId = admobTestAppId
-val admobReleaseInterstitialId = admobTestInterstitialId
+val admobReleaseAppId = "ca-app-pub-8151554078712608~5277588777"
+val admobReleaseInterstitialId = "ca-app-pub-8151554078712608/2651425439"
 
 android {
     namespace = "uk.edbetter.kemdaily"

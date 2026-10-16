@@ -12,41 +12,13 @@ data class DailyElement(
     val period: Int,
     /** IUPAC group 1–18; null for the lanthanides and actinides shown in the separate f-block rows. */
     val group: Int?,
-    val description: String,
+    val story: ElementStory,
 )
 
 /** Zero-based cell in an 18-column periodic table: rows 0–6 are periods, rows 8–9 the f-block. */
 data class TablePosition(val row: Int, val column: Int)
 
 object ElementOfDay {
-    private val spotlights = mapOf(
-        "H" to "Stars fuse hydrogen into heavier elements, while fuel cells can use it to carry energy.",
-        "He" to "Its exceptionally low boiling point makes helium valuable for cooling powerful superconducting magnets.",
-        "Li" to "Lithium ions move between electrodes in many rechargeable batteries.",
-        "C" to "Different arrangements of carbon atoms produce materials as different as graphite and diamond.",
-        "N" to "Nitrogen gas dominates Earth’s atmosphere, and fixed nitrogen is essential for proteins and DNA.",
-        "O" to "Oxygen supports respiration and many oxidation reactions, including combustion and corrosion.",
-        "F" to "Fluorine is extremely reactive, although fluoride compounds can help protect tooth enamel.",
-        "Ne" to "An electrical discharge through low-pressure neon produces its familiar orange-red glow.",
-        "Na" to "Sodium ions help nerves and muscles work, while sodium metal itself reacts vigorously with water.",
-        "Mg" to "Magnesium sits at the centre of chlorophyll and burns with an intense white light.",
-        "Al" to "A thin oxide layer protects aluminium, helping the lightweight metal resist further corrosion.",
-        "Si" to "Silicon is central to most computer chips and is abundant in minerals and silicate rocks.",
-        "P" to "Phosphorus compounds are essential in DNA, cell membranes and the molecules cells use to transfer energy.",
-        "S" to "Sulfur occurs in proteins and is used on a vast scale to manufacture sulfuric acid.",
-        "Cl" to "Chloride ions are essential in the body, while chlorine compounds are widely used to disinfect water.",
-        "Ar" to "Argon’s low reactivity makes it useful as a protective atmosphere in welding and lighting.",
-        "K" to "Potassium ions are vital for electrical signalling in nerves and are an important plant nutrient.",
-        "Ca" to "Calcium compounds strengthen bones and shells and also help muscles and cells communicate.",
-        "Fe" to "Iron carries oxygen in haemoglobin and is the main element in steels.",
-        "Cu" to "Copper conducts electricity well and develops a protective green patina outdoors.",
-        "Ag" to "Silver is an excellent electrical conductor and its compounds are light-sensitive and antimicrobial.",
-        "Au" to "Gold’s low reactivity and easy shaping make it useful in jewellery and reliable electrical contacts.",
-        "Hg" to "Mercury is liquid near room temperature, but it and many of its compounds are toxic.",
-        "Pb" to "Lead is dense and useful for radiation shielding, but exposure can damage the nervous system.",
-        "U" to "Uranium nuclei can release energy through fission, and all uranium isotopes are radioactive.",
-    )
-
     val all: List<DailyElement> = ElementCatalog.names.entries.mapIndexed { index, (symbol, name) ->
         val atomicNumber = index + 1
         val family = family(atomicNumber, symbol)
@@ -57,8 +29,7 @@ object ElementOfDay {
             family = family,
             period = period(atomicNumber),
             group = group(atomicNumber),
-            description = "$name has atomic number $atomicNumber, so each neutral atom contains $atomicNumber protons and $atomicNumber electrons. " +
-                (spotlights[symbol] ?: "It is conventionally placed among the ${family.lowercase()} in the periodic table."),
+            story = ElementStories.forSymbol(symbol),
         )
     }
 
@@ -66,6 +37,37 @@ object ElementOfDay {
         all[Math.floorMod(date.toEpochDay(), all.size.toLong()).toInt()]
 
     fun bySymbol(symbol: String): DailyElement? = all.firstOrNull { it.symbol == symbol }
+
+    /**
+     * Ground-state electrons per shell (K, L, M, ...), as drawn in a Bohr model. Filled in Madelung
+     * order, with the well-known exceptions where an electron moves between shells.
+     */
+    fun electronShells(atomicNumber: Int): List<Int> {
+        shellExceptions[atomicNumber]?.let { return it }
+        val subshells = (1..7).flatMap { n -> (0 until n).map { l -> n to l } }
+            .sortedWith(compareBy<Pair<Int, Int>>({ it.first + it.second }, { it.first }))
+        val shells = IntArray(7)
+        var remaining = atomicNumber
+        for ((n, l) in subshells) {
+            if (remaining == 0) break
+            val added = minOf(remaining, 2 * (2 * l + 1))
+            shells[n - 1] += added
+            remaining -= added
+        }
+        return shells.toList().dropLastWhile { it == 0 }
+    }
+
+    private val shellExceptions = mapOf(
+        24 to listOf(2, 8, 13, 1), 29 to listOf(2, 8, 18, 1),
+        41 to listOf(2, 8, 18, 12, 1), 42 to listOf(2, 8, 18, 13, 1), 44 to listOf(2, 8, 18, 15, 1),
+        45 to listOf(2, 8, 18, 16, 1), 46 to listOf(2, 8, 18, 18), 47 to listOf(2, 8, 18, 18, 1),
+        57 to listOf(2, 8, 18, 18, 9, 2), 58 to listOf(2, 8, 18, 19, 9, 2), 64 to listOf(2, 8, 18, 25, 9, 2),
+        78 to listOf(2, 8, 18, 32, 17, 1), 79 to listOf(2, 8, 18, 32, 18, 1),
+        89 to listOf(2, 8, 18, 32, 18, 9, 2), 90 to listOf(2, 8, 18, 32, 18, 10, 2),
+        91 to listOf(2, 8, 18, 32, 20, 9, 2), 92 to listOf(2, 8, 18, 32, 21, 9, 2),
+        93 to listOf(2, 8, 18, 32, 22, 9, 2), 96 to listOf(2, 8, 18, 32, 25, 9, 2),
+        103 to listOf(2, 8, 18, 32, 32, 8, 3),
+    )
 
     fun position(element: DailyElement): TablePosition = when (val group = element.group) {
         null -> TablePosition(

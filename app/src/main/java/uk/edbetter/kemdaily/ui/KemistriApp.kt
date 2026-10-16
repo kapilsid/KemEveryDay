@@ -12,6 +12,11 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -86,7 +91,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.input.pointer.pointerInput
@@ -138,6 +145,9 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlinx.coroutines.delay
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 private object Routes {
     const val Home = "home"
@@ -161,7 +171,7 @@ fun KemistriApp(viewModel: MainViewModel = viewModel()) {
         }
         composable(Routes.DailyHistory) { DailyHistoryScreen(nav, viewModel) }
         composable(Routes.Fact) { FactScreen(nav) }
-        composable(Routes.Element) { ElementOfDayScreen(nav) }
+        composable(Routes.Element) { ElementOfDayScreen(nav, viewModel) }
         composable(Routes.Leaderboard) { LeaderboardScreen(nav, viewModel) }
         composable(Routes.Review) { ReviewScreen(nav, viewModel) }
         composable(Routes.Settings) { SettingsScreen(nav, viewModel) }
@@ -1035,86 +1045,65 @@ private fun familyColor(family: String): Color = when (family) {
 }
 
 @Composable
-private fun ElementOfDayScreen(nav: NavHostController) {
-    val today = remember { ElementOfDay.today() }
-    var shown by remember { mutableStateOf(today) }
-    val tint = familyColor(shown.family)
+private fun ElementOfDayScreen(nav: NavHostController, viewModel: MainViewModel) {
+    val element = remember { ElementOfDay.today() }
+    val settings by viewModel.settings.collectAsStateWithLifecycle()
+    val tint = familyColor(element.family)
     Scaffold(topBar = { AppBar("Element a Day", { nav.popBackStack() }) }, containerColor = Color(0xFFFFF5F1)) { padding ->
         LazyColumn(
             Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(18.dp),
             verticalArrangement = Arrangement.spacedBy(13.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item {
                 Text(
-                    if (shown == today) "TODAY'S ELEMENT" else "EXPLORING THE TABLE",
-                    Modifier.fillMaxWidth(),
+                    "TODAY'S ELEMENT",
                     color = Coral, fontWeight = FontWeight.Black, fontSize = 12.sp, letterSpacing = 1.5.sp,
                 )
             }
             item {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(
-                        { ElementOfDay.all.getOrNull(shown.atomicNumber - 2)?.let { shown = it } },
-                        enabled = shown.atomicNumber > 1,
-                    ) { Icon(Icons.Default.ChevronLeft, "Previous element") }
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
                     Box(
-                        Modifier.size(176.dp)
-                            .background(tint, RoundedCornerShape(28.dp))
-                            .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(28.dp))
-                            .semantics { contentDescription = "${shown.name}, symbol ${shown.symbol}, atomic number ${shown.atomicNumber}" },
+                        Modifier.weight(1f).aspectRatio(1f)
+                            .background(tint, RoundedCornerShape(26.dp))
+                            .border(3.dp, Navy.copy(alpha = .18f), RoundedCornerShape(26.dp))
+                            .semantics { contentDescription = "${element.name}, symbol ${element.symbol}, atomic number ${element.atomicNumber}" },
                     ) {
                         Text(
-                            shown.atomicNumber.toString(),
-                            Modifier.align(Alignment.TopStart).padding(14.dp),
-                            color = Navy, fontWeight = FontWeight.Bold, fontSize = 18.sp,
+                            element.atomicNumber.toString(),
+                            Modifier.align(Alignment.TopStart).padding(12.dp),
+                            color = Navy, fontWeight = FontWeight.Bold, fontSize = 16.sp,
                         )
                         Column(Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(shown.symbol, color = Navy, fontWeight = FontWeight.Black, fontSize = 64.sp)
-                            Text(shown.name, color = Navy.copy(alpha = .8f), fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                            Text(element.symbol, color = Navy, fontWeight = FontWeight.Black, fontSize = 54.sp)
+                            Text(element.name, color = Navy.copy(alpha = .8f), fontWeight = FontWeight.Bold, fontSize = 14.sp)
                         }
                     }
-                    IconButton(
-                        { ElementOfDay.all.getOrNull(shown.atomicNumber)?.let { shown = it } },
-                        enabled = shown.atomicNumber < ElementOfDay.all.size,
-                    ) { Icon(Icons.Default.ChevronRight, "Next element") }
-                }
-            }
-            item {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    StatPill("Atomic no.", shown.atomicNumber.toString(), Modifier.weight(1f))
-                    StatPill("Period", shown.period.toString(), Modifier.weight(1f))
-                    StatPill("Group", shown.group?.toString() ?: "f-block", Modifier.weight(1f))
-                }
-            }
-            item {
-                Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
-                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(Modifier.size(12.dp).background(tint, CircleShape).border(1.dp, Navy.copy(alpha = .3f), CircleShape))
-                            Spacer(Modifier.width(8.dp))
-                            Text(shown.family, color = Navy, fontWeight = FontWeight.Black)
-                        }
-                        Text(shown.description, color = Navy.copy(alpha = .8f), lineHeight = 21.sp)
+                    val shells = remember(element) { ElementOfDay.electronShells(element.atomicNumber) }
+                    Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                        AtomModel(shells, tint, animate = !settings.reducedMotion, modifier = Modifier.fillMaxWidth().aspectRatio(1f))
+                        Text(
+                            "Electrons ${shells.joinToString(" · ")}",
+                            color = Navy.copy(alpha = .6f), fontSize = 11.sp, fontWeight = FontWeight.SemiBold,
+                        )
                     }
                 }
             }
+            item {
+                Text(
+                    listOf(element.family, "Period ${element.period}", element.group?.let { "Group $it" } ?: "f-block").joinToString(" · "),
+                    color = Navy.copy(alpha = .7f), fontWeight = FontWeight.Bold, fontSize = 13.sp,
+                )
+            }
+            item { ElementStoryCard("REMEMBER IT", element.story.hook, Icons.Default.Lightbulb, Gold, highlight = true) }
+            item { ElementStoryCard("HOW IT WAS FOUND", element.story.discovery, Icons.Default.Science, Coral) }
+            item { ElementStoryCard("WHERE YOU MEET IT", element.story.uses, Icons.Default.Home, Green) }
             item {
                 Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                     Column(Modifier.fillMaxWidth().padding(12.dp)) {
                         Text("Where it sits", color = Navy, fontWeight = FontWeight.Black, modifier = Modifier.padding(bottom = 8.dp))
-                        MiniPeriodicTable(shown, onSelect = { shown = it })
-                        Text(
-                            "Tap any square to explore another element.",
-                            color = Navy.copy(alpha = .55f), fontSize = 11.sp, modifier = Modifier.padding(top = 8.dp),
-                        )
+                        MiniPeriodicTable(element)
                     }
-                }
-            }
-            if (shown != today) {
-                item {
-                    OutlinedButton({ shown = today }, Modifier.fillMaxWidth()) { Text("Back to today's element (${today.symbol})") }
                 }
             }
             item {
@@ -1127,8 +1116,72 @@ private fun ElementOfDayScreen(nav: NavHostController) {
     }
 }
 
+/** Bohr-style model: electrons orbit their shells, inner shells faster. Static when reduced motion is on. */
 @Composable
-private fun MiniPeriodicTable(selected: DailyElement, onSelect: (DailyElement) -> Unit) {
+private fun AtomModel(shells: List<Int>, nucleusColor: Color, animate: Boolean, modifier: Modifier) {
+    val turn = if (animate) {
+        val transition = rememberInfiniteTransition(label = "atom")
+        transition.animateFloat(
+            initialValue = 0f, targetValue = 1f,
+            animationSpec = infiniteRepeatable(tween(12_000, easing = LinearEasing)),
+            label = "orbit",
+        ).value
+    } else 0f
+    Canvas(
+        modifier.semantics {
+            contentDescription = "Atom model with electron shells holding ${shells.joinToString(", ")} electrons"
+        },
+    ) {
+        val centre = this.center
+        val maxRadius = size.minDimension / 2f * .94f
+        val nucleusRadius = maxRadius * .16f
+        val step = (maxRadius - nucleusRadius * 1.6f) / shells.size
+        val dotRadius = (step * .22f).coerceIn(2.2f, 7f)
+        shells.forEachIndexed { index, count ->
+            val radius = nucleusRadius * 1.6f + step * (index + 1)
+            drawCircle(Navy.copy(alpha = .16f), radius, centre, style = Stroke(width = 2f))
+            // Inner shells turn faster; each shell starts at a different angle so they do not line up.
+            val offset = 2f * PI.toFloat() * (turn * (shells.size - index) + index * .13f)
+            repeat(count) { electron ->
+                val angle = offset + 2f * PI.toFloat() * electron / count
+                drawCircle(
+                    Sky, dotRadius,
+                    Offset(centre.x + radius * cos(angle), centre.y + radius * sin(angle)),
+                )
+                drawCircle(
+                    Navy, dotRadius, Offset(centre.x + radius * cos(angle), centre.y + radius * sin(angle)),
+                    style = Stroke(width = 1.5f),
+                )
+            }
+        }
+        drawCircle(nucleusColor, nucleusRadius, centre)
+        drawCircle(Navy.copy(alpha = .5f), nucleusRadius, centre, style = Stroke(width = 2f))
+    }
+}
+
+@Composable
+private fun ElementStoryCard(label: String, text: String, icon: ImageVector, accent: Color, highlight: Boolean = false) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = if (highlight) Color(0xFFFFF3C9) else Color.White),
+        shape = RoundedCornerShape(18.dp),
+    ) {
+        Row(Modifier.fillMaxWidth().padding(16.dp)) {
+            Icon(icon, null, tint = accent, modifier = Modifier.size(22.dp))
+            Spacer(Modifier.width(12.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(label, color = accent, fontWeight = FontWeight.Black, fontSize = 11.sp, letterSpacing = 1.1.sp)
+                Text(
+                    text, color = Navy,
+                    fontWeight = if (highlight) FontWeight.Bold else FontWeight.Normal,
+                    fontSize = if (highlight) 17.sp else 15.sp, lineHeight = if (highlight) 23.sp else 21.sp,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MiniPeriodicTable(selected: DailyElement) {
     val cells = remember { ElementOfDay.all.associateBy(ElementOfDay::position) }
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         for (row in 0..9) {
@@ -1143,7 +1196,6 @@ private fun MiniPeriodicTable(selected: DailyElement, onSelect: (DailyElement) -
                                 Modifier.fillMaxSize()
                                     .clip(RoundedCornerShape(2.dp))
                                     .background(if (isSelected) Coral else familyColor(element.family).copy(alpha = .75f))
-                                    .clickable(onClickLabel = "Show ${element.name}") { onSelect(element) }
                                     .semantics { contentDescription = element.name },
                             )
                         }
