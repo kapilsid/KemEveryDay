@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Everyday Chemistry card text is looked up by name (ev_<card>_<field>), which the release
+     resource shrinker cannot see; keep it so translated cards survive shrinking. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/ev_*" />

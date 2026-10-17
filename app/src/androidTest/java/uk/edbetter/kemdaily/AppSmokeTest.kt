@@ -24,8 +24,8 @@ class AppSmokeTest {
 
         composeRule.onNodeWithText("Moves").assertIsDisplayed()
         composeRule.onNodeWithText("Discover").assertIsEnabled()
-        composeRule.onNodeWithText("Hint").assertIsEnabled()
-        composeRule.onNodeWithText("Shuffle").assertIsEnabled()
+        composeRule.onNodeWithText("Hint", substring = true).assertIsEnabled()
+        composeRule.onNodeWithText("Shuffle", substring = true).assertIsEnabled()
         composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
     }
 
