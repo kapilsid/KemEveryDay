@@ -391,4 +391,5 @@
     <string name="settings_version">Versi %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Opsi privasi iklan tidak diperlukan di perangkat ini</string>
     <string name="champions_your_score">Skor kamu</string>
+    <string name="champions_past_days">Hari sebelumnya</string>
 </resources>

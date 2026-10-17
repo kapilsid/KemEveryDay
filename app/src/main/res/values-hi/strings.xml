@@ -391,4 +391,5 @@
     <string name="settings_version">वर्शन %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">इस डिवाइस पर विज्ञापन गोपनीयता विकल्पों की ज़रूरत नहीं है</string>
     <string name="champions_your_score">आपका स्कोर</string>
+    <string name="champions_past_days">पिछले दिन</string>
 </resources>

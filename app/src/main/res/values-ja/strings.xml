@@ -391,4 +391,5 @@
     <string name="settings_version">バージョン %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">この端末では広告のプライバシー設定は不要です</string>
     <string name="champions_your_score">あなたのスコア</string>
+    <string name="champions_past_days">これまでの記録</string>
 </resources>

@@ -391,4 +391,5 @@
     <string name="settings_version">版本 %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">本设备无需广告隐私选项</string>
     <string name="champions_your_score">你的得分</string>
+    <string name="champions_past_days">往日成绩</string>
 </resources>

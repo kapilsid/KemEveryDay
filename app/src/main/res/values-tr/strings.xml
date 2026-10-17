@@ -391,4 +391,5 @@
     <string name="settings_version">Sürüm %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Bu cihazda reklam gizliliği seçenekleri gerekmiyor</string>
     <string name="champions_your_score">Puanın</string>
+    <string name="champions_past_days">Önceki günler</string>
 </resources>

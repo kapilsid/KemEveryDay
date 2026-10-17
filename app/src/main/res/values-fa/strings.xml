@@ -391,4 +391,5 @@
     <string name="settings_version">نسخهٔ %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">در این دستگاه نیازی به گزینه‌های حریم خصوصی تبلیغات نیست</string>
     <string name="champions_your_score">امتیاز تو</string>
+    <string name="champions_past_days">روزهای قبل</string>
 </resources>

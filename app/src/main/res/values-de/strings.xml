@@ -390,4 +390,5 @@
     <string name="settings_version">Version %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Werbe-Datenschutzoptionen sind auf diesem Gerät nicht erforderlich</string>
     <string name="champions_your_score">Dein Ergebnis</string>
+    <string name="champions_past_days">Vergangene Tage</string>
 </resources>
