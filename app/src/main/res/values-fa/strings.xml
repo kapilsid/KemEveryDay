@@ -390,4 +390,6 @@
     <string name="settings_ad_privacy_unavailable">در این دستگاه نیازی به گزینه‌های حریم خصوصی تبلیغات نیست</string>
     <string name="champions_your_score">امتیاز تو</string>
     <string name="champions_past_days">روزهای قبل</string>
+    <string name="hunt_msg_no_hints">راهنمایی دیگری برای این صفحه نمانده</string>
+    <string name="hunt_msg_no_shuffles">جابه‌جایی دیگری برای این صفحه نمانده</string>
 </resources>

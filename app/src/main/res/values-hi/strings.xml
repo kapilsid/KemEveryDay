@@ -390,4 +390,6 @@
     <string name="settings_ad_privacy_unavailable">इस डिवाइस पर विज्ञापन गोपनीयता विकल्पों की ज़रूरत नहीं है</string>
     <string name="champions_your_score">आपका स्कोर</string>
     <string name="champions_past_days">पिछले दिन</string>
+    <string name="hunt_msg_no_hints">इस बोर्ड पर कोई संकेत नहीं बचा</string>
+    <string name="hunt_msg_no_shuffles">इस बोर्ड पर कोई शफ़ल नहीं बचा</string>
 </resources>

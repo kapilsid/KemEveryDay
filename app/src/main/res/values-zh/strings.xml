@@ -390,4 +390,6 @@
     <string name="settings_ad_privacy_unavailable">本设备无需广告隐私选项</string>
     <string name="champions_your_score">你的得分</string>
     <string name="champions_past_days">往日成绩</string>
+    <string name="hunt_msg_no_hints">本局提示已用完</string>
+    <string name="hunt_msg_no_shuffles">本局洗牌已用完</string>
 </resources>

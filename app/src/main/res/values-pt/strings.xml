@@ -416,4 +416,6 @@
     <string name="settings_ad_privacy_unavailable">As opções de privacidade de anúncios não são necessárias neste aparelho</string>
     <string name="champions_your_score">Sua pontuação</string>
     <string name="champions_past_days">Dias anteriores</string>
+    <string name="hunt_msg_no_hints">Não há mais dicas neste tabuleiro</string>
+    <string name="hunt_msg_no_shuffles">Não há mais embaralhamentos neste tabuleiro</string>
 </resources>

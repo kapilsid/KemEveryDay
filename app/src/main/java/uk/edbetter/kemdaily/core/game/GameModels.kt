@@ -7,6 +7,9 @@ const val BOARD_CELLS = BOARD_SIZE * BOARD_SIZE
 const val STARTING_MOVES = 20
 const val MISSION_TARGET = 10
 const val MAX_SELECTION_ATOMS = 7
+/** Paid help per board; a board with no possible molecule is always reshuffled for free. */
+const val MAX_SHUFFLES = 1
+const val MAX_HINTS = 1
 
 data class Cell(val row: Int, val column: Int) {
     init { require(row in 0 until BOARD_SIZE && column in 0 until BOARD_SIZE) }
@@ -51,7 +54,12 @@ data class GameState(
     val lastDiscovery: DiscoveryResult? = null,
     val message: String? = null,
     val hintedCells: Set<Cell> = emptySet(),
+    val shufflesUsed: Int = 0,
+    val hintsUsed: Int = 0,
 ) {
+    val shufflesLeft: Int get() = (MAX_SHUFFLES - shufflesUsed).coerceAtLeast(0)
+    val hintsLeft: Int get() = (MAX_HINTS - hintsUsed).coerceAtLeast(0)
+
     init { require(board.size == BOARD_CELLS) }
 }
 

@@ -442,4 +442,6 @@
     <string name="settings_ad_privacy_unavailable">На этом устройстве настройки конфиденциальности рекламы не требуются</string>
     <string name="champions_your_score">Твой счёт</string>
     <string name="champions_past_days">Прошлые дни</string>
+    <string name="hunt_msg_no_hints">Подсказок на этой доске больше нет</string>
+    <string name="hunt_msg_no_shuffles">Перемешиваний на этой доске больше нет</string>
 </resources>

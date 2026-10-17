@@ -389,4 +389,6 @@
     <string name="settings_ad_privacy_unavailable">Werbe-Datenschutzoptionen sind auf diesem Gerät nicht erforderlich</string>
     <string name="champions_your_score">Dein Ergebnis</string>
     <string name="champions_past_days">Vergangene Tage</string>
+    <string name="hunt_msg_no_hints">Keine Tipps mehr für dieses Brett</string>
+    <string name="hunt_msg_no_shuffles">Kein Mischen mehr für dieses Brett</string>
 </resources>

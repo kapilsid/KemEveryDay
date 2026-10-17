@@ -161,6 +161,8 @@ class LocalRepository(context: Context) {
             state.consecutiveUnique.toString(),
             state.missionAchieved.toString(),
             state.phase.name,
+            state.shufflesUsed.toString(),
+            state.hintsUsed.toString(),
         ).joinToString(";")
         prefs.edit().putString("active_${state.mode.name}", encoded).apply()
     }
@@ -183,6 +185,8 @@ class LocalRepository(context: Context) {
             consecutiveUnique = parts[8].toInt(),
             missionAchieved = parts[9].toBoolean(),
             phase = GamePhase.valueOf(parts[10]),
+            shufflesUsed = parts.getOrNull(11)?.toIntOrNull() ?: 0,
+            hintsUsed = parts.getOrNull(12)?.toIntOrNull() ?: 0,
         )
     }.getOrNull()
 

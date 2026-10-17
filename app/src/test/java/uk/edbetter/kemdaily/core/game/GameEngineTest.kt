@@ -1,6 +1,7 @@
 package uk.edbetter.kemdaily.core.game
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -96,5 +97,25 @@ class GameEngineTest {
             List(5) { "C" } + List(3) { "N" } + listOf("Cl")
         assertEquals(25, symbols.size)
         return symbols.mapIndexed { index, symbol -> AtomTile(index.toLong() + 1, symbol) }
+    }
+
+    @Test fun oneShuffleAndOneHintPerBoard() {
+        val engine = GameEngine(42L, GameMode.DAILY)
+        val firstBoard = engine.state.board
+        engine.shuffle()
+        assertEquals(1, engine.state.shufflesUsed)
+        assertNotEquals(firstBoard, engine.state.board)
+        val shuffledBoard = engine.state.board
+        engine.shuffle()
+        assertEquals(shuffledBoard, engine.state.board)
+        assertEquals("No shuffles left on this board", engine.state.message)
+
+        engine.hint()
+        assertEquals(1, engine.state.hintsUsed)
+        assertTrue(engine.state.hintedCells.isNotEmpty())
+        engine.clear()
+        engine.hint()
+        assertTrue(engine.state.hintedCells.isEmpty())
+        assertEquals("No hints left on this board", engine.state.message)
     }
 }

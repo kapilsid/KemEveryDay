@@ -42,20 +42,31 @@ class GameEngine(seed: Long, mode: GameMode = GameMode.STANDARD) {
     fun hint(): GameState {
         val path = PathFinder.firstKnownPath(state.board, state.uniqueDiscoveries)
             ?: PathFinder.firstKnownPath(state.board)
-        state = if (path == null) shuffle().copy(message = "Board refreshed — try this new layout")
-        else state.copy(hintedCells = path.toSet(), message = "A possible discovery is glowing")
+        state = when {
+            // A stuck board is refreshed for free and does not use up the hint.
+            path == null -> reshuffle().copy(message = "Board refreshed — try this new layout")
+            state.hintsLeft == 0 -> state.copy(message = "No hints left on this board")
+            else -> state.copy(hintedCells = path.toSet(), hintsUsed = state.hintsUsed + 1, message = "A possible discovery is glowing")
+        }
         return state
     }
 
     fun shuffle(): GameState {
-        state = state.copy(
-            board = generator.shuffled(state.board),
-            selection = emptyList(),
-            hintedCells = emptySet(),
-            message = "Board shuffled",
-        )
+        val stuck = PathFinder.firstKnownPath(state.board) == null
+        state = when {
+            stuck -> reshuffle()
+            state.shufflesLeft == 0 -> state.copy(message = "No shuffles left on this board")
+            else -> reshuffle().copy(shufflesUsed = state.shufflesUsed + 1)
+        }
         return state
     }
+
+    private fun reshuffle(): GameState = state.copy(
+        board = generator.shuffled(state.board),
+        selection = emptyList(),
+        hintedCells = emptySet(),
+        message = "Board shuffled",
+    )
 
     fun continueAfterMission(): GameState {
         if (state.phase == GamePhase.MISSION_COMPLETE) {

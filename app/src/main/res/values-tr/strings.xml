@@ -390,4 +390,6 @@
     <string name="settings_ad_privacy_unavailable">Bu cihazda reklam gizliliği seçenekleri gerekmiyor</string>
     <string name="champions_your_score">Puanın</string>
     <string name="champions_past_days">Önceki günler</string>
+    <string name="hunt_msg_no_hints">Bu tahtada ipucu hakkın kalmadı</string>
+    <string name="hunt_msg_no_shuffles">Bu tahtada karıştırma hakkın kalmadı</string>
 </resources>

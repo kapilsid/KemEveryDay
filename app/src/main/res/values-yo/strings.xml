@@ -390,4 +390,6 @@
     <string name="settings_ad_privacy_unavailable">Ẹ̀rọ yìí kò nílò ààyò àṣírí ìpolówó</string>
     <string name="champions_your_score">Àmì-ẹ̀yẹ rẹ</string>
     <string name="champions_past_days">Àwọn ọjọ́ tó kọjá</string>
+    <string name="hunt_msg_no_hints">Kò sí ìtọ́sọ́nà mọ́ fún pátákó yìí</string>
+    <string name="hunt_msg_no_shuffles">Kò sí àdàlú mọ́ fún pátákó yìí</string>
 </resources>

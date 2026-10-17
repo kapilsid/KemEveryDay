@@ -415,4 +415,6 @@
     <string name="settings_ad_privacy_unavailable">Les options de confidentialité publicitaire ne sont pas nécessaires sur cet appareil</string>
     <string name="champions_your_score">Ton score</string>
     <string name="champions_past_days">Jours précédents</string>
+    <string name="hunt_msg_no_hints">Plus d\'indice pour ce plateau</string>
+    <string name="hunt_msg_no_shuffles">Plus de mélange pour ce plateau</string>
 </resources>

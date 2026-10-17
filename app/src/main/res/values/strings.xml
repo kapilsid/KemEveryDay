@@ -389,4 +389,6 @@
     <string name="settings_ad_privacy_unavailable">Ad privacy options are not required on this device</string>
     <string name="champions_your_score">Your score</string>
     <string name="champions_past_days">Past days</string>
+    <string name="hunt_msg_no_hints">No hints left on this board</string>
+    <string name="hunt_msg_no_shuffles">No shuffles left on this board</string>
 </resources>

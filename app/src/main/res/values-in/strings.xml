@@ -390,4 +390,6 @@
     <string name="settings_ad_privacy_unavailable">Opsi privasi iklan tidak diperlukan di perangkat ini</string>
     <string name="champions_your_score">Skor kamu</string>
     <string name="champions_past_days">Hari sebelumnya</string>
+    <string name="hunt_msg_no_hints">Petunjuk untuk papan ini sudah habis</string>
+    <string name="hunt_msg_no_shuffles">Acak untuk papan ini sudah habis</string>
 </resources>
