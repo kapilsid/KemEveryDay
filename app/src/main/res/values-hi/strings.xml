@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">डेली चैंपियंस</string>
-    <string name="champions_intro">आज की विश्व रैंकिंग में आने के लिए कोई भी एक डेली गेम पूरा करें। जो गेम नहीं खेला वह शून्य माना जाएगा; कुल UTC-दिन स्कोर बढ़ाने के लिए उसे बाद में पूरा करें।</string>
     <string name="champions_default_player">विज्ञान खिलाड़ी</string>
     <string name="champions_edit_nickname">निकनेम बदलें</string>
     <string name="champions_retry">Firebase से फिर जोड़ें</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">मॉलिक्यूल बोर्ड %1$s · विज्ञान %2$s</string>
     <string name="champions_not_finished">पूरा नहीं हुआ</string>
     <string name="champions_in_progress">जारी है</string>
-    <string name="champions_worldwide">विश्व रैंकिंग</string>
     <string name="champions_today_utc">आज · UTC</string>
     <string name="champions_offline">ऑफ़लाइन</string>
-    <string name="champions_no_scores_today">आज अभी तक कोई विश्व स्कोर नहीं आया है।</string>
-    <string name="champions_scores_need_firebase">Firebase जुड़ने पर विश्व स्कोर यहाँ दिखेंगे।</string>
+    <string name="champions_no_scores_today">आज अभी तक कोई स्कोर नहीं।</string>
+    <string name="champions_scores_need_firebase">ऑनलाइन होने पर स्कोर यहाँ दिखेंगे।</string>
     <string name="champions_you">%1$s · आप</string>
     <string name="champions_entry_scores">बोर्ड %1$d · विज्ञान %2$d</string>
     <string name="champions_local_scores">आपके डेली कुल</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">इस सप्ताह</string>
     <string name="champions_week_total">इस सप्ताह का कुल</string>
     <string name="champions_week_utc">इस सप्ताह · UTC</string>
-    <string name="champions_no_scores_week">इस सप्ताह के लिए अभी कोई विश्व स्कोर पोस्ट नहीं हुआ है।</string>
+    <string name="champions_no_scores_week">इस हफ़्ते अभी तक कोई स्कोर नहीं।</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d पहेली हल हुई</item>
         <item quantity="other">%1$d पहेलियाँ हल हुईं</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">निकनेम सेव हो रहा है…</string>
     <string name="champions_status_saved">निकनेम सेव हो गया</string>
     <string name="champions_status_save_failed">निकनेम सेव नहीं हो सका। अपना कनेक्शन और Firebase सेटअप जाँचें।</string>
-    <string name="champions_status_connected">विश्व लीडरबोर्ड जुड़ गया</string>
-    <string name="champions_status_offline_setup">लोकल स्कोर सुरक्षित हैं। विश्व रैंकिंग से जुड़ने के लिए Anonymous Authentication और Firestore चालू करें।</string>
+    <string name="champions_status_connected">लीडरबोर्ड जुड़ गया</string>
+    <string name="champions_status_offline_setup">ऑफ़लाइन। आपके स्कोर इस फ़ोन पर सुरक्षित हैं।</string>
     <string name="champions_status_rankings_unavailable">जुड़ गया, पर अभी रैंकिंग उपलब्ध नहीं है।</string>
     <string name="champions_status_submitting">आज का डेली चैंपियंस स्कोर भेज रहे हैं…</string>
     <string name="champions_status_submitted_rank">स्कोर भेजा गया · रैंक #%1$d</string>

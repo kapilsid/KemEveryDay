@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Àwọn Akọni Ojoojúmọ́</string>
-    <string name="champions_intro">Parí ọ̀kan lára àwọn eré ojoojúmọ́ láti wọ ipò àgbáyé òní. Eré tí o kò tíì ṣe jẹ́ odo; parí i lẹ́yìn náà láti mú àpapọ̀ ọjọ́ UTC rẹ ga.</string>
     <string name="champions_default_player">Aláṣeré sáyẹ́ǹsì</string>
     <string name="champions_edit_nickname">Yí orúkọ ìnagijẹ padà</string>
     <string name="champions_retry">Tún so Firebase pọ̀</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">Pátákó Mọ́lẹ́kúlù %1$s · Sáyẹ́ǹsì %2$s</string>
     <string name="champions_not_finished">kò tíì parí</string>
     <string name="champions_in_progress">ó ń lọ lọ́wọ́</string>
-    <string name="champions_worldwide">Ipò àgbáyé</string>
     <string name="champions_today_utc">ÒNÍ · UTC</string>
     <string name="champions_offline">LÁÌSÍ ÍŃTÁNẸ́Ẹ̀TÌ</string>
-    <string name="champions_no_scores_today">Kò sí àmì àgbáyé kankan fún òní síbẹ̀.</string>
-    <string name="champions_scores_need_firebase">Àmì àgbáyé yóò hàn níbí nígbà tí Firebase bá ti so pọ̀.</string>
+    <string name="champions_no_scores_today">Kò sí àmì-ẹ̀yẹ kankan lónìí síbẹ̀.</string>
+    <string name="champions_scores_need_firebase">Àwọn àmì-ẹ̀yẹ yóò hàn níbí nígbà tí o bá wà lórí ayélujára.</string>
     <string name="champions_you">%1$s · Ìwọ</string>
     <string name="champions_entry_scores">Pátákó %1$d · Sáyẹ́ǹsì %2$d</string>
     <string name="champions_local_scores">Àpapọ̀ ojoojúmọ́ rẹ</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">Ọ̀sẹ̀ Yìí</string>
     <string name="champions_week_total">ÀPAPỌ̀ Ọ̀SẸ̀ YÌÍ</string>
     <string name="champions_week_utc">Ọ̀SẸ̀ YÌÍ · UTC</string>
-    <string name="champions_no_scores_week">Kò sí àmì àgbáyé fún ọ̀sẹ̀ yìí síbẹ̀.</string>
+    <string name="champions_no_scores_week">Kò sí àmì-ẹ̀yẹ kankan ní ọ̀sẹ̀ yìí síbẹ̀.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">àdììtú %1$d ti yanjú</item>
         <item quantity="other">àdììtú %1$d ti yanjú</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">À ń fi orúkọ ìnagijẹ pamọ́…</string>
     <string name="champions_status_saved">A ti fi orúkọ ìnagijẹ pamọ́</string>
     <string name="champions_status_save_failed">A kò lè fi orúkọ ìnagijẹ pamọ́. Ṣàyẹ̀wò ìsopọ̀ rẹ àti ètò Firebase.</string>
-    <string name="champions_status_connected">Ipò àgbáyé ti so pọ̀</string>
-    <string name="champions_status_offline_setup">Àmì orí ẹ̀rọ rẹ wà ní ààbò. Mú Anonymous Authentication àti Firestore ṣiṣẹ́ láti so mọ́ ipò àgbáyé.</string>
+    <string name="champions_status_connected">Àtẹ àwọn aṣáájú ti so pọ̀</string>
+    <string name="champions_status_offline_setup">O kò sí lórí ayélujára. Àwọn àmì-ẹ̀yẹ rẹ wà lórí fóònù yìí.</string>
     <string name="champions_status_rankings_unavailable">Ó ti so pọ̀, ṣùgbọ́n ipò kò sí lọ́wọ́lọ́wọ́.</string>
     <string name="champions_status_submitting">À ń fi àmì Àwọn Akọni Ojoojúmọ́ òní ránṣẹ́…</string>
     <string name="champions_status_submitted_rank">A ti fi àmì ránṣẹ́ · ipò #%1$d</string>

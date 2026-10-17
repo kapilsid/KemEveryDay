@@ -312,7 +312,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Чемпионы дня</string>
-    <string name="champions_intro">Пройди любую дневную игру, чтобы войти в мировой рейтинг сегодня. Непройденная игра даёт ноль; пройди её позже, чтобы повысить общий результат за сутки UTC.</string>
     <string name="champions_default_player">Юный учёный</string>
     <string name="champions_edit_nickname">Изменить ник</string>
     <string name="champions_retry">Переподключить Firebase</string>
@@ -321,11 +320,10 @@
     <string name="champions_today_breakdown">Доска молекул %1$s · Наука %2$s</string>
     <string name="champions_not_finished">не завершено</string>
     <string name="champions_in_progress">в процессе</string>
-    <string name="champions_worldwide">Мировой рейтинг</string>
     <string name="champions_today_utc">СЕГОДНЯ · UTC</string>
     <string name="champions_offline">ОФЛАЙН</string>
-    <string name="champions_no_scores_today">Сегодня в мировом рейтинге ещё нет результатов.</string>
-    <string name="champions_scores_need_firebase">Мировые результаты появятся здесь после подключения к Firebase.</string>
+    <string name="champions_no_scores_today">Сегодня пока нет результатов.</string>
+    <string name="champions_scores_need_firebase">Результаты появятся здесь, когда ты будешь в сети.</string>
     <string name="champions_you">%1$s · Ты</string>
     <string name="champions_entry_scores">Доска %1$d · Наука %2$d</string>
     <string name="champions_local_scores">Твои дневные результаты</string>
@@ -336,7 +334,7 @@
     <string name="champions_this_week">Эта неделя</string>
     <string name="champions_week_total">ИТОГ ЗА НЕДЕЛЮ</string>
     <string name="champions_week_utc">ЭТА НЕДЕЛЯ · UTC</string>
-    <string name="champions_no_scores_week">За эту неделю ещё нет результатов мирового рейтинга.</string>
+    <string name="champions_no_scores_week">На этой неделе пока нет результатов.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d загадка решена</item>
         <item quantity="few">%1$d загадки решены</item>
@@ -357,8 +355,8 @@
     <string name="champions_status_saving">Сохраняем ник…</string>
     <string name="champions_status_saved">Ник сохранён</string>
     <string name="champions_status_save_failed">Не удалось сохранить ник. Проверь подключение и настройку Firebase.</string>
-    <string name="champions_status_connected">Мировой рейтинг подключён</string>
-    <string name="champions_status_offline_setup">Локальные результаты в сохранности. Включи анонимную аутентификацию и Firestore, чтобы подключить мировой рейтинг.</string>
+    <string name="champions_status_connected">Таблица лидеров подключена</string>
+    <string name="champions_status_offline_setup">Нет сети. Твои результаты сохранены на этом телефоне.</string>
     <string name="champions_status_rankings_unavailable">Подключено, но рейтинг сейчас недоступен.</string>
     <string name="champions_status_submitting">Отправляем сегодняшний результат…</string>
     <string name="champions_status_submitted_rank">Результат отправлен · место №%1$d</string>

@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Juara Harian</string>
-    <string name="champions_intro">Selesaikan salah satu game harian untuk masuk peringkat dunia hari ini. Game yang belum dimainkan bernilai nol; selesaikan nanti untuk meningkatkan total gabungan hari UTC-mu.</string>
     <string name="champions_default_player">Pemain sains</string>
     <string name="champions_edit_nickname">Ubah nama panggilan</string>
     <string name="champions_retry">Hubungkan ulang Firebase</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">Papan Molekul %1$s · Sains %2$s</string>
     <string name="champions_not_finished">belum selesai</string>
     <string name="champions_in_progress">sedang berjalan</string>
-    <string name="champions_worldwide">Peringkat dunia</string>
     <string name="champions_today_utc">HARI INI · UTC</string>
     <string name="champions_offline">OFFLINE</string>
-    <string name="champions_no_scores_today">Belum ada skor dunia untuk hari ini.</string>
-    <string name="champions_scores_need_firebase">Skor dunia muncul di sini saat Firebase terhubung.</string>
+    <string name="champions_no_scores_today">Belum ada skor hari ini.</string>
+    <string name="champions_scores_need_firebase">Skor muncul di sini saat kamu online.</string>
     <string name="champions_you">%1$s · Kamu</string>
     <string name="champions_entry_scores">Papan %1$d · Sains %2$d</string>
     <string name="champions_local_scores">Total harianmu</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">Minggu ini</string>
     <string name="champions_week_total">TOTAL MINGGU INI</string>
     <string name="champions_week_utc">MINGGU INI · UTC</string>
-    <string name="champions_no_scores_week">Belum ada skor dunia yang dikirim untuk minggu ini.</string>
+    <string name="champions_no_scores_week">Belum ada skor minggu ini.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d misteri terpecahkan</item>
         <item quantity="other">%1$d misteri terpecahkan</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">Menyimpan nama panggilan…</string>
     <string name="champions_status_saved">Nama panggilan tersimpan</string>
     <string name="champions_status_save_failed">Nama panggilan gagal disimpan. Periksa koneksi dan pengaturan Firebase.</string>
-    <string name="champions_status_connected">Papan peringkat dunia terhubung</string>
-    <string name="champions_status_offline_setup">Skor lokal aman. Aktifkan Anonymous Authentication dan Firestore untuk terhubung ke peringkat dunia.</string>
+    <string name="champions_status_connected">Papan peringkat terhubung</string>
+    <string name="champions_status_offline_setup">Offline. Skor kamu tersimpan di ponsel ini.</string>
     <string name="champions_status_rankings_unavailable">Terhubung, tetapi peringkat sedang tidak tersedia.</string>
     <string name="champions_status_submitting">Mengirim skor Juara Harian hari ini…</string>
     <string name="champions_status_submitted_rank">Skor terkirim · peringkat #%1$d</string>

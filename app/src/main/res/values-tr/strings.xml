@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Günün Şampiyonları</string>
-    <string name="champions_intro">Bugünkü dünya sıralamasına katılmak için günlük oyunlardan birini bitir. Oynamadığın oyun sıfır sayılır; birleşik UTC günü puanını artırmak için daha sonra bitir.</string>
     <string name="champions_default_player">Bilim oyuncusu</string>
     <string name="champions_edit_nickname">Takma adı düzenle</string>
     <string name="champions_retry">Firebase\'e tekrar bağlan</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">Molekül Tahtası %1$s · Bilim %2$s</string>
     <string name="champions_not_finished">bitmedi</string>
     <string name="champions_in_progress">devam ediyor</string>
-    <string name="champions_worldwide">Dünya sıralaması</string>
     <string name="champions_today_utc">BUGÜN · UTC</string>
     <string name="champions_offline">ÇEVRİMDIŞI</string>
-    <string name="champions_no_scores_today">Bugün için henüz dünya puanı yok.</string>
-    <string name="champions_scores_need_firebase">Firebase bağlandığında dünya puanları burada görünür.</string>
+    <string name="champions_no_scores_today">Bugün henüz puan yok.</string>
+    <string name="champions_scores_need_firebase">Çevrimiçi olduğunda puanlar burada görünür.</string>
     <string name="champions_you">%1$s · Sen</string>
     <string name="champions_entry_scores">Tahta %1$d · Bilim %2$d</string>
     <string name="champions_local_scores">Günlük toplamların</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">Bu Hafta</string>
     <string name="champions_week_total">BU HAFTANIN TOPLAMI</string>
     <string name="champions_week_utc">BU HAFTA · UTC</string>
-    <string name="champions_no_scores_week">Bu hafta için henüz dünya çapında puan gönderilmedi.</string>
+    <string name="champions_no_scores_week">Bu hafta henüz puan yok.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d gizem çözüldü</item>
         <item quantity="other">%1$d gizem çözüldü</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">Takma ad kaydediliyor…</string>
     <string name="champions_status_saved">Takma ad kaydedildi</string>
     <string name="champions_status_save_failed">Takma ad kaydedilemedi. Bağlantını ve Firebase kurulumunu kontrol et.</string>
-    <string name="champions_status_connected">Dünya sıralamasına bağlandı</string>
-    <string name="champions_status_offline_setup">Yerel puanların güvende. Dünya sıralamasına bağlanmak için Anonim Kimlik Doğrulama ve Firestore\'u aç.</string>
+    <string name="champions_status_connected">Sıralama bağlandı</string>
+    <string name="champions_status_offline_setup">Çevrimdışı. Puanların bu telefonda kayıtlı.</string>
     <string name="champions_status_rankings_unavailable">Bağlandı ama sıralama şu an kullanılamıyor.</string>
     <string name="champions_status_submitting">Bugünün Günün Şampiyonları puanı gönderiliyor…</string>
     <string name="champions_status_submitted_rank">Puan gönderildi · sıra #%1$d</string>

@@ -269,7 +269,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Daily Champions</string>
-    <string name="champions_intro">Finish either daily game to join today\'s worldwide ranking. The unplayed game counts as zero; finish it later to improve your combined UTC-day score.</string>
     <string name="champions_default_player">Science player</string>
     <string name="champions_edit_nickname">Edit nickname</string>
     <string name="champions_retry">Retry Firebase connection</string>
@@ -278,11 +277,10 @@
     <string name="champions_today_breakdown">Molecule Board %1$s · Science %2$s</string>
     <string name="champions_not_finished">not finished</string>
     <string name="champions_in_progress">in progress</string>
-    <string name="champions_worldwide">Worldwide rankings</string>
     <string name="champions_today_utc">TODAY · UTC</string>
     <string name="champions_offline">OFFLINE</string>
-    <string name="champions_no_scores_today">No worldwide scores have been posted for today yet.</string>
-    <string name="champions_scores_need_firebase">Worldwide scores appear here when Firebase is connected.</string>
+    <string name="champions_no_scores_today">No scores yet today.</string>
+    <string name="champions_scores_need_firebase">Scores appear here when you\'re online.</string>
     <string name="champions_you">%1$s · You</string>
     <string name="champions_entry_scores">Board %1$d · Science %2$d</string>
     <string name="champions_local_scores">Your daily totals</string>
@@ -293,7 +291,7 @@
     <string name="champions_this_week">This Week</string>
     <string name="champions_week_total">THIS WEEK\'S TOTAL</string>
     <string name="champions_week_utc">THIS WEEK · UTC</string>
-    <string name="champions_no_scores_week">No worldwide scores have been posted for this week yet.</string>
+    <string name="champions_no_scores_week">No scores yet this week.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d mystery solved</item>
         <item quantity="other">%1$d mysteries solved</item>
@@ -312,8 +310,8 @@
     <string name="champions_status_saving">Saving nickname…</string>
     <string name="champions_status_saved">Nickname saved</string>
     <string name="champions_status_save_failed">Could not save the nickname. Check your connection and Firebase setup.</string>
-    <string name="champions_status_connected">Worldwide leaderboard connected</string>
-    <string name="champions_status_offline_setup">Local scores are safe. Enable Anonymous Authentication and Firestore to connect worldwide rankings.</string>
+    <string name="champions_status_connected">Leaderboard connected</string>
+    <string name="champions_status_offline_setup">Offline. Your scores are saved on this phone.</string>
     <string name="champions_status_rankings_unavailable">Connected, but rankings are unavailable right now.</string>
     <string name="champions_status_submitting">Submitting today\'s Daily Champions score…</string>
     <string name="champions_status_submitted_rank">Score submitted · rank #%1$d</string>

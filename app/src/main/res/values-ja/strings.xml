@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">デイリーチャンピオン</string>
-    <string name="champions_intro">どちらかのデイリーゲームを終えると今日の世界ランキングに参加できます。未プレイのゲームは0点で、後から終えるとUTC日の合計点が上がります。</string>
     <string name="champions_default_player">サイエンスプレイヤー</string>
     <string name="champions_edit_nickname">ニックネームを編集</string>
     <string name="champions_retry">Firebase に再接続</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">分子ボード %1$s · サイエンス %2$s</string>
     <string name="champions_not_finished">未完了</string>
     <string name="champions_in_progress">プレイ中</string>
-    <string name="champions_worldwide">世界ランキング</string>
     <string name="champions_today_utc">今日 · UTC</string>
     <string name="champions_offline">オフライン</string>
-    <string name="champions_no_scores_today">今日の世界スコアはまだありません。</string>
-    <string name="champions_scores_need_firebase">Firebase に接続すると世界スコアがここに表示されます。</string>
+    <string name="champions_no_scores_today">今日のスコアはまだありません。</string>
+    <string name="champions_scores_need_firebase">オンラインになるとここにスコアが表示されます。</string>
     <string name="champions_you">%1$s · あなた</string>
     <string name="champions_entry_scores">ボード %1$d · サイエンス %2$d</string>
     <string name="champions_local_scores">デイリー合計</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">今週</string>
     <string name="champions_week_total">今週の合計</string>
     <string name="champions_week_utc">今週 · UTC</string>
-    <string name="champions_no_scores_week">今週の世界スコアはまだありません。</string>
+    <string name="champions_no_scores_week">今週のスコアはまだありません。</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d問正解</item>
         <item quantity="other">%1$d問正解</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">ニックネームを保存中…</string>
     <string name="champions_status_saved">ニックネームを保存しました</string>
     <string name="champions_status_save_failed">ニックネームを保存できませんでした。接続と Firebase の設定を確認してください。</string>
-    <string name="champions_status_connected">世界ランキングに接続しました</string>
-    <string name="champions_status_offline_setup">ローカルのスコアは安全です。匿名認証と Firestore を有効にすると世界ランキングに接続できます。</string>
+    <string name="champions_status_connected">ランキングに接続しました</string>
+    <string name="champions_status_offline_setup">オフラインです。スコアはこの端末に保存されています。</string>
     <string name="champions_status_rankings_unavailable">接続済みですが、今はランキングを表示できません。</string>
     <string name="champions_status_submitting">今日のデイリーチャンピオンのスコアを送信中…</string>
     <string name="champions_status_submitted_rank">スコア送信完了 · %1$d位</string>

@@ -290,7 +290,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Campeones del día</string>
-    <string name="champions_intro">Termina cualquiera de los juegos diarios para entrar en el ranking mundial de hoy. El juego no jugado cuenta como cero; termínalo después para mejorar tu total combinado del día UTC.</string>
     <string name="champions_default_player">Jugador científico</string>
     <string name="champions_edit_nickname">Editar apodo</string>
     <string name="champions_retry">Reintentar conexión con Firebase</string>
@@ -299,11 +298,10 @@
     <string name="champions_today_breakdown">Tablero de moléculas %1$s · Ciencia %2$s</string>
     <string name="champions_not_finished">sin terminar</string>
     <string name="champions_in_progress">en curso</string>
-    <string name="champions_worldwide">Ranking mundial</string>
     <string name="champions_today_utc">HOY · UTC</string>
     <string name="champions_offline">SIN CONEXIÓN</string>
-    <string name="champions_no_scores_today">Todavía no hay puntuaciones mundiales para hoy.</string>
-    <string name="champions_scores_need_firebase">Las puntuaciones mundiales aparecen aquí cuando Firebase está conectado.</string>
+    <string name="champions_no_scores_today">Aún no hay puntuaciones hoy.</string>
+    <string name="champions_scores_need_firebase">Las puntuaciones aparecen aquí cuando estás en línea.</string>
     <string name="champions_you">%1$s · Tú</string>
     <string name="champions_entry_scores">Tablero %1$d · Ciencia %2$d</string>
     <string name="champions_local_scores">Tus totales diarios</string>
@@ -314,7 +312,7 @@
     <string name="champions_this_week">Esta semana</string>
     <string name="champions_week_total">TOTAL DE ESTA SEMANA</string>
     <string name="champions_week_utc">ESTA SEMANA · UTC</string>
-    <string name="champions_no_scores_week">Todavía no hay puntuaciones mundiales para esta semana.</string>
+    <string name="champions_no_scores_week">Aún no hay puntuaciones esta semana.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d misterio resuelto</item>
         <item quantity="many">%1$d misterios resueltos</item>
@@ -334,8 +332,8 @@
     <string name="champions_status_saving">Guardando apodo…</string>
     <string name="champions_status_saved">Apodo guardado</string>
     <string name="champions_status_save_failed">No se pudo guardar el apodo. Revisa tu conexión y la configuración de Firebase.</string>
-    <string name="champions_status_connected">Ranking mundial conectado</string>
-    <string name="champions_status_offline_setup">Tus puntuaciones locales están a salvo. Activa Anonymous Authentication y Firestore para conectar el ranking mundial.</string>
+    <string name="champions_status_connected">Clasificación conectada</string>
+    <string name="champions_status_offline_setup">Sin conexión. Tus puntuaciones se guardan en este teléfono.</string>
     <string name="champions_status_rankings_unavailable">Conectado, pero el ranking no está disponible ahora mismo.</string>
     <string name="champions_status_submitting">Enviando la puntuación de hoy a Campeones del día…</string>
     <string name="champions_status_submitted_rank">Puntuación enviada · puesto n.º %1$d</string>

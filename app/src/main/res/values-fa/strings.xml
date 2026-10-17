@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">قهرمانان روز</string>
-    <string name="champions_intro">یکی از بازی‌های روزانه را تمام کن تا وارد رتبه‌بندی جهانی امروز شوی. بازی انجام‌نشده صفر حساب می‌شود؛ بعداً آن را تمام کن تا مجموع روز UTC بهتر شود.</string>
     <string name="champions_default_player">بازیکن علم</string>
     <string name="champions_edit_nickname">ویرایش نام مستعار</string>
     <string name="champions_retry">اتصال دوباره به Firebase</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">صفحهٔ مولکول %1$s · علم %2$s</string>
     <string name="champions_not_finished">تمام نشده</string>
     <string name="champions_in_progress">در جریان</string>
-    <string name="champions_worldwide">رتبه‌بندی جهانی</string>
     <string name="champions_today_utc">امروز · UTC</string>
     <string name="champions_offline">آفلاین</string>
-    <string name="champions_no_scores_today">هنوز امتیاز جهانی‌ای برای امروز ثبت نشده است.</string>
-    <string name="champions_scores_need_firebase">وقتی Firebase وصل شود، امتیازهای جهانی اینجا نمایش داده می‌شوند.</string>
+    <string name="champions_no_scores_today">امروز هنوز امتیازی ثبت نشده است.</string>
+    <string name="champions_scores_need_firebase">وقتی آنلاین باشی امتیازها اینجا نمایش داده می‌شوند.</string>
     <string name="champions_you">%1$s · تو</string>
     <string name="champions_entry_scores">صفحه %1$d · علم %2$d</string>
     <string name="champions_local_scores">مجموع‌های روزانهٔ تو</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">این هفته</string>
     <string name="champions_week_total">مجموع این هفته</string>
     <string name="champions_week_utc">این هفته · UTC</string>
-    <string name="champions_no_scores_week">هنوز امتیاز جهانی‌ای برای این هفته ثبت نشده است.</string>
+    <string name="champions_no_scores_week">این هفته هنوز امتیازی ثبت نشده است.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d معما حل شد</item>
         <item quantity="other">%1$d معما حل شد</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">در حال ذخیرهٔ نام مستعار…</string>
     <string name="champions_status_saved">نام مستعار ذخیره شد</string>
     <string name="champions_status_save_failed">نام مستعار ذخیره نشد. اتصال اینترنت و تنظیمات Firebase را بررسی کن.</string>
-    <string name="champions_status_connected">جدول امتیازات جهانی وصل شد</string>
-    <string name="champions_status_offline_setup">امتیازهای محلی امن هستند. برای اتصال به رتبه‌بندی جهانی، Anonymous Authentication و Firestore را فعال کن.</string>
+    <string name="champions_status_connected">جدول امتیازات وصل شد</string>
+    <string name="champions_status_offline_setup">آفلاین. امتیازهایت روی این گوشی ذخیره شده‌اند.</string>
     <string name="champions_status_rankings_unavailable">وصل شد، اما رتبه‌بندی فعلاً در دسترس نیست.</string>
     <string name="champions_status_submitting">در حال ارسال امتیاز امروزِ قهرمانان روز…</string>
     <string name="champions_status_submitted_rank">امتیاز ارسال شد · رتبهٔ #%1$d</string>

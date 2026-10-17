@@ -270,7 +270,6 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">每日冠军</string>
-    <string name="champions_intro">完成任一每日游戏即可进入今天的全球排名。未玩的游戏按零分计算；之后完成它即可提高该 UTC 日的合计分数。</string>
     <string name="champions_default_player">科学玩家</string>
     <string name="champions_edit_nickname">修改昵称</string>
     <string name="champions_retry">重新连接 Firebase</string>
@@ -279,11 +278,10 @@
     <string name="champions_today_breakdown">分子棋盘 %1$s · 科学 %2$s</string>
     <string name="champions_not_finished">未完成</string>
     <string name="champions_in_progress">进行中</string>
-    <string name="champions_worldwide">全球排名</string>
     <string name="champions_today_utc">今天 · UTC</string>
     <string name="champions_offline">离线</string>
-    <string name="champions_no_scores_today">今天还没有人提交全球得分。</string>
-    <string name="champions_scores_need_firebase">连接 Firebase 后，全球得分会显示在这里。</string>
+    <string name="champions_no_scores_today">今天还没有成绩。</string>
+    <string name="champions_scores_need_firebase">联网后成绩会显示在这里。</string>
     <string name="champions_you">%1$s · 你</string>
     <string name="champions_entry_scores">棋盘 %1$d · 科学 %2$d</string>
     <string name="champions_local_scores">你的每日总分</string>
@@ -294,7 +292,7 @@
     <string name="champions_this_week">本周</string>
     <string name="champions_week_total">本周总分</string>
     <string name="champions_week_utc">本周 · UTC</string>
-    <string name="champions_no_scores_week">本周还没有全球得分记录。</string>
+    <string name="champions_no_scores_week">本周还没有成绩。</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">解开 %1$d 个谜题</item>
         <item quantity="other">解开 %1$d 个谜题</item>
@@ -313,8 +311,8 @@
     <string name="champions_status_saving">正在保存昵称…</string>
     <string name="champions_status_saved">昵称已保存</string>
     <string name="champions_status_save_failed">无法保存昵称。请检查网络连接和 Firebase 设置。</string>
-    <string name="champions_status_connected">已连接全球排行榜</string>
-    <string name="champions_status_offline_setup">本地得分很安全。启用匿名身份验证和 Firestore 即可连接全球排名。</string>
+    <string name="champions_status_connected">排行榜已连接</string>
+    <string name="champions_status_offline_setup">离线。你的成绩已保存在这部手机上。</string>
     <string name="champions_status_rankings_unavailable">已连接，但排名暂时不可用。</string>
     <string name="champions_status_submitting">正在提交今天的每日冠军得分…</string>
     <string name="champions_status_submitted_rank">得分已提交 · 第 %1$d 名</string>
