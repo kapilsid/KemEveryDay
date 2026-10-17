@@ -391,5 +391,8 @@
     <string name="champions_your_score">Puanın</string>
     <string name="champions_past_days">Önceki günler</string>
     <string name="hunt_msg_no_hints">Bu tahtada ipucu hakkın kalmadı</string>
-    <string name="hunt_msg_no_shuffles">Bu tahtada karıştırma hakkın kalmadı</string>
+    <string name="hunt_msg_no_molecules">Burada molekül yok — Karıştır\'ı dene</string>
+    <string name="hunt_msg_shuffled_for_move">Tahta 1 hamle karşılığında karıştırıldı</string>
+    <string name="hunt_msg_no_moves_to_shuffle">Karıştırmak için yeterli hamle yok</string>
+    <string name="hunt_shuffle_paid">Karıştır (−1 hamle)</string>
 </resources>

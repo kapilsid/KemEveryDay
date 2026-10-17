@@ -43,8 +43,8 @@ class GameEngine(seed: Long, mode: GameMode = GameMode.STANDARD) {
         val path = PathFinder.firstKnownPath(state.board, state.uniqueDiscoveries)
             ?: PathFinder.firstKnownPath(state.board)
         state = when {
-            // A stuck board is refreshed for free and does not use up the hint.
-            path == null -> reshuffle().copy(message = "Board refreshed — try this new layout")
+            // Nothing to point at: keep the hint and send the player to Shuffle.
+            path == null -> state.copy(message = "No molecules here — try Shuffle")
             state.hintsLeft == 0 -> state.copy(message = "No hints left on this board")
             else -> state.copy(hintedCells = path.toSet(), hintsUsed = state.hintsUsed + 1, message = "A possible discovery is glowing")
         }
@@ -55,8 +55,13 @@ class GameEngine(seed: Long, mode: GameMode = GameMode.STANDARD) {
         val stuck = PathFinder.firstKnownPath(state.board) == null
         state = when {
             stuck -> reshuffle()
-            state.shufflesLeft == 0 -> state.copy(message = "No shuffles left on this board")
-            else -> reshuffle().copy(shufflesUsed = state.shufflesUsed + 1)
+            state.shufflesLeft > 0 -> reshuffle().copy(shufflesUsed = state.shufflesUsed + 1)
+            // After the free shuffle, more shuffles cost a move. The last move is kept for a discovery.
+            state.movesRemaining > 1 -> reshuffle().copy(
+                movesRemaining = state.movesRemaining - 1,
+                message = "Board shuffled for 1 move",
+            )
+            else -> state.copy(message = "Not enough moves left to shuffle")
         }
         return state
     }

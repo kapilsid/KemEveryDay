@@ -391,5 +391,8 @@
     <string name="champions_your_score">امتیاز تو</string>
     <string name="champions_past_days">روزهای قبل</string>
     <string name="hunt_msg_no_hints">راهنمایی دیگری برای این صفحه نمانده</string>
-    <string name="hunt_msg_no_shuffles">جابه‌جایی دیگری برای این صفحه نمانده</string>
+    <string name="hunt_msg_no_molecules">اینجا مولکولی نیست؛ جابه‌جایی را امتحان کن</string>
+    <string name="hunt_msg_shuffled_for_move">صفحه با ۱ حرکت جابه‌جا شد</string>
+    <string name="hunt_msg_no_moves_to_shuffle">حرکت کافی برای جابه‌جایی نمانده</string>
+    <string name="hunt_shuffle_paid">جابه‌جایی (−۱ حرکت)</string>
 </resources>

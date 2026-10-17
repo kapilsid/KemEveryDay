@@ -416,5 +416,8 @@
     <string name="champions_your_score">Tu puntuación</string>
     <string name="champions_past_days">Días anteriores</string>
     <string name="hunt_msg_no_hints">No quedan pistas en este tablero</string>
-    <string name="hunt_msg_no_shuffles">No quedan mezclas en este tablero</string>
+    <string name="hunt_msg_no_molecules">No hay moléculas aquí: prueba a mezclar</string>
+    <string name="hunt_msg_shuffled_for_move">Tablero mezclado por 1 movimiento</string>
+    <string name="hunt_msg_no_moves_to_shuffle">No quedan movimientos para mezclar</string>
+    <string name="hunt_shuffle_paid">Mezclar (−1 mov.)</string>
 </resources>

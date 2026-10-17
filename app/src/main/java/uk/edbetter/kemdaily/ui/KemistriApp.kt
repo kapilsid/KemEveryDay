@@ -437,7 +437,10 @@ private fun HuntScreen(nav: NavHostController, viewModel: MainViewModel, daily: 
                         Icon(Icons.Default.Lightbulb, null); Spacer(Modifier.width(5.dp)); Text("${stringResource(R.string.hunt_hint)} (${game.hintsLeft})")
                     }
                     OutlinedButton(viewModel::shuffle, Modifier.weight(1f), contentPadding = PaddingValues(8.dp)) {
-                        Icon(Icons.Default.Shuffle, null); Spacer(Modifier.width(5.dp)); Text("${stringResource(R.string.hunt_shuffle)} (${game.shufflesLeft})")
+                        Icon(Icons.Default.Shuffle, null); Spacer(Modifier.width(5.dp)); Text(
+                            if (game.shufflesLeft > 0) "${stringResource(R.string.hunt_shuffle)} (${game.shufflesLeft})"
+                            else stringResource(R.string.hunt_shuffle_paid),
+                        )
                     }
                 }
                 Row(Modifier.fillMaxWidth().padding(vertical = 9.dp), horizontalArrangement = Arrangement.spacedBy(9.dp)) {

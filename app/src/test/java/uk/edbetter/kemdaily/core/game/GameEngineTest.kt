@@ -105,10 +105,10 @@ class GameEngineTest {
         engine.shuffle()
         assertEquals(1, engine.state.shufflesUsed)
         assertNotEquals(firstBoard, engine.state.board)
-        val shuffledBoard = engine.state.board
+        val movesBefore = engine.state.movesRemaining
         engine.shuffle()
-        assertEquals(shuffledBoard, engine.state.board)
-        assertEquals("No shuffles left on this board", engine.state.message)
+        assertEquals(movesBefore - 1, engine.state.movesRemaining)
+        assertEquals("Board shuffled for 1 move", engine.state.message)
 
         engine.hint()
         assertEquals(1, engine.state.hintsUsed)

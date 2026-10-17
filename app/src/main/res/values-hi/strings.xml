@@ -391,5 +391,8 @@
     <string name="champions_your_score">आपका स्कोर</string>
     <string name="champions_past_days">पिछले दिन</string>
     <string name="hunt_msg_no_hints">इस बोर्ड पर कोई संकेत नहीं बचा</string>
-    <string name="hunt_msg_no_shuffles">इस बोर्ड पर कोई शफ़ल नहीं बचा</string>
+    <string name="hunt_msg_no_molecules">यहाँ कोई अणु नहीं — शफ़ल आज़माएँ</string>
+    <string name="hunt_msg_shuffled_for_move">1 चाल देकर बोर्ड शफ़ल हुआ</string>
+    <string name="hunt_msg_no_moves_to_shuffle">शफ़ल के लिए चालें कम हैं</string>
+    <string name="hunt_shuffle_paid">शफ़ल (−1 चाल)</string>
 </resources>

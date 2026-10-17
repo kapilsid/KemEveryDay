@@ -391,5 +391,8 @@
     <string name="champions_your_score">Àmì-ẹ̀yẹ rẹ</string>
     <string name="champions_past_days">Àwọn ọjọ́ tó kọjá</string>
     <string name="hunt_msg_no_hints">Kò sí ìtọ́sọ́nà mọ́ fún pátákó yìí</string>
-    <string name="hunt_msg_no_shuffles">Kò sí àdàlú mọ́ fún pátákó yìí</string>
+    <string name="hunt_msg_no_molecules">Kò sí mọ́lẹ́kúlù níbí — gbìyànjú Àdàlú</string>
+    <string name="hunt_msg_shuffled_for_move">A da pátákó pọ̀ fún ìgbésẹ̀ 1</string>
+    <string name="hunt_msg_no_moves_to_shuffle">Ìgbésẹ̀ kò tó láti dà á pọ̀</string>
+    <string name="hunt_shuffle_paid">Àdàlú (−1 ìgbésẹ̀)</string>
 </resources>

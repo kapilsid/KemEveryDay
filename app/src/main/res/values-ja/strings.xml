@@ -391,5 +391,8 @@
     <string name="champions_your_score">あなたのスコア</string>
     <string name="champions_past_days">これまでの記録</string>
     <string name="hunt_msg_no_hints">このボードのヒントはもうありません</string>
-    <string name="hunt_msg_no_shuffles">このボードのシャッフルはもうありません</string>
+    <string name="hunt_msg_no_molecules">ここには分子がありません。シャッフルしてみよう</string>
+    <string name="hunt_msg_shuffled_for_move">1手使ってシャッフルしました</string>
+    <string name="hunt_msg_no_moves_to_shuffle">シャッフルする手数が足りません</string>
+    <string name="hunt_shuffle_paid">シャッフル（−1手）</string>
 </resources>

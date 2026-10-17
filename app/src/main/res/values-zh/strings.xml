@@ -391,5 +391,8 @@
     <string name="champions_your_score">你的得分</string>
     <string name="champions_past_days">往日成绩</string>
     <string name="hunt_msg_no_hints">本局提示已用完</string>
-    <string name="hunt_msg_no_shuffles">本局洗牌已用完</string>
+    <string name="hunt_msg_no_molecules">这里没有分子——试试洗牌</string>
+    <string name="hunt_msg_shuffled_for_move">用 1 步洗牌了</string>
+    <string name="hunt_msg_no_moves_to_shuffle">步数不够，无法洗牌</string>
+    <string name="hunt_shuffle_paid">洗牌（−1 步）</string>
 </resources>

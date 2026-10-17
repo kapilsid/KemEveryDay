@@ -72,7 +72,9 @@ fun localizedGameMessage(message: String): String {
         "A possible discovery is glowing" -> R.string.hunt_msg_hint_glowing
         "Board shuffled" -> R.string.hunt_msg_board_shuffled
         "No hints left on this board" -> R.string.hunt_msg_no_hints
-        "No shuffles left on this board" -> R.string.hunt_msg_no_shuffles
+        "No molecules here — try Shuffle" -> R.string.hunt_msg_no_molecules
+        "Board shuffled for 1 move" -> R.string.hunt_msg_shuffled_for_move
+        "Not enough moves left to shuffle" -> R.string.hunt_msg_no_moves_to_shuffle
         "No moves remaining" -> R.string.hunt_msg_no_moves
         "Connect at least two atoms" -> R.string.hunt_msg_too_short
         "New discovery!" -> R.string.hunt_msg_new_discovery

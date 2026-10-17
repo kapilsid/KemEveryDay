@@ -416,5 +416,8 @@
     <string name="champions_your_score">Ton score</string>
     <string name="champions_past_days">Jours précédents</string>
     <string name="hunt_msg_no_hints">Plus d\'indice pour ce plateau</string>
-    <string name="hunt_msg_no_shuffles">Plus de mélange pour ce plateau</string>
+    <string name="hunt_msg_no_molecules">Aucune molécule ici — essaie de mélanger</string>
+    <string name="hunt_msg_shuffled_for_move">Plateau mélangé pour 1 coup</string>
+    <string name="hunt_msg_no_moves_to_shuffle">Pas assez de coups pour mélanger</string>
+    <string name="hunt_shuffle_paid">Mélanger (−1 coup)</string>
 </resources>

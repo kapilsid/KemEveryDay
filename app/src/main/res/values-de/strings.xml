@@ -390,5 +390,8 @@
     <string name="champions_your_score">Dein Ergebnis</string>
     <string name="champions_past_days">Vergangene Tage</string>
     <string name="hunt_msg_no_hints">Keine Tipps mehr für dieses Brett</string>
-    <string name="hunt_msg_no_shuffles">Kein Mischen mehr für dieses Brett</string>
+    <string name="hunt_msg_no_molecules">Hier gibt es kein Molekül – versuch Mischen</string>
+    <string name="hunt_msg_shuffled_for_move">Brett gemischt für 1 Zug</string>
+    <string name="hunt_msg_no_moves_to_shuffle">Nicht genug Züge zum Mischen</string>
+    <string name="hunt_shuffle_paid">Mischen (−1 Zug)</string>
 </resources>

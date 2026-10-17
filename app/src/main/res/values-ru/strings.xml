@@ -443,5 +443,8 @@
     <string name="champions_your_score">Твой счёт</string>
     <string name="champions_past_days">Прошлые дни</string>
     <string name="hunt_msg_no_hints">Подсказок на этой доске больше нет</string>
-    <string name="hunt_msg_no_shuffles">Перемешиваний на этой доске больше нет</string>
+    <string name="hunt_msg_no_molecules">Здесь нет молекул — попробуй перемешать</string>
+    <string name="hunt_msg_shuffled_for_move">Доска перемешана за 1 ход</string>
+    <string name="hunt_msg_no_moves_to_shuffle">Недостаточно ходов для перемешивания</string>
+    <string name="hunt_shuffle_paid">Перемешать (−1 ход)</string>
 </resources>

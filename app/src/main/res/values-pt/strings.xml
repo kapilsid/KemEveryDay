@@ -417,5 +417,8 @@
     <string name="champions_your_score">Sua pontuação</string>
     <string name="champions_past_days">Dias anteriores</string>
     <string name="hunt_msg_no_hints">Não há mais dicas neste tabuleiro</string>
-    <string name="hunt_msg_no_shuffles">Não há mais embaralhamentos neste tabuleiro</string>
+    <string name="hunt_msg_no_molecules">Nenhuma molécula aqui — tente embaralhar</string>
+    <string name="hunt_msg_shuffled_for_move">Tabuleiro embaralhado por 1 jogada</string>
+    <string name="hunt_msg_no_moves_to_shuffle">Jogadas insuficientes para embaralhar</string>
+    <string name="hunt_shuffle_paid">Embaralhar (−1 jogada)</string>
 </resources>
