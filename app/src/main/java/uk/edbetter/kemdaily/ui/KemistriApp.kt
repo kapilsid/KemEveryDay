@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -111,6 +112,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -199,6 +201,9 @@ private data class LocalDailyTotal(
 @Composable
 fun KemistriApp(viewModel: MainViewModel = viewModel()) {
     val nav = rememberNavController()
+    // Phone-shaped column on tablets and in landscape: Android 16 ignores the portrait lock on large screens.
+    Box(Modifier.fillMaxSize().background(Color(0xFFE8FAFF)), contentAlignment = Alignment.TopCenter) {
+    Box(Modifier.fillMaxHeight().widthIn(max = 520.dp)) {
     NavHost(navController = nav, startDestination = Routes.Home) {
         composable(Routes.Home) { HomeScreen(nav, viewModel) }
         composable(Routes.Daily) {
@@ -212,6 +217,8 @@ fun KemistriApp(viewModel: MainViewModel = viewModel()) {
         composable(Routes.Leaderboard) { LeaderboardScreen(nav, viewModel) }
         composable(Routes.Review) { ReviewScreen(nav, viewModel) }
         composable(Routes.Settings) { SettingsScreen(nav, viewModel) }
+    }
+    }
     }
 }
 
@@ -493,7 +500,9 @@ private val atomColors = mapOf(
 @Composable
 private fun AtomBoard(game: GameState, onSelect: (Cell) -> Unit, reducedMotion: Boolean) {
     Column(
-        Modifier.fillMaxWidth().aspectRatio(1f).background(Color.White, RoundedCornerShape(20.dp)).padding(7.dp)
+        // Keep the whole hunt on screen when the window is short (tablets in landscape).
+        Modifier.widthIn(max = (LocalConfiguration.current.screenHeightDp - 480).coerceAtLeast(240).dp)
+            .fillMaxWidth().aspectRatio(1f).background(Color.White, RoundedCornerShape(20.dp)).padding(7.dp)
             .pointerInput(game.board) {
                 var lastDragCell: Cell? = null
                 fun cellAt(x: Float, y: Float): Cell? {
