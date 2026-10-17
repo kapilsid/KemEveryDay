@@ -945,7 +945,7 @@ private fun ResultDialog(game: GameState, viewModel: MainViewModel, nav: NavHost
 
 /**
  * Leaving a feature (back arrow, system back or its finish button) returns Home through an interstitial.
- * Ads never interrupt play, and AdMobInterstitial allows at most one a minute.
+ * Ads never interrupt play, and AdMobInterstitial allows at most one every 30 seconds.
  */
 @Composable
 private fun rememberLeaveWithAd(nav: NavHostController): () -> Unit {

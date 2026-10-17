@@ -62,7 +62,7 @@ Pass a different installed AVD name as the first argument when required:
 - Device-local active-game restore, pending-review counts, and settings.
 - Daily Board history and streak calendar: best result per UTC board date, current and best streaks, a Monday-first month calendar, and stale saved Daily games discarded at the UTC rollover.
 - Accessibility descriptions, numbered selections, 48dp controls, live chemical symbols, and reduced-motion preference.
-- Google AdMob interstitials with the UMP consent prompt, shown only when a finished board is left (at most one a minute), never during a hunt. Pending formulas never leave the device.
+- Google AdMob interstitials with the UMP consent prompt, shown only when a finished board is left (at most one every 30 seconds), never during a hunt. Pending formulas never leave the device.
 
 The catalogue model, gameplay/reference split, scientific caveats and source conventions are documented in `docs/CHEMISTRY_LIBRARY.md`.
 

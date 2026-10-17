@@ -25,7 +25,7 @@ object AdMobInterstitial {
     private var lastShownAt = 0L
 
     /** Leaving and re-opening a finished board should not show a second ad straight away. */
-    private const val MIN_INTERVAL_MS = 60 * 1000L
+    private const val MIN_INTERVAL_MS = 30 * 1000L
 
     fun initialize(activity: Activity) {
         val consentInformation = UserMessagingPlatform.getConsentInformation(activity)
