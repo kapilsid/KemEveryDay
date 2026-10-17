@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">デイリーチャンピオン</string>
-    <string name="champions_intro">今日の分子ボードとサイエンスのなぞのランをクリアしよう。2つのスコアの合計のうち、UTCの各日で最初に完了した合計が世界ランキングに載ります。</string>
+    <string name="champions_intro">どちらかのデイリーゲームを終えると今日の世界ランキングに参加できます。未プレイのゲームは0点で、後から終えるとUTC日の合計点が上がります。</string>
     <string name="champions_default_player">サイエンスプレイヤー</string>
     <string name="champions_edit_nickname">ニックネームを編集</string>
     <string name="champions_retry">Firebase に再接続</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">Firebase に接続すると世界スコアがここに表示されます。</string>
     <string name="champions_you">%1$s · あなた</string>
     <string name="champions_entry_scores">ボード %1$d · サイエンス %2$d</string>
-    <string name="champions_local_scores">この端末でのスコア</string>
+    <string name="champions_local_scores">デイリー合計</string>
     <string name="champions_local">ローカル</string>
-    <string name="champions_no_runs">完了したランはまだありません</string>
-    <string name="champions_finish_to_place">今日のサイエンスのなぞのランを終えると、最初のスコアが記録されます。</string>
+    <string name="champions_no_runs">デイリースコアはまだありません</string>
+    <string name="champions_finish_to_place">どちらかのデイリーゲームを終えて参加し、もう一方も遊んで合計点を伸ばそう。</string>
     <string name="champions_today">今日</string>
+    <string name="champions_this_week">今週</string>
+    <string name="champions_week_total">今週の合計</string>
+    <string name="champions_week_utc">今週 · UTC</string>
+    <string name="champions_no_scores_week">今週の世界スコアはまだありません。</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d問正解</item>
         <item quantity="other">%1$d問正解</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase 接続済み</string>
     <string name="champions_playing_offline">オフラインでプレイ中</string>
-    <string name="champions_online_note">匿名のプレイヤーIDなので、Google ログイン画面もメールアドレスの表示もありません。完了したデイリーランは1回だけ送信されます。</string>
-    <string name="champions_offline_note">ランとスコアはこの端末に残ります。匿名認証、Firestore、スコア機能を有効にしたら「再接続」をタップしてください。</string>
+    <string name="champions_online_note">匿名のプレイヤーIDなので、Google ログイン画面もメールアドレスの表示もありません。ゲームを終えるたびに今日の記録が更新されます。</string>
+    <string name="champions_offline_note">ゲームはこの端末に残ります。匿名認証と Firestore を有効にしたら「再接続」をタップして今日の合計を送信・更新できます。</string>
     <string name="champions_choose_name">プレイヤー名を決めよう</string>
     <string name="champions_nickname_note">このニックネームはデイリーチャンピオンで公開されます。本名は使わないでね。</string>
     <string name="champions_nickname_label">ニックネーム</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">接続済みですが、今はランキングを表示できません。</string>
     <string name="champions_status_submitting">今日のデイリーチャンピオンのスコアを送信中…</string>
     <string name="champions_status_submitted_rank">スコア送信完了 · %1$d位</string>
-    <string name="champions_status_submitted">今日のスコアを送信しました</string>
-    <string name="champions_status_already_submitted">今日のスコアは送信済みです</string>
+    <string name="champions_status_submitted">今日のランキングスコアを更新しました</string>
+    <string name="champions_status_already_submitted">今日のランキングスコアは最新です</string>
     <string name="champions_status_offline_retry">オフライン — 後で更新をタップして保存済みスコアを送信</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">アプリの言語を選ぶ</string>
     <string name="settings_language_system">システムのデフォルト</string>
     <string name="settings_privacy">プライバシー</string>
-    <string name="settings_privacy_text">進行状況はこのスマホに保存されます。広告は Google が提供しています。</string>
+    <string name="settings_privacy_text">ゲームの進行状況はこのスマホに保存されます。デイリーチャンピオンは匿名プレイヤーID、公開ニックネーム、完了したデイリースコアを Firebase に送信します。広告は Google が提供しています。</string>
     <string name="settings_ad_choices">広告の設定</string>
     <string name="settings_privacy_policy">プライバシーポリシー</string>
     <string name="settings_about">EdBetter について</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">Google Play で Kemistri を開く</string>
     <string name="settings_version">バージョン %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">この端末では広告のプライバシー設定は不要です</string>
+    <string name="champions_your_score">あなたのスコア</string>
 </resources>

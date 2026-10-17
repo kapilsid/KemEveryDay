@@ -13,6 +13,7 @@
     <string name="common_home">Accueil</string>
     <plurals name="common_points_awarded">
         <item quantity="one">+%1$d point</item>
+        <item quantity="many">+%1$d points</item>
         <item quantity="other">+%1$d points</item>
     </plurals>
 
@@ -25,6 +26,7 @@
     <string name="home_daily_subtitle">Une énigme de chimie partagée chaque jour</string>
     <plurals name="home_daily_subtitle_streak">
         <item quantity="one">Série de %1$d jour · une énigme partagée chaque jour</item>
+        <item quantity="many">Série de %1$d jours · une énigme partagée chaque jour</item>
         <item quantity="other">Série de %1$d jours · une énigme partagée chaque jour</item>
     </plurals>
     <string name="home_science_title">Science dévoilée</string>
@@ -50,6 +52,7 @@
     <string name="hunt_discover">Découvrir</string>
     <plurals name="hunt_already_found_toast">
         <item quantity="one">%1$s déjà trouvé · +%2$d point</item>
+        <item quantity="many">%1$s déjà trouvé · +%2$d points</item>
         <item quantity="other">%1$s déjà trouvé · +%2$d points</item>
     </plurals>
     <string name="hunt_stat_moves">Coups</string>
@@ -65,10 +68,12 @@
     <string name="hunt_mission_complete_text">Tu as trouvé %1$s, avec %2$s. Score : %3$d</string>
     <plurals name="hunt_found_substances">
         <item quantity="one">%1$d substance</item>
+        <item quantity="many">%1$d substances</item>
         <item quantity="other">%1$d substances</item>
     </plurals>
     <plurals name="hunt_moves_remaining">
         <item quantity="one">%1$d coup restant</item>
+        <item quantity="many">%1$d coups restants</item>
         <item quantity="other">%1$d coups restants</item>
     </plurals>
     <string name="hunt_keep_discovering">Continuer à découvrir</string>
@@ -78,10 +83,12 @@
     <!-- Score breakdown parts, joined with " · " -->
     <plurals name="hunt_score_atoms">
         <item quantity="one">%1$d atome</item>
+        <item quantity="many">%1$d atomes</item>
         <item quantity="other">%1$d atomes</item>
     </plurals>
     <plurals name="hunt_score_elements">
         <item quantity="one">%1$d élément</item>
+        <item quantity="many">%1$d éléments</item>
         <item quantity="other">%1$d éléments</item>
     </plurals>
     <string name="hunt_score_rarity">rareté +%1$d</string>
@@ -106,14 +113,17 @@
     <!-- Discovery summary parts, joined with " · " -->
     <plurals name="hunt_discoveries_mission">
         <item quantity="one">%1$d mission</item>
+        <item quantity="many">%1$d mission</item>
         <item quantity="other">%1$d mission</item>
     </plurals>
     <plurals name="hunt_discoveries_extra">
         <item quantity="one">%1$d bonus</item>
+        <item quantity="many">%1$d bonus</item>
         <item quantity="other">%1$d bonus</item>
     </plurals>
     <plurals name="hunt_discoveries_total">
         <item quantity="one">%1$d trouvaille au total</item>
+        <item quantity="many">%1$d trouvailles au total</item>
         <item quantity="other">%1$d trouvailles au total</item>
     </plurals>
     <string name="hunt_discoveries_empty">Aucune découverte pour l\'instant — relie des atomes et vois ce que tu peux créer !</string>
@@ -124,6 +134,7 @@
     <string name="hunt_result_complete">Chasse terminée</string>
     <plurals name="hunt_result_summary">
         <item quantity="one">Score %1$d · %2$d substance unique</item>
+        <item quantity="many">Score %1$d · %2$d substances uniques</item>
         <item quantity="other">Score %1$d · %2$d substances uniques</item>
     </plurals>
     <string name="hunt_play_again">Rejouer</string>
@@ -131,6 +142,7 @@
     <string name="hunt_msg_choose_neighbour">Choisis une case voisine</string>
     <plurals name="hunt_msg_max_atoms">
         <item quantity="one">Une découverte peut utiliser %1$d atome au maximum</item>
+        <item quantity="many">Une découverte peut utiliser %1$d atomes au maximum</item>
         <item quantity="other">Une découverte peut utiliser %1$d atomes au maximum</item>
     </plurals>
     <string name="hunt_msg_board_refreshed">Plateau renouvelé — essaie cette nouvelle disposition</string>
@@ -150,10 +162,12 @@
     <string name="science_answer_shape">%1$s · %2$s</string>
     <plurals name="science_letter_count">
         <item quantity="one">%1$d lettre</item>
+        <item quantity="many">%1$d lettres</item>
         <item quantity="other">%1$d lettres</item>
     </plurals>
     <plurals name="science_word_count">
         <item quantity="one">%1$d mot</item>
+        <item quantity="many">%1$d mots</item>
         <item quantity="other">%1$d mots</item>
     </plurals>
     <string name="science_clue_number">INDICE %1$d</string>
@@ -164,27 +178,33 @@
     <string name="science_skip">Passer (−1 vie)</string>
     <plurals name="science_solved">
         <item quantity="one">Résolu — +%1$d point !</item>
+        <item quantity="many">Résolu — +%1$d points !</item>
         <item quantity="other">Résolu — +%1$d points !</item>
     </plurals>
     <plurals name="science_run_over">
         <item quantity="one">Partie terminée — %1$d point</item>
+        <item quantity="many">Partie terminée — %1$d points</item>
         <item quantity="other">Partie terminée — %1$d points</item>
     </plurals>
     <string name="science_revealed">Mystère révélé — une vie perdue</string>
     <plurals name="science_perfect_bonus">
         <item quantity="one">Sans faute : bonus de +%1$d inclus.</item>
+        <item quantity="many">Sans faute : bonus de +%1$d inclus.</item>
         <item quantity="other">Sans faute : bonus de +%1$d inclus.</item>
     </plurals>
     <plurals name="science_life_bonus">
         <item quantity="one">Bonus de vie : +%1$d pour %2$d vie restante.</item>
+        <item quantity="many">Bonus de vies : +%1$d pour %2$d vies restantes.</item>
         <item quantity="other">Bonus de vies : +%1$d pour %2$d vies restantes.</item>
     </plurals>
     <plurals name="science_solved_after">
         <item quantity="one">Résolu après %1$d mauvaise lettre.</item>
+        <item quantity="many">Résolu après %1$d mauvaises lettres.</item>
         <item quantity="other">Résolu après %1$d mauvaises lettres.</item>
     </plurals>
     <plurals name="science_run_solved_count">
         <item quantity="one">%1$d mystère résolu dans cette partie</item>
+        <item quantity="many">%1$d mystères résolus dans cette partie</item>
         <item quantity="other">%1$d mystères résolus dans cette partie</item>
     </plurals>
     <string name="science_back_home">ACCUEIL</string>
@@ -192,6 +212,7 @@
     <string name="science_next_mystery">MYSTÈRE SUIVANT</string>
     <plurals name="science_continue_lives">
         <item quantity="one">CONTINUER — %1$d VIE RESTANTE</item>
+        <item quantity="many">CONTINUER — %1$d VIES RESTANTES</item>
         <item quantity="other">CONTINUER — %1$d VIES RESTANTES</item>
     </plurals>
     <string name="science_done_today">Les trois mystères du jour sont terminés. Les prochains arrivent à 00:00 UTC.</string>
@@ -269,7 +290,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Champions du jour</string>
-    <string name="champions_intro">Termine le Plateau moléculaire du jour et la partie du jour de Science dévoilée. Tes deux scores sont additionnés, et ton premier total complet de chaque jour UTC entre dans le classement mondial.</string>
+    <string name="champions_intro">Termine l\'un des jeux du jour pour rejoindre le classement mondial. Le jeu non joué vaut zéro ; termine-le plus tard pour améliorer ton total combiné du jour UTC.</string>
     <string name="champions_default_player">Joueur scientifique</string>
     <string name="champions_edit_nickname">Modifier le pseudo</string>
     <string name="champions_retry">Réessayer la connexion Firebase</string>
@@ -285,19 +306,24 @@
     <string name="champions_scores_need_firebase">Les scores mondiaux s\'affichent ici quand Firebase est connecté.</string>
     <string name="champions_you">%1$s · Toi</string>
     <string name="champions_entry_scores">Plateau %1$d · Science %2$d</string>
-    <string name="champions_local_scores">Tes scores sur cet appareil</string>
+    <string name="champions_local_scores">Tes totaux quotidiens</string>
     <string name="champions_local">LOCAL</string>
-    <string name="champions_no_runs">Aucune partie terminée</string>
-    <string name="champions_finish_to_place">Termine la partie du jour de Science dévoilée pour inscrire ton premier score.</string>
+    <string name="champions_no_runs">Aucun score quotidien pour le moment</string>
+    <string name="champions_finish_to_place">Termine un jeu du jour pour participer. Joue à l\'autre pour améliorer ton total.</string>
     <string name="champions_today">Aujourd\'hui</string>
+    <string name="champions_this_week">Cette semaine</string>
+    <string name="champions_week_total">TOTAL DE LA SEMAINE</string>
+    <string name="champions_week_utc">CETTE SEMAINE · UTC</string>
+    <string name="champions_no_scores_week">Aucun score mondial n\'a encore été publié cette semaine.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d mystère résolu</item>
+        <item quantity="many">%1$d mystères résolus</item>
         <item quantity="other">%1$d mystères résolus</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase connecté</string>
     <string name="champions_playing_offline">Jeu hors ligne</string>
-    <string name="champions_online_note">Ton identité de joueur anonyme garde l\'appli simple : pas d\'écran de connexion Google et aucune adresse e-mail affichée. Une partie du jour terminée n\'est envoyée qu\'une fois.</string>
-    <string name="champions_offline_note">Ta partie et ton score restent sur cet appareil. Une fois Anonymous Authentication, Firestore et la fonction de score activés, touche Réessayer pour te connecter.</string>
+    <string name="champions_online_note">Ton identité anonyme garde l\'appli simple : pas de connexion Google ni d\'adresse e-mail affichée. Chaque jeu terminé actualise l\'entrée du jour.</string>
+    <string name="champions_offline_note">Tes parties restent sur cet appareil. Une fois Anonymous Authentication et Firestore activés, touche Réessayer pour envoyer ou améliorer le total du jour.</string>
     <string name="champions_choose_name">Choisis ton nom de joueur</string>
     <string name="champions_nickname_note">Ce pseudo public apparaît dans Champions du jour. N\'utilise pas ton vrai nom.</string>
     <string name="champions_nickname_label">Pseudo</string>
@@ -313,8 +339,8 @@
     <string name="champions_status_rankings_unavailable">Connecté, mais le classement est indisponible pour le moment.</string>
     <string name="champions_status_submitting">Envoi du score du jour pour Champions du jour…</string>
     <string name="champions_status_submitted_rank">Score envoyé · rang n° %1$d</string>
-    <string name="champions_status_submitted">Score du jour envoyé</string>
-    <string name="champions_status_already_submitted">Le score du jour est déjà envoyé</string>
+    <string name="champions_status_submitted">Score du classement actualisé</string>
+    <string name="champions_status_already_submitted">Le score du jour est à jour</string>
     <string name="champions_status_offline_retry">Hors ligne — touche Actualiser pour envoyer le score enregistré plus tard</string>
 
     <!-- Daily Streak -->
@@ -322,6 +348,7 @@
     <string name="streak_none">Pas encore de série</string>
     <plurals name="streak_days">
         <item quantity="one">Série de %1$d jour</item>
+        <item quantity="many">Série de %1$d jours</item>
         <item quantity="other">Série de %1$d jours</item>
     </plurals>
     <string name="streak_played_today">Aujourd\'hui compte. Reviens demain.</string>
@@ -335,10 +362,12 @@
     <string name="streak_recent_empty">Aucun plateau du jour joué pour l\'instant. Un jour compte quand tu termines le Plateau moléculaire ou Science dévoilée.</string>
     <plurals name="streak_unique">
         <item quantity="one">%1$d unique</item>
+        <item quantity="many">%1$d uniques</item>
         <item quantity="other">%1$d uniques</item>
     </plurals>
     <plurals name="streak_unique_mission">
         <item quantity="one">%1$d unique · mission accomplie</item>
+        <item quantity="many">%1$d uniques · mission accomplie</item>
         <item quantity="other">%1$d uniques · mission accomplie</item>
     </plurals>
     <string name="streak_footer">Le plateau change chaque jour à minuit UTC. L\'historique est stocké uniquement sur cet appareil.</string>
@@ -360,6 +389,7 @@
     <string name="review_empty">Rien à revoir</string>
     <plurals name="review_tried">
         <item quantity="one">Pas encore reconnu · essayé %1$d fois</item>
+        <item quantity="many">Pas encore reconnu · essayé %1$d fois</item>
         <item quantity="other">Pas encore reconnu · essayé %1$d fois</item>
     </plurals>
 
@@ -375,7 +405,7 @@
     <string name="settings_language_description">Choisis la langue de l\'appli</string>
     <string name="settings_language_system">Langue du système</string>
     <string name="settings_privacy">Confidentialité</string>
-    <string name="settings_privacy_text">Ta progression reste sur ce téléphone. Les publicités sont fournies par Google.</string>
+    <string name="settings_privacy_text">La progression reste sur ce téléphone. Champions du jour envoie à Firebase un identifiant anonyme, ton pseudo public et tes scores quotidiens terminés. Les publicités sont fournies par Google.</string>
     <string name="settings_ad_choices">Choix publicitaires</string>
     <string name="settings_privacy_policy">Politique de confidentialité</string>
     <string name="settings_about">À propos d\'EdBetter</string>
@@ -385,4 +415,5 @@
     <string name="settings_open_kemistri">Ouvrir Kemistri sur Google Play</string>
     <string name="settings_version">Version %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Les options de confidentialité publicitaire ne sont pas nécessaires sur cet appareil</string>
+    <string name="champions_your_score">Ton score</string>
 </resources>

@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Àwọn Akọni Ojoojúmọ́</string>
-    <string name="champions_intro">Parí Pátákó Mọ́lẹ́kúlù òní àti ìpele Àṣírí Sáyẹ́ǹsì òní. A ó ro àmì méjèèjì pọ̀, àpapọ̀ àkọ́kọ́ tí o bá parí ní ọjọ́ UTC kọ̀ọ̀kan yóò sì wọ ipò àgbáyé.</string>
+    <string name="champions_intro">Parí ọ̀kan lára àwọn eré ojoojúmọ́ láti wọ ipò àgbáyé òní. Eré tí o kò tíì ṣe jẹ́ odo; parí i lẹ́yìn náà láti mú àpapọ̀ ọjọ́ UTC rẹ ga.</string>
     <string name="champions_default_player">Aláṣeré sáyẹ́ǹsì</string>
     <string name="champions_edit_nickname">Yí orúkọ ìnagijẹ padà</string>
     <string name="champions_retry">Tún so Firebase pọ̀</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">Àmì àgbáyé yóò hàn níbí nígbà tí Firebase bá ti so pọ̀.</string>
     <string name="champions_you">%1$s · Ìwọ</string>
     <string name="champions_entry_scores">Pátákó %1$d · Sáyẹ́ǹsì %2$d</string>
-    <string name="champions_local_scores">Àmì rẹ lórí ẹ̀rọ yìí</string>
+    <string name="champions_local_scores">Àpapọ̀ ojoojúmọ́ rẹ</string>
     <string name="champions_local">LÓRÍ Ẹ̀RỌ</string>
-    <string name="champions_no_runs">Kò sí ìpele tó ti parí síbẹ̀</string>
-    <string name="champions_finish_to_place">Parí ìpele Àṣírí Sáyẹ́ǹsì òní láti fi àmì àkọ́kọ́ rẹ sílẹ̀.</string>
+    <string name="champions_no_runs">Kò sí àmì ojoojúmọ́ síbẹ̀</string>
+    <string name="champions_finish_to_place">Parí eré ojoojúmọ́ kan láti darapọ̀. Ṣe èkejì láti mú àpapọ̀ rẹ ga.</string>
     <string name="champions_today">Òní</string>
+    <string name="champions_this_week">Ọ̀sẹ̀ Yìí</string>
+    <string name="champions_week_total">ÀPAPỌ̀ Ọ̀SẸ̀ YÌÍ</string>
+    <string name="champions_week_utc">Ọ̀SẸ̀ YÌÍ · UTC</string>
+    <string name="champions_no_scores_week">Kò sí àmì àgbáyé fún ọ̀sẹ̀ yìí síbẹ̀.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">àdììtú %1$d ti yanjú</item>
         <item quantity="other">àdììtú %1$d ti yanjú</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase ti so pọ̀</string>
     <string name="champions_playing_offline">Ò ń ṣeré láìsí íńtánẹ́ẹ̀tì</string>
-    <string name="champions_online_note">Ìdánimọ̀ aláṣeré àìlórúkọ rẹ jẹ́ kí app rọrùn: kò sí ojú-ìwé ìwọlé Google, a kò sì fi ímeèlì kankan hàn. Ìpele ojoojúmọ́ tó ti parí ni a ó fi ránṣẹ́ lẹ́ẹ̀kan ṣoṣo.</string>
-    <string name="champions_offline_note">Ìpele àti àmì rẹ wà lórí ẹ̀rọ yìí. Lẹ́yìn tí a bá mú Anonymous Authentication, Firestore àti iṣẹ́ àmì ṣiṣẹ́, tẹ Tún gbìyànjú láti so pọ̀.</string>
+    <string name="champions_online_note">Ìdánimọ̀ aláṣeré àìlórúkọ rẹ jẹ́ kí app rọrùn: kò sí ìwọlé Google, a kò sì fi ímeèlì hàn. Gbogbo eré tí o parí ń ṣàtúnṣe àkọsílẹ̀ òní.</string>
+    <string name="champions_offline_note">Àwọn eré rẹ wà lórí ẹ̀rọ yìí. Lẹ́yìn tí Anonymous Authentication àti Firestore bá ṣiṣẹ́, tẹ Tún gbìyànjú láti fi àpapọ̀ òní ránṣẹ́ tàbí mú un ga.</string>
     <string name="champions_choose_name">Yan orúkọ aláṣeré rẹ</string>
     <string name="champions_nickname_note">Orúkọ ìnagijẹ yìí yóò hàn fún gbogbo ènìyàn lórí Àwọn Akọni Ojoojúmọ́. Má ṣe lo orúkọ gidi rẹ.</string>
     <string name="champions_nickname_label">Orúkọ ìnagijẹ</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">Ó ti so pọ̀, ṣùgbọ́n ipò kò sí lọ́wọ́lọ́wọ́.</string>
     <string name="champions_status_submitting">À ń fi àmì Àwọn Akọni Ojoojúmọ́ òní ránṣẹ́…</string>
     <string name="champions_status_submitted_rank">A ti fi àmì ránṣẹ́ · ipò #%1$d</string>
-    <string name="champions_status_submitted">A ti fi àmì òní ránṣẹ́</string>
-    <string name="champions_status_already_submitted">A ti fi àmì òní ránṣẹ́ tẹ́lẹ̀</string>
+    <string name="champions_status_submitted">A ti ṣàtúnṣe àmì ipò òní</string>
+    <string name="champions_status_already_submitted">Àmì ipò òní ti pé</string>
     <string name="champions_status_offline_retry">Láìsí íńtánẹ́ẹ̀tì — tẹ sọdọ̀tun lẹ́yìn náà láti fi àmì tí a pamọ́ ránṣẹ́</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">Yan èdè app</string>
     <string name="settings_language_system">Ti ẹ̀rọ</string>
     <string name="settings_privacy">Àṣírí</string>
-    <string name="settings_privacy_text">Ìtẹ̀síwájú rẹ wà lórí fóònù yìí. Google ló ń pèsè ìpolówó.</string>
+    <string name="settings_privacy_text">Ìtẹ̀síwájú eré wà lórí fóònù yìí. Àwọn Aṣiwájú Ojoojúmọ́ ń fi ID aláìlórúkọ, orúkọ àpèlé gbangba àti àmì ojoojúmọ́ tó parí ránṣẹ́ sí Firebase. Google ló ń pèsè ìpolówó.</string>
     <string name="settings_ad_choices">Ààyò ìpolówó</string>
     <string name="settings_privacy_policy">Ìlànà àṣírí</string>
     <string name="settings_about">Nípa EdBetter</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">Ṣí Kemistri lórí Google Play</string>
     <string name="settings_version">Ẹ̀dà %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Ẹ̀rọ yìí kò nílò ààyò àṣírí ìpolówó</string>
+    <string name="champions_your_score">Àmì-ẹ̀yẹ rẹ</string>
 </resources>

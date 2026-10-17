@@ -5,7 +5,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.temporal.TemporalAdjusters
 import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -43,26 +45,61 @@ class FirebaseScienceLeaderboardGateway(
         val current = player ?: connect(null)
         val scoreRef = firestore.collection(SCORES).document(submission.date.toString())
             .collection(PLAYERS).document(current.uid)
+        val weekStart = submission.date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+        val weeklyRef = firestore.collection(WEEKLY_SCORES).document(weekStart.toString())
+            .collection(PLAYERS).document(current.uid)
         return try {
-            if (scoreRef.get().await().exists()) return SubmissionResult.AlreadySubmitted
-            scoreRef.set(
-                mapOf(
+            val updated = firestore.runTransaction { transaction ->
+                val existing = transaction.get(scoreRef)
+                val previousScore = existing.getLong("score")?.toInt() ?: 0
+                if (existing.exists() && previousScore >= submission.score) return@runTransaction false
+
+                val previousMolecule = existing.getLong("moleculeScore")?.toInt() ?: 0
+                val previousScience = existing.getLong("scienceScore")?.toInt() ?: 0
+                val previousUnique = existing.getLong("uniqueDiscoveries")?.toInt() ?: 0
+                val previousSolved = existing.getLong("mysteriesSolved")?.toInt() ?: 0
+                require(submission.moleculeScore >= previousMolecule && submission.scienceScore >= previousScience)
+
+                val weekly = transaction.get(weeklyRef)
+                val daysPlayed = (weekly.getLong("daysPlayed")?.toInt() ?: 0) + if (existing.exists()) 0 else 1
+                val weeklyMolecule = (weekly.getLong("moleculeScore")?.toInt() ?: 0) + submission.moleculeScore - previousMolecule
+                val weeklyScience = (weekly.getLong("scienceScore")?.toInt() ?: 0) + submission.scienceScore - previousScience
+                val weeklyUnique = (weekly.getLong("uniqueDiscoveries")?.toInt() ?: 0) + submission.uniqueDiscoveries - previousUnique
+                val weeklySolved = (weekly.getLong("mysteriesSolved")?.toInt() ?: 0) + submission.mysteriesSolved - previousSolved
+                val dailyContentVersion = maxOf(existing.getLong("contentVersion")?.toInt() ?: 1, submission.contentVersion)
+                val weeklyContentVersion = maxOf(weekly.getLong("contentVersion")?.toInt() ?: 1, submission.contentVersion)
+
+                transaction.set(scoreRef, mapOf(
                     "displayName" to current.displayName,
                     "score" to submission.score,
                     "moleculeScore" to submission.moleculeScore,
                     "scienceScore" to submission.scienceScore,
                     "uniqueDiscoveries" to submission.uniqueDiscoveries,
                     "mysteriesSolved" to submission.mysteriesSolved,
-                    "contentVersion" to submission.contentVersion,
+                    "contentVersion" to dailyContentVersion,
                     "submittedAt" to FieldValue.serverTimestamp(),
                     "verified" to false,
-                ),
-            ).await()
-            SubmissionResult.Accepted(null)
+                ))
+                transaction.set(weeklyRef, mapOf(
+                    "displayName" to current.displayName,
+                    "score" to weeklyMolecule + weeklyScience,
+                    "moleculeScore" to weeklyMolecule,
+                    "scienceScore" to weeklyScience,
+                    "daysPlayed" to daysPlayed,
+                    "uniqueDiscoveries" to weeklyUnique,
+                    "mysteriesSolved" to weeklySolved,
+                    "contentVersion" to weeklyContentVersion,
+                    "updatedAt" to FieldValue.serverTimestamp(),
+                    "verified" to false,
+                ))
+                true
+            }.await()
+            if (updated) SubmissionResult.Accepted(null) else SubmissionResult.UpToDate
         } catch (_: Exception) {
-            // A concurrent second create is rejected by rules; recognise it as the existing result.
+            // A concurrent submission may already have stored the same or a better total.
             try {
-                if (scoreRef.get().await().exists()) SubmissionResult.AlreadySubmitted else SubmissionResult.Offline
+                val storedScore = scoreRef.get().await().getLong("score") ?: -1L
+                if (storedScore >= submission.score) SubmissionResult.UpToDate else SubmissionResult.Offline
             } catch (_: Exception) {
                 SubmissionResult.Offline
             }
@@ -71,7 +108,16 @@ class FirebaseScienceLeaderboardGateway(
 
     override suspend fun rankings(date: LocalDate, limit: Int): List<PublicScienceRank> {
         if (auth.currentUser == null) connect(null)
-        val documents = firestore.collection(SCORES).document(date.toString()).collection(PLAYERS)
+        return loadRankings(SCORES, date, limit)
+    }
+
+    override suspend fun weeklyRankings(weekStart: LocalDate, limit: Int): List<PublicScienceRank> {
+        if (auth.currentUser == null) connect(null)
+        return loadRankings(WEEKLY_SCORES, weekStart, limit)
+    }
+
+    private suspend fun loadRankings(collection: String, periodStart: LocalDate, limit: Int): List<PublicScienceRank> {
+        val documents = firestore.collection(collection).document(periodStart.toString()).collection(PLAYERS)
             .orderBy("score", Query.Direction.DESCENDING)
             .limit(limit.toLong())
             .get().await().documents
@@ -114,6 +160,7 @@ class FirebaseScienceLeaderboardGateway(
     private companion object {
         const val PLAYERS = "players"
         const val SCORES = "daily_champions"
+        const val WEEKLY_SCORES = "weekly_champions"
     }
 }
 

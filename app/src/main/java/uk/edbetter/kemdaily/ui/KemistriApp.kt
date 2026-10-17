@@ -145,6 +145,7 @@ import uk.edbetter.kemdaily.core.game.BOARD_SIZE
 import uk.edbetter.kemdaily.core.game.CalendarDay
 import uk.edbetter.kemdaily.core.game.Cell
 import uk.edbetter.kemdaily.core.game.DailyHistory
+import uk.edbetter.kemdaily.core.game.DailyRecord
 import uk.edbetter.kemdaily.core.game.GameMode
 import uk.edbetter.kemdaily.core.game.GamePhase
 import uk.edbetter.kemdaily.core.game.GameState
@@ -156,6 +157,7 @@ import uk.edbetter.kemdaily.data.ElementFactsTable
 import uk.edbetter.kemdaily.data.EverydayFacts
 import uk.edbetter.kemdaily.data.MysteryCategory
 import uk.edbetter.kemdaily.data.ScienceMysteries
+import uk.edbetter.kemdaily.data.ScienceLeaderboardEntry
 import uk.edbetter.kemdaily.data.ScienceRunSnapshot
 import uk.edbetter.kemdaily.data.TablePosition
 import uk.edbetter.kemdaily.ui.theme.Coral
@@ -184,6 +186,14 @@ private object Routes {
     const val Leaderboard = "leaderboard"
     const val Review = "review"
     const val Settings = "settings"
+}
+
+private data class LocalDailyTotal(
+    val date: LocalDate,
+    val science: ScienceLeaderboardEntry?,
+    val molecule: DailyRecord?,
+) {
+    val score: Int get() = (science?.score ?: 0) + (molecule?.score ?: 0)
 }
 
 @Composable
@@ -1902,10 +1912,26 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
     val entries by viewModel.scienceLeaderboard.collectAsStateWithLifecycle()
     val cloud by viewModel.scienceCloud.collectAsStateWithLifecycle()
     val today = viewModel.todayUtc()
+    val weekStart = viewModel.currentWeekStartUtc()
+    val weekEnd = weekStart.plusDays(6)
     val run = remember { viewModel.loadScienceRun() }
     val history by viewModel.dailyHistory.collectAsStateWithLifecycle()
     val board = history[today]
+    val localDailyTotals = remember(entries, history) {
+        val scienceByDate = entries.associateBy { it.date }
+        (scienceByDate.keys + history.keys).distinct().map { date ->
+            LocalDailyTotal(date, scienceByDate[date], history[date])
+        }.sortedWith(
+            compareByDescending<LocalDailyTotal> { it.score }
+                .thenByDescending { it.science?.mysteriesSolved ?: 0 },
+        )
+    }
     val dateFormatter = remember { DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault()) }
+    var showWeekly by remember { mutableStateOf(false) }
+    val visibleRankings = if (showWeekly) cloud.weeklyRankings else cloud.rankings
+    val currentWeekTotals = localDailyTotals.filter { !it.date.isBefore(weekStart) && !it.date.isAfter(weekEnd) }
+    val displayedBoardScore = if (showWeekly) currentWeekTotals.sumOf { it.molecule?.score ?: 0 } else board?.score ?: 0
+    val displayedScienceScore = if (showWeekly) currentWeekTotals.sumOf { it.science?.score ?: 0 } else if (run.runOver) run.totalScore else 0
     var editNickname by remember { mutableStateOf(false) }
     var nicknameDraft by remember(cloud.nickname) { mutableStateOf(cloud.nickname) }
     Scaffold(topBar = { AppBar(stringResource(R.string.champions_title), leave) }, containerColor = Color(0xFFF4FCFF)) { padding ->
@@ -1915,19 +1941,107 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             item {
-                Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3C9)), shape = RoundedCornerShape(18.dp)) {
-                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Default.EmojiEvents, null, tint = Gold)
-                            Spacer(Modifier.width(9.dp))
-                            Text(stringResource(R.string.champions_title), color = Navy, fontWeight = FontWeight.Black, fontSize = 20.sp)
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(
+                        onClick = { showWeekly = false },
+                        modifier = Modifier.weight(1f),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (!showWeekly) Navy else Color.White,
+                            contentColor = if (!showWeekly) Color.White else Navy,
+                        ),
+                    ) { Text(stringResource(R.string.champions_today), fontWeight = FontWeight.Black) }
+                    Button(
+                        onClick = { showWeekly = true },
+                        modifier = Modifier.weight(1f),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (showWeekly) Navy else Color.White,
+                            contentColor = if (showWeekly) Color.White else Navy,
+                        ),
+                    ) { Text(stringResource(R.string.champions_this_week), fontWeight = FontWeight.Black) }
+                }
+            }
+            item {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(stringResource(R.string.champions_worldwide), modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
+                    Text(
+                        stringResource(
+                            if (!cloud.online) R.string.champions_offline
+                            else if (showWeekly) R.string.champions_week_utc
+                            else R.string.champions_today_utc,
+                        ),
+                        color = Coral,
+                        fontWeight = FontWeight.Black,
+                        fontSize = 10.sp,
+                    )
+                }
+            }
+            if (visibleRankings.isEmpty()) {
+                item {
+                    Text(
+                        stringResource(
+                            if (!cloud.online) R.string.champions_scores_need_firebase
+                            else if (showWeekly) R.string.champions_no_scores_week
+                            else R.string.champions_no_scores_today,
+                        ),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 18.dp),
+                        color = Navy.copy(alpha = .62f),
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            } else {
+                items(visibleRankings.size) { index ->
+                    val entry = visibleRankings[index]
+                    val isPlayer = entry.playerId == cloud.playerId
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = if (isPlayer) Color(0xFFFFF3C9) else Color.White),
+                        shape = RoundedCornerShape(16.dp),
+                    ) {
+                        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                Modifier.size(42.dp).background(if (entry.rank <= 3) Gold else Sky, CircleShape),
+                                contentAlignment = Alignment.Center,
+                            ) { Text("#${entry.rank}", color = Navy, fontWeight = FontWeight.Black) }
+                            Spacer(Modifier.width(12.dp))
+                            Column(Modifier.weight(1f)) {
+                                Text(if (isPlayer) stringResource(R.string.champions_you, entry.displayName) else entry.displayName, fontWeight = FontWeight.Bold)
+                                Text(
+                                    stringResource(R.string.champions_entry_scores, entry.moleculeScore, entry.scienceScore),
+                                    color = Navy.copy(alpha = .6f), fontSize = 11.sp,
+                                )
+                            }
+                            Text(entry.score.toString(), color = Green, fontWeight = FontWeight.Black, fontSize = 22.sp)
                         }
-                        Text(
-                            stringResource(R.string.champions_intro),
-                            color = Navy.copy(alpha = .7f),
-                            fontSize = 12.sp,
-                            lineHeight = 17.sp,
-                        )
+                    }
+                }
+            }
+            item {
+                Text(stringResource(R.string.champions_your_score), modifier = Modifier.padding(top = 8.dp), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
+            }
+            item {
+                Card(colors = CardDefaults.cardColors(containerColor = Navy), shape = RoundedCornerShape(18.dp)) {
+                    Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                stringResource(
+                                    if (showWeekly) R.string.champions_week_total
+                                    else if (board != null && run.runOver) R.string.champions_todays_total
+                                    else R.string.champions_today_so_far,
+                                ),
+                                color = Gold,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 11.sp,
+                            )
+                            Text(
+                                stringResource(
+                                    R.string.champions_today_breakdown,
+                                    displayedBoardScore.toString(),
+                                    displayedScienceScore.toString(),
+                                ),
+                                color = Color.White.copy(alpha = .7f),
+                                fontSize = 12.sp,
+                            )
+                        }
+                        Text((displayedBoardScore + displayedScienceScore).toString(), color = Color.White, fontWeight = FontWeight.Black, fontSize = 32.sp)
                     }
                 }
             }
@@ -1957,72 +2071,12 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                 }
             }
             item {
-                Card(colors = CardDefaults.cardColors(containerColor = Navy), shape = RoundedCornerShape(18.dp)) {
-                    Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f)) {
-                            Text(stringResource(if (board != null && run.runOver) R.string.champions_todays_total else R.string.champions_today_so_far), color = Gold, fontWeight = FontWeight.Black, fontSize = 11.sp)
-                            Text(
-                                stringResource(
-                                    R.string.champions_today_breakdown,
-                                    board?.score?.toString() ?: stringResource(R.string.champions_not_finished),
-                                    if (run.runOver) run.totalScore.toString() else stringResource(R.string.champions_in_progress),
-                                ),
-                                color = Color.White.copy(alpha = .7f),
-                                fontSize = 12.sp,
-                            )
-                        }
-                        Text(((board?.score ?: 0) + if (run.runOver) run.totalScore else 0).toString(), color = Color.White, fontWeight = FontWeight.Black, fontSize = 32.sp)
-                    }
-                }
-            }
-            item {
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text(stringResource(R.string.champions_worldwide), modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
-                    Text(stringResource(if (cloud.online) R.string.champions_today_utc else R.string.champions_offline), color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
-                }
-            }
-            if (cloud.rankings.isEmpty()) {
-                item {
-                    Text(
-                        stringResource(if (cloud.online) R.string.champions_no_scores_today else R.string.champions_scores_need_firebase),
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 18.dp),
-                        color = Navy.copy(alpha = .62f),
-                        textAlign = TextAlign.Center,
-                    )
-                }
-            } else {
-                items(cloud.rankings.size) { index ->
-                    val entry = cloud.rankings[index]
-                    val isPlayer = entry.playerId == cloud.playerId
-                    Card(
-                        colors = CardDefaults.cardColors(containerColor = if (isPlayer) Color(0xFFFFF3C9) else Color.White),
-                        shape = RoundedCornerShape(16.dp),
-                    ) {
-                        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Box(
-                                Modifier.size(42.dp).background(if (entry.rank <= 3) Gold else Sky, CircleShape),
-                                contentAlignment = Alignment.Center,
-                            ) { Text("#${entry.rank}", color = Navy, fontWeight = FontWeight.Black) }
-                            Spacer(Modifier.width(12.dp))
-                            Column(Modifier.weight(1f)) {
-                                Text(if (isPlayer) stringResource(R.string.champions_you, entry.displayName) else entry.displayName, fontWeight = FontWeight.Bold)
-                                Text(
-                                    stringResource(R.string.champions_entry_scores, entry.moleculeScore, entry.scienceScore),
-                                    color = Navy.copy(alpha = .6f), fontSize = 11.sp,
-                                )
-                            }
-                            Text(entry.score.toString(), color = Green, fontWeight = FontWeight.Black, fontSize = 22.sp)
-                        }
-                    }
-                }
-            }
-            item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text(stringResource(R.string.champions_local_scores), modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
                     Text(stringResource(R.string.champions_local), color = Coral, fontWeight = FontWeight.Black, fontSize = 10.sp)
                 }
             }
-            if (entries.isEmpty()) {
+            if (localDailyTotals.isEmpty()) {
                 item {
                     Column(
                         Modifier.fillMaxWidth().padding(vertical = 48.dp),
@@ -2031,11 +2085,17 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                         Icon(Icons.Default.EmojiEvents, null, tint = Gold, modifier = Modifier.size(54.dp))
                         Spacer(Modifier.height(12.dp))
                         Text(stringResource(R.string.champions_no_runs), fontWeight = FontWeight.Black, fontSize = 19.sp)
+                        Text(
+                            stringResource(R.string.champions_finish_to_place),
+                            color = Navy.copy(alpha = .62f),
+                            textAlign = TextAlign.Center,
+                            fontSize = 12.sp,
+                        )
                     }
                 }
             } else {
-                items(entries.size) { index ->
-                    val entry = entries[index]
+                items(localDailyTotals.size) { index ->
+                    val total = localDailyTotals[index]
                     Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(16.dp)) {
                         Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                             Box(
@@ -2044,14 +2104,14 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                             ) { Text("#${index + 1}", color = Navy, fontWeight = FontWeight.Black) }
                             Spacer(Modifier.width(12.dp))
                             Column(Modifier.weight(1f)) {
-                                Text(if (entry.date == today) stringResource(R.string.champions_today) else entry.date.format(dateFormatter), fontWeight = FontWeight.Bold)
+                                Text(if (total.date == today) stringResource(R.string.champions_today) else total.date.format(dateFormatter), fontWeight = FontWeight.Bold)
                                 Text(
-                                    pluralStringResource(R.plurals.champions_mysteries_solved, entry.mysteriesSolved, entry.mysteriesSolved),
+                                    stringResource(R.string.champions_entry_scores, total.molecule?.score ?: 0, total.science?.score ?: 0),
                                     color = Navy.copy(alpha = .6f),
                                     fontSize = 11.sp,
                                 )
                             }
-                            Text(entry.score.toString(), color = Green, fontWeight = FontWeight.Black, fontSize = 22.sp)
+                            Text(total.score.toString(), color = Green, fontWeight = FontWeight.Black, fontSize = 22.sp)
                         }
                     }
                 }

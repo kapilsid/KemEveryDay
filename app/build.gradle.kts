@@ -2,7 +2,6 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.gms.google-services")
 }
@@ -31,6 +30,14 @@ val admobReleaseInterstitialId = "ca-app-pub-8151554078712608/2651425439"
 android {
     namespace = "uk.edbetter.kemdaily"
     compileSdk = 36
+
+    // The app has its own language picker. Keep every translation in the base APK/AAB so changing
+    // language works immediately without asking Play to download another language split.
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 
     defaultConfig {
         applicationId = "uk.edbetter.kemdaily"

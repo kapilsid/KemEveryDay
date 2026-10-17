@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">डेली चैंपियंस</string>
-    <string name="champions_intro">आज का मॉलिक्यूल बोर्ड और आज का विज्ञान के राज़ रन पूरा करें। दोनों स्कोर जुड़ते हैं, और हर UTC दिन का आपका पहला पूरा कुल स्कोर विश्व रैंकिंग में जाता है।</string>
+    <string name="champions_intro">आज की विश्व रैंकिंग में आने के लिए कोई भी एक डेली गेम पूरा करें। जो गेम नहीं खेला वह शून्य माना जाएगा; कुल UTC-दिन स्कोर बढ़ाने के लिए उसे बाद में पूरा करें।</string>
     <string name="champions_default_player">विज्ञान खिलाड़ी</string>
     <string name="champions_edit_nickname">निकनेम बदलें</string>
     <string name="champions_retry">Firebase से फिर जोड़ें</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">Firebase जुड़ने पर विश्व स्कोर यहाँ दिखेंगे।</string>
     <string name="champions_you">%1$s · आप</string>
     <string name="champions_entry_scores">बोर्ड %1$d · विज्ञान %2$d</string>
-    <string name="champions_local_scores">इस डिवाइस पर आपके स्कोर</string>
+    <string name="champions_local_scores">आपके डेली कुल</string>
     <string name="champions_local">लोकल</string>
-    <string name="champions_no_runs">अभी तक कोई रन पूरा नहीं</string>
-    <string name="champions_finish_to_place">अपना पहला स्कोर दर्ज करने के लिए आज का विज्ञान के राज़ रन पूरा करें।</string>
+    <string name="champions_no_runs">अभी कोई डेली स्कोर नहीं</string>
+    <string name="champions_finish_to_place">शामिल होने के लिए कोई एक डेली गेम पूरा करें। कुल स्कोर बढ़ाने के लिए दूसरा खेलें।</string>
     <string name="champions_today">आज</string>
+    <string name="champions_this_week">इस सप्ताह</string>
+    <string name="champions_week_total">इस सप्ताह का कुल</string>
+    <string name="champions_week_utc">इस सप्ताह · UTC</string>
+    <string name="champions_no_scores_week">इस सप्ताह के लिए अभी कोई विश्व स्कोर पोस्ट नहीं हुआ है।</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d पहेली हल हुई</item>
         <item quantity="other">%1$d पहेलियाँ हल हुईं</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase जुड़ा है</string>
     <string name="champions_playing_offline">ऑफ़लाइन खेल रहे हैं</string>
-    <string name="champions_online_note">आपकी गुमनाम खिलाड़ी पहचान ऐप को आसान रखती है: न Google लॉगिन स्क्रीन, न कोई ईमेल दिखता है। पूरा किया गया डेली रन एक बार भेजा जाता है।</string>
-    <string name="champions_offline_note">आपका रन और स्कोर इसी डिवाइस पर रहते हैं। Anonymous Authentication, Firestore और स्कोर फ़ंक्शन चालू होने के बाद “Firebase से फिर जोड़ें” दबाएँ।</string>
+    <string name="champions_online_note">आपकी गुमनाम खिलाड़ी पहचान ऐप को आसान रखती है: न Google लॉगिन स्क्रीन, न कोई ईमेल दिखता है। हर पूरा गेम आज की एंट्री अपडेट करता है।</string>
+    <string name="champions_offline_note">आपके गेम इसी डिवाइस पर रहते हैं। Anonymous Authentication और Firestore चालू होने के बाद आज का कुल भेजने या बढ़ाने के लिए “फिर जोड़ें” दबाएँ।</string>
     <string name="champions_choose_name">अपना खिलाड़ी नाम चुनें</string>
     <string name="champions_nickname_note">यह सार्वजनिक निकनेम डेली चैंपियंस में दिखता है। अपना असली नाम इस्तेमाल न करें।</string>
     <string name="champions_nickname_label">निकनेम</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">जुड़ गया, पर अभी रैंकिंग उपलब्ध नहीं है।</string>
     <string name="champions_status_submitting">आज का डेली चैंपियंस स्कोर भेज रहे हैं…</string>
     <string name="champions_status_submitted_rank">स्कोर भेजा गया · रैंक #%1$d</string>
-    <string name="champions_status_submitted">आज का स्कोर भेजा गया</string>
-    <string name="champions_status_already_submitted">आज का स्कोर पहले ही भेजा जा चुका है</string>
+    <string name="champions_status_submitted">आज का रैंकिंग स्कोर अपडेट हुआ</string>
+    <string name="champions_status_already_submitted">आज का रैंकिंग स्कोर नवीनतम है</string>
     <string name="champions_status_offline_retry">ऑफ़लाइन — सेव किया स्कोर बाद में भेजने के लिए रीफ़्रेश दबाएँ</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">ऐप की भाषा चुनें</string>
     <string name="settings_language_system">सिस्टम डिफ़ॉल्ट</string>
     <string name="settings_privacy">गोपनीयता</string>
-    <string name="settings_privacy_text">आपकी प्रगति इसी फ़ोन पर रहती है। विज्ञापन Google द्वारा दिए जाते हैं।</string>
+    <string name="settings_privacy_text">गेम की प्रगति इसी फ़ोन पर रहती है। डेली चैंपियंस एक गुमनाम खिलाड़ी ID, सार्वजनिक उपनाम और पूरे किए गए डेली स्कोर Firebase को भेजता है। विज्ञापन Google द्वारा दिए जाते हैं।</string>
     <string name="settings_ad_choices">विज्ञापन विकल्प</string>
     <string name="settings_privacy_policy">गोपनीयता नीति</string>
     <string name="settings_about">EdBetter के बारे में</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">Google Play पर Kemistri खोलें</string>
     <string name="settings_version">वर्शन %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">इस डिवाइस पर विज्ञापन गोपनीयता विकल्पों की ज़रूरत नहीं है</string>
+    <string name="champions_your_score">आपका स्कोर</string>
 </resources>

@@ -269,7 +269,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Daily Champions</string>
-    <string name="champions_intro">Finish today\'s Molecule Board and today\'s Science Uncovered run. Your two scores are added together, and your first completed total for each UTC day goes on the worldwide ranking.</string>
+    <string name="champions_intro">Finish either daily game to join today\'s worldwide ranking. The unplayed game counts as zero; finish it later to improve your combined UTC-day score.</string>
     <string name="champions_default_player">Science player</string>
     <string name="champions_edit_nickname">Edit nickname</string>
     <string name="champions_retry">Retry Firebase connection</string>
@@ -285,19 +285,23 @@
     <string name="champions_scores_need_firebase">Worldwide scores appear here when Firebase is connected.</string>
     <string name="champions_you">%1$s · You</string>
     <string name="champions_entry_scores">Board %1$d · Science %2$d</string>
-    <string name="champions_local_scores">Your scores on this device</string>
+    <string name="champions_local_scores">Your daily totals</string>
     <string name="champions_local">LOCAL</string>
-    <string name="champions_no_runs">No completed runs yet</string>
-    <string name="champions_finish_to_place">Finish today\'s Science Uncovered run to place your first score.</string>
+    <string name="champions_no_runs">No daily scores yet</string>
+    <string name="champions_finish_to_place">Finish either daily game to join. Play the other to improve your total.</string>
     <string name="champions_today">Today</string>
+    <string name="champions_this_week">This Week</string>
+    <string name="champions_week_total">THIS WEEK\'S TOTAL</string>
+    <string name="champions_week_utc">THIS WEEK · UTC</string>
+    <string name="champions_no_scores_week">No worldwide scores have been posted for this week yet.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d mystery solved</item>
         <item quantity="other">%1$d mysteries solved</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase connected</string>
     <string name="champions_playing_offline">Playing offline</string>
-    <string name="champions_online_note">Your anonymous player identity keeps the app simple: no Google login screen and no email is shown. A finished daily run is submitted once.</string>
-    <string name="champions_offline_note">Your run and score remain on this device. After Anonymous Authentication, Firestore and the score function are enabled, tap Retry to connect.</string>
+    <string name="champions_online_note">Your anonymous player identity keeps the app simple: no Google login screen and no email is shown. Each finished game updates today\'s entry.</string>
+    <string name="champions_offline_note">Your games remain on this device. After Anonymous Authentication and Firestore are enabled, tap Retry to submit or improve today\'s total.</string>
     <string name="champions_choose_name">Choose your player name</string>
     <string name="champions_nickname_note">This public nickname appears on Daily Champions. Do not use your real name.</string>
     <string name="champions_nickname_label">Nickname</string>
@@ -313,8 +317,8 @@
     <string name="champions_status_rankings_unavailable">Connected, but rankings are unavailable right now.</string>
     <string name="champions_status_submitting">Submitting today\'s Daily Champions score…</string>
     <string name="champions_status_submitted_rank">Score submitted · rank #%1$d</string>
-    <string name="champions_status_submitted">Today\'s score submitted</string>
-    <string name="champions_status_already_submitted">Today\'s score is already submitted</string>
+    <string name="champions_status_submitted">Today\'s leaderboard score updated</string>
+    <string name="champions_status_already_submitted">Today\'s leaderboard score is up to date</string>
     <string name="champions_status_offline_retry">Offline — tap refresh to submit the saved score later</string>
 
     <!-- Daily Streak -->
@@ -375,7 +379,7 @@
     <string name="settings_language_description">Choose the app language</string>
     <string name="settings_language_system">System default</string>
     <string name="settings_privacy">Privacy</string>
-    <string name="settings_privacy_text">Your progress stays on this phone. Ads are provided by Google.</string>
+    <string name="settings_privacy_text">Game progress stays on this phone. Daily Champions sends an anonymous player ID, public nickname and completed daily scores to Firebase. Ads are provided by Google.</string>
     <string name="settings_ad_choices">Ad choices</string>
     <string name="settings_privacy_policy">Privacy policy</string>
     <string name="settings_about">About EdBetter</string>
@@ -385,4 +389,5 @@
     <string name="settings_open_kemistri">Open Kemistri on Google Play</string>
     <string name="settings_version">Version %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Ad privacy options are not required on this device</string>
+    <string name="champions_your_score">Your score</string>
 </resources>

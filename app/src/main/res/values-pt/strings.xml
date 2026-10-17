@@ -14,6 +14,7 @@
     <string name="common_home">Início</string>
     <plurals name="common_points_awarded">
         <item quantity="one">+%1$d ponto</item>
+        <item quantity="many">+%1$d pontos</item>
         <item quantity="other">+%1$d pontos</item>
     </plurals>
 
@@ -26,6 +27,7 @@
     <string name="home_daily_subtitle">Um desafio de química para todos, todo dia</string>
     <plurals name="home_daily_subtitle_streak">
         <item quantity="one">Sequência de %1$d dia · um desafio para todos, todo dia</item>
+        <item quantity="many">Sequência de %1$d dias · um desafio para todos, todo dia</item>
         <item quantity="other">Sequência de %1$d dias · um desafio para todos, todo dia</item>
     </plurals>
     <string name="home_science_title">Ciência Revelada</string>
@@ -51,6 +53,7 @@
     <string name="hunt_discover">Descobrir</string>
     <plurals name="hunt_already_found_toast">
         <item quantity="one">%1$s já encontrado · +%2$d ponto</item>
+        <item quantity="many">%1$s já encontrado · +%2$d pontos</item>
         <item quantity="other">%1$s já encontrado · +%2$d pontos</item>
     </plurals>
     <string name="hunt_stat_moves">Jogadas</string>
@@ -66,10 +69,12 @@
     <string name="hunt_mission_complete_text">Você encontrou %1$s com %2$s. Pontuação: %3$d</string>
     <plurals name="hunt_found_substances">
         <item quantity="one">%1$d substância</item>
+        <item quantity="many">%1$d substâncias</item>
         <item quantity="other">%1$d substâncias</item>
     </plurals>
     <plurals name="hunt_moves_remaining">
         <item quantity="one">%1$d jogada restante</item>
+        <item quantity="many">%1$d jogadas restantes</item>
         <item quantity="other">%1$d jogadas restantes</item>
     </plurals>
     <string name="hunt_keep_discovering">Continuar descobrindo</string>
@@ -79,10 +84,12 @@
     <!-- Score breakdown parts, joined with " · " -->
     <plurals name="hunt_score_atoms">
         <item quantity="one">%1$d átomo</item>
+        <item quantity="many">%1$d átomos</item>
         <item quantity="other">%1$d átomos</item>
     </plurals>
     <plurals name="hunt_score_elements">
         <item quantity="one">%1$d elemento</item>
+        <item quantity="many">%1$d elementos</item>
         <item quantity="other">%1$d elementos</item>
     </plurals>
     <string name="hunt_score_rarity">raridade +%1$d</string>
@@ -107,14 +114,17 @@
     <!-- Discovery summary parts, joined with " · " -->
     <plurals name="hunt_discoveries_mission">
         <item quantity="one">%1$d da missão</item>
+        <item quantity="many">%1$d da missão</item>
         <item quantity="other">%1$d da missão</item>
     </plurals>
     <plurals name="hunt_discoveries_extra">
         <item quantity="one">%1$d extra</item>
+        <item quantity="many">%1$d extras</item>
         <item quantity="other">%1$d extras</item>
     </plurals>
     <plurals name="hunt_discoveries_total">
         <item quantity="one">%1$d achado no total</item>
+        <item quantity="many">%1$d achados no total</item>
         <item quantity="other">%1$d achados no total</item>
     </plurals>
     <string name="hunt_discoveries_empty">Nenhuma descoberta ainda — ligue alguns átomos e veja o que dá para criar!</string>
@@ -125,6 +135,7 @@
     <string name="hunt_result_complete">Caçada concluída</string>
     <plurals name="hunt_result_summary">
         <item quantity="one">Pontuação %1$d · %2$d substância única</item>
+        <item quantity="many">Pontuação %1$d · %2$d substâncias únicas</item>
         <item quantity="other">Pontuação %1$d · %2$d substâncias únicas</item>
     </plurals>
     <string name="hunt_play_again">Jogar de novo</string>
@@ -132,6 +143,7 @@
     <string name="hunt_msg_choose_neighbour">Escolha uma peça vizinha</string>
     <plurals name="hunt_msg_max_atoms">
         <item quantity="one">Uma descoberta pode usar até %1$d átomo</item>
+        <item quantity="many">Uma descoberta pode usar até %1$d átomos</item>
         <item quantity="other">Uma descoberta pode usar até %1$d átomos</item>
     </plurals>
     <string name="hunt_msg_board_refreshed">Tabuleiro renovado — tente este novo layout</string>
@@ -151,10 +163,12 @@
     <string name="science_answer_shape">%1$s · %2$s</string>
     <plurals name="science_letter_count">
         <item quantity="one">%1$d letra</item>
+        <item quantity="many">%1$d letras</item>
         <item quantity="other">%1$d letras</item>
     </plurals>
     <plurals name="science_word_count">
         <item quantity="one">%1$d palavra</item>
+        <item quantity="many">%1$d palavras</item>
         <item quantity="other">%1$d palavras</item>
     </plurals>
     <string name="science_clue_number">PISTA %1$d</string>
@@ -165,27 +179,33 @@
     <string name="science_skip">Pular (−1 vida)</string>
     <plurals name="science_solved">
         <item quantity="one">Resolvido — +%1$d ponto!</item>
+        <item quantity="many">Resolvido — +%1$d pontos!</item>
         <item quantity="other">Resolvido — +%1$d pontos!</item>
     </plurals>
     <plurals name="science_run_over">
         <item quantity="one">Fim da rodada — %1$d ponto</item>
+        <item quantity="many">Fim da rodada — %1$d pontos</item>
         <item quantity="other">Fim da rodada — %1$d pontos</item>
     </plurals>
     <string name="science_revealed">Mistério revelado — você perdeu uma vida</string>
     <plurals name="science_perfect_bonus">
         <item quantity="one">Acerto perfeito: +%1$d de bônus incluído.</item>
+        <item quantity="many">Acerto perfeito: +%1$d de bônus incluídos.</item>
         <item quantity="other">Acerto perfeito: +%1$d de bônus incluídos.</item>
     </plurals>
     <plurals name="science_life_bonus">
         <item quantity="one">Bônus de vida: +%1$d por %2$d vida restante.</item>
+        <item quantity="many">Bônus de vida: +%1$d por %2$d vidas restantes.</item>
         <item quantity="other">Bônus de vida: +%1$d por %2$d vidas restantes.</item>
     </plurals>
     <plurals name="science_solved_after">
         <item quantity="one">Resolvido depois de %1$d letra errada.</item>
+        <item quantity="many">Resolvido depois de %1$d letras erradas.</item>
         <item quantity="other">Resolvido depois de %1$d letras erradas.</item>
     </plurals>
     <plurals name="science_run_solved_count">
         <item quantity="one">%1$d mistério resolvido nesta rodada</item>
+        <item quantity="many">%1$d mistérios resolvidos nesta rodada</item>
         <item quantity="other">%1$d mistérios resolvidos nesta rodada</item>
     </plurals>
     <string name="science_back_home">VOLTAR AO INÍCIO</string>
@@ -193,6 +213,7 @@
     <string name="science_next_mystery">PRÓXIMO MISTÉRIO</string>
     <plurals name="science_continue_lives">
         <item quantity="one">CONTINUAR — %1$d VIDA</item>
+        <item quantity="many">CONTINUAR — %1$d VIDAS</item>
         <item quantity="other">CONTINUAR — %1$d VIDAS</item>
     </plurals>
     <string name="science_done_today">Os três mistérios de hoje acabaram. Novos chegam às 00:00 UTC.</string>
@@ -270,7 +291,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Campeões do Dia</string>
-    <string name="champions_intro">Termine o Tabuleiro Molecular de hoje e a rodada de hoje do Ciência Revelada. Suas duas pontuações são somadas, e o seu primeiro total completo de cada dia UTC entra no ranking mundial.</string>
+    <string name="champions_intro">Termine qualquer um dos jogos diários para entrar no ranking mundial de hoje. O jogo não disputado vale zero; termine-o depois para melhorar seu total combinado do dia UTC.</string>
     <string name="champions_default_player">Jogador de ciência</string>
     <string name="champions_edit_nickname">Editar apelido</string>
     <string name="champions_retry">Reconectar ao Firebase</string>
@@ -286,19 +307,24 @@
     <string name="champions_scores_need_firebase">As pontuações mundiais aparecem aqui quando o Firebase está conectado.</string>
     <string name="champions_you">%1$s · Você</string>
     <string name="champions_entry_scores">Tabuleiro %1$d · Ciência %2$d</string>
-    <string name="champions_local_scores">Suas pontuações neste aparelho</string>
+    <string name="champions_local_scores">Seus totais diários</string>
     <string name="champions_local">LOCAL</string>
-    <string name="champions_no_runs">Nenhuma rodada concluída ainda</string>
-    <string name="champions_finish_to_place">Termine a rodada de hoje do Ciência Revelada para registrar sua primeira pontuação.</string>
+    <string name="champions_no_runs">Ainda não há pontuações diárias</string>
+    <string name="champions_finish_to_place">Termine um jogo diário para participar. Jogue o outro para melhorar seu total.</string>
     <string name="champions_today">Hoje</string>
+    <string name="champions_this_week">Esta semana</string>
+    <string name="champions_week_total">TOTAL DA SEMANA</string>
+    <string name="champions_week_utc">ESTA SEMANA · UTC</string>
+    <string name="champions_no_scores_week">Ainda não há pontuações mundiais para esta semana.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d mistério resolvido</item>
+        <item quantity="many">%1$d mistérios resolvidos</item>
         <item quantity="other">%1$d mistérios resolvidos</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase conectado</string>
     <string name="champions_playing_offline">Jogando offline</string>
-    <string name="champions_online_note">Sua identidade anônima de jogador deixa tudo simples: sem tela de login do Google e sem mostrar e-mail. Cada rodada diária concluída é enviada uma única vez.</string>
-    <string name="champions_offline_note">Sua rodada e pontuação ficam neste aparelho. Depois de ativar a Autenticação Anônima, o Firestore e a função de pontuação, toque em Reconectar para se conectar.</string>
+    <string name="champions_online_note">Sua identidade anônima deixa tudo simples: sem login do Google e sem mostrar e-mail. Cada jogo concluído atualiza a entrada de hoje.</string>
+    <string name="champions_offline_note">Seus jogos ficam neste aparelho. Depois de ativar a Autenticação Anônima e o Firestore, toque em Reconectar para enviar ou melhorar o total de hoje.</string>
     <string name="champions_choose_name">Escolha seu nome de jogador</string>
     <string name="champions_nickname_note">Este apelido público aparece nos Campeões do Dia. Não use seu nome real.</string>
     <string name="champions_nickname_label">Apelido</string>
@@ -314,8 +340,8 @@
     <string name="champions_status_rankings_unavailable">Conectado, mas o ranking está indisponível agora.</string>
     <string name="champions_status_submitting">Enviando a pontuação de hoje dos Campeões do Dia…</string>
     <string name="champions_status_submitted_rank">Pontuação enviada · posição #%1$d</string>
-    <string name="champions_status_submitted">Pontuação de hoje enviada</string>
-    <string name="champions_status_already_submitted">A pontuação de hoje já foi enviada</string>
+    <string name="champions_status_submitted">Pontuação de hoje atualizada</string>
+    <string name="champions_status_already_submitted">A pontuação de hoje está atualizada</string>
     <string name="champions_status_offline_retry">Offline — toque em atualizar para enviar a pontuação salva depois</string>
 
     <!-- Daily Streak -->
@@ -323,6 +349,7 @@
     <string name="streak_none">Nenhuma sequência ainda</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %1$d dia</item>
+        <item quantity="many">Sequência de %1$d dias</item>
         <item quantity="other">Sequência de %1$d dias</item>
     </plurals>
     <string name="streak_played_today">Hoje já conta. Volte amanhã.</string>
@@ -336,10 +363,12 @@
     <string name="streak_recent_empty">Nenhum Tabuleiro Diário jogado ainda. Um dia conta quando você termina o Tabuleiro Molecular ou o Ciência Revelada.</string>
     <plurals name="streak_unique">
         <item quantity="one">%1$d única</item>
+        <item quantity="many">%1$d únicas</item>
         <item quantity="other">%1$d únicas</item>
     </plurals>
     <plurals name="streak_unique_mission">
         <item quantity="one">%1$d única · missão cumprida</item>
+        <item quantity="many">%1$d únicas · missão cumprida</item>
         <item quantity="other">%1$d únicas · missão cumprida</item>
     </plurals>
     <string name="streak_footer">O tabuleiro de cada dia muda à meia-noite UTC. O histórico fica salvo só neste aparelho.</string>
@@ -361,6 +390,7 @@
     <string name="review_empty">Nada esperando revisão</string>
     <plurals name="review_tried">
         <item quantity="one">Ainda não reconhecida · tentada %1$d vez</item>
+        <item quantity="many">Ainda não reconhecida · tentada %1$d vezes</item>
         <item quantity="other">Ainda não reconhecida · tentada %1$d vezes</item>
     </plurals>
 
@@ -376,7 +406,7 @@
     <string name="settings_language_description">Escolha o idioma do app</string>
     <string name="settings_language_system">Padrão do sistema</string>
     <string name="settings_privacy">Privacidade</string>
-    <string name="settings_privacy_text">Seu progresso fica neste celular. Os anúncios são fornecidos pelo Google.</string>
+    <string name="settings_privacy_text">O progresso do jogo fica neste celular. Campeões do Dia envia ao Firebase um ID anônimo, seu apelido público e pontuações diárias concluídas. Os anúncios são fornecidos pelo Google.</string>
     <string name="settings_ad_choices">Opções de anúncios</string>
     <string name="settings_privacy_policy">Política de privacidade</string>
     <string name="settings_about">Sobre a EdBetter</string>
@@ -386,4 +416,5 @@
     <string name="settings_open_kemistri">Abrir o Kemistri no Google Play</string>
     <string name="settings_version">Versão %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">As opções de privacidade de anúncios não são necessárias neste aparelho</string>
+    <string name="champions_your_score">Sua pontuação</string>
 </resources>

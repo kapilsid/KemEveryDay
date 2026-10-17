@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Juara Harian</string>
-    <string name="champions_intro">Selesaikan Papan Molekul hari ini dan putaran Sains Terungkap hari ini. Kedua skormu dijumlahkan, dan total pertamamu yang selesai di setiap hari UTC masuk ke peringkat dunia.</string>
+    <string name="champions_intro">Selesaikan salah satu game harian untuk masuk peringkat dunia hari ini. Game yang belum dimainkan bernilai nol; selesaikan nanti untuk meningkatkan total gabungan hari UTC-mu.</string>
     <string name="champions_default_player">Pemain sains</string>
     <string name="champions_edit_nickname">Ubah nama panggilan</string>
     <string name="champions_retry">Hubungkan ulang Firebase</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">Skor dunia muncul di sini saat Firebase terhubung.</string>
     <string name="champions_you">%1$s · Kamu</string>
     <string name="champions_entry_scores">Papan %1$d · Sains %2$d</string>
-    <string name="champions_local_scores">Skormu di perangkat ini</string>
+    <string name="champions_local_scores">Total harianmu</string>
     <string name="champions_local">LOKAL</string>
-    <string name="champions_no_runs">Belum ada putaran yang selesai</string>
-    <string name="champions_finish_to_place">Selesaikan putaran Sains Terungkap hari ini untuk mencatat skor pertamamu.</string>
+    <string name="champions_no_runs">Belum ada skor harian</string>
+    <string name="champions_finish_to_place">Selesaikan salah satu game harian untuk bergabung. Mainkan yang lain untuk meningkatkan totalmu.</string>
     <string name="champions_today">Hari ini</string>
+    <string name="champions_this_week">Minggu ini</string>
+    <string name="champions_week_total">TOTAL MINGGU INI</string>
+    <string name="champions_week_utc">MINGGU INI · UTC</string>
+    <string name="champions_no_scores_week">Belum ada skor dunia yang dikirim untuk minggu ini.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d misteri terpecahkan</item>
         <item quantity="other">%1$d misteri terpecahkan</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase terhubung</string>
     <string name="champions_playing_offline">Bermain offline</string>
-    <string name="champions_online_note">Identitas pemain anonim membuat aplikasi tetap simpel: tanpa layar login Google dan tanpa menampilkan email. Putaran harian yang selesai dikirim satu kali.</string>
-    <string name="champions_offline_note">Putaran dan skormu tetap tersimpan di perangkat ini. Setelah Anonymous Authentication, Firestore, dan fungsi skor diaktifkan, ketuk Hubungkan ulang untuk terhubung.</string>
+    <string name="champions_online_note">Identitas pemain anonim membuat aplikasi tetap simpel: tanpa login Google dan tanpa email yang ditampilkan. Setiap game yang selesai memperbarui entri hari ini.</string>
+    <string name="champions_offline_note">Game-mu tetap tersimpan di perangkat ini. Setelah Anonymous Authentication dan Firestore aktif, ketuk Hubungkan ulang untuk mengirim atau meningkatkan total hari ini.</string>
     <string name="champions_choose_name">Pilih nama pemainmu</string>
     <string name="champions_nickname_note">Nama panggilan publik ini muncul di Juara Harian. Jangan pakai nama aslimu.</string>
     <string name="champions_nickname_label">Nama panggilan</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">Terhubung, tetapi peringkat sedang tidak tersedia.</string>
     <string name="champions_status_submitting">Mengirim skor Juara Harian hari ini…</string>
     <string name="champions_status_submitted_rank">Skor terkirim · peringkat #%1$d</string>
-    <string name="champions_status_submitted">Skor hari ini terkirim</string>
-    <string name="champions_status_already_submitted">Skor hari ini sudah dikirim</string>
+    <string name="champions_status_submitted">Skor peringkat hari ini diperbarui</string>
+    <string name="champions_status_already_submitted">Skor peringkat hari ini sudah terbaru</string>
     <string name="champions_status_offline_retry">Offline — ketuk muat ulang untuk mengirim skor yang tersimpan nanti</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">Pilih bahasa aplikasi</string>
     <string name="settings_language_system">Default sistem</string>
     <string name="settings_privacy">Privasi</string>
-    <string name="settings_privacy_text">Progresmu tetap di ponsel ini. Iklan disediakan oleh Google.</string>
+    <string name="settings_privacy_text">Progres game tetap di ponsel ini. Juara Harian mengirim ID pemain anonim, nama panggilan publik, dan skor harian yang selesai ke Firebase. Iklan disediakan oleh Google.</string>
     <string name="settings_ad_choices">Pilihan iklan</string>
     <string name="settings_privacy_policy">Kebijakan privasi</string>
     <string name="settings_about">Tentang EdBetter</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">Buka Kemistri di Google Play</string>
     <string name="settings_version">Versi %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Opsi privasi iklan tidak diperlukan di perangkat ini</string>
+    <string name="champions_your_score">Skor kamu</string>
 </resources>

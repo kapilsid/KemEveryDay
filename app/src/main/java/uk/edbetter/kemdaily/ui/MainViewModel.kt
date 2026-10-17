@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import uk.edbetter.kemdaily.R
+import uk.edbetter.kemdaily.LocaleManager
 import uk.edbetter.kemdaily.core.game.Cell
 import uk.edbetter.kemdaily.core.game.DailyRecord
 import uk.edbetter.kemdaily.core.game.DailySeed
@@ -29,7 +30,9 @@ import uk.edbetter.kemdaily.data.ScienceRunSnapshot
 import uk.edbetter.kemdaily.data.ScienceLeaderboardEntry
 import uk.edbetter.kemdaily.data.SubmissionResult
 import java.time.LocalDate
+import java.time.DayOfWeek
 import java.time.ZoneOffset
+import java.time.temporal.TemporalAdjusters
 
 data class SettingsState(val sound: Boolean, val vibration: Boolean, val reducedMotion: Boolean, val languageTag: String = "system")
 
@@ -39,6 +42,7 @@ data class ScienceCloudState(
     val playerId: String = "",
     val nickname: String = "",
     val rankings: List<PublicScienceRank> = emptyList(),
+    val weeklyRankings: List<PublicScienceRank> = emptyList(),
     val message: String = "",
     val scoreSubmitted: Boolean = false,
 )
@@ -207,23 +211,29 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private suspend fun loadCloudRankings() {
         try {
             val ranks = cloudLeaderboard.rankings(todayUtc())
-            _scienceCloud.value = _scienceCloud.value.copy(rankings = ranks, online = true)
+            val weeklyRanks = cloudLeaderboard.weeklyRankings(currentWeekStartUtc())
+            _scienceCloud.value = _scienceCloud.value.copy(
+                rankings = ranks,
+                weeklyRankings = weeklyRanks,
+                online = true,
+            )
         } catch (_: Exception) {
             _scienceCloud.value = _scienceCloud.value.copy(message = text(R.string.champions_status_rankings_unavailable))
         }
     }
 
-    /** Today's Daily Champions entry, available once both the Molecule Board and Science Uncovered are finished. */
+    /** Today's partial or complete entry. An unplayed daily game contributes zero until it is finished. */
     fun championEntry(): ScienceScoreSubmission? {
         val today = todayUtc()
-        val board = repository.dailyHistory()[today] ?: return null
-        val run = loadScienceRun().takeIf { it.runOver } ?: return null
+        val board = repository.dailyHistory()[today]
+        val run = loadScienceRun().takeIf { it.runOver }
+        if (board == null && run == null) return null
         return ScienceScoreSubmission(
             date = today,
-            moleculeScore = board.score,
-            scienceScore = run.totalScore,
-            uniqueDiscoveries = board.uniqueDiscoveries,
-            mysteriesSolved = run.solvedCount,
+            moleculeScore = board?.score ?: 0,
+            scienceScore = run?.totalScore ?: 0,
+            uniqueDiscoveries = board?.uniqueDiscoveries ?: 0,
+            mysteriesSolved = run?.solvedCount ?: 0,
             contentVersion = 1,
         )
     }
@@ -245,7 +255,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     )
                     loadCloudRankings()
                 }
-                SubmissionResult.AlreadySubmitted -> {
+                SubmissionResult.UpToDate -> {
                     _scienceCloud.value = _scienceCloud.value.copy(scoreSubmitted = true, message = text(R.string.champions_status_already_submitted))
                     loadCloudRankings()
                 }
@@ -284,8 +294,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun todayUtc(): LocalDate = LocalDate.now(ZoneOffset.UTC)
 
-    /** Status text in the phone's language (re-read on each call, so it follows a language change). */
-    private fun text(id: Int, vararg args: Any): String = getApplication<Application>().getString(id, *args)
+    fun currentWeekStartUtc(): LocalDate =
+        todayUtc().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+
+    /** Status text follows the app-selected language instead of the device/application locale. */
+    private fun text(id: Int, vararg args: Any): String =
+        LocaleManager.wrap(getApplication(), repository.languageTag).getString(id, *args)
 
     private fun settingsSnapshot() = SettingsState(
         repository.soundEnabled, repository.vibrationEnabled, repository.reducedMotion, repository.languageTag,

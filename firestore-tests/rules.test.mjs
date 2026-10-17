@@ -4,9 +4,12 @@ import { doc, setDoc, getDoc, serverTimestamp, updateDoc } from "firebase/firest
 
 const env = await initializeTestEnvironment({
   projectId: "kemistri-rules-test",
-  firestore: { rules: readFileSync("../firestore.rules", "utf8"), host: "127.0.0.1", port: 8089 },
+  firestore: { rules: readFileSync(new URL("../firestore.rules", import.meta.url), "utf8"), host: "127.0.0.1", port: 8089 },
 });
 const today = new Date().toISOString().slice(0, 10);
+const monday = new Date();
+monday.setUTCDate(monday.getUTCDate() - ((monday.getUTCDay() + 6) % 7));
+const weekStart = monday.toISOString().slice(0, 10);
 const old = new Date(Date.now() - 5 * 864e5).toISOString().slice(0, 10);
 const future = new Date(Date.now() + 2 * 864e5).toISOString().slice(0, 10);
 const alice = env.authenticatedContext("alice").firestore();
@@ -18,6 +21,11 @@ const score = (o = {}) => ({
   mysteriesSolved: 3, contentVersion: 1, submittedAt: serverTimestamp(), verified: false, ...o,
 });
 const at = (db, date, uid) => doc(db, "daily_champions", date, "players", uid);
+const weekly = (o = {}) => ({
+  displayName: "SwiftFlask414", score: 1000, moleculeScore: 750, scienceScore: 250, daysPlayed: 1,
+  uniqueDiscoveries: 10, mysteriesSolved: 3, contentVersion: 1, updatedAt: serverTimestamp(), verified: false, ...o,
+});
+const weekAt = (db, start, uid) => doc(db, "weekly_champions", start, "players", uid);
 let passed = 0, failed = 0;
 async function check(name, p) { try { await p; passed++; console.log("PASS", name); } catch (e) { failed++; console.log("FAIL", name, e.message); } }
 
@@ -37,10 +45,19 @@ await check("old date rejected", assertFails(setDoc(at(alice, old, "alice"), sco
 await check("future date rejected", assertFails(setDoc(at(alice, future, "alice"), score())));
 await check("bad date rejected", assertFails(setDoc(at(alice, "2026-1-1", "alice"), score())));
 await check("writing as another player rejected", assertFails(setDoc(at(bob, today, "alice"), score())));
-await check("valid score accepted", assertSucceeds(setDoc(at(alice, today, "alice"), score())));
-await check("second write rejected", assertFails(setDoc(at(alice, today, "alice"), score({ moleculeScore: 760, score: 1010 }))));
-await check("update rejected", assertFails(updateDoc(at(alice, today, "alice"), { score: 2000 })));
+await check("partial board score accepted", assertSucceeds(setDoc(at(alice, today, "alice"), score({ scienceScore: 0, mysteriesSolved: 0, score: 750 }))));
+await check("completing the other game improves entry", assertSucceeds(setDoc(at(alice, today, "alice"), score())));
+await check("same score cannot rewrite entry", assertFails(setDoc(at(alice, today, "alice"), score())));
+await check("score cannot be reduced", assertFails(setDoc(at(alice, today, "alice"), score({ moleculeScore: 700, score: 950 }))));
+await check("one component cannot be traded for another", assertFails(setDoc(at(alice, today, "alice"), score({ moleculeScore: 740, scienceScore: 300, score: 1040 }))));
+await check("invalid partial update rejected", assertFails(updateDoc(at(alice, today, "alice"), { score: 2000 })));
 await check("signed-in can read board", assertSucceeds(getDoc(at(bob, today, "alice"))));
+await check("partial weekly score accepted", assertSucceeds(setDoc(weekAt(alice, weekStart, "alice"), weekly({ scienceScore: 0, mysteriesSolved: 0, score: 750 }))));
+await check("weekly score can increase", assertSucceeds(setDoc(weekAt(alice, weekStart, "alice"), weekly())));
+await check("weekly score cannot be rewritten", assertFails(setDoc(weekAt(alice, weekStart, "alice"), weekly())));
+await check("weekly component cannot decrease", assertFails(setDoc(weekAt(alice, weekStart, "alice"), weekly({ moleculeScore: 700, scienceScore: 350, score: 1050 }))));
+await check("weekly days cap enforced", assertFails(setDoc(weekAt(alice, weekStart, "alice"), weekly({ daysPlayed: 8, score: 1001, scienceScore: 251 }))));
+await check("signed-out cannot read weekly scores", assertFails(getDoc(weekAt(anon, weekStart, "alice"))));
 await check("old collection closed", assertFails(setDoc(doc(alice, "science_daily_scores", today, "players", "alice"), { score: 1 })));
 await env.cleanup();
 console.log(`${passed} passed, ${failed} failed`);

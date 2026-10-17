@@ -30,6 +30,7 @@ object ChampionLimits {
 interface ScienceLeaderboardGateway {
     suspend fun submit(submission: ScienceScoreSubmission): SubmissionResult
     suspend fun rankings(date: LocalDate, limit: Int = 100): List<PublicScienceRank>
+    suspend fun weeklyRankings(weekStart: LocalDate, limit: Int = 100): List<PublicScienceRank>
 }
 
 data class ScienceScoreSubmission(
@@ -57,7 +58,7 @@ data class PublicScienceRank(
 
 sealed interface SubmissionResult {
     data class Accepted(val rank: Int?) : SubmissionResult
-    data object AlreadySubmitted : SubmissionResult
+    data object UpToDate : SubmissionResult
     data object Offline : SubmissionResult
     data class Rejected(val reason: String) : SubmissionResult
 }

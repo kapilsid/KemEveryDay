@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">每日冠军</string>
-    <string name="champions_intro">完成今天的分子棋盘和科学揭秘挑战。两项得分相加，每个 UTC 日你第一次完成的总分会进入全球排名。</string>
+    <string name="champions_intro">完成任一每日游戏即可进入今天的全球排名。未玩的游戏按零分计算；之后完成它即可提高该 UTC 日的合计分数。</string>
     <string name="champions_default_player">科学玩家</string>
     <string name="champions_edit_nickname">修改昵称</string>
     <string name="champions_retry">重新连接 Firebase</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">连接 Firebase 后，全球得分会显示在这里。</string>
     <string name="champions_you">%1$s · 你</string>
     <string name="champions_entry_scores">棋盘 %1$d · 科学 %2$d</string>
-    <string name="champions_local_scores">你在本设备上的得分</string>
+    <string name="champions_local_scores">你的每日总分</string>
     <string name="champions_local">本地</string>
-    <string name="champions_no_runs">还没有完成的挑战</string>
-    <string name="champions_finish_to_place">完成今天的科学揭秘挑战，记录你的第一个得分。</string>
+    <string name="champions_no_runs">还没有每日得分</string>
+    <string name="champions_finish_to_place">完成任一每日游戏即可加入。再玩另一个游戏来提高总分。</string>
     <string name="champions_today">今天</string>
+    <string name="champions_this_week">本周</string>
+    <string name="champions_week_total">本周总分</string>
+    <string name="champions_week_utc">本周 · UTC</string>
+    <string name="champions_no_scores_week">本周还没有全球得分记录。</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">解开 %1$d 个谜题</item>
         <item quantity="other">解开 %1$d 个谜题</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase 已连接</string>
     <string name="champions_playing_offline">离线游戏中</string>
-    <string name="champions_online_note">匿名玩家身份让应用更简单：没有 Google 登录页面，也不会显示邮箱。完成的每日挑战只会提交一次。</string>
-    <string name="champions_offline_note">你的挑战和得分会保留在本设备上。启用匿名身份验证、Firestore 和计分函数后，点击“重试”即可连接。</string>
+    <string name="champions_online_note">匿名玩家身份让应用更简单：无需 Google 登录，也不会显示邮箱。每完成一个游戏都会更新今天的记录。</string>
+    <string name="champions_offline_note">你的游戏会保留在本设备上。启用匿名身份验证和 Firestore 后，点击“重试”即可提交或提高今天的总分。</string>
     <string name="champions_choose_name">选择你的玩家名</string>
     <string name="champions_nickname_note">这个公开昵称会显示在每日冠军中。请不要使用真实姓名。</string>
     <string name="champions_nickname_label">昵称</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">已连接，但排名暂时不可用。</string>
     <string name="champions_status_submitting">正在提交今天的每日冠军得分…</string>
     <string name="champions_status_submitted_rank">得分已提交 · 第 %1$d 名</string>
-    <string name="champions_status_submitted">今日得分已提交</string>
-    <string name="champions_status_already_submitted">今日得分已经提交过了</string>
+    <string name="champions_status_submitted">今日排名得分已更新</string>
+    <string name="champions_status_already_submitted">今日排名得分已是最新</string>
     <string name="champions_status_offline_retry">离线 — 稍后点击刷新提交已保存的得分</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">选择应用语言</string>
     <string name="settings_language_system">系统默认</string>
     <string name="settings_privacy">隐私</string>
-    <string name="settings_privacy_text">你的进度保存在这部手机上。广告由 Google 提供。</string>
+    <string name="settings_privacy_text">游戏进度保存在这部手机上。“每日冠军”会向 Firebase 发送匿名玩家 ID、公开昵称和已完成的每日得分。广告由 Google 提供。</string>
     <string name="settings_ad_choices">广告选择</string>
     <string name="settings_privacy_policy">隐私政策</string>
     <string name="settings_about">关于 EdBetter</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">在 Google Play 打开 Kemistri</string>
     <string name="settings_version">版本 %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">本设备无需广告隐私选项</string>
+    <string name="champions_your_score">你的得分</string>
 </resources>

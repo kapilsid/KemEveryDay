@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">قهرمانان روز</string>
-    <string name="champions_intro">صفحهٔ مولکول امروز و دور «رازهای علم» امروز را تمام کن. دو امتیازت با هم جمع می‌شوند و اولین مجموع کاملت در هر روز UTC در رتبه‌بندی جهانی ثبت می‌شود.</string>
+    <string name="champions_intro">یکی از بازی‌های روزانه را تمام کن تا وارد رتبه‌بندی جهانی امروز شوی. بازی انجام‌نشده صفر حساب می‌شود؛ بعداً آن را تمام کن تا مجموع روز UTC بهتر شود.</string>
     <string name="champions_default_player">بازیکن علم</string>
     <string name="champions_edit_nickname">ویرایش نام مستعار</string>
     <string name="champions_retry">اتصال دوباره به Firebase</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">وقتی Firebase وصل شود، امتیازهای جهانی اینجا نمایش داده می‌شوند.</string>
     <string name="champions_you">%1$s · تو</string>
     <string name="champions_entry_scores">صفحه %1$d · علم %2$d</string>
-    <string name="champions_local_scores">امتیازهای تو روی این دستگاه</string>
+    <string name="champions_local_scores">مجموع‌های روزانهٔ تو</string>
     <string name="champions_local">محلی</string>
-    <string name="champions_no_runs">هنوز دوری تمام نشده</string>
-    <string name="champions_finish_to_place">دور «رازهای علم» امروز را تمام کن تا اولین امتیازت ثبت شود.</string>
+    <string name="champions_no_runs">هنوز امتیاز روزانه‌ای وجود ندارد</string>
+    <string name="champions_finish_to_place">یکی از بازی‌های روزانه را تمام کن تا وارد شوی. بازی دیگر را انجام بده تا مجموعت بهتر شود.</string>
     <string name="champions_today">امروز</string>
+    <string name="champions_this_week">این هفته</string>
+    <string name="champions_week_total">مجموع این هفته</string>
+    <string name="champions_week_utc">این هفته · UTC</string>
+    <string name="champions_no_scores_week">هنوز امتیاز جهانی‌ای برای این هفته ثبت نشده است.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d معما حل شد</item>
         <item quantity="other">%1$d معما حل شد</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase وصل است</string>
     <string name="champions_playing_offline">بازی آفلاین</string>
-    <string name="champions_online_note">هویت ناشناس بازیکن، برنامه را ساده نگه می‌دارد: نه صفحهٔ ورود Google هست و نه ایمیلی نشان داده می‌شود. هر دور روزانهٔ تمام‌شده فقط یک بار ارسال می‌شود.</string>
-    <string name="champions_offline_note">دور و امتیازت روی همین دستگاه می‌ماند. بعد از فعال شدن Anonymous Authentication، Firestore و تابع امتیاز، «اتصال دوباره به Firebase» را بزن.</string>
+    <string name="champions_online_note">هویت ناشناس بازیکن برنامه را ساده نگه می‌دارد: نه ورود Google و نه ایمیلی نمایش داده می‌شود. هر بازی تمام‌شده ورودی امروز را به‌روز می‌کند.</string>
+    <string name="champions_offline_note">بازی‌هایت روی همین دستگاه می‌ماند. پس از فعال شدن Anonymous Authentication و Firestore، «اتصال دوباره» را بزن تا مجموع امروز ارسال یا بهتر شود.</string>
     <string name="champions_choose_name">نام بازیکنت را انتخاب کن</string>
     <string name="champions_nickname_note">این نام مستعار عمومی در قهرمانان روز دیده می‌شود. از نام واقعی‌ات استفاده نکن.</string>
     <string name="champions_nickname_label">نام مستعار</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">وصل شد، اما رتبه‌بندی فعلاً در دسترس نیست.</string>
     <string name="champions_status_submitting">در حال ارسال امتیاز امروزِ قهرمانان روز…</string>
     <string name="champions_status_submitted_rank">امتیاز ارسال شد · رتبهٔ #%1$d</string>
-    <string name="champions_status_submitted">امتیاز امروز ارسال شد</string>
-    <string name="champions_status_already_submitted">امتیاز امروز قبلاً ارسال شده است</string>
+    <string name="champions_status_submitted">امتیاز رتبه‌بندی امروز به‌روز شد</string>
+    <string name="champions_status_already_submitted">امتیاز رتبه‌بندی امروز به‌روز است</string>
     <string name="champions_status_offline_retry">آفلاین — برای ارسال امتیاز ذخیره‌شده بعداً تازه‌سازی را بزن</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">زبان برنامه را انتخاب کن</string>
     <string name="settings_language_system">پیش‌فرض سیستم</string>
     <string name="settings_privacy">حریم خصوصی</string>
-    <string name="settings_privacy_text">پیشرفتت روی همین گوشی می‌ماند. تبلیغات توسط Google ارائه می‌شود.</string>
+    <string name="settings_privacy_text">پیشرفت بازی روی همین گوشی می‌ماند. قهرمانان روزانه شناسهٔ ناشناس بازیکن، نام عمومی و امتیازهای کامل روزانه را به Firebase می‌فرستد. تبلیغات توسط Google ارائه می‌شود.</string>
     <string name="settings_ad_choices">گزینه‌های تبلیغات</string>
     <string name="settings_privacy_policy">سیاست حفظ حریم خصوصی</string>
     <string name="settings_about">دربارهٔ EdBetter</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">Kemistri را در Google Play باز کن</string>
     <string name="settings_version">نسخهٔ %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">در این دستگاه نیازی به گزینه‌های حریم خصوصی تبلیغات نیست</string>
+    <string name="champions_your_score">امتیاز تو</string>
 </resources>

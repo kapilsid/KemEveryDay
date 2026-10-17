@@ -270,7 +270,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Günün Şampiyonları</string>
-    <string name="champions_intro">Bugünün Molekül Tahtası\'nı ve bugünün Bilim Çözülüyor turunu bitir. İki puanın toplanır ve her UTC gününde bitirdiğin ilk toplam dünya sıralamasına girer.</string>
+    <string name="champions_intro">Bugünkü dünya sıralamasına katılmak için günlük oyunlardan birini bitir. Oynamadığın oyun sıfır sayılır; birleşik UTC günü puanını artırmak için daha sonra bitir.</string>
     <string name="champions_default_player">Bilim oyuncusu</string>
     <string name="champions_edit_nickname">Takma adı düzenle</string>
     <string name="champions_retry">Firebase\'e tekrar bağlan</string>
@@ -286,19 +286,23 @@
     <string name="champions_scores_need_firebase">Firebase bağlandığında dünya puanları burada görünür.</string>
     <string name="champions_you">%1$s · Sen</string>
     <string name="champions_entry_scores">Tahta %1$d · Bilim %2$d</string>
-    <string name="champions_local_scores">Bu cihazdaki puanların</string>
+    <string name="champions_local_scores">Günlük toplamların</string>
     <string name="champions_local">YEREL</string>
-    <string name="champions_no_runs">Henüz bitmiş tur yok</string>
-    <string name="champions_finish_to_place">İlk puanını kaydetmek için bugünün Bilim Çözülüyor turunu bitir.</string>
+    <string name="champions_no_runs">Henüz günlük puan yok</string>
+    <string name="champions_finish_to_place">Katılmak için günlük oyunlardan birini bitir. Toplamını artırmak için diğerini oyna.</string>
     <string name="champions_today">Bugün</string>
+    <string name="champions_this_week">Bu Hafta</string>
+    <string name="champions_week_total">BU HAFTANIN TOPLAMI</string>
+    <string name="champions_week_utc">BU HAFTA · UTC</string>
+    <string name="champions_no_scores_week">Bu hafta için henüz dünya çapında puan gönderilmedi.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d gizem çözüldü</item>
         <item quantity="other">%1$d gizem çözüldü</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase bağlı</string>
     <string name="champions_playing_offline">Çevrimdışı oynuyorsun</string>
-    <string name="champions_online_note">Anonim oyuncu kimliğin uygulamayı sade tutar: Google giriş ekranı yok, e-posta gösterilmez. Biten günlük tur yalnızca bir kez gönderilir.</string>
-    <string name="champions_offline_note">Turun ve puanın bu cihazda kalır. Anonim Kimlik Doğrulama, Firestore ve puan fonksiyonu açıldıktan sonra bağlanmak için Tekrar bağlan\'a dokun.</string>
+    <string name="champions_online_note">Anonim oyuncu kimliğin uygulamayı sade tutar: Google girişi yok, e-posta gösterilmez. Biten her oyun bugünkü kaydı günceller.</string>
+    <string name="champions_offline_note">Oyunların bu cihazda kalır. Anonim Kimlik Doğrulama ve Firestore açılınca bugünkü toplamı göndermek veya artırmak için Tekrar bağlan\'a dokun.</string>
     <string name="champions_choose_name">Oyuncu adını seç</string>
     <string name="champions_nickname_note">Bu herkese açık takma ad Günün Şampiyonları\'nda görünür. Gerçek adını kullanma.</string>
     <string name="champions_nickname_label">Takma ad</string>
@@ -314,8 +318,8 @@
     <string name="champions_status_rankings_unavailable">Bağlandı ama sıralama şu an kullanılamıyor.</string>
     <string name="champions_status_submitting">Bugünün Günün Şampiyonları puanı gönderiliyor…</string>
     <string name="champions_status_submitted_rank">Puan gönderildi · sıra #%1$d</string>
-    <string name="champions_status_submitted">Bugünün puanı gönderildi</string>
-    <string name="champions_status_already_submitted">Bugünün puanı zaten gönderildi</string>
+    <string name="champions_status_submitted">Bugünkü sıralama puanı güncellendi</string>
+    <string name="champions_status_already_submitted">Bugünkü sıralama puanı güncel</string>
     <string name="champions_status_offline_retry">Çevrimdışı — kayıtlı puanı sonra göndermek için yenile\'ye dokun</string>
 
     <!-- Daily Streak -->
@@ -376,7 +380,7 @@
     <string name="settings_language_description">Uygulama dilini seç</string>
     <string name="settings_language_system">Sistem varsayılanı</string>
     <string name="settings_privacy">Gizlilik</string>
-    <string name="settings_privacy_text">İlerlemen bu telefonda kalır. Reklamlar Google tarafından sağlanır.</string>
+    <string name="settings_privacy_text">Oyun ilerlemen bu telefonda kalır. Günlük Şampiyonlar anonim oyuncu kimliğini, herkese açık takma adını ve tamamlanan günlük puanlarını Firebase\'e gönderir. Reklamlar Google tarafından sağlanır.</string>
     <string name="settings_ad_choices">Reklam tercihleri</string>
     <string name="settings_privacy_policy">Gizlilik politikası</string>
     <string name="settings_about">EdBetter Hakkında</string>
@@ -386,4 +390,5 @@
     <string name="settings_open_kemistri">Kemistri\'yi Google Play\'de aç</string>
     <string name="settings_version">Sürüm %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Bu cihazda reklam gizliliği seçenekleri gerekmiyor</string>
+    <string name="champions_your_score">Puanın</string>
 </resources>

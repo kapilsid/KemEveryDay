@@ -269,7 +269,7 @@
 
     <!-- Daily Champions -->
     <string name="champions_title">Tägliche Champions</string>
-    <string name="champions_intro">Schließe das heutige Molekülbrett und die heutige Runde von Wissenschaft enthüllt ab. Deine beiden Punktzahlen werden addiert, und deine erste fertige Summe jedes UTC-Tages kommt in die weltweite Rangliste.</string>
+    <string name="champions_intro">Beende eines der Tagesspiele, um in die heutige Weltrangliste zu kommen. Das ungespielte Spiel zählt null; beende es später, um deine kombinierte UTC-Tagessumme zu verbessern.</string>
     <string name="champions_default_player">Science-Fan</string>
     <string name="champions_edit_nickname">Spitznamen ändern</string>
     <string name="champions_retry">Firebase-Verbindung erneut versuchen</string>
@@ -285,19 +285,23 @@
     <string name="champions_scores_need_firebase">Weltweite Punkte erscheinen hier, sobald Firebase verbunden ist.</string>
     <string name="champions_you">%1$s · Du</string>
     <string name="champions_entry_scores">Brett %1$d · Wissenschaft %2$d</string>
-    <string name="champions_local_scores">Deine Punkte auf diesem Gerät</string>
+    <string name="champions_local_scores">Deine Tagessummen</string>
     <string name="champions_local">LOKAL</string>
-    <string name="champions_no_runs">Noch keine beendeten Runden</string>
-    <string name="champions_finish_to_place">Beende die heutige Runde von Wissenschaft enthüllt, um deine erste Punktzahl einzutragen.</string>
+    <string name="champions_no_runs">Noch keine Tagespunkte</string>
+    <string name="champions_finish_to_place">Beende ein Tagesspiel, um teilzunehmen. Spiele das andere, um deine Summe zu verbessern.</string>
     <string name="champions_today">Heute</string>
+    <string name="champions_this_week">Diese Woche</string>
+    <string name="champions_week_total">WOCHENSUMME</string>
+    <string name="champions_week_utc">DIESE WOCHE · UTC</string>
+    <string name="champions_no_scores_week">Für diese Woche gibt es noch keine weltweiten Punkte.</string>
     <plurals name="champions_mysteries_solved">
         <item quantity="one">%1$d Rätsel gelöst</item>
         <item quantity="other">%1$d Rätsel gelöst</item>
     </plurals>
     <string name="champions_firebase_connected">Firebase verbunden</string>
     <string name="champions_playing_offline">Offline-Spiel</string>
-    <string name="champions_online_note">Deine anonyme Spieler-ID hält die App einfach: kein Google-Login und keine E-Mail-Adresse wird angezeigt. Eine beendete Tagesrunde wird nur einmal eingereicht.</string>
-    <string name="champions_offline_note">Deine Runde und deine Punkte bleiben auf diesem Gerät. Sobald Anonymous Authentication, Firestore und die Score-Funktion aktiviert sind, tippe auf Erneut versuchen, um dich zu verbinden.</string>
+    <string name="champions_online_note">Deine anonyme Spieler-ID hält die App einfach: kein Google-Login und keine E-Mail-Adresse wird angezeigt. Jedes beendete Spiel aktualisiert den heutigen Eintrag.</string>
+    <string name="champions_offline_note">Deine Spiele bleiben auf diesem Gerät. Tippe nach der Aktivierung von Anonymous Authentication und Firestore auf Erneut versuchen, um die heutige Summe zu senden oder zu verbessern.</string>
     <string name="champions_choose_name">Wähle deinen Spielernamen</string>
     <string name="champions_nickname_note">Dieser öffentliche Spitzname erscheint bei Tägliche Champions. Verwende nicht deinen echten Namen.</string>
     <string name="champions_nickname_label">Spitzname</string>
@@ -313,8 +317,8 @@
     <string name="champions_status_rankings_unavailable">Verbunden, aber die Rangliste ist gerade nicht verfügbar.</string>
     <string name="champions_status_submitting">Heutige Punkte für Tägliche Champions werden eingereicht…</string>
     <string name="champions_status_submitted_rank">Punkte eingereicht · Platz %1$d</string>
-    <string name="champions_status_submitted">Heutige Punkte eingereicht</string>
-    <string name="champions_status_already_submitted">Heutige Punkte sind schon eingereicht</string>
+    <string name="champions_status_submitted">Heutige Ranglistenpunkte aktualisiert</string>
+    <string name="champions_status_already_submitted">Heutige Ranglistenpunkte sind aktuell</string>
     <string name="champions_status_offline_retry">Offline — tippe auf Aktualisieren, um die gespeicherten Punkte später einzureichen</string>
 
     <!-- Daily Streak -->
@@ -375,7 +379,7 @@
     <string name="settings_language_description">App-Sprache auswählen</string>
     <string name="settings_language_system">Systemstandard</string>
     <string name="settings_privacy">Datenschutz</string>
-    <string name="settings_privacy_text">Dein Fortschritt bleibt auf diesem Handy. Werbung wird von Google bereitgestellt.</string>
+    <string name="settings_privacy_text">Der Spielfortschritt bleibt auf diesem Handy. Tägliche Champions sendet eine anonyme Spieler-ID, deinen öffentlichen Spitznamen und fertige Tagespunkte an Firebase. Werbung wird von Google bereitgestellt.</string>
     <string name="settings_ad_choices">Werbeeinstellungen</string>
     <string name="settings_privacy_policy">Datenschutzerklärung</string>
     <string name="settings_about">Über EdBetter</string>
@@ -385,4 +389,5 @@
     <string name="settings_open_kemistri">Kemistri bei Google Play öffnen</string>
     <string name="settings_version">Version %1$s · © 2026 EdBetter</string>
     <string name="settings_ad_privacy_unavailable">Werbe-Datenschutzoptionen sind auf diesem Gerät nicht erforderlich</string>
+    <string name="champions_your_score">Dein Ergebnis</string>
 </resources>

@@ -12,3 +12,4 @@
 /.kotlin/
 /functions/node_modules/
 /firestore-tests/node_modules/
+/firestore-debug.log
