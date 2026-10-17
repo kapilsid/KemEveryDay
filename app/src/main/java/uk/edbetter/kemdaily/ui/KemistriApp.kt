@@ -1985,21 +1985,6 @@ private fun LeaderboardScreen(nav: NavHostController, viewModel: MainViewModel) 
                     ) { Text(stringResource(R.string.champions_this_week), fontWeight = FontWeight.Black) }
                 }
             }
-            item {
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text(stringResource(R.string.champions_worldwide), modifier = Modifier.weight(1f), color = Navy, fontWeight = FontWeight.Black, fontSize = 17.sp)
-                    Text(
-                        stringResource(
-                            if (!cloud.online) R.string.champions_offline
-                            else if (showWeekly) R.string.champions_week_utc
-                            else R.string.champions_today_utc,
-                        ),
-                        color = Coral,
-                        fontWeight = FontWeight.Black,
-                        fontSize = 10.sp,
-                    )
-                }
-            }
             if (visibleRankings.isEmpty()) {
                 item {
                     Text(
