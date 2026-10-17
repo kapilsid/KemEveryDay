@@ -7,3 +7,102 @@ Welcome to Kemistri Everyday!
 • Daily Champions leaderboard and daily streaks
 • Available in 13 languages
 </en-GB>
+<de-DE>
+Willkommen bei Kemistri Everyday!
+• Tägliches Molekülbrett: Verbinde Atome zu echten Molekülen
+• Wissenschaft enthüllt: jeden Tag drei neue Wissenschaftsrätsel
+• Element des Tages: Errate das Element und füge es deiner Sammlung hinzu
+• Alltagschemie: die Wissenschaft im Alltag
+• Rangliste „Tägliche Champions“ und Tagesserien
+• In 13 Sprachen verfügbar
+</de-DE>
+<es-ES>
+¡Bienvenido a Kemistri Everyday!
+• Tablero diario de moléculas: une átomos para formar moléculas reales
+• Ciencia al descubierto: tres misterios científicos nuevos cada día
+• Elemento del día: adivina el elemento y añádelo a tu colección
+• Química cotidiana: la ciencia oculta en el día a día
+• Clasificación Campeones del día y rachas diarias
+• Disponible en 13 idiomas
+</es-ES>
+<fr-FR>
+Bienvenue dans Kemistri Everyday !
+• Plateau moléculaire du jour : relie des atomes pour créer de vraies molécules
+• Science dévoilée : trois nouveaux mystères scientifiques chaque jour
+• Élément du jour : devine l'élément et ajoute-le à ta collection
+• Chimie du quotidien : la science cachée dans la vie de tous les jours
+• Classement Champions du jour et séries quotidiennes
+• Disponible en 13 langues
+</fr-FR>
+<pt-BR>
+Boas-vindas ao Kemistri Everyday!
+• Tabuleiro Molecular Diário: ligue átomos para formar moléculas reais
+• Ciência Revelada: três novos mistérios científicos todos os dias
+• Um Elemento por Dia: adivinhe o elemento e adicione-o à sua coleção
+• Química do Dia a Dia: a ciência escondida na rotina
+• Ranking Campeões do Dia e sequências diárias
+• Disponível em 13 idiomas
+</pt-BR>
+<id>
+Selamat datang di Kemistri Everyday!
+• Papan Molekul Harian: hubungkan atom untuk membuat molekul nyata
+• Sains Terungkap: tiga misteri sains baru setiap hari
+• Satu Unsur Sehari: tebak unsurnya, lalu tambahkan ke koleksimu
+• Kimia Sehari-hari: sains yang tersembunyi dalam kehidupan sehari-hari
+• Papan peringkat Juara Harian dan rangkaian harian
+• Tersedia dalam 13 bahasa
+</id>
+<tr-TR>
+Kemistri Everyday'e hoş geldin!
+• Günlük Molekül Tahtası: Gerçek moleküller oluşturmak için atomları birleştir
+• Bilim Çözülüyor: Her gün üç yeni bilim gizemi
+• Günün Elementi: Elementi tahmin et ve koleksiyonuna ekle
+• Günlük Hayatta Kimya: Günlük yaşamda saklı bilim
+• Günün Şampiyonları sıralaması ve günlük seriler
+• 13 dilde kullanılabilir
+</tr-TR>
+<ru-RU>
+Добро пожаловать в Kemistri Everyday!
+• Доска молекул дня: соединяй атомы и собирай настоящие молекулы
+• Тайны науки: три новые научные загадки каждый день
+• Элемент дня: угадай элемент и добавь его в свою коллекцию
+• Химия вокруг нас: наука, скрытая в повседневной жизни
+• Таблица «Чемпионы дня» и ежедневные серии
+• Доступно на 13 языках
+</ru-RU>
+<hi-IN>
+Kemistri Everyday में आपका स्वागत है!
+• डेली मॉलिक्यूल बोर्ड: परमाणुओं को जोड़कर असली अणु बनाएँ
+• विज्ञान के राज़: हर दिन तीन नई विज्ञान पहेलियाँ
+• आज का तत्व: तत्व पहचानें और उसे अपने संग्रह में जोड़ें
+• रोज़ की केमिस्ट्री: रोज़मर्रा की ज़िंदगी में छिपा विज्ञान
+• डेली चैंपियंस लीडरबोर्ड और रोज़ की स्ट्रीक
+• 13 भाषाओं में उपलब्ध
+</hi-IN>
+<fa>
+به Kemistri Everyday خوش آمدی!
+• صفحهٔ مولکول روز: اتم‌ها را به هم وصل کن و مولکول‌های واقعی بساز
+• رازهای علم: هر روز سه معمای علمی تازه
+• عنصر روز: عنصر را حدس بزن و به مجموعه‌ات اضافه کن
+• شیمی روزمره: علمِ پنهان در زندگی روزمره
+• جدول قهرمانان روز و روزهای پیاپی
+• در دسترس به ۱۳ زبان
+</fa>
+<ja-JP>
+Kemistri Everyday へようこそ！
+• デイリー分子ボード：原子をつないで本物の分子を作ろう
+• サイエンスのなぞ：毎日3つの新しい科学ミステリー
+• 今日の元素：元素を当てて、コレクションに加えよう
+• 身近な化学：日常にひそむ科学
+• デイリーチャンピオンのランキングと連続記録
+• 13言語に対応
+</ja-JP>
+<zh-CN>
+欢迎来到 Kemistri Everyday！
+• 每日分子棋盘：连接原子，组成真实的分子
+• 科学揭秘：每天三个新的科学谜题
+• 每日元素：猜出元素，把它加入你的收藏
+• 日常化学：隐藏在日常生活中的科学
+• 每日冠军排行榜和连续打卡
+• 支持 13 种语言
+</zh-CN>
