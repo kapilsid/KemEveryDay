@@ -1,6 +1,9 @@
-First release of Kemistri Everyday:
-• Daily Molecule Board: build real molecules from a shared board of atoms
+<en-GB>
+Welcome to Kemistri Everyday!
+• Daily Molecule Board: link atoms to build real molecules
 • Science Uncovered: three new science mysteries every day
-• Element a Day: guess the element, then collect it
-• Everyday Chemistry: the chemistry hiding in daily life
-• Daily Champions leaderboard, streaks and 13 languages
+• Element a Day: guess the element, then add it to your collection
+• Everyday Chemistry: the science hiding in daily life
+• Daily Champions leaderboard and daily streaks
+• Available in 13 languages
+</en-GB>
